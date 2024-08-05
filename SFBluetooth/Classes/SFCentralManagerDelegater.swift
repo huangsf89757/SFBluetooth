@@ -47,7 +47,7 @@ extension SFCentralManagerDelegater: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if isLogEnable {
-            Log.info(central)
+            Log.info("central=\(central)")
         }
         didUpdateStateBlock?(central)
     }
@@ -71,7 +71,7 @@ extension SFCentralManagerDelegater: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         if isLogEnable {
-            Log.info(central, "dict")
+            Log.info("central=\(central) dict=\(dict)")
         }
         willRestoreStateBlock?(central, dict)
     }
@@ -95,6 +95,9 @@ extension SFCentralManagerDelegater: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        if isLogEnable {
+            Log.info("central=\(central) peripheral=\(peripheral) advertisementData=\(advertisementData) RSSI=\(RSSI)")
+        }
         didDiscoverPeripheralBlock?(central, peripheral, advertisementData, RSSI)
     }
 
@@ -110,6 +113,9 @@ extension SFCentralManagerDelegater: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        if isLogEnable {
+            Log.info("central=\(central) peripheral=\(peripheral)")
+        }
         didConnectPeripheralBlock?(central, peripheral)
     }
  
@@ -127,6 +133,9 @@ extension SFCentralManagerDelegater: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
+        if isLogEnable {
+            Log.info("central=\(central) peripheral=\(peripheral) error=\(error?.localizedDescription ?? "nil")")
+        }
         didFailToConnectPeripheralBlock?(central, peripheral, error)
     }
 
@@ -145,6 +154,9 @@ extension SFCentralManagerDelegater: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
+        if isLogEnable {
+            Log.info("central=\(central) peripheral=\(peripheral) error=\(error?.localizedDescription ?? "nil")")
+        }
         didDisconnectPeripheralBlock?(central, peripheral, error)
     }
 
@@ -168,6 +180,9 @@ extension SFCentralManagerDelegater: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
+        if isLogEnable {
+            Log.info("central=\(central) peripheral=\(peripheral) timestamp=\(timestamp) isReconnecting=\(isReconnecting) error=\(error?.localizedDescription ?? "nil")")
+        }
         didDisconnectPeripheralAutoReconnectBlock?(central, peripheral, timestamp, isReconnecting, error)
     }
 
@@ -184,6 +199,9 @@ extension SFCentralManagerDelegater: CBCentralManagerDelegate {
      */
     @available(iOS 13.0, *)
     public func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
+        if isLogEnable {
+            Log.info("central=\(central) event=\(event) peripheral=\(peripheral)")
+        }
         connectionEventDidOccurBlock?(central, event, peripheral)
     }
 
@@ -199,6 +217,9 @@ extension SFCentralManagerDelegater: CBCentralManagerDelegate {
      */
     @available(iOS 13.0, *)
     public func centralManager(_ central: CBCentralManager, didUpdateANCSAuthorizationFor peripheral: CBPeripheral) {
+        if isLogEnable {
+            Log.info("central=\(central) peripheral=\(peripheral)")
+        }
         didUpdateANCSAuthorizationForPeripheralBlock?(central, peripheral)
     }
 }

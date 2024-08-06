@@ -13,7 +13,6 @@ import SFLogger
 
 // MARK: - SFPeripheralDelegater
 public class SFPeripheralDelegater: NSObject {
-    
     // MARK: Block
     public var didUpdateNameBlock: ((CBPeripheral) -> ())?
     public var didModifyServicesBlock: ((CBPeripheral, [CBService]) -> ())?

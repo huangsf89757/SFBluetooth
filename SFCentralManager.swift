@@ -1,8 +1,8 @@
 //
-//  SFCentralManagerDelegater.swift
+//  SFCentralManager.swift
 //  SFBluetooth
 //
-//  Created by hsf on 2024/8/5.
+//  Created by hsf on 2024/8/20.
 //
 
 import Foundation
@@ -10,8 +10,12 @@ import CoreBluetooth
 // Server
 import SFLogger
 
-// MARK: - SFCentralManagerDelegater
-public class SFCentralManagerDelegater: NSObject {
+// MARK: - SFCentralManager
+public class SFCentralManager: NSObject {
+    // MARK: var
+    public private(set) var centralManager: CBCentralManager!
+    public var isLogEnable = true
+    
     // MARK: block
     public var didUpdateStateBlock: ((CBCentralManager) -> ())?
     public var willRestoreStateBlock: ((CBCentralManager, [String : Any]) -> ())?
@@ -23,11 +27,76 @@ public class SFCentralManagerDelegater: NSObject {
     public var connectionEventDidOccurBlock: ((CBCentralManager, CBConnectionEvent, CBPeripheral) -> ())?
     public var didUpdateANCSAuthorizationForPeripheralBlock: ((CBCentralManager, CBPeripheral) -> ())?
     
-    // MARK: log
-    public var isLogEnable = true
+    // MARK: life cycle
+    public init(queue: dispatch_queue_t?, options: [String : Any]?) {
+        self.centralManager = CBCentralManager(delegate: self, queue: queue, options: options)
+    }
+       
 }
 
-extension SFCentralManagerDelegater: CBCentralManagerDelegate {
+// MARK: - func
+extension SFCentralManager {
+    /// 检索外设
+    public func retrievePeripherals(identifiers: [UUID]) -> [CBPeripheral] {
+        let peripherals = centralManager.retrievePeripherals(withIdentifiers: identifiers)
+        if isLogEnable {
+            Log.info("central=\(centralManager) identifiers=\(identifiers) [return] peripherals=\(peripherals)")
+        }
+        return peripherals
+    }
+    
+    /// 检索已连接的外设
+    public func retrieveConnectedPeripherals(services: [CBUUID]) -> [CBPeripheral] {
+        let peripherals = centralManager.retrieveConnectedPeripherals(withServices: services)
+        if isLogEnable {
+            Log.info("central=\(centralManager) services=\(services) [return] peripherals=\(peripherals)")
+        }
+        return peripherals
+    }
+    
+    /// 开始扫描
+    public func scanForPeripherals(services: [CBUUID]?, options: [String: Any]?) {
+        centralManager.scanForPeripherals(withServices: services, options: options)
+        if isLogEnable {
+            Log.info("central=\(centralManager) services=\(services) options=\(options)")
+        }
+    }
+    
+    /// 停止扫描
+    public func stopScan() {
+        centralManager.stopScan()
+        if isLogEnable {
+            Log.info("central=\(centralManager)")
+        }
+    }
+    
+    /// 连接外设
+    public func connect(peripheral: CBPeripheral, options: [String: Any]?) {
+        centralManager.connect(peripheral, options: options)
+        if isLogEnable {
+            Log.info("central=\(centralManager) peripheral=\(peripheral) options=\(options)")
+        }
+    }
+    
+    /// 断开外设
+    public func cancel(peripheral: CBPeripheral) {
+        centralManager.cancelPeripheralConnection(peripheral)
+        if isLogEnable {
+            Log.info("central=\(centralManager) peripheral=\(peripheral)")
+        }
+    }
+    
+    /// 注册连接事件
+    public func registerForConnectionEvents(options: [String: Any]?) {
+        centralManager.registerForConnectionEvents(options: options)
+        if isLogEnable {
+            Log.info("central=\(centralManager) options=\(options)")
+        }
+    }
+}
+
+// MARK: - CBCentralManagerDelegate
+extension SFCentralManager: CBCentralManagerDelegate {
     
     
     /**

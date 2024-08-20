@@ -17,6 +17,7 @@ public class SFCentralManager: NSObject {
     public var isLogEnable = true
     
     // MARK: block
+    public var didChangedIsScanningBlock: ((CBCentralManager, Bool) -> ())?
     public var didUpdateStateBlock: ((CBCentralManager) -> ())?
     public var willRestoreStateBlock: ((CBCentralManager, [String : Any]) -> ())?
     public var didDiscoverPeripheralBlock: ((CBCentralManager, CBPeripheral, [String : Any], NSNumber) -> ())?
@@ -29,9 +30,30 @@ public class SFCentralManager: NSObject {
     
     // MARK: life cycle
     public init(queue: dispatch_queue_t?, options: [String : Any]?) {
-        self.centralManager = CBCentralManager(delegate: self, queue: queue, options: options)
+        super.init()
+        centralManager = CBCentralManager(delegate: self, queue: queue, options: options)
+        centralManager.addObserver(self, forKeyPath: "isScanning", options: .new, context: nil)
+    }
+    deinit {
+        centralManager.removeObserver(self, forKeyPath: "isScanning")
     }
        
+}
+
+// MARK: - KVO
+extension SFCentralManager {
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let centralManager = object as? CBCentralManager, centralManager == self.centralManager {
+            if keyPath == "isScanning", let isScanning = change?[.newKey] as? Bool {
+                if isLogEnable {
+                    Log.info("central=\(centralManager) isScanning=\(isScanning)")
+                }
+                didChangedIsScanningBlock?(centralManager, isScanning)
+                return
+            }
+            return
+        }
+    }
 }
 
 // MARK: - func
@@ -87,7 +109,8 @@ extension SFCentralManager {
     }
     
     /// 注册连接事件
-    public func registerForConnectionEvents(options: [String: Any]?) {
+    @available(iOS 13.0, *)
+    public func registerForConnectionEvents(options: [CBConnectionEventMatchingOption : Any]?) {
         centralManager.registerForConnectionEvents(options: options)
         if isLogEnable {
             Log.info("central=\(centralManager) options=\(options)")

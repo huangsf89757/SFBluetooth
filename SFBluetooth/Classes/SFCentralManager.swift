@@ -62,7 +62,7 @@ extension SFCentralManager {
     public func retrievePeripherals(identifiers: [UUID]) -> [CBPeripheral] {
         let peripherals = centralManager.retrievePeripherals(withIdentifiers: identifiers)
         if isLogEnable {
-            Log.info("central=\(centralManager) identifiers=\(identifiers) [return] peripherals=\(peripherals)")
+            Log.info("central=\(centralManager) identifiers=\(identifiers) -> peripherals=\(peripherals)")
         }
         return peripherals
     }
@@ -71,7 +71,7 @@ extension SFCentralManager {
     public func retrieveConnectedPeripherals(services: [CBUUID]) -> [CBPeripheral] {
         let peripherals = centralManager.retrieveConnectedPeripherals(withServices: services)
         if isLogEnable {
-            Log.info("central=\(centralManager) services=\(services) [return] peripherals=\(peripherals)")
+            Log.info("central=\(centralManager) services=\(services) -> peripherals=\(peripherals)")
         }
         return peripherals
     }

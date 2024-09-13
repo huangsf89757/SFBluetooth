@@ -44,6 +44,63 @@ public class SFPeripheral: NSObject {
 
 extension SFPeripheral {
     /**
+     *  @property name
+     *
+     *  @discussion The name of the peripheral.
+     */
+    public var name: String? { peripheral.name }
+
+    
+    /**
+     *  @property RSSI
+     *
+     *  @discussion The most recently read RSSI, in decibels.
+     *
+     *  @deprecated Use {@link peripheral:didReadRSSI:error:} instead.
+     */
+    @available(iOS, introduced: 5.0, deprecated: 8.0)
+    public var rssi: NSNumber? { peripheral.rssi }
+
+    
+    /**
+     *  @property state
+     *
+     *  @discussion The current connection state of the peripheral.
+     */
+    public var state: CBPeripheralState { peripheral.state }
+
+    
+    /**
+     *  @property services
+     *
+     *  @discussion A list of <code>CBService</code> objects that have been discovered on the peripheral.
+     */
+    public var services: [CBService]? { peripheral.services }
+
+    
+    /**
+     *  @property canSendWriteWithoutResponse
+     *
+     *  @discussion YES if the remote device has space to send a write without response. If this value is NO,
+     *                the value will be set to YES after the current writes have been flushed, and
+     *                <link>peripheralIsReadyToSendWriteWithoutResponse:</link> will be called.
+     */
+    @available(iOS 11.0, *)
+    public var canSendWriteWithoutResponse: Bool { peripheral.canSendWriteWithoutResponse }
+
+    
+    /**
+     *  @property ancsAuthorized
+     *
+     *  @discussion YES if the remote device has been authorized to receive data over ANCS (Apple Notification Service Center) protocol.  If this value is NO,
+     *                the value will be set to YES after a user authorization occurs and
+     *                <link>didUpdateANCSAuthorizationForPeripheral:</link> will be called.
+     */
+    @available(iOS 13.0, *)
+    public var ancsAuthorized: Bool { peripheral.ancsAuthorized }
+    
+    
+    /**
      *  @method readRSSI
      *
      *  @discussion While connected, retrieves the current RSSI of the link.

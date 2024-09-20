@@ -87,8 +87,12 @@ extension SFCentralManager {
         if let centralManager = object as? CBCentralManager, centralManager == self.centralManager {
             if keyPath == "isScanning", let isScanning = change?[.newKey] as? Bool {
                 // log
-        if isLogEnable {
-                    Log.info("\n\(SF_Tag_CentralManager_IsScanning_DidChanged)\ncentral=\(centralManager.sf.description)\nisScanning=\(isScanning)")
+                if isLogEnable {
+                    let msg_tag = SF_Tag_CentralManager_IsScanning_DidChanged
+                    let msg_central = "central=\(centralManager.sf.description)"
+                    let msg_isScanning = "isScanning=\(isScanning)"
+                    let msgs = [msg_tag, msg_central, msg_isScanning].joined(separator: "\n")
+                    Log.info("\n\(msgs)\n")
                 }
                 // notify
                 var userInfo = [String: Any]()
@@ -109,12 +113,16 @@ extension SFCentralManager {
         let peripherals = centralManager.retrievePeripherals(withIdentifiers: identifiers)
         // log
         if isLogEnable {
-            var msg_peripherals = "["
+            let msg_tag = SF_Tag_CentralManager_RetrievePeripherals
+            let msg_central = "central=\(centralManager.sf.description)"
+            let msg_identifiers = "identifiers=\(identifiers)"
+            var msg_peripherals = "peripherals=["
             for peripheral in peripherals {
                 msg_peripherals.append(peripheral.sf.description)
             }
             msg_peripherals.append("]")
-            Log.info("\n\(SF_Tag_CentralManager_RetrievePeripherals)\ncentral=\(centralManager.sf.description)\nidentifiers=\(identifiers)\n-> peripherals=\(msg_peripherals)")
+            let msgs = [msg_tag, msg_central, msg_identifiers, msg_peripherals].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -130,17 +138,23 @@ extension SFCentralManager {
         let peripherals = centralManager.retrieveConnectedPeripherals(withServices: services)
         // log
         if isLogEnable {
-            var msg_peripherals = "["
+            let msg_tag = SF_Tag_CentralManager_RetrieveConnectedPeripherals
+            let msg_central = "central=\(centralManager.sf.description)"
+            let msg_serviceUUIDs = "serviceUUIDs=\(services)"
+            var msg_peripherals = "peripherals=["
             for peripheral in peripherals {
                 msg_peripherals.append(peripheral.sf.description)
             }
             msg_peripherals.append("]")
-            Log.info("\n\(SF_Tag_CentralManager_RetrieveConnectedPeripherals)\ncentral=\(centralManager.sf.description)\nserviceUUIDs=\(services)\n-> peripherals=\(msg_peripherals)")
+            let msgs = [msg_tag, msg_central, msg_serviceUUIDs, msg_peripherals].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
         userInfo["central"] = centralManager
-        NotificationCenter.default.post(name: SF_Notify_CentralManager_RetrieveConnectedPeripherals, object: nil, userInfo: ["central": centralManager, "serviceUUIDs": services, "peripherals": peripherals])
+        userInfo["serviceUUIDs"] = services
+        userInfo["peripherals"] = peripherals
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_RetrieveConnectedPeripherals, object: nil, userInfo: userInfo)
         return peripherals
     }
     
@@ -149,7 +163,15 @@ extension SFCentralManager {
         centralManager.scanForPeripherals(withServices: services, options: options)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_Scan_Start)\ncentral=\(centralManager.sf.description)\nservices=\(services)\noptions=\(options)")
+            let msg_tag = SF_Tag_CentralManager_Scan_Start
+            let msg_central = "central=\(centralManager.sf.description)"
+            let msg_services = "services=\(services)"
+            var msg_options = "options=nil"
+            if let options = options {
+                msg_options = "options=\(options)"
+            }
+            let msgs = [msg_tag, msg_central, msg_services, msg_options].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -168,7 +190,10 @@ extension SFCentralManager {
         centralManager.stopScan()
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_Scan_Stop)\ncentral=\(centralManager.sf.description)")
+            let msg_tag = SF_Tag_CentralManager_Scan_Stop
+            let msg_central = "central=\(centralManager.sf.description)"
+            let msgs = [msg_tag, msg_central].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -181,13 +206,23 @@ extension SFCentralManager {
         centralManager.connect(peripheral, options: options)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_ConnectPeripheral_Start)\ncentral=\(centralManager.sf.description)\nperipheral=\(peripheral.sf.description)\noptions=\(options)")
+            let msg_tag = SF_Tag_CentralManager_ConnectPeripheral_Start
+            let msg_central = "central=\(centralManager.sf.description)"
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            var msg_options = "options=nil"
+            if let options = options {
+                msg_options = "options=\(options)"
+            }
+            let msgs = [msg_tag, msg_central, msg_peripheral, msg_options].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
         userInfo["central"] = centralManager
         userInfo["peripheral"] = peripheral
-        userInfo["options"] = options
+        if let options = options {
+            userInfo["options"] = options
+        }
         NotificationCenter.default.post(name: SF_Notify_CentralManager_ConnectPeripheral_Start, object: nil, userInfo: userInfo)
     }
     
@@ -196,7 +231,11 @@ extension SFCentralManager {
         centralManager.cancelPeripheralConnection(peripheral)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_DisconnectPeripheral_Start)\ncentral=\(centralManager.sf.description)\nperipheral=\(peripheral.sf.description)")
+            let msg_tag = SF_Tag_CentralManager_DisconnectPeripheral_Start
+            let msg_central = "central=\(centralManager.sf.description)"
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msgs = [msg_tag, msg_central, msg_peripheral].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -211,12 +250,21 @@ extension SFCentralManager {
         centralManager.registerForConnectionEvents(options: options)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_ConnectionEvents_Register)\ncentral=\(centralManager.sf.description)\noptions=\(options)")
+            let msg_tag = SF_Tag_CentralManager_ConnectionEvents_Register
+            let msg_central = "central=\(centralManager.sf.description)"
+            var msg_options = "options=nil"
+            if let options = options {
+                msg_options = "options=\(options)"
+            }   
+            let msgs = [msg_tag, msg_central, msg_options].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
         userInfo["central"] = centralManager
-        userInfo["options"] = options
+        if let options = options {
+            userInfo["options"] = options
+        }
         NotificationCenter.default.post(name: SF_Notify_CentralManager_ConnectionEvents_Register, object: nil, userInfo: userInfo)
     }
 }
@@ -243,7 +291,10 @@ extension SFCentralManager: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_State_DidUpdated)\ncentral=\(central.sf.description)")
+            let msg_tag = SF_Tag_CentralManager_State_DidUpdated
+            let msg_central = "central=\(central.sf.description)"
+            let msgs = [msg_tag, msg_central].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -271,7 +322,11 @@ extension SFCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_WillRestoreState)\ncentral=\(central.sf.description)\ndict=\(dict)")
+            let msg_tag = SF_Tag_CentralManager_WillRestoreState
+            let msg_central = "central=\(central.sf.description)"
+            let msg_dict = "dict=\(dict)"
+            let msgs = [msg_tag, msg_central, msg_dict].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -301,7 +356,13 @@ extension SFCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_DidDiscoverPeripheral)\ncentral=\(central.sf.description)\nperipheral=\(peripheral.sf.description)\nadvertisementData=\(advertisementData)\nRSSI=\(RSSI)")
+            let msg_tag = SF_Tag_CentralManager_DidDiscoverPeripheral
+            let msg_central = "central=\(central.sf.description)"
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_advertisementData = "advertisementData=\(advertisementData)"
+            let msg_RSSI = "RSSI=\(RSSI)"
+            let msgs = [msg_tag, msg_central, msg_peripheral, msg_advertisementData, msg_RSSI].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -326,7 +387,11 @@ extension SFCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_ConnectPeripheral_Success)\ncentral=\(central.sf.description)\nperipheral=\(peripheral.sf.description)")
+            let msg_tag = SF_Tag_CentralManager_ConnectPeripheral_Success
+            let msg_central = "central=\(central.sf.description)"
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msgs = [msg_tag, msg_central, msg_peripheral].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -351,7 +416,15 @@ extension SFCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_ConnectPeripheral_Failure)\ncentral=\(central.sf.description)\nperipheral=\(peripheral.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_CentralManager_ConnectPeripheral_Failure
+            let msg_central = "central=\(central.sf.description)"
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_central, msg_peripheral, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -380,7 +453,15 @@ extension SFCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_DisconnectPeripheral_Success)\ncentral=\(central.sf.description)\nperipheral=\(peripheral.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_CentralManager_DisconnectPeripheral_Success
+            let msg_central = "central=\(central.sf.description)"
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_central, msg_peripheral, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -414,7 +495,17 @@ extension SFCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success)\ncentral=\(central.sf.description)\nperipheral=\(peripheral.sf.description)\ntimestamp=\(timestamp)\nisReconnecting=\(isReconnecting)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success
+            let msg_central = "central=\(central.sf.description)"
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_timestamp = "timestamp=\(timestamp)"
+            let msg_isReconnecting = "isReconnecting=\(isReconnecting)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_central, msg_peripheral, msg_timestamp, msg_isReconnecting, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -443,7 +534,12 @@ extension SFCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_ConnectionEvents_Occur)\ncentral=\(central.sf.description)\nevent=\(event.sf.description)\nperipheral=\(peripheral.sf.description)")
+            let msg_tag = SF_Tag_CentralManager_ConnectionEvents_Occur
+            let msg_central = "central=\(central.sf.description)"
+            let msg_event = "event=\(event.sf.description)"
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msgs = [msg_tag, msg_central, msg_event, msg_peripheral].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -467,7 +563,11 @@ extension SFCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didUpdateANCSAuthorizationFor peripheral: CBPeripheral) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_CentralManager_ANCSAuthorization_DidUpdated)\ncentral=\(central.sf.description)\nperipheral=\(peripheral.sf.description)")
+            let msg_tag = SF_Tag_CentralManager_ANCSAuthorization_DidUpdated
+            let msg_central = "central=\(central.sf.description)"
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msgs = [msg_tag, msg_central, msg_peripheral].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()

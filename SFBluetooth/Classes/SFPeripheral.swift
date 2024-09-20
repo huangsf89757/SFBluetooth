@@ -176,7 +176,10 @@ extension SFPeripheral {
         peripheral.readRSSI()
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_ReadRSSI_Start)\nperipheral=\(peripheral.sf.description)")
+            let msg_tag = SF_Tag_Peripheral_ReadRSSI_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msgs = [msg_tag, msg_peripheral].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -199,7 +202,14 @@ extension SFPeripheral {
         peripheral.discoverServices(serviceUUIDs)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_DiscoverServices_Start)\nperipheral=\(peripheral.sf.description)\nserviceUUIDs=\(serviceUUIDs)")
+            let msg_tag = SF_Tag_Peripheral_DiscoverServices_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            var msg_serviceUUIDs = "serviceUUIDs=nil"
+            if let serviceUUIDs = serviceUUIDs {
+                msg_serviceUUIDs = "serviceUUIDs=\(serviceUUIDs)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_serviceUUIDs].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -233,7 +243,7 @@ extension SFPeripheral {
             if let includedServiceUUIDs = includedServiceUUIDs {
                 msg_includedServiceUUIDs = "includedServiceUUIDs=\(includedServiceUUIDs)"
             }
-            let msgs = [msg_tag, msg_peripheral].joined(separator: "\n")
+            let msgs = [msg_tag, msg_peripheral, msg_service, msg_includedServiceUUIDs].joined(separator: "\n")
             Log.info("\n\(msgs)\n")
         }
         // notify
@@ -262,7 +272,15 @@ extension SFPeripheral {
         peripheral.discoverCharacteristics(characteristicUUIDs, for: service)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_DiscoverCharacteristics_Start)\nperipheral=\(peripheral.sf.description)\nservice=\(service.sf.description)\ncharacteristicUUIDs=\(characteristicUUIDs)")
+            let msg_tag = SF_Tag_Peripheral_DiscoverCharacteristics_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_service = "service=\(service.sf.description)"
+            var msg_characteristicUUIDs = "characteristicUUIDs=nil"
+            if let characteristicUUIDs = characteristicUUIDs {
+                msg_characteristicUUIDs = "characteristicUUIDs=\(characteristicUUIDs)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_service, msg_characteristicUUIDs].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -288,7 +306,11 @@ extension SFPeripheral {
         peripheral.readRSSI()
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_ReadCharacteristicValue_Start)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)")
+            let msg_tag = SF_Tag_Peripheral_ReadCharacteristicValue_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+            let msgs = [msg_tag, msg_peripheral, msg_characteristic].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -338,7 +360,13 @@ extension SFPeripheral {
         peripheral.writeValue(data, for: characteristic, type: type)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_WriteCharacteristicValue_Start)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\ntype=\(type.sf.description)\ndata=\(data.sf.toHex())")
+            let msg_tag = SF_Tag_Peripheral_WriteCharacteristicValue_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+            let msg_type = "type=\(type.sf.description)"
+            let msg_data = "data=\(data.sf.toHex())"
+            let msgs = [msg_tag, msg_peripheral, msg_characteristic, msg_type, msg_data].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -369,7 +397,12 @@ extension SFPeripheral {
         peripheral.setNotifyValue(enabled, for: characteristic)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_SetCharacteristicNotificationState_Start)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nenabled=\(enabled)")
+            let msg_tag = SF_Tag_Peripheral_SetCharacteristicNotificationState_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+            let msg_enabled = "enabled=\(enabled)"
+            let msgs = [msg_tag, msg_peripheral, msg_characteristic, msg_enabled].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -393,7 +426,11 @@ extension SFPeripheral {
         peripheral.discoverDescriptors(for: characteristic)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_DiscoverDescriptors_Start)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)")
+            let msg_tag = SF_Tag_Peripheral_DiscoverDescriptors_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+            let msgs = [msg_tag, msg_peripheral, msg_characteristic].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -416,7 +453,11 @@ extension SFPeripheral {
         peripheral.readValue(for: descriptor)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_ReadDescriptorValue_Start)\nperipheral=\(peripheral.sf.description)\ndescriptor=\(descriptor)")
+            let msg_tag = SF_Tag_Peripheral_ReadDescriptorValue_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_descriptor = "descriptor=\(descriptor.sf.description)"
+            let msgs = [msg_tag, msg_peripheral, msg_descriptor].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -441,7 +482,12 @@ extension SFPeripheral {
         peripheral.writeValue(data, for: descriptor)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_WriteDescriptorValue_Start)\nperipheral=\(peripheral.sf.description)\ndescriptor=\(descriptor)\ndata=\(data.sf.toHex())")
+            let msg_tag = SF_Tag_Peripheral_WriteDescriptorValue_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_descriptor = "descriptor=\(descriptor.sf.description)"
+            let msg_data = "data=\(data.sf.toHex())"
+            let msgs = [msg_tag, msg_peripheral, msg_descriptor, msg_data].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -466,7 +512,11 @@ extension SFPeripheral {
         peripheral.openL2CAPChannel(PSM)
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_OpenL2CAPChannel_Start)\nperipheral=\(peripheral.sf.description)\nPSM=\(PSM)")
+            let msg_tag = SF_Tag_Peripheral_OpenL2CAPChannel_Start
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_PSM = "PSM=\(PSM)"
+            let msgs = [msg_tag, msg_peripheral, msg_PSM].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -491,7 +541,10 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_Name_DidUpdated)\nperipheral=\(peripheral.sf.description)")
+            let msg_tag = SF_Tag_Peripheral_Name_DidUpdated
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msgs = [msg_tag, msg_peripheral].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -514,12 +567,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
         // log
         if isLogEnable {
-            var msg_invalidatedServices = "["
+            let msg_tag = SF_Tag_Peripheral_Services_DidModified
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            var msg_invalidatedServices = "invalidatedServices=["
             for invalidatedService in invalidatedServices {
                 msg_invalidatedServices.append(invalidatedService.sf.description)
             }
             msg_invalidatedServices.append("]")
-            Log.info("\n\(SF_Tag_Peripheral_Services_DidModified)\nperipheral=\(peripheral.sf.description)\ninvalidatedServices=\(msg_invalidatedServices)")
+            let msgs = [msg_tag, msg_peripheral, msg_invalidatedServices].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -543,7 +599,14 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheralDidUpdateRSSI(_ peripheral: CBPeripheral, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_RSSI_DidUpdated)\nperipheral=\(peripheral.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_RSSI_DidUpdated
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -568,7 +631,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_ReadRSSI_Success)\nperipheral=\(peripheral.sf.description)\nRSSI=\(RSSI)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_ReadRSSI_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_RSSI = "RSSI=\(RSSI)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_RSSI, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -595,7 +666,14 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_DiscoverServices_Success)\nperipheral=\(peripheral.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_DiscoverServices_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -621,7 +699,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_DiscoverIncludedServices_Success)\nperipheral=\(peripheral.sf.description)\nservice=\(service.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_DiscoverIncludedServices_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_service = "service=\(service.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_service, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -648,7 +734,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_DiscoverCharacteristics_Success)\nperipheral=\(peripheral.sf.description)\nservice=\(service.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_DiscoverCharacteristics_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_service = "service=\(service.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_service, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -674,7 +768,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_ReadCharacteristicValue_Success)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_ReadCharacteristicValue_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_characteristic, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -700,7 +802,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_WriteCharacteristicValue_Success)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_WriteCharacteristicValue_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_characteristic, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -726,7 +836,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_SetCharacteristicNotificationState_Success)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_SetCharacteristicNotificationState_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_characteristic, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -753,7 +871,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_DiscoverDescriptors_Success)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_DiscoverDescriptors_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_characteristic, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -779,7 +905,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_ReadDescriptorValue_Success)\nperipheral=\(peripheral.sf.description)\ndescriptor=\(descriptor.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_ReadDescriptorValue_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_descriptor = "descriptor=\(descriptor.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_descriptor, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -805,7 +939,15 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_WriteDescriptorValue_Success)\nperipheral=\(peripheral.sf.description) descriptor=\(descriptor) error=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_WriteDescriptorValue_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msg_descriptor = "descriptor=\(descriptor.sf.description)"
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_descriptor, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -831,7 +973,10 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse)\nperipheral=\(peripheral.sf.description)")
+            let msg_tag = SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            let msgs = [msg_tag, msg_peripheral].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()
@@ -853,7 +998,18 @@ extension SFPeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didOpen channel: CBL2CAPChannel?, error: (any Error)?) {
         // log
         if isLogEnable {
-            Log.info("\n\(SF_Tag_Peripheral_OpenL2CAPChannel_Success)\nperipheral=\(peripheral.sf.description)\nchannel=\(channel?.description ?? nil)\nerror=\(error?.localizedDescription ?? "nil")")
+            let msg_tag = SF_Tag_Peripheral_OpenL2CAPChannel_Success
+            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+            var msg_channel = "channel=nil"
+            if let channel = channel {
+                msg_channel = "channel=\(channel.description)"
+            }   
+            var msg_error = "error=nil"
+            if let error = error {
+                msg_error = "error=\(error.localizedDescription)"
+            }
+            let msgs = [msg_tag, msg_peripheral, msg_channel, msg_error].joined(separator: "\n")
+            Log.info("\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()

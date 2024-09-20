@@ -13,28 +13,28 @@ import SFExtension
 import SFLogger
 
 // MARK: - Tag
-public let SF_Tag_CentralManager_IsScanning_DidChanged =                     "SF_Tag_CentralManager_IsScanning_DidChanged"
-public let SF_Tag_CentralManager_State_DidUpdated =                          "SF_Tag_CentralManager_State_DidUpdated"
-public let SF_Tag_CentralManager_ANCSAuthorization_DidUpdated =              "SF_Tag_CentralManager_ANCSAuthorization_DidUpdated"
+public let SF_Tag_CentralManager_IsScanning_DidChanged =                        "SF_Tag_CentralManager_IsScanning_DidChanged"
+public let SF_Tag_CentralManager_State_DidUpdated =                             "SF_Tag_CentralManager_State_DidUpdated"
+public let SF_Tag_CentralManager_ANCSAuthorization_DidUpdated =                 "SF_Tag_CentralManager_ANCSAuthorization_DidUpdated"
 
-public let SF_Tag_CentralManager_WillRestoreState =                          "SF_Tag_CentralManager_WillRestoreState"
-public let SF_Tag_CentralManager_RetrievePeripherals =                       "SF_Tag_CentralManager_RetrievePeripherals"
-public let SF_Tag_CentralManager_RetrieveConnectedPeripherals =              "SF_Tag_CentralManager_RetrieveConnectedPeripherals"
+public let SF_Tag_CentralManager_WillRestoreState =                             "SF_Tag_CentralManager_WillRestoreState"
+public let SF_Tag_CentralManager_RetrievePeripherals =                          "SF_Tag_CentralManager_RetrievePeripherals"
+public let SF_Tag_CentralManager_RetrieveConnectedPeripherals =                 "SF_Tag_CentralManager_RetrieveConnectedPeripherals"
 
-public let SF_Tag_CentralManager_Scan_Start =                                "SF_Tag_CentralManager_Scan_Start"
-public let SF_Tag_CentralManager_Scan_Stop =                                 "SF_Tag_CentralManager_Scan_Stop"
-public let SF_Tag_CentralManager_DidDiscoverPeripheral =                     "SF_Tag_CentralManager_DidDiscoverPeripheral"
+public let SF_Tag_CentralManager_Scan_Start =                                   "SF_Tag_CentralManager_Scan_Start"
+public let SF_Tag_CentralManager_Scan_Stop =                                    "SF_Tag_CentralManager_Scan_Stop"
+public let SF_Tag_CentralManager_DidDiscoverPeripheral =                        "SF_Tag_CentralManager_DidDiscoverPeripheral"
 
-public let SF_Tag_CentralManager_ConnectPeripheral_Start =                   "SF_Tag_CentralManager_ConnectPeripheral_Start"
-public let SF_Tag_CentralManager_ConnectPeripheral_Success =                 "SF_Tag_CentralManager_ConnectPeripheral_Success"
-public let SF_Tag_CentralManager_ConnectPeripheral_Failure =                 "SF_Tag_CentralManager_ConnectPeripheral_Failure"
+public let SF_Tag_CentralManager_ConnectPeripheral_Start =                      "SF_Tag_CentralManager_ConnectPeripheral_Start"
+public let SF_Tag_CentralManager_ConnectPeripheral_Success =                    "SF_Tag_CentralManager_ConnectPeripheral_Success"
+public let SF_Tag_CentralManager_ConnectPeripheral_Failure =                    "SF_Tag_CentralManager_ConnectPeripheral_Failure"
 
-public let SF_Tag_CentralManager_DisconnectPeripheral_Start =                "SF_Tag_CentralManager_DisconnectPeripheral_Start"
-public let SF_Tag_CentralManager_DisconnectPeripheral_Success =              "SF_Tag_CentralManager_DisconnectPeripheral_Success"
-public let SF_Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success = "SF_Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success"
+public let SF_Tag_CentralManager_DisconnectPeripheral_Start =                   "SF_Tag_CentralManager_DisconnectPeripheral_Start"
+public let SF_Tag_CentralManager_DisconnectPeripheral_Success =                 "SF_Tag_CentralManager_DisconnectPeripheral_Success"
+public let SF_Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success =    "SF_Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success"
 
-public let SF_Tag_CentralManager_ConnectionEvents_Register =                 "SF_Tag_CentralManager_ConnectionEvents_Register"
-public let SF_Tag_CentralManager_ConnectionEvents_Occur =                    "SF_Tag_CentralManager_ConnectionEvents_Occur"
+public let SF_Tag_CentralManager_ConnectionEvents_Register =                    "SF_Tag_CentralManager_ConnectionEvents_Register"
+public let SF_Tag_CentralManager_ConnectionEvents_Occur =                       "SF_Tag_CentralManager_ConnectionEvents_Occur"
 
 
 // MARK: - Notify

@@ -14,43 +14,43 @@ import SFLogger
 
 
 // MARK: - Tag
-public let SF_Tag_Peripheral_Name_DidUpdated =                               "SF_Tag_Peripheral_Name_DidUpdated"
-public let SF_Tag_Peripheral_Services_DidModified =                          "SF_Tag_Peripheral_Services_DidModified"
-public let SF_Tag_Peripheral_RSSI_DidUpdated =                               "SF_Tag_Peripheral_RSSI_DidUpdated"
-public let SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse =             "SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse"
+public let SF_Tag_Peripheral_Name_DidUpdated =                                  "SF_Tag_Peripheral_Name_DidUpdated"
+public let SF_Tag_Peripheral_Services_DidModified =                             "SF_Tag_Peripheral_Services_DidModified"
+public let SF_Tag_Peripheral_RSSI_DidUpdated =                                  "SF_Tag_Peripheral_RSSI_DidUpdated"
+public let SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse =                "SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse"
 
-public let SF_Tag_Peripheral_ReadRSSI_Start =                                "SF_Tag_Peripheral_ReadRSSI_Start"
-public let SF_Tag_Peripheral_ReadRSSI_Success =                              "SF_Tag_Peripheral_ReadRSSI_Success"
+public let SF_Tag_Peripheral_ReadRSSI_Start =                                   "SF_Tag_Peripheral_ReadRSSI_Start"
+public let SF_Tag_Peripheral_ReadRSSI_Success =                                 "SF_Tag_Peripheral_ReadRSSI_Success"
 
-public let SF_Tag_Peripheral_DiscoverServices_Start =                        "SF_Tag_Peripheral_DiscoverServices_Start"
-public let SF_Tag_Peripheral_DiscoverServices_Success =                      "SF_Tag_Peripheral_DiscoverServices_Success"
+public let SF_Tag_Peripheral_DiscoverServices_Start =                           "SF_Tag_Peripheral_DiscoverServices_Start"
+public let SF_Tag_Peripheral_DiscoverServices_Success =                         "SF_Tag_Peripheral_DiscoverServices_Success"
 
-public let SF_Tag_Peripheral_DiscoverIncludedServices_Start =                "SF_Tag_Peripheral_DiscoverIncludedServices_Start"
-public let SF_Tag_Peripheral_DiscoverIncludedServices_Success =              "SF_Tag_Peripheral_DiscoverIncludedServices_Success"
+public let SF_Tag_Peripheral_DiscoverIncludedServices_Start =                   "SF_Tag_Peripheral_DiscoverIncludedServices_Start"
+public let SF_Tag_Peripheral_DiscoverIncludedServices_Success =                 "SF_Tag_Peripheral_DiscoverIncludedServices_Success"
 
-public let SF_Tag_Peripheral_DiscoverCharacteristics_Start =                 "SF_Tag_Peripheral_DiscoverCharacteristics_Start"
-public let SF_Tag_Peripheral_DiscoverCharacteristics_Success =               "SF_Tag_Peripheral_DiscoverCharacteristics_Success"
+public let SF_Tag_Peripheral_DiscoverCharacteristics_Start =                    "SF_Tag_Peripheral_DiscoverCharacteristics_Start"
+public let SF_Tag_Peripheral_DiscoverCharacteristics_Success =                  "SF_Tag_Peripheral_DiscoverCharacteristics_Success"
 
-public let SF_Tag_Peripheral_DiscoverDescriptors_Start =                     "SF_Tag_Peripheral_DiscoverDescriptors_Start"
-public let SF_Tag_Peripheral_DiscoverDescriptors_Success =                   "SF_Tag_Peripheral_DiscoverDescriptors_Success"
+public let SF_Tag_Peripheral_DiscoverDescriptors_Start =                        "SF_Tag_Peripheral_DiscoverDescriptors_Start"
+public let SF_Tag_Peripheral_DiscoverDescriptors_Success =                      "SF_Tag_Peripheral_DiscoverDescriptors_Success"
 
-public let SF_Tag_Peripheral_SetCharacteristicNotificationState_Start =      "SF_Tag_Peripheral_SetCharacteristicNotificationState_Start"
-public let SF_Tag_Peripheral_SetCharacteristicNotificationState_Success =    "SF_Tag_Peripheral_SetCharacteristicNotificationState_Success"
+public let SF_Tag_Peripheral_SetCharacteristicNotificationState_Start =         "SF_Tag_Peripheral_SetCharacteristicNotificationState_Start"
+public let SF_Tag_Peripheral_SetCharacteristicNotificationState_Success =       "SF_Tag_Peripheral_SetCharacteristicNotificationState_Success"
 
-public let SF_Tag_Peripheral_ReadCharacteristicValue_Start =                 "SF_Tag_Peripheral_ReadCharacteristicValue_Start"
-public let SF_Tag_Peripheral_ReadCharacteristicValue_Success =               "SF_Tag_Peripheral_ReadCharacteristicValue_Success"
+public let SF_Tag_Peripheral_ReadCharacteristicValue_Start =                    "SF_Tag_Peripheral_ReadCharacteristicValue_Start"
+public let SF_Tag_Peripheral_ReadCharacteristicValue_Success =                  "SF_Tag_Peripheral_ReadCharacteristicValue_Success"
 
-public let SF_Tag_Peripheral_WriteCharacteristicValue_Start =                "SF_Tag_Peripheral_WriteCharacteristicValue_Start"
-public let SF_Tag_Peripheral_WriteCharacteristicValue_Success =              "SF_Tag_Peripheral_WriteCharacteristicValue_Success"
+public let SF_Tag_Peripheral_WriteCharacteristicValue_Start =                   "SF_Tag_Peripheral_WriteCharacteristicValue_Start"
+public let SF_Tag_Peripheral_WriteCharacteristicValue_Success =                 "SF_Tag_Peripheral_WriteCharacteristicValue_Success"
 
-public let SF_Tag_Peripheral_ReadDescriptorValue_Start =                     "SF_Tag_Peripheral_ReadDescriptorValue_Start"
-public let SF_Tag_Peripheral_ReadDescriptorValue_Success =                   "SF_Tag_Peripheral_ReadDescriptorValue_Success"
+public let SF_Tag_Peripheral_ReadDescriptorValue_Start =                        "SF_Tag_Peripheral_ReadDescriptorValue_Start"
+public let SF_Tag_Peripheral_ReadDescriptorValue_Success =                      "SF_Tag_Peripheral_ReadDescriptorValue_Success"
 
-public let SF_Tag_Peripheral_WriteDescriptorValue_Start =                    "SF_Tag_Peripheral_WriteDescriptorValue_Start"
-public let SF_Tag_Peripheral_WriteDescriptorValue_Success =                  "SF_Tag_Peripheral_WriteDescriptorValue_Success"
+public let SF_Tag_Peripheral_WriteDescriptorValue_Start =                       "SF_Tag_Peripheral_WriteDescriptorValue_Start"
+public let SF_Tag_Peripheral_WriteDescriptorValue_Success =                     "SF_Tag_Peripheral_WriteDescriptorValue_Success"
 
-public let SF_Tag_Peripheral_OpenL2CAPChannel_Start =                        "SF_Tag_Peripheral_OpenL2CAPChannel_Start"
-public let SF_Tag_Peripheral_OpenL2CAPChannel_Success =                      "SF_Tag_Peripheral_OpenL2CAPChannel_Success"
+public let SF_Tag_Peripheral_OpenL2CAPChannel_Start =                           "SF_Tag_Peripheral_OpenL2CAPChannel_Start"
+public let SF_Tag_Peripheral_OpenL2CAPChannel_Success =                         "SF_Tag_Peripheral_OpenL2CAPChannel_Success"
 
 
 // MARK: - Notify

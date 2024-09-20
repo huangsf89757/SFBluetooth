@@ -62,6 +62,11 @@ public let SF_Notify_CentralManager_ConnectionEvents_Register =                 
 public let SF_Notify_CentralManager_ConnectionEvents_Occur =                    NSNotification.Name("SF_Notify_CentralManager_ConnectionEvents_Occur")
 
 
+// MARK: - SFCentralManagerLogOption
+enum SFCentralManagerLogOption {
+case <#case#>
+}
+
 
 // MARK: - SFCentralManager
 public class SFCentralManager: NSObject {

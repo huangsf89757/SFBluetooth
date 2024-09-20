@@ -7,8 +7,91 @@
 
 import Foundation
 import CoreBluetooth
+// Basic
+import SFExtension
 // Server
 import SFLogger
+
+
+// MARK: - Tag
+public let SF_Tag_Peripheral_Name_DidUpdated =                               NSNotification.Name("SF_Tag_Peripheral_Name_DidUpdated")
+public let SF_Tag_Peripheral_Services_DidModified =                          NSNotification.Name("SF_Tag_Peripheral_Services_DidModified")
+public let SF_Tag_Peripheral_RSSI_DidUpdated =                               NSNotification.Name("SF_Tag_Peripheral_RSSI_DidUpdated")
+public let SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse =             NSNotification.Name("SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse")
+
+public let SF_Tag_Peripheral_ReadRSSI_Start =                                NSNotification.Name("SF_Tag_Peripheral_ReadRSSI_Start")
+public let SF_Tag_Peripheral_ReadRSSI_Success =                              NSNotification.Name("SF_Tag_Peripheral_ReadRSSI_Success")
+
+public let SF_Tag_Peripheral_DiscoverServices_Start =                        NSNotification.Name("SF_Tag_Peripheral_DiscoverServices_Start")
+public let SF_Tag_Peripheral_DiscoverServices_Success =                      NSNotification.Name("SF_Tag_Peripheral_DiscoverServices_Success")
+
+public let SF_Tag_Peripheral_DiscoverIncludedServices_Start =                NSNotification.Name("SF_Tag_Peripheral_DiscoverIncludedServices_Start")
+public let SF_Tag_Peripheral_DiscoverIncludedServices_Success =              NSNotification.Name("SF_Tag_Peripheral_DiscoverIncludedServices_Success")
+
+public let SF_Tag_Peripheral_DiscoverCharacteristics_Start =                 NSNotification.Name("SF_Tag_Peripheral_DiscoverCharacteristics_Start")
+public let SF_Tag_Peripheral_DiscoverCharacteristics_Success =               NSNotification.Name("SF_Tag_Peripheral_DiscoverCharacteristics_Success")
+
+public let SF_Tag_Peripheral_DiscoverDescriptors_Start =                     NSNotification.Name("SF_Tag_Peripheral_DiscoverDescriptors_Start")
+public let SF_Tag_Peripheral_DiscoverDescriptors_Success =                   NSNotification.Name("SF_Tag_Peripheral_DiscoverDescriptors_Success")
+
+public let SF_Tag_Peripheral_SetCharacteristicNotificationState_Start =      NSNotification.Name("SF_Tag_Peripheral_SetCharacteristicNotificationState_Start")
+public let SF_Tag_Peripheral_SetCharacteristicNotificationState_Success =    NSNotification.Name("SF_Tag_Peripheral_SetCharacteristicNotificationState_Success")
+
+public let SF_Tag_Peripheral_ReadCharacteristicValue_Start =                 NSNotification.Name("SF_Tag_Peripheral_ReadCharacteristicValue_Start")
+public let SF_Tag_Peripheral_ReadCharacteristicValue_Success =               NSNotification.Name("SF_Tag_Peripheral_ReadCharacteristicValue_Success")
+
+public let SF_Tag_Peripheral_WriteCharacteristicValue_Start =                NSNotification.Name("SF_Tag_Peripheral_WriteCharacteristicValue_Start")
+public let SF_Tag_Peripheral_WriteCharacteristicValue_Success =              NSNotification.Name("SF_Tag_Peripheral_WriteCharacteristicValue_Success")
+
+public let SF_Tag_Peripheral_ReadDescriptorValue_Start =                     NSNotification.Name("SF_Tag_Peripheral_ReadDescriptorValue_Start")
+public let SF_Tag_Peripheral_ReadDescriptorValue_Success =                   NSNotification.Name("SF_Tag_Peripheral_ReadDescriptorValue_Success")
+
+public let SF_Tag_Peripheral_WriteDescriptorValue_Start =                    NSNotification.Name("SF_Tag_Peripheral_WriteDescriptorValue_Start")
+public let SF_Tag_Peripheral_WriteDescriptorValue_Success =                  NSNotification.Name("SF_Tag_Peripheral_WriteDescriptorValue_Success")
+
+public let SF_Tag_Peripheral_OpenL2CAPChannel_Start =                        NSNotification.Name("SF_Tag_Peripheral_OpenL2CAPChannel_Start")
+public let SF_Tag_Peripheral_OpenL2CAPChannel_Success =                      NSNotification.Name("SF_Tag_Peripheral_OpenL2CAPChannel_Success")
+
+
+// MARK: - Notify
+public let SF_Notify_Peripheral_Name_DidUpdated =                               NSNotification.Name("SF_Notify_Peripheral_Name_DidUpdated")
+public let SF_Notify_Peripheral_Services_DidModified =                          NSNotification.Name("SF_Notify_Peripheral_Services_DidModified")
+public let SF_Notify_Peripheral_RSSI_DidUpdated =                               NSNotification.Name("SF_Notify_Peripheral_RSSI_DidUpdated")
+public let SF_Notify_Peripheral_IsReadyToSendWriteWithoutResponse =             NSNotification.Name("SF_Notify_Peripheral_IsReadyToSendWriteWithoutResponse")
+
+public let SF_Notify_Peripheral_ReadRSSI_Start =                                NSNotification.Name("SF_Notify_Peripheral_ReadRSSI_Start")
+public let SF_Notify_Peripheral_ReadRSSI_Success =                              NSNotification.Name("SF_Notify_Peripheral_ReadRSSI_Success")
+
+public let SF_Notify_Peripheral_DiscoverServices_Start =                        NSNotification.Name("SF_Notify_Peripheral_DiscoverServices_Start")
+public let SF_Notify_Peripheral_DiscoverServices_Success =                      NSNotification.Name("SF_Notify_Peripheral_DiscoverServices_Success")
+
+public let SF_Notify_Peripheral_DiscoverIncludedServices_Start =                NSNotification.Name("SF_Notify_Peripheral_DiscoverIncludedServices_Start")
+public let SF_Notify_Peripheral_DiscoverIncludedServices_Success =              NSNotification.Name("SF_Notify_Peripheral_DiscoverIncludedServices_Success")
+
+public let SF_Notify_Peripheral_DiscoverCharacteristics_Start =                 NSNotification.Name("SF_Notify_Peripheral_DiscoverCharacteristics_Start")
+public let SF_Notify_Peripheral_DiscoverCharacteristics_Success =               NSNotification.Name("SF_Notify_Peripheral_DiscoverCharacteristics_Success")
+
+public let SF_Notify_Peripheral_DiscoverDescriptors_Start =                     NSNotification.Name("SF_Notify_Peripheral_DiscoverDescriptors_Start")
+public let SF_Notify_Peripheral_DiscoverDescriptors_Success =                   NSNotification.Name("SF_Notify_Peripheral_DiscoverDescriptors_Success")
+
+public let SF_Notify_Peripheral_SetCharacteristicNotificationState_Start =      NSNotification.Name("SF_Notify_Peripheral_SetCharacteristicNotificationState_Start")
+public let SF_Notify_Peripheral_SetCharacteristicNotificationState_Success =    NSNotification.Name("SF_Notify_Peripheral_SetCharacteristicNotificationState_Success")
+
+public let SF_Notify_Peripheral_ReadCharacteristicValue_Start =                 NSNotification.Name("SF_Notify_Peripheral_ReadCharacteristicValue_Start")
+public let SF_Notify_Peripheral_ReadCharacteristicValue_Success =               NSNotification.Name("SF_Notify_Peripheral_ReadCharacteristicValue_Success")
+
+public let SF_Notify_Peripheral_WriteCharacteristicValue_Start =                NSNotification.Name("SF_Notify_Peripheral_WriteCharacteristicValue_Start")
+public let SF_Notify_Peripheral_WriteCharacteristicValue_Success =              NSNotification.Name("SF_Notify_Peripheral_WriteCharacteristicValue_Success")
+
+public let SF_Notify_Peripheral_ReadDescriptorValue_Start =                     NSNotification.Name("SF_Notify_Peripheral_ReadDescriptorValue_Start")
+public let SF_Notify_Peripheral_ReadDescriptorValue_Success =                   NSNotification.Name("SF_Notify_Peripheral_ReadDescriptorValue_Success")
+
+public let SF_Notify_Peripheral_WriteDescriptorValue_Start =                    NSNotification.Name("SF_Notify_Peripheral_WriteDescriptorValue_Start")
+public let SF_Notify_Peripheral_WriteDescriptorValue_Success =                  NSNotification.Name("SF_Notify_Peripheral_WriteDescriptorValue_Success")
+
+public let SF_Notify_Peripheral_OpenL2CAPChannel_Start =                        NSNotification.Name("SF_Notify_Peripheral_OpenL2CAPChannel_Start")
+public let SF_Notify_Peripheral_OpenL2CAPChannel_Success =                      NSNotification.Name("SF_Notify_Peripheral_OpenL2CAPChannel_Success")
+
 
 // MARK: - SFPeripheral
 public class SFPeripheral: NSObject {
@@ -16,30 +99,12 @@ public class SFPeripheral: NSObject {
     public let peripheral: CBPeripheral
     public var isLogEnable = true
     
-    // MARK: block
-    public var didUpdateNameBlock: ((CBPeripheral) -> ())?
-    public var didModifyServicesBlock: ((CBPeripheral, [CBService]) -> ())?
-    public var didUpdateRSSIBlock: ((CBPeripheral, (any Error)?) -> ())?
-    public var didReadRSSIBlock: ((CBPeripheral, NSNumber, (any Error)?) -> ())?
-    public var didDiscoverServicesBlock: ((CBPeripheral, (any Error)?) -> ())?
-    public var didDiscoverIncludedServicesForServiceBlock: ((CBPeripheral, CBService, (any Error)?) -> ())?
-    public var didDiscoverCharacteristicsForServiceBlock: ((CBPeripheral, CBService, (any Error)?) -> ())?
-    public var didUpdateValueForCharacteristicBlock: ((CBPeripheral, CBCharacteristic, (any Error)?) -> ())?
-    public var didWriteValueForCharacteristicBlock: ((CBPeripheral, CBCharacteristic, (any Error)?) -> ())?
-    public var didUpdateNotificationStateForCharacteristicBlock: ((CBPeripheral, CBCharacteristic, (any Error)?) -> ())?
-    public var didDiscoverDescriptorsForCharacteristicBlock: ((CBPeripheral, CBCharacteristic, (any Error)?) -> ())?
-    public var didUpdateValueForDescriptorBlock: ((CBPeripheral, CBDescriptor, (any Error)?) -> ())?
-    public var didWriteValueForDescriptorBlock: ((CBPeripheral, CBDescriptor, (any Error)?) -> ())?
-    public var isReadyToSendWriteWithoutResponseBlock: ((CBPeripheral) -> ())?
-    public var didOpenChannelBlock: ((CBPeripheral, CBL2CAPChannel?, (any Error)?) -> ())?
-    
     // MARK: life cycle
     public init(peripheral: CBPeripheral) {
         self.peripheral = peripheral
         super.init()
         peripheral.delegate = self
     }
-       
 }
 
 extension SFPeripheral {
@@ -110,8 +175,9 @@ extension SFPeripheral {
     public func readRSSI() {
         peripheral.readRSSI()
         if isLogEnable {
-            Log.info("peripheral=\(peripheral)")
+            Log.info("\n\(SF_Tag_Peripheral_ReadRSSI_Start)\nperipheral=\(peripheral.sf.description)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_ReadRSSI_Start, object: nil, userInfo: ["peripheral": peripheral])
     }
 
     
@@ -128,8 +194,9 @@ extension SFPeripheral {
     public func discoverServices(_ serviceUUIDs: [CBUUID]?) {
         peripheral.discoverServices(serviceUUIDs)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) serviceUUIDs=\(serviceUUIDs)")
+            Log.info("\n\(SF_Tag_Peripheral_DiscoverServices_Start)\nperipheral=\(peripheral.sf.description)\nserviceUUIDs=\(serviceUUIDs)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_DiscoverServices_Start, object: nil, userInfo: ["peripheral": peripheral, "serviceUUIDs": serviceUUIDs])
     }
 
     
@@ -147,8 +214,9 @@ extension SFPeripheral {
     public func discoverIncludedServices(_ includedServiceUUIDs: [CBUUID]?, for service: CBService) {
         peripheral.discoverIncludedServices(includedServiceUUIDs, for: service)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) includedServiceUUIDs=\(includedServiceUUIDs) service=\(service)")
+            Log.info("\n\(SF_Tag_Peripheral_DiscoverIncludedServices_Start)\nperipheral=\(peripheral.sf.description)\nservice=\(service.sf.description)\nincludedServiceUUIDs=\(includedServiceUUIDs)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_DiscoverIncludedServices_Start, object: nil, userInfo: ["peripheral": peripheral, "service": service, "includedServiceUUIDs": includedServiceUUIDs])
     }
 
     
@@ -166,8 +234,9 @@ extension SFPeripheral {
     public func discoverCharacteristics(_ characteristicUUIDs: [CBUUID]?, for service: CBService) {
         peripheral.discoverCharacteristics(characteristicUUIDs, for: service)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) characteristicUUIDs=\(characteristicUUIDs) service=\(service)")
+            Log.info("\n\(SF_Tag_Peripheral_DiscoverCharacteristics_Start)\nperipheral=\(peripheral.sf.description)\nservice=\(service.sf.description)\ncharacteristicUUIDs=\(characteristicUUIDs)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_DiscoverCharacteristics_Start, object: nil, userInfo: ["peripheral": peripheral, "service": service, "characteristicUUIDs": characteristicUUIDs])
     }
 
     
@@ -183,8 +252,9 @@ extension SFPeripheral {
     public func readValue(for characteristic: CBCharacteristic) {
         peripheral.readRSSI()
         if isLogEnable {
-            Log.info("peripheral=\(peripheral)")
+            Log.info("\n\(SF_Tag_Peripheral_ReadCharacteristicValue_Start)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_ReadCharacteristicValue_Start, object: nil, userInfo: ["peripheral": peripheral, "characteristic": characteristic])
     }
 
     
@@ -199,7 +269,7 @@ extension SFPeripheral {
     public func maximumWriteValueLength(for type: CBCharacteristicWriteType) -> Int {
         let length = peripheral.maximumWriteValueLength(for: type)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) type=\(type) -> length=\(length)")
+            Log.info("\n\(SF_Tag_CentralManager_Scan_Stop)\nperipheral=\(peripheral.sf.description)\ntype=\(type.sf.description)\n-> length=\(length)")
         }
         return length
     }
@@ -226,8 +296,9 @@ extension SFPeripheral {
     public func writeValue(_ data: Data, for characteristic: CBCharacteristic, type: CBCharacteristicWriteType) {
         peripheral.writeValue(data, for: characteristic, type: type)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) data=\(data) characteristic=\(characteristic) type=\(type)")
+            Log.info("\n\(SF_Tag_Peripheral_WriteCharacteristicValue_Start)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\ntype=\(type.sf.description)\ndata=\(data)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_WriteCharacteristicValue_Start, object: nil, userInfo: ["peripheral": peripheral, "characteristic": characteristic, "type": type, "data": data])
     }
 
     
@@ -249,8 +320,9 @@ extension SFPeripheral {
     public func setNotifyValue(_ enabled: Bool, for characteristic: CBCharacteristic) {
         peripheral.setNotifyValue(enabled, for: characteristic)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) enabled=\(enabled) characteristic=\(characteristic)")
+            Log.info("\n\(SF_Tag_Peripheral_SetCharacteristicNotificationState_Start)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nenabled=\(enabled)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_SetCharacteristicNotificationState_Start, object: nil, userInfo: ["peripheral": peripheral, "characteristic": characteristic, "enabled": enabled])
     }
 
     
@@ -266,8 +338,9 @@ extension SFPeripheral {
     public func discoverDescriptors(for characteristic: CBCharacteristic) {
         peripheral.discoverDescriptors(for: characteristic)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) characteristic=\(characteristic)")
+            Log.info("\n\(SF_Tag_Peripheral_DiscoverDescriptors_Start)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_DiscoverDescriptors_Start, object: nil, userInfo: ["peripheral": peripheral, "characteristic": characteristic])
     }
 
     
@@ -283,8 +356,9 @@ extension SFPeripheral {
     public func readValue(for descriptor: CBDescriptor) {
         peripheral.readValue(for: descriptor)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) descriptor=\(descriptor)")
+            Log.info("\n\(SF_Tag_Peripheral_ReadDescriptorValue_Start)\nperipheral=\(peripheral.sf.description)\ndescriptor=\(descriptor)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_ReadDescriptorValue_Start, object: nil, userInfo: ["peripheral": peripheral, "descriptor": descriptor])
     }
 
     
@@ -302,8 +376,9 @@ extension SFPeripheral {
     public func writeValue(_ data: Data, for descriptor: CBDescriptor) {
         peripheral.writeValue(data, for: descriptor)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) data=\(data) descriptor=\(descriptor)")
+            Log.info("\n\(SF_Tag_Peripheral_WriteDescriptorValue_Start)\nperipheral=\(peripheral.sf.description)\ndescriptor=\(descriptor)\ndata=\(data)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_WriteDescriptorValue_Start, object: nil, userInfo: ["peripheral": peripheral, "descriptor": descriptor, "data": data])
     }
 
     
@@ -320,8 +395,9 @@ extension SFPeripheral {
     public func openL2CAPChannel(_ PSM: CBL2CAPPSM) {
         peripheral.openL2CAPChannel(PSM)
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) PSM=\(PSM)")
+            Log.info("\n\(SF_Tag_Peripheral_OpenL2CAPChannel_Start)\nperipheral=\(peripheral.sf.description)\nPSM=\(PSM)")
         }
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_OpenL2CAPChannel_Start, object: nil, userInfo: ["peripheral": peripheral, "PSM": PSM])
     }
 }
 
@@ -339,9 +415,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 6.0, *)
     public func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral)")
+            Log.info("\n\(SF_Tag_Peripheral_Name_DidUpdated)\nperipheral=\(peripheral.sf.description)")
         }
-        didUpdateNameBlock?(peripheral)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_Name_DidUpdated, object: nil, userInfo: ["peripheral": peripheral])
     }
 
     
@@ -358,9 +434,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 7.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) services=\(invalidatedServices)")
+            Log.info("\n\(SF_Tag_Peripheral_Services_DidModified)\nperipheral=\(peripheral.sf.description)\ninvalidatedServices=\(invalidatedServices)")
         }
-        didModifyServicesBlock?(peripheral, invalidatedServices)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_Services_DidModified, object: nil, userInfo: ["peripheral": peripheral, "invalidatedServices": invalidatedServices])
     }
 
     
@@ -377,9 +453,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS, introduced: 5.0, deprecated: 8.0)
     public func peripheralDidUpdateRSSI(_ peripheral: CBPeripheral, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_RSSI_DidUpdated)\nperipheral=\(peripheral.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didUpdateRSSIBlock?(peripheral, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_RSSI_DidUpdated, object: nil, userInfo: ["peripheral": peripheral, "error": error])
     }
 
     
@@ -395,9 +471,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 8.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) RSSI=\(RSSI) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_ReadRSSI_Success)\nperipheral=\(peripheral.sf.description)\nRSSI=\(RSSI)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didReadRSSIBlock?(peripheral, RSSI, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_ReadRSSI_Success, object: nil, userInfo: ["peripheral": peripheral, "RSSI": RSSI, "error": error])
     }
 
     
@@ -414,9 +490,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_DiscoverServices_Success)\nperipheral=\(peripheral.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didDiscoverServicesBlock?(peripheral, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_DiscoverServices_Success, object: nil, userInfo: ["peripheral": peripheral, "error": error])
     }
 
     
@@ -433,9 +509,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) service=\(service) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_DiscoverIncludedServices_Success)\nperipheral=\(peripheral.sf.description)\nservice=\(service.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didDiscoverIncludedServicesForServiceBlock?(peripheral, service, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_DiscoverIncludedServices_Success, object: nil, userInfo: ["peripheral": peripheral, "service": service, "error": error])
     }
 
     
@@ -452,9 +528,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) service=\(service) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_DiscoverCharacteristics_Success)\nperipheral=\(peripheral.sf.description)\nservice=\(service.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didDiscoverCharacteristicsForServiceBlock?(peripheral, service, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_DiscoverCharacteristics_Success, object: nil, userInfo: ["peripheral": peripheral, "service": service, "error": error])
     }
 
     
@@ -470,9 +546,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) characteristic=\(characteristic) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_ReadCharacteristicValue_Success)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didUpdateValueForCharacteristicBlock?(peripheral, characteristic, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_ReadCharacteristicValue_Success, object: nil, userInfo: ["peripheral": peripheral, "characteristic": characteristic, "error": error])
     }
 
     
@@ -488,9 +564,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) characteristic=\(characteristic) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_WriteCharacteristicValue_Success)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didWriteValueForCharacteristicBlock?(peripheral, characteristic, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_WriteCharacteristicValue_Success, object: nil, userInfo: ["peripheral": peripheral, "characteristic": characteristic, "error": error])
     }
 
     
@@ -506,9 +582,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) characteristic=\(characteristic) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_SetCharacteristicNotificationState_Success)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didUpdateNotificationStateForCharacteristicBlock?(peripheral, characteristic, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_SetCharacteristicNotificationState_Success, object: nil, userInfo: ["peripheral": peripheral, "characteristic": characteristic, "error": error])
     }
 
     
@@ -525,9 +601,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) characteristic=\(characteristic) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_DiscoverDescriptors_Success)\nperipheral=\(peripheral.sf.description)\ncharacteristic=\(characteristic.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didDiscoverDescriptorsForCharacteristicBlock?(peripheral, characteristic, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_DiscoverDescriptors_Success, object: nil, userInfo: ["peripheral": peripheral, "characteristic": characteristic, "error": error])
     }
 
     
@@ -543,9 +619,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) descriptor=\(descriptor) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_ReadDescriptorValue_Success)\nperipheral=\(peripheral.sf.description)\ndescriptor=\(descriptor.sf.description)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didUpdateValueForDescriptorBlock?(peripheral, descriptor, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_ReadDescriptorValue_Success, object: nil, userInfo: ["peripheral": peripheral, "descriptor": descriptor, "error": error])
     }
 
     
@@ -561,9 +637,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) descriptor=\(descriptor) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_WriteDescriptorValue_Success)\nperipheral=\(peripheral.sf.description) descriptor=\(descriptor) error=\(error?.localizedDescription ?? "nil")")
         }
-        didWriteValueForDescriptorBlock?(peripheral, descriptor, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_WriteDescriptorValue_Success, object: nil, userInfo: ["peripheral": peripheral, "descriptor": descriptor, "error": error])
     }
 
     
@@ -579,9 +655,9 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 5.0, *)
     public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral)")
+            Log.info("\n\(SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse)\nperipheral=\(peripheral.sf.description)")
         }
-        isReadyToSendWriteWithoutResponseBlock?(peripheral)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_IsReadyToSendWriteWithoutResponse, object: nil, userInfo: ["peripheral": peripheral])
     }
 
     
@@ -597,8 +673,8 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS 11.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didOpen channel: CBL2CAPChannel?, error: (any Error)?) {
         if isLogEnable {
-            Log.info("peripheral=\(peripheral) channel=\(channel?.description ?? nil) error=\(error?.localizedDescription ?? "nil")")
+            Log.info("\n\(SF_Tag_Peripheral_OpenL2CAPChannel_Success)\nperipheral=\(peripheral.sf.description)\nchannel=\(channel?.description ?? nil)\nerror=\(error?.localizedDescription ?? "nil")")
         }
-        didOpenChannelBlock?(peripheral, channel, error)
+        NotificationCenter.default.post(name: SF_Notify_Peripheral_OpenL2CAPChannel_Success, object: nil, userInfo: ["peripheral": peripheral, "channel": channel, "error": error])
     }
 }

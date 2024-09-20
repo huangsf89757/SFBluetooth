@@ -68,6 +68,9 @@ public class SFCentralManager: NSObject {
     // MARK: var
     public private(set) var centralManager: CBCentralManager!
     public var isLogEnable = true
+    public private(set) lazy var discoverLogger: SFDiscoveryLogger = {
+        return SFDiscoveryLogger()
+    }()
     
     // MARK: life cycle
     public init(queue: dispatch_queue_t?, options: [String : Any]?) {
@@ -362,7 +365,8 @@ extension SFCentralManager: CBCentralManagerDelegate {
             let msg_advertisementData = "advertisementData=\(advertisementData)"
             let msg_RSSI = "RSSI=\(RSSI)"
             let msgs = [msg_tag, msg_central, msg_peripheral, msg_advertisementData, msg_RSSI].joined(separator: "\n")
-            Log.info("\n\(msgs)\n")
+//            Log.info("\n\(msgs)\n")
+            self.discoverLogger.log(peripheral: peripheral, RSSI: RSSI, msg: "\n\(msgs)\n")
         }
         // notify
         var userInfo = [String: Any]()

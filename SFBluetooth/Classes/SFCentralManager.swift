@@ -63,8 +63,55 @@ public let SF_Notify_CentralManager_ConnectionEvents_Occur =                    
 
 
 // MARK: - SFCentralManagerLogOption
-enum SFCentralManagerLogOption {
-case <#case#>
+public struct SFCentralManagerLogOption: OptionSet {
+    public let rawValue: Int
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+
+    public static let isScanningDidChanged = SFCentralManagerLogOption(rawValue: 1 << 0)
+    public static let stateDidUpdated = SFCentralManagerLogOption(rawValue: 1 << 1)
+    public static let ANCSAuthorizationDidUpdated = SFCentralManagerLogOption(rawValue: 1 << 2)
+
+    public static let willRestoreState = SFCentralManagerLogOption(rawValue: 1 << 3)
+    public static let retrievePeripherals = SFCentralManagerLogOption(rawValue: 1 << 4)
+    public static let retrieveConnectedPeripherals = SFCentralManagerLogOption(rawValue: 1 << 5)
+    
+    public static let scanStart = SFCentralManagerLogOption(rawValue: 1 << 6)
+    public static let scanStop = SFCentralManagerLogOption(rawValue: 1 << 7)
+    public static let didDiscoverPeripheral = SFCentralManagerLogOption(rawValue: 1 << 8)
+    
+    public static let connectPeripheralStart = SFCentralManagerLogOption(rawValue: 1 << 9)
+    public static let connectPeripheralSuccess = SFCentralManagerLogOption(rawValue: 1 << 10)
+    public static let connectPeripheralFailure = SFCentralManagerLogOption(rawValue: 1 << 11)
+    
+    public static let disconnectPeripheralStart = SFCentralManagerLogOption(rawValue: 1 << 12)
+    public static let disconnectPeripheralSuccess = SFCentralManagerLogOption(rawValue: 1 << 13)
+    public static let disconnectPeripheralAutoReconnectSuccess = SFCentralManagerLogOption(rawValue: 1 << 14)
+   
+    public static let connectionEventsRegister = SFCentralManagerLogOption(rawValue: 1 << 15)
+    public static let connectionEventsOccur = SFCentralManagerLogOption(rawValue: 1 << 16)
+
+    // Combine all options into a single option for convenience
+    public static let all: SFCentralManagerLogOption = [
+        .isScanningDidChanged,
+        .stateDidUpdated,
+        .ANCSAuthorizationDidUpdated,
+        .willRestoreState,
+        .retrievePeripherals,
+        .retrieveConnectedPeripherals,
+        .scanStart,
+        .scanStop,
+        .didDiscoverPeripheral,
+        .connectPeripheralStart,
+        .connectPeripheralSuccess,
+        .connectPeripheralFailure,
+        .disconnectPeripheralStart,
+        .disconnectPeripheralSuccess,
+        .disconnectPeripheralAutoReconnectSuccess,
+        .connectionEventsRegister,
+        .connectionEventsOccur
+    ]
 }
 
 
@@ -72,7 +119,7 @@ case <#case#>
 public class SFCentralManager: NSObject {
     // MARK: var
     public private(set) var centralManager: CBCentralManager!
-    public var isLogEnable = true
+    public var logOption: SFCentralManagerLogOption = .all
     public private(set) lazy var discoverLogger: SFDiscoveryLogger = {
         return SFDiscoveryLogger()
     }()
@@ -95,7 +142,7 @@ extension SFCentralManager {
         if let centralManager = object as? CBCentralManager, centralManager == self.centralManager {
             if keyPath == "isScanning", let isScanning = change?[.newKey] as? Bool {
                 // log
-                if isLogEnable {
+                if logOption.contains(.isScanningDidChanged) {
                     let msg_tag = SF_Tag_CentralManager_IsScanning_DidChanged
                     let msg_central = "central=\(centralManager.sf.description)"
                     let msg_isScanning = "isScanning=\(isScanning)"
@@ -120,7 +167,7 @@ extension SFCentralManager {
     public func retrievePeripherals(identifiers: [UUID]) -> [CBPeripheral] {
         let peripherals = centralManager.retrievePeripherals(withIdentifiers: identifiers)
         // log
-        if isLogEnable {
+        if logOption.contains(.retrievePeripherals) {
             let msg_tag = SF_Tag_CentralManager_RetrievePeripherals
             let msg_central = "central=\(centralManager.sf.description)"
             let msg_identifiers = "identifiers=\(identifiers)"
@@ -145,7 +192,7 @@ extension SFCentralManager {
     public func retrieveConnectedPeripherals(services: [CBUUID]) -> [CBPeripheral] {
         let peripherals = centralManager.retrieveConnectedPeripherals(withServices: services)
         // log
-        if isLogEnable {
+        if logOption.contains(.retrieveConnectedPeripherals) {
             let msg_tag = SF_Tag_CentralManager_RetrieveConnectedPeripherals
             let msg_central = "central=\(centralManager.sf.description)"
             let msg_serviceUUIDs = "serviceUUIDs=\(services)"
@@ -170,7 +217,7 @@ extension SFCentralManager {
     public func scanForPeripherals(services: [CBUUID]?, options: [String: Any]?) {
         centralManager.scanForPeripherals(withServices: services, options: options)
         // log
-        if isLogEnable {
+        if logOption.contains(.scanStart) {
             let msg_tag = SF_Tag_CentralManager_Scan_Start
             let msg_central = "central=\(centralManager.sf.description)"
             let msg_services = "services=\(services)"
@@ -197,7 +244,7 @@ extension SFCentralManager {
     public func stopScan() {
         centralManager.stopScan()
         // log
-        if isLogEnable {
+        if logOption.contains(.scanStop) {
             let msg_tag = SF_Tag_CentralManager_Scan_Stop
             let msg_central = "central=\(centralManager.sf.description)"
             let msgs = [msg_tag, msg_central].joined(separator: "\n")
@@ -213,7 +260,7 @@ extension SFCentralManager {
     public func connect(peripheral: CBPeripheral, options: [String: Any]?) {
         centralManager.connect(peripheral, options: options)
         // log
-        if isLogEnable {
+        if logOption.contains(.connectPeripheralStart) {
             let msg_tag = SF_Tag_CentralManager_ConnectPeripheral_Start
             let msg_central = "central=\(centralManager.sf.description)"
             let msg_peripheral = "peripheral=\(peripheral.sf.description)"
@@ -238,7 +285,7 @@ extension SFCentralManager {
     public func cancel(peripheral: CBPeripheral) {
         centralManager.cancelPeripheralConnection(peripheral)
         // log
-        if isLogEnable {
+        if logOption.contains(.disconnectPeripheralStart) {
             let msg_tag = SF_Tag_CentralManager_DisconnectPeripheral_Start
             let msg_central = "central=\(centralManager.sf.description)"
             let msg_peripheral = "peripheral=\(peripheral.sf.description)"
@@ -257,7 +304,7 @@ extension SFCentralManager {
     public func registerForConnectionEvents(options: [CBConnectionEventMatchingOption : Any]?) {
         centralManager.registerForConnectionEvents(options: options)
         // log
-        if isLogEnable {
+        if logOption.contains(.connectionEventsRegister) {
             let msg_tag = SF_Tag_CentralManager_ConnectionEvents_Register
             let msg_central = "central=\(centralManager.sf.description)"
             var msg_options = "options=nil"
@@ -298,7 +345,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         // log
-        if isLogEnable {
+        if logOption.contains(.stateDidUpdated) {
             let msg_tag = SF_Tag_CentralManager_State_DidUpdated
             let msg_central = "central=\(central.sf.description)"
             let msgs = [msg_tag, msg_central].joined(separator: "\n")
@@ -329,7 +376,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         // log
-        if isLogEnable {
+        if logOption.contains(.willRestoreState) {
             let msg_tag = SF_Tag_CentralManager_WillRestoreState
             let msg_central = "central=\(central.sf.description)"
             let msg_dict = "dict=\(dict)"
@@ -363,7 +410,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // log
-        if isLogEnable {
+        if logOption.contains(.didDiscoverPeripheral) {
             let msg_tag = SF_Tag_CentralManager_DidDiscoverPeripheral
             let msg_central = "central=\(central.sf.description)"
             let msg_peripheral = "peripheral=\(peripheral.sf.description)"
@@ -395,7 +442,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         // log
-        if isLogEnable {
+        if logOption.contains(.connectPeripheralSuccess) {
             let msg_tag = SF_Tag_CentralManager_ConnectPeripheral_Success
             let msg_central = "central=\(central.sf.description)"
             let msg_peripheral = "peripheral=\(peripheral.sf.description)"
@@ -424,7 +471,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
         // log
-        if isLogEnable {
+        if logOption.contains(.connectPeripheralFailure) {
             let msg_tag = SF_Tag_CentralManager_ConnectPeripheral_Failure
             let msg_central = "central=\(central.sf.description)"
             let msg_peripheral = "peripheral=\(peripheral.sf.description)"
@@ -461,7 +508,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
         // log
-        if isLogEnable {
+        if logOption.contains(.disconnectPeripheralSuccess) {
             let msg_tag = SF_Tag_CentralManager_DisconnectPeripheral_Success
             let msg_central = "central=\(central.sf.description)"
             let msg_peripheral = "peripheral=\(peripheral.sf.description)"
@@ -503,7 +550,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         // log
-        if isLogEnable {
+        if logOption.contains(.disconnectPeripheralAutoReconnectSuccess) {
             let msg_tag = SF_Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success
             let msg_central = "central=\(central.sf.description)"
             let msg_peripheral = "peripheral=\(peripheral.sf.description)"
@@ -542,7 +589,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
     @available(iOS 13.0, *)
     public func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
         // log
-        if isLogEnable {
+        if logOption.contains(.connectionEventsOccur) {
             let msg_tag = SF_Tag_CentralManager_ConnectionEvents_Occur
             let msg_central = "central=\(central.sf.description)"
             let msg_event = "event=\(event.sf.description)"
@@ -571,7 +618,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
     @available(iOS 13.0, *)
     public func centralManager(_ central: CBCentralManager, didUpdateANCSAuthorizationFor peripheral: CBPeripheral) {
         // log
-        if isLogEnable {
+        if logOption.contains(.ANCSAuthorizationDidUpdated) {
             let msg_tag = SF_Tag_CentralManager_ANCSAuthorization_DidUpdated
             let msg_central = "central=\(central.sf.description)"
             let msg_peripheral = "peripheral=\(peripheral.sf.description)"

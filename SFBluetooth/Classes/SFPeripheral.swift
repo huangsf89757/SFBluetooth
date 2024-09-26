@@ -637,7 +637,7 @@ extension SFPeripheral: CBPeripheralDelegate {
     @available(iOS, introduced: 5.0, deprecated: 8.0)
     public func peripheralDidUpdateRSSI(_ peripheral: CBPeripheral, error: (any Error)?) {
         // log
-        if logOption.contains(.rssiDidUpdated) {
+        if logOption.contains(.readRSSISuccess) {
             let msg_tag = SF_Tag_Peripheral_RSSI_DidUpdated
             let msg_peripheral = "peripheral=\(peripheral.sf.description)"
             var msg_error = "error=nil"

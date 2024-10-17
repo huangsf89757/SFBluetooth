@@ -1,5 +1,5 @@
 //
-//  SFCentralManager.swift
+//  SFBleCentralManager.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/8/20.
@@ -68,11 +68,11 @@ public struct SFCentralManagerLogOption: OptionSet {
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
-
+    
     public static let isScanningDidChanged = SFCentralManagerLogOption(rawValue: 1 << 0)
     public static let stateDidUpdated = SFCentralManagerLogOption(rawValue: 1 << 1)
     public static let ANCSAuthorizationDidUpdated = SFCentralManagerLogOption(rawValue: 1 << 2)
-
+    
     public static let willRestoreState = SFCentralManagerLogOption(rawValue: 1 << 3)
     public static let retrievePeripherals = SFCentralManagerLogOption(rawValue: 1 << 4)
     public static let retrieveConnectedPeripherals = SFCentralManagerLogOption(rawValue: 1 << 5)
@@ -88,10 +88,10 @@ public struct SFCentralManagerLogOption: OptionSet {
     public static let disconnectPeripheralStart = SFCentralManagerLogOption(rawValue: 1 << 12)
     public static let disconnectPeripheralSuccess = SFCentralManagerLogOption(rawValue: 1 << 13)
     public static let disconnectPeripheralAutoReconnectSuccess = SFCentralManagerLogOption(rawValue: 1 << 14)
-   
+    
     public static let connectionEventsRegister = SFCentralManagerLogOption(rawValue: 1 << 15)
     public static let connectionEventsOccur = SFCentralManagerLogOption(rawValue: 1 << 16)
-
+    
     // Combine all options into a single option for convenience
     public static let all: SFCentralManagerLogOption = [
         .isScanningDidChanged,
@@ -115,14 +115,15 @@ public struct SFCentralManagerLogOption: OptionSet {
 }
 
 
-// MARK: - SFCentralManager
-public class SFCentralManager: NSObject {
+// MARK: - SFBleCentralManager
+public class SFBleCentralManager: NSObject {
     // MARK: var
     public private(set) var centralManager: CBCentralManager!
     public var logOption: SFCentralManagerLogOption = .all
     public private(set) lazy var discoverLogger: SFDiscoveryLogger = {
         return SFDiscoveryLogger()
     }()
+    public var id: String?
     
     // MARK: life cycle
     public init(queue: dispatch_queue_t?, options: [String : Any]?) {
@@ -133,11 +134,11 @@ public class SFCentralManager: NSObject {
     deinit {
         centralManager.removeObserver(self, forKeyPath: "isScanning")
     }
-       
+    
 }
 
 // MARK: - KVO
-extension SFCentralManager {
+extension SFBleCentralManager {
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let centralManager = object as? CBCentralManager, centralManager == self.centralManager {
             if keyPath == "isScanning", let isScanning = change?[.newKey] as? Bool {
@@ -161,26 +162,94 @@ extension SFCentralManager {
     }
 }
 
-// MARK: - func
-extension SFCentralManager {
-    /// 检索外设
-    public func retrievePeripherals(identifiers: [UUID]) -> [CBPeripheral] {
-        let peripherals = centralManager.retrievePeripherals(withIdentifiers: identifiers)
-        // log
-        if logOption.contains(.retrievePeripherals) {
-            let msg_tag = SF_Tag_CentralManager_RetrievePeripherals
-            let msg_central = "central=\(centralManager.sf.description)"
-            let msg_identifiers = "identifiers=\(identifiers)"
-            var msg_peripherals = "peripherals=["
-            for peripheral in peripherals {
-                msg_peripherals.append(peripheral.sf.description)
+// MARK: - log
+extension SFBleCentralManager {
+    enum SFLogMedthod {
+        case immediate
+        case waiting
+        
+        var description: String {
+            switch self {
+            case .immediate:
+                return "immediate"
+            case .waiting:
+                return "waiting"
             }
-            msg_peripherals.append("]")
-            let msgs = [msg_tag, msg_central, msg_identifiers, msg_peripherals].joined(separator: "\n")
-            Log.info("\n\(msgs)\n")
         }
+    }
+    // 通用的日志记录函数
+    private func logOperation(option: SFCentralManagerLogOption, id: String, tag: String, params: [String: String], isSuccess: Bool, medthod: SFLogMedthod, result: String? = nil) {
+        guard logOption.contains(option) else { return }
+        // id
+        let msg_id = "ID: \(id)"
+        // try
+        var msg_try = """
+        Try:
+            \(tag)
+            central=\(centralManager.sf.description)
+        """
+        if params.count > 0 {
+            msg_try += "\n\(params.map { "    \($0.key)=\($0.value)" }.joined(separator: "\n"))"
+        }
+        // result
+        let msg_result = """
+        Result:
+            \(isSuccess ? "Success" : "Failure\nID: \(self.id) is in process")
+        """
+        // callback
+        var msg_callback = """
+        Return:
+            \(medthod.description)
+        """
+        if let result = result {
+            msg_callback += "\n\(result)"
+        }
+        // msg
+        var msg = msg_id + "\n" + msg_try + "\n" + msg_result + "\n"
+        if isSuccess {
+            msg += msg_callback + "\n"
+        }
+        msg += "End"
+        Log.info("\n\(msg)\n")
+    }
+    
+    // 通用的操作执行函数
+    private func executeOperation<T>(id: String, operation: () -> T) -> (isSuccess: Bool, result: T?) {
+        if self.id != nil {
+            return (false, nil)
+        } else {
+            let result = operation()
+            return (true, result)
+        }
+    }
+}
+
+
+// MARK: - func
+extension SFBleCentralManager {
+    /// 检索外设
+    public func retrievePeripherals(id: String, identifiers: [UUID]) -> [CBPeripheral] {
+        // do
+        let (isSuccess, result) = executeOperation(id: id) {
+            return centralManager.retrievePeripherals(withIdentifiers: identifiers)
+        }
+        let peripherals = result ?? []
+        // log
+        var msg_peripherals = "peripherals=["
+        for peripheral in peripherals {
+            msg_peripherals.append(peripheral.sf.description)
+        }
+        msg_peripherals.append("]")
+        logOperation(option: .retrievePeripherals,
+                     id: id,
+                     tag: SF_Tag_CentralManager_RetrievePeripherals,
+                     params: ["identifiers": identifiers.description],
+                     isSuccess: isSuccess, 
+                     medthod: .immediate,
+                     result: msg_peripherals)
         // notify
         var userInfo = [String: Any]()
+        userInfo["isSuccess"] = isSuccess
         userInfo["central"] = centralManager
         userInfo["identifiers"] = identifiers
         userInfo["peripherals"] = peripherals
@@ -189,47 +258,52 @@ extension SFCentralManager {
     }
     
     /// 检索已连接的外设
-    public func retrieveConnectedPeripherals(services: [CBUUID]) -> [CBPeripheral] {
-        let peripherals = centralManager.retrieveConnectedPeripherals(withServices: services)
-        // log
-        if logOption.contains(.retrieveConnectedPeripherals) {
-            let msg_tag = SF_Tag_CentralManager_RetrieveConnectedPeripherals
-            let msg_central = "central=\(centralManager.sf.description)"
-            let msg_serviceUUIDs = "serviceUUIDs=\(services)"
-            var msg_peripherals = "peripherals=["
-            for peripheral in peripherals {
-                msg_peripherals.append(peripheral.sf.description)
-            }
-            msg_peripherals.append("]")
-            let msgs = [msg_tag, msg_central, msg_serviceUUIDs, msg_peripherals].joined(separator: "\n")
-            Log.info("\n\(msgs)\n")
+    public func retrieveConnectedPeripherals(id: String, services: [CBUUID]) -> [CBPeripheral] {
+        // do
+        let (isSuccess, result) = executeOperation(id: id) {
+            return centralManager.retrieveConnectedPeripherals(withServices: services)
         }
+        let peripherals = result ?? []
+        // log
+        var msg_peripherals = "peripherals=["
+        for peripheral in peripherals {
+            msg_peripherals.append(peripheral.sf.description)
+        }
+        msg_peripherals.append("]")
+        logOperation(option: .retrieveConnectedPeripherals,
+                     id: id,
+                     tag: SF_Tag_CentralManager_RetrieveConnectedPeripherals,
+                     params: ["services": services.description],
+                     isSuccess: isSuccess,
+                     medthod: .immediate,
+                     result: msg_peripherals)
         // notify
         var userInfo = [String: Any]()
+        userInfo["isSuccess"] = isSuccess
         userInfo["central"] = centralManager
-        userInfo["serviceUUIDs"] = services
+        userInfo["services"] = services
         userInfo["peripherals"] = peripherals
         NotificationCenter.default.post(name: SF_Notify_CentralManager_RetrieveConnectedPeripherals, object: nil, userInfo: userInfo)
         return peripherals
     }
     
     /// 开始扫描
-    public func scanForPeripherals(services: [CBUUID]?, options: [String: Any]?) {
-        centralManager.scanForPeripherals(withServices: services, options: options)
-        // log
-        if logOption.contains(.scanStart) {
-            let msg_tag = SF_Tag_CentralManager_Scan_Start
-            let msg_central = "central=\(centralManager.sf.description)"
-            let msg_services = "services=\(services)"
-            var msg_options = "options=nil"
-            if let options = options {
-                msg_options = "options=\(options)"
-            }
-            let msgs = [msg_tag, msg_central, msg_services, msg_options].joined(separator: "\n")
-            Log.info("\n\(msgs)\n")
+    public func scanForPeripherals(id: String, services: [CBUUID]?, options: [String: Any]?) {
+        // do
+        let (isSuccess, result) = executeOperation(id: id) {
+            centralManager.scanForPeripherals(withServices: services, options: options)
+            return true
         }
+        // log
+        logOperation(option: .scanStart,
+                     id: id,
+                     tag: SF_Tag_CentralManager_Scan_Start,
+                     params: ["services": services?.description ?? "nil", "options": options?.description ?? "nil"],
+                     isSuccess: isSuccess,
+                     medthod: .immediate)
         // notify
         var userInfo = [String: Any]()
+        userInfo["isSuccess"] = isSuccess
         userInfo["central"] = centralManager
         if let services = services {
             userInfo["services"] = services
@@ -241,38 +315,43 @@ extension SFCentralManager {
     }
     
     /// 停止扫描
-    public func stopScan() {
-        centralManager.stopScan()
-        // log
-        if logOption.contains(.scanStop) {
-            let msg_tag = SF_Tag_CentralManager_Scan_Stop
-            let msg_central = "central=\(centralManager.sf.description)"
-            let msgs = [msg_tag, msg_central].joined(separator: "\n")
-            Log.info("\n\(msgs)\n")
+    public func stopScan(id: String) {
+        // do
+        let (isSuccess, result) = executeOperation(id: id) {
+            centralManager.stopScan()
+            return true
         }
+        // log
+        logOperation(option: .scanStop,
+                     id: id,
+                     tag: SF_Tag_CentralManager_Scan_Stop,
+                     params: [:],
+                     isSuccess: isSuccess,
+                     medthod: .immediate)
         // notify
         var userInfo = [String: Any]()
+        userInfo["isSuccess"] = isSuccess
         userInfo["central"] = centralManager
         NotificationCenter.default.post(name: SF_Notify_CentralManager_Scan_Stop, object: nil, userInfo: userInfo)
     }
     
     /// 连接外设
-    public func connect(peripheral: CBPeripheral, options: [String: Any]?) {
-        centralManager.connect(peripheral, options: options)
-        // log
-        if logOption.contains(.connectPeripheralStart) {
-            let msg_tag = SF_Tag_CentralManager_ConnectPeripheral_Start
-            let msg_central = "central=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            var msg_options = "options=nil"
-            if let options = options {
-                msg_options = "options=\(options)"
-            }
-            let msgs = [msg_tag, msg_central, msg_peripheral, msg_options].joined(separator: "\n")
-            Log.info("\n\(msgs)\n")
+    public func connect(id: String, peripheral: CBPeripheral, options: [String: Any]?) {
+        // do
+        let (isSuccess, result) = executeOperation(id: id) {
+            centralManager.connect(peripheral, options: options)
+            return true
         }
+        // log
+        logOperation(option: .connectPeripheralStart,
+                     id: id,
+                     tag: SF_Tag_CentralManager_ConnectPeripheral_Start,
+                     params: ["peripheral": peripheral.sf.description, "options": options?.description ?? "nil"],
+                     isSuccess: isSuccess,
+                     medthod: .immediate)
         // notify
         var userInfo = [String: Any]()
+        userInfo["isSuccess"] = isSuccess
         userInfo["central"] = centralManager
         userInfo["peripheral"] = peripheral
         if let options = options {
@@ -282,18 +361,22 @@ extension SFCentralManager {
     }
     
     /// 断开外设
-    public func cancel(peripheral: CBPeripheral) {
-        centralManager.cancelPeripheralConnection(peripheral)
-        // log
-        if logOption.contains(.disconnectPeripheralStart) {
-            let msg_tag = SF_Tag_CentralManager_DisconnectPeripheral_Start
-            let msg_central = "central=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msgs = [msg_tag, msg_central, msg_peripheral].joined(separator: "\n")
-            Log.info("\n\(msgs)\n")
+    public func cancel(id: String, peripheral: CBPeripheral) {
+        // do
+        let (isSuccess, result) = executeOperation(id: id) {
+            centralManager.cancelPeripheralConnection(peripheral)
+            return true
         }
+        // log
+        logOperation(option: .disconnectPeripheralStart,
+                     id: id,
+                     tag: SF_Tag_CentralManager_DisconnectPeripheral_Start,
+                     params: ["peripheral": peripheral.sf.description],
+                     isSuccess: isSuccess,
+                     medthod: .immediate)
         // notify
         var userInfo = [String: Any]()
+        userInfo["isSuccess"] = isSuccess
         userInfo["central"] = centralManager
         userInfo["peripheral"] = peripheral
         NotificationCenter.default.post(name: SF_Notify_CentralManager_DisconnectPeripheral_Start, object: nil, userInfo: userInfo)
@@ -301,21 +384,22 @@ extension SFCentralManager {
     
     /// 注册连接事件
     @available(iOS 13.0, *)
-    public func registerForConnectionEvents(options: [CBConnectionEventMatchingOption : Any]?) {
-        centralManager.registerForConnectionEvents(options: options)
-        // log
-        if logOption.contains(.connectionEventsRegister) {
-            let msg_tag = SF_Tag_CentralManager_ConnectionEvents_Register
-            let msg_central = "central=\(centralManager.sf.description)"
-            var msg_options = "options=nil"
-            if let options = options {
-                msg_options = "options=\(options)"
-            }   
-            let msgs = [msg_tag, msg_central, msg_options].joined(separator: "\n")
-            Log.info("\n\(msgs)\n")
+    public func registerForConnectionEvents(id: String,     options: [CBConnectionEventMatchingOption : Any]?) {
+        // do
+        let (isSuccess, result) = executeOperation(id: id) {
+            centralManager.registerForConnectionEvents(options: options)
+            return true
         }
+        // log
+        logOperation(option: .connectionEventsRegister,
+                     id: id,
+                     tag: SF_Tag_CentralManager_ConnectionEvents_Register,
+                     params: ["options": options?.description ?? "nil"],
+                     isSuccess: isSuccess,
+                     medthod: .immediate)
         // notify
         var userInfo = [String: Any]()
+        userInfo["isSuccess"] = isSuccess
         userInfo["central"] = centralManager
         if let options = options {
             userInfo["options"] = options
@@ -325,7 +409,7 @@ extension SFCentralManager {
 }
 
 // MARK: - CBCentralManagerDelegate
-extension SFCentralManager: CBCentralManagerDelegate {
+extension SFBleCentralManager: CBCentralManagerDelegate {
     
     
     /**
@@ -356,7 +440,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
         userInfo["central"] = centralManager
         NotificationCenter.default.post(name: SF_Notify_CentralManager_State_DidUpdated, object: nil, userInfo: userInfo)
     }
-
+    
     
     /**
      *  @method centralManager:willRestoreState:
@@ -389,7 +473,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
         userInfo["dict"] = dict
         NotificationCenter.default.post(name: SF_Notify_CentralManager_WillRestoreState, object: nil, userInfo: userInfo)
     }
-
+    
     
     /**
      *  @method centralManager:didDiscoverPeripheral:advertisementData:RSSI:
@@ -417,7 +501,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
             let msg_advertisementData = "advertisementData=\(advertisementData)"
             let msg_RSSI = "RSSI=\(RSSI)"
             let msgs = [msg_tag, msg_central, msg_peripheral, msg_advertisementData, msg_RSSI].joined(separator: "\n")
-//            Log.info("\n\(msgs)\n")
+            //            Log.info("\n\(msgs)\n")
             self.discoverLogger.log(peripheral: peripheral, RSSI: RSSI, msg: "\n\(msgs)\n")
         }
         // notify
@@ -428,7 +512,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
         userInfo["RSSI"] = RSSI
         NotificationCenter.default.post(name: SF_Notify_CentralManager_DidDiscoverPeripheral, object: nil, userInfo: userInfo)
     }
-
+    
     
     /**
      *  @method centralManager:didConnectPeripheral:
@@ -441,6 +525,30 @@ extension SFCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        
+        //        """
+        //        【连接回调】
+        //        成功示例：
+        //        2024/10/16 12:12:12.789 +12 [E] file func line
+        //        Callback:
+        //            SF_Tag_CentralManager_ConnectPeripheral_Success
+        //            ID: SFSD44389S0JHK76T6Y
+        //            central=xxx
+        //            peripheral=xxx
+        //        End
+        //
+        //
+        //        失败示例：
+        //        2024/10/16 12:12:12.789 +12 [E] file func line
+        //        Callback:
+        //            SF_Tag_CentralManager_ConnectPeripheral_Failure
+        //            ID: SFSD44389S0JHK76T6Y
+        //            central=xxx
+        //            peripheral=xxx
+        //            error=nil
+        //        End
+        //        """
+        
         // log
         if logOption.contains(.connectPeripheralSuccess) {
             let msg_tag = SF_Tag_CentralManager_ConnectPeripheral_Success
@@ -455,7 +563,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
         userInfo["peripheral"] = peripheral
         NotificationCenter.default.post(name: SF_Notify_CentralManager_ConnectPeripheral_Success, object: nil, userInfo: userInfo)
     }
- 
+    
     
     /**
      *  @method centralManager:didFailToConnectPeripheral:error:
@@ -491,7 +599,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
         }
         NotificationCenter.default.post(name: SF_Notify_CentralManager_ConnectPeripheral_Failure, object: nil, userInfo: userInfo)
     }
-
+    
     
     /**
      *  @method centralManager:didDisconnectPeripheral:error:
@@ -528,7 +636,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
         }
         NotificationCenter.default.post(name: SF_Notify_CentralManager_DisconnectPeripheral_Success, object: nil, userInfo: userInfo)
     }
-
+    
     
     /**
      *  @method centralManager:didDisconnectPeripheral:timestamp:isReconnecting:error
@@ -574,7 +682,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
         }
         NotificationCenter.default.post(name: SF_Notify_CentralManager_DisconnectPeripheralAutoReconnect_Success, object: nil, userInfo: userInfo)
     }
-
+    
     
     /**
      *  @method centralManager:connectionEventDidOccur:forPeripheral:
@@ -604,7 +712,7 @@ extension SFCentralManager: CBCentralManagerDelegate {
         userInfo["peripheral"] = peripheral
         NotificationCenter.default.post(name: SF_Notify_CentralManager_ConnectionEvents_Occur, object: nil, userInfo: userInfo)
     }
-
+    
     
     /**
      *  @method centralManager:didUpdateANCSAuthorizationForPeripheral:

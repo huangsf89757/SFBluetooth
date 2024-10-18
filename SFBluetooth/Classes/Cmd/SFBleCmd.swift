@@ -14,34 +14,29 @@ import SFLogger
 
 
 // MARK: - SFBleCmdResponse
-public typealias SFBleCmdResponseSuccess = (Any) -> Void
-public typealias SFBleCmdResponseFailure = (SFBleCmdError) -> Void
+public typealias SFBleCmdSuccess = (_ data: Any?, _ msg: String?) -> Void
+public typealias SFBleCmdFailure = (_ error: SFBleCmdError) -> Void
 
 
 // MARK: - SFBleCmd
 public class SFBleCmd {
     // MARK: var
-    public var bleCentralManager: SFBleCentralManager?
+    public var id: String = UUID().uuidString
+    public var order = 0
+    public var success: SFBleCmdSuccess
+    public var failure: SFBleCmdFailure
     
-    public var success: SFBleCmdResponseSuccess?
-    public var failure: SFBleCmdResponseFailure?
     
-    public func execute(target: SFBleCmdTarget, success: SFBleCmdResponseSuccess, failure: SFBleCmdResponseFailure? = nil) -> String {
-        let id = UUID().uuidString
-        guard let bleCentralManager = bleCentralManager else {
-            failure?(.custom("bleCentralManager=nil"))
-            return id
-        }
-        let state = bleCentralManager.centralManager.state
-        guard state == .poweredOn else {
-            failure?(.state(state))
-            return id
-        }
-        if let target = target as? SFBleCmdCentralTarget {
-            target.bleCentralManager = bleCentralManager
-        }
-        target.execute()
-        return id
+    // MARK: life cycle
+    public init(success: @escaping SFBleCmdSuccess, failure: @escaping SFBleCmdFailure) {
+        self.success = success
+        self.failure = failure
+    }
+    
+    // MARK: excute
+    public func execute() {
+        self.id = UUID().uuidString
+        self.order = 0
     }
 }
 

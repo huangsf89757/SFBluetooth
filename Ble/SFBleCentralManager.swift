@@ -69,48 +69,26 @@ public struct SFBleCentralManagerLogOption: OptionSet {
         self.rawValue = rawValue
     }
     
-    public static let isScanningDidChanged = SFBleCentralManagerLogOption(rawValue: 1 << 0)
-    public static let stateDidUpdated = SFBleCentralManagerLogOption(rawValue: 1 << 1)
-    public static let ANCSAuthorizationDidUpdated = SFBleCentralManagerLogOption(rawValue: 1 << 2)
+    public static let isScanningDidChanged =                        SFBleCentralManagerLogOption(rawValue: 1 << 0)
+    public static let stateDidUpdated =                             SFBleCentralManagerLogOption(rawValue: 1 << 1)
+    public static let ANCSAuthorizationDidUpdated =                 SFBleCentralManagerLogOption(rawValue: 1 << 2)
+    public static let willRestoreState =                            SFBleCentralManagerLogOption(rawValue: 1 << 3)
+    public static let retrievePeripherals =                         SFBleCentralManagerLogOption(rawValue: 1 << 4)
+    public static let retrieveConnectedPeripherals =                SFBleCentralManagerLogOption(rawValue: 1 << 5)
+    public static let scanStart =                                   SFBleCentralManagerLogOption(rawValue: 1 << 6)
+    public static let scanStop =                                    SFBleCentralManagerLogOption(rawValue: 1 << 7)
+    public static let didDiscoverPeripheral =                       SFBleCentralManagerLogOption(rawValue: 1 << 8)
+    public static let connectPeripheralStart =                      SFBleCentralManagerLogOption(rawValue: 1 << 9)
+    public static let connectPeripheralSuccess =                    SFBleCentralManagerLogOption(rawValue: 1 << 10)
+    public static let connectPeripheralFailure =                    SFBleCentralManagerLogOption(rawValue: 1 << 11)
+    public static let disconnectPeripheralStart =                   SFBleCentralManagerLogOption(rawValue: 1 << 12)
+    public static let disconnectPeripheralSuccess =                 SFBleCentralManagerLogOption(rawValue: 1 << 13)
+    public static let disconnectPeripheralAutoReconnectSuccess =    SFBleCentralManagerLogOption(rawValue: 1 << 14)
+    public static let connectionEventsRegister =                    SFBleCentralManagerLogOption(rawValue: 1 << 15)
+    public static let connectionEventsOccur =                       SFBleCentralManagerLogOption(rawValue: 1 << 16)
     
-    public static let willRestoreState = SFBleCentralManagerLogOption(rawValue: 1 << 3)
-    public static let retrievePeripherals = SFBleCentralManagerLogOption(rawValue: 1 << 4)
-    public static let retrieveConnectedPeripherals = SFBleCentralManagerLogOption(rawValue: 1 << 5)
-    
-    public static let scanStart = SFBleCentralManagerLogOption(rawValue: 1 << 6)
-    public static let scanStop = SFBleCentralManagerLogOption(rawValue: 1 << 7)
-    public static let didDiscoverPeripheral = SFBleCentralManagerLogOption(rawValue: 1 << 8)
-    
-    public static let connectPeripheralStart = SFBleCentralManagerLogOption(rawValue: 1 << 9)
-    public static let connectPeripheralSuccess = SFBleCentralManagerLogOption(rawValue: 1 << 10)
-    public static let connectPeripheralFailure = SFBleCentralManagerLogOption(rawValue: 1 << 11)
-    
-    public static let disconnectPeripheralStart = SFBleCentralManagerLogOption(rawValue: 1 << 12)
-    public static let disconnectPeripheralSuccess = SFBleCentralManagerLogOption(rawValue: 1 << 13)
-    public static let disconnectPeripheralAutoReconnectSuccess = SFBleCentralManagerLogOption(rawValue: 1 << 14)
-    
-    public static let connectionEventsRegister = SFBleCentralManagerLogOption(rawValue: 1 << 15)
-    public static let connectionEventsOccur = SFBleCentralManagerLogOption(rawValue: 1 << 16)
-    
-    // Combine all options into a single option for convenience
     public static let all: SFBleCentralManagerLogOption = [
-        .isScanningDidChanged,
-        .stateDidUpdated,
-        .ANCSAuthorizationDidUpdated,
-        .willRestoreState,
-        .retrievePeripherals,
-        .retrieveConnectedPeripherals,
-        .scanStart,
-        .scanStop,
-        .didDiscoverPeripheral,
-        .connectPeripheralStart,
-        .connectPeripheralSuccess,
-        .connectPeripheralFailure,
-        .disconnectPeripheralStart,
-        .disconnectPeripheralSuccess,
-        .disconnectPeripheralAutoReconnectSuccess,
-        .connectionEventsRegister,
-        .connectionEventsOccur
+        .isScanningDidChanged, .stateDidUpdated, .ANCSAuthorizationDidUpdated, .willRestoreState, .retrievePeripherals, .retrieveConnectedPeripherals, .scanStart, .scanStop, .didDiscoverPeripheral, .connectPeripheralStart, .connectPeripheralSuccess, .connectPeripheralFailure, .disconnectPeripheralStart, .disconnectPeripheralSuccess, .disconnectPeripheralAutoReconnectSuccess, .connectionEventsRegister, .connectionEventsOccur
     ]
 }
 
@@ -123,7 +101,6 @@ public class SFBleCentralManager: SFBle {
     public private(set) lazy var discoverLogger: SFDiscoveryLogger = {
         return SFDiscoveryLogger()
     }()
-   
     
     // MARK: life cycle
     public init(queue: dispatch_queue_t?, options: [String : Any]?) {

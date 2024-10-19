@@ -16,6 +16,7 @@ import SFLogger
 // MARK: - Tag
 public let SF_Tag_Peripheral_Name_DidUpdated =                                  "SF_Tag_Peripheral_Name_DidUpdated"
 public let SF_Tag_Peripheral_Services_DidModified =                             "SF_Tag_Peripheral_Services_DidModified"
+public let SF_Tag_Peripheral_State_DidChanged =                                 "SF_Tag_Peripheral_State_DidChanged"
 public let SF_Tag_Peripheral_RSSI_DidUpdated =                                  "SF_Tag_Peripheral_RSSI_DidUpdated"
 public let SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse =                "SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse"
 
@@ -56,6 +57,7 @@ public let SF_Tag_Peripheral_OpenL2CAPChannel_Success =                         
 // MARK: - Notify
 public let SF_Notify_Peripheral_Name_DidUpdated =                               NSNotification.Name("SF_Notify_Peripheral_Name_DidUpdated")
 public let SF_Notify_Peripheral_Services_DidModified =                          NSNotification.Name("SF_Notify_Peripheral_Services_DidModified")
+public let SF_Notify_Peripheral_State_DidChanged =                              NSNotification.Name("SF_Notify_Peripheral_State_DidChanged")
 public let SF_Notify_Peripheral_RSSI_DidUpdated =                               NSNotification.Name("SF_Notify_Peripheral_RSSI_DidUpdated")
 public let SF_Notify_Peripheral_IsReadyToSendWriteWithoutResponse =             NSNotification.Name("SF_Notify_Peripheral_IsReadyToSendWriteWithoutResponse")
 
@@ -100,35 +102,36 @@ public struct SFBlePeripheralLogOption: OptionSet {
         self.rawValue = rawValue
     }
 
-    public static let nameDidUpdated = SFBlePeripheralLogOption(rawValue: 1 << 0)
-    public static let servicesDidModified = SFBlePeripheralLogOption(rawValue: 1 << 1)
-    public static let RSSIDidUpdated = SFBlePeripheralLogOption(rawValue: 1 << 2)
-    public static let isReadyToSendWriteWithoutResponse = SFBlePeripheralLogOption(rawValue: 1 << 3)
-    public static let readRSSIStart = SFBlePeripheralLogOption(rawValue: 1 << 4)
-    public static let readRSSISuccess = SFBlePeripheralLogOption(rawValue: 1 << 5)
-    public static let discoverServicesStart = SFBlePeripheralLogOption(rawValue: 1 << 6)
-    public static let discoverServicesSuccess = SFBlePeripheralLogOption(rawValue: 1 << 7)
-    public static let discoverIncludedServicesStart = SFBlePeripheralLogOption(rawValue: 1 << 8)
-    public static let discoverIncludedServicesSuccess = SFBlePeripheralLogOption(rawValue: 1 << 9)
-    public static let discoverCharacteristicsStart = SFBlePeripheralLogOption(rawValue: 1 << 10)
-    public static let discoverCharacteristicsSuccess = SFBlePeripheralLogOption(rawValue: 1 << 11)
-    public static let discoverDescriptorsStart = SFBlePeripheralLogOption(rawValue: 1 << 12)
-    public static let discoverDescriptorsSuccess = SFBlePeripheralLogOption(rawValue: 1 << 13)
-    public static let setCharacteristicNotificationStateStart = SFBlePeripheralLogOption(rawValue: 1 << 14)
-    public static let setCharacteristicNotificationStateSuccess = SFBlePeripheralLogOption(rawValue: 1 << 15)
-    public static let readCharacteristicValueStart = SFBlePeripheralLogOption(rawValue: 1 << 16)
-    public static let readCharacteristicValueSuccess = SFBlePeripheralLogOption(rawValue: 1 << 17)
-    public static let writeCharacteristicValueStart = SFBlePeripheralLogOption(rawValue: 1 << 18)
-    public static let writeCharacteristicValueSuccess = SFBlePeripheralLogOption(rawValue: 1 << 19)
-    public static let readDescriptorValueStart = SFBlePeripheralLogOption(rawValue: 1 << 20)
-    public static let readDescriptorValueSuccess = SFBlePeripheralLogOption(rawValue: 1 << 21)
-    public static let writeDescriptorValueStart = SFBlePeripheralLogOption(rawValue: 1 << 22)
-    public static let writeDescriptorValueSuccess = SFBlePeripheralLogOption(rawValue: 1 << 23)
-    public static let openL2CAPChannelStart = SFBlePeripheralLogOption(rawValue: 1 << 24)
-    public static let openL2CAPChannelSuccess = SFBlePeripheralLogOption(rawValue: 1 << 25)
+    public static let nameDidUpdated =                              SFBlePeripheralLogOption(rawValue: 1 << 0)
+    public static let servicesDidModified =                         SFBlePeripheralLogOption(rawValue: 1 << 1)
+    public static let stateDidChanged =                             SFBlePeripheralLogOption(rawValue: 1 << 2)
+    public static let RSSIDidUpdated =                              SFBlePeripheralLogOption(rawValue: 1 << 3)
+    public static let isReadyToSendWriteWithoutResponse =           SFBlePeripheralLogOption(rawValue: 1 << 4)
+    public static let readRSSIStart =                               SFBlePeripheralLogOption(rawValue: 1 << 5)
+    public static let readRSSISuccess =                             SFBlePeripheralLogOption(rawValue: 1 << 6)
+    public static let discoverServicesStart =                       SFBlePeripheralLogOption(rawValue: 1 << 7)
+    public static let discoverServicesSuccess =                     SFBlePeripheralLogOption(rawValue: 1 << 8)
+    public static let discoverIncludedServicesStart =               SFBlePeripheralLogOption(rawValue: 1 << 9)
+    public static let discoverIncludedServicesSuccess =             SFBlePeripheralLogOption(rawValue: 1 << 10)
+    public static let discoverCharacteristicsStart =                SFBlePeripheralLogOption(rawValue: 1 << 11)
+    public static let discoverCharacteristicsSuccess =              SFBlePeripheralLogOption(rawValue: 1 << 12)
+    public static let discoverDescriptorsStart =                    SFBlePeripheralLogOption(rawValue: 1 << 13)
+    public static let discoverDescriptorsSuccess =                  SFBlePeripheralLogOption(rawValue: 1 << 14)
+    public static let setCharacteristicNotificationStateStart =     SFBlePeripheralLogOption(rawValue: 1 << 15)
+    public static let setCharacteristicNotificationStateSuccess =   SFBlePeripheralLogOption(rawValue: 1 << 16)
+    public static let readCharacteristicValueStart =                SFBlePeripheralLogOption(rawValue: 1 << 17)
+    public static let readCharacteristicValueSuccess =              SFBlePeripheralLogOption(rawValue: 1 << 18)
+    public static let writeCharacteristicValueStart =               SFBlePeripheralLogOption(rawValue: 1 << 19)
+    public static let writeCharacteristicValueSuccess =             SFBlePeripheralLogOption(rawValue: 1 << 20)
+    public static let readDescriptorValueStart =                    SFBlePeripheralLogOption(rawValue: 1 << 21)
+    public static let readDescriptorValueSuccess =                  SFBlePeripheralLogOption(rawValue: 1 << 22)
+    public static let writeDescriptorValueStart =                   SFBlePeripheralLogOption(rawValue: 1 << 23)
+    public static let writeDescriptorValueSuccess =                 SFBlePeripheralLogOption(rawValue: 1 << 24)
+    public static let openL2CAPChannelStart =                       SFBlePeripheralLogOption(rawValue: 1 << 25)
+    public static let openL2CAPChannelSuccess =                     SFBlePeripheralLogOption(rawValue: 1 << 26)
 
     public static let all: SFBlePeripheralLogOption = [
-        .nameDidUpdated, .servicesDidModified, .RSSIDidUpdated, .isReadyToSendWriteWithoutResponse, .readRSSIStart, .readRSSISuccess, .discoverServicesStart, .discoverServicesSuccess, .discoverIncludedServicesStart, .discoverIncludedServicesSuccess, .discoverCharacteristicsStart, .discoverCharacteristicsSuccess, .discoverDescriptorsStart, .discoverDescriptorsSuccess, .setCharacteristicNotificationStateStart, .setCharacteristicNotificationStateSuccess, .readCharacteristicValueStart, .readCharacteristicValueSuccess, .writeCharacteristicValueStart, .writeCharacteristicValueSuccess, .readDescriptorValueStart, .readDescriptorValueSuccess, .writeDescriptorValueStart, .writeDescriptorValueSuccess, .openL2CAPChannelStart, .openL2CAPChannelSuccess
+        .nameDidUpdated, .servicesDidModified, .stateDidChanged, .RSSIDidUpdated, .isReadyToSendWriteWithoutResponse, .readRSSIStart, .readRSSISuccess, .discoverServicesStart, .discoverServicesSuccess, .discoverIncludedServicesStart, .discoverIncludedServicesSuccess, .discoverCharacteristicsStart, .discoverCharacteristicsSuccess, .discoverDescriptorsStart, .discoverDescriptorsSuccess, .setCharacteristicNotificationStateStart, .setCharacteristicNotificationStateSuccess, .readCharacteristicValueStart, .readCharacteristicValueSuccess, .writeCharacteristicValueStart, .writeCharacteristicValueSuccess, .readDescriptorValueStart, .readDescriptorValueSuccess, .writeDescriptorValueStart, .writeDescriptorValueSuccess, .openL2CAPChannelStart, .openL2CAPChannelSuccess
     ]
 }
 
@@ -138,71 +141,49 @@ public class SFBlePeripheral: SFBle {
     // MARK: var
     public let peripheral: CBPeripheral
     public var logOption: SFBlePeripheralLogOption = .all
+    
     // MARK: life cycle
     public init(peripheral: CBPeripheral) {
         self.peripheral = peripheral
         super.init()
-        peripheral.delegate = self
+        self.peripheral.delegate = self
+        self.peripheral.addObserver(self, forKeyPath: "state", options: .new, context: nil)
+    }
+    deinit {
+        self.peripheral.removeObserver(self, forKeyPath: "state")
+    }
+
+}
+
+
+// MARK: - KVO
+extension SFBlePeripheral {
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let peripheral = object as? CBPeripheral, peripheral == self.peripheral {
+            if keyPath == "state", let state = change?[.newKey] as? CBPeripheralState {
+                // log
+                if logOption.contains(.stateDidChanged) {
+                    let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+                    let msg_state = "state=\(state.sf.description)"
+                    logCallback(tag: SF_Tag_CentralManager_IsScanning_DidChanged,
+                           msgs: [msg_peripheral, msg_state])
+                }
+                
+                // notify
+                var userInfo = [String: Any]()
+                userInfo["peripheral"] = peripheral
+                userInfo["state"] = state
+                NotificationCenter.default.post(name: SF_Notify_CentralManager_IsScanning_DidChanged, object: nil, userInfo: userInfo)
+                return
+            }
+            return
+        }
     }
 }
 
+
+// MARK: - func
 extension SFBlePeripheral {
-    /**
-     *  @property name
-     *
-     *  @discussion The name of the peripheral.
-     */
-    public var name: String? { peripheral.name }
-
-    
-    /**
-     *  @property RSSI
-     *
-     *  @discussion The most recently read RSSI, in decibels.
-     *
-     *  @deprecated Use {@link peripheral:didReadRSSI:error:} instead.
-     */
-    @available(iOS, introduced: 5.0, deprecated: 8.0)
-    public var rssi: NSNumber? { peripheral.rssi }
-
-    
-    /**
-     *  @property state
-     *
-     *  @discussion The current connection state of the peripheral.
-     */
-    public var state: CBPeripheralState { peripheral.state }
-
-    
-    /**
-     *  @property services
-     *
-     *  @discussion A list of <code>CBService</code> objects that have been discovered on the peripheral.
-     */
-    public var services: [CBService]? { peripheral.services }
-
-    
-    /**
-     *  @property canSendWriteWithoutResponse
-     *
-     *  @discussion YES if the remote device has space to send a write without response. If this value is NO,
-     *                the value will be set to YES after the current writes have been flushed, and
-     *                <link>peripheralIsReadyToSendWriteWithoutResponse:</link> will be called.
-     */
-    @available(iOS 11.0, *)
-    public var canSendWriteWithoutResponse: Bool { peripheral.canSendWriteWithoutResponse }
-
-    
-    /**
-     *  @property ancsAuthorized
-     *
-     *  @discussion YES if the remote device has been authorized to receive data over ANCS (Apple Notification Service Center) protocol.  If this value is NO,
-     *                the value will be set to YES after a user authorization occurs and
-     *                <link>didUpdateANCSAuthorizationForPeripheral:</link> will be called.
-     */
-    @available(iOS 13.0, *)
-    public var ancsAuthorized: Bool { peripheral.ancsAuthorized }
-    
     
     /**
      *  @method readRSSI

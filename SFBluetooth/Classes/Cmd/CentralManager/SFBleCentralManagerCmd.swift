@@ -29,7 +29,7 @@ public class SFBleCentralManagerCmd: SFBleCmd {
         super.execute()
         let state = bleCentralManager.centralManager.state
         guard state == .poweredOn else {
-            failure(.state(state))
+            failure(.managerState(state))
             return
         }
     }

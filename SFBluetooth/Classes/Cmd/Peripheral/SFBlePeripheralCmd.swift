@@ -27,9 +27,9 @@ public class SFBlePeripheralCmd: SFBleCmd {
     // MARK: excute
     public override func execute() {
         super.execute()
-        let state = blePeripheral.state
+        let state = blePeripheral.peripheral.state
         guard state == .connected else {
-            failure(.state(state))
+            failure(.peripheralState(state))
             return
         }
     }

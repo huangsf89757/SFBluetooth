@@ -15,19 +15,25 @@ import SFLogger
 
 // MARK: - SFBleCmdError
 public enum SFBleCmdError {
+    // custom
     case custom(String)
-    case state(CBManagerState)
+    
+    // centralManager
+    case managerState(CBManagerState)
     case scan(String)
     case connect(String)
     case disconnect(String)
     case register(String)
     
+    // peripheral
+    case peripheralState(CBPeripheralState)
+
     /// 状态码
     public var code: Int {
         switch self {
         case .custom(let msg):
             return 0
-        case .state(let state):
+        case .managerState(let state):
             return 1
         case .scan(let msg):
             return 2
@@ -37,6 +43,8 @@ public enum SFBleCmdError {
             return 4
         case .register(let msg):
             return 5
+        case .peripheralState(let state):
+            return 1
         }
     }
     
@@ -45,7 +53,7 @@ public enum SFBleCmdError {
         switch self {
         case .custom(let msg):
             return msg
-        case .state(let state):
+        case .managerState(let state):
             return "centralManager`s state is \(state.sf.description)."
         case .scan(let msg):
             return msg
@@ -55,6 +63,8 @@ public enum SFBleCmdError {
             return msg
         case .register(let msg):
             return msg
+        case .peripheralState(let state):
+            return "peripheral`s state is \(state.sf.description)."
         }
     }
 }

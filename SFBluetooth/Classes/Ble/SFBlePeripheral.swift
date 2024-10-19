@@ -192,8 +192,9 @@ extension SFBlePeripheral {
      *
      *  @see        peripheral:didReadRSSI:error:
      */
-    public func readRSSI() {
+    public func readRSSI(id: String) {
         // do
+        self.id = id
         peripheral.readRSSI()
         
         // log
@@ -222,8 +223,9 @@ extension SFBlePeripheral {
      *
      *  @see                peripheral:didDiscoverServices:
      */
-    public func discoverServices(_ serviceUUIDs: [CBUUID]?) {
+    public func discoverServices(id: String, serviceUUIDs: [CBUUID]?) {
         // do
+        self.id = id
         peripheral.discoverServices(serviceUUIDs)
         
         // log
@@ -259,8 +261,9 @@ extension SFBlePeripheral {
      *
      *  @see                        peripheral:didDiscoverIncludedServicesForService:error:
      */
-    public func discoverIncludedServices(_ includedServiceUUIDs: [CBUUID]?, for service: CBService) {
+    public func discoverIncludedServices(id: String, includedServiceUUIDs: [CBUUID]?, for service: CBService) {
         // do
+        self.id = id
         peripheral.discoverIncludedServices(includedServiceUUIDs, for: service)
         
         // log
@@ -298,8 +301,9 @@ extension SFBlePeripheral {
      *
      *  @see                        peripheral:didDiscoverCharacteristicsForService:error:
      */
-    public func discoverCharacteristics(_ characteristicUUIDs: [CBUUID]?, for service: CBService) {
+    public func discoverCharacteristics(id: String, characteristicUUIDs: [CBUUID]?, for service: CBService) {
         // do
+        self.id = id
         peripheral.discoverCharacteristics(characteristicUUIDs, for: service)
         
         // log
@@ -335,8 +339,9 @@ extension SFBlePeripheral {
      *
      *  @see                    peripheral:didUpdateValueForCharacteristic:error:
      */
-    public func readValue(for characteristic: CBCharacteristic) {
+    public func readValue(id: String, for characteristic: CBCharacteristic) {
         // do
+        self.id = id
         peripheral.readRSSI()
         
         // log
@@ -392,8 +397,9 @@ extension SFBlePeripheral {
      *    @see                    canSendWriteWithoutResponse
      *    @see                    CBCharacteristicWriteType
      */
-    public func writeValue(_ data: Data, for characteristic: CBCharacteristic, type: CBCharacteristicWriteType) {
+    public func writeValue(id: String, data: Data, for characteristic: CBCharacteristic, type: CBCharacteristicWriteType) {
         // do
+        self.id = id
         peripheral.writeValue(data, for: characteristic, type: type)
         
         // log
@@ -432,8 +438,9 @@ extension SFBlePeripheral {
      *  @see                    peripheral:didUpdateNotificationStateForCharacteristic:error:
      *  @seealso                CBConnectPeripheralOptionNotifyOnNotificationKey
      */
-    public func setNotifyValue(_ enabled: Bool, for characteristic: CBCharacteristic) {
+    public func setNotifyValue(id: String, enabled: Bool, for characteristic: CBCharacteristic) {
         // do
+        self.id = id
         peripheral.setNotifyValue(enabled, for: characteristic)
         
         // log
@@ -464,8 +471,9 @@ extension SFBlePeripheral {
      *
      *  @see                    peripheral:didDiscoverDescriptorsForCharacteristic:error:
      */
-    public func discoverDescriptors(for characteristic: CBCharacteristic) {
+    public func discoverDescriptors(id: String, for characteristic: CBCharacteristic) {
         // do
+        self.id = id
         peripheral.discoverDescriptors(for: characteristic)
         
         // log
@@ -494,8 +502,9 @@ extension SFBlePeripheral {
      *
      *  @see                peripheral:didUpdateValueForDescriptor:error:
      */
-    public func readValue(for descriptor: CBDescriptor) {
+    public func readValue(id: String, for descriptor: CBDescriptor) {
         // do
+        self.id = id
         peripheral.readValue(for: descriptor)
         
         // log
@@ -526,8 +535,9 @@ extension SFBlePeripheral {
      *
      *  @see                peripheral:didWriteValueForCharacteristic:error:
      */
-    public func writeValue(_ data: Data, for descriptor: CBDescriptor) {
+    public func writeValue(id: String, data: Data, for descriptor: CBDescriptor) {
         // do
+        self.id = id
         peripheral.writeValue(data, for: descriptor)
         
         // log
@@ -559,8 +569,9 @@ extension SFBlePeripheral {
      *  @see                peripheral:didWriteValueForCharacteristic:error:
      */
     @available(iOS 11.0, *)
-    public func openL2CAPChannel(_ PSM: CBL2CAPPSM) {
+    public func openL2CAPChannel(id: String, PSM: CBL2CAPPSM) {
         // do
+        self.id = id
         peripheral.openL2CAPChannel(PSM)
         
         // log

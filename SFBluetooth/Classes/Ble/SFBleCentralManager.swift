@@ -13,7 +13,7 @@ import SFExtension
 import SFLogger
 
 // MARK: - Notify
-public let SF_Notify_CentralManager_Callback_IsScanning_DidChanged =                     NSNotification.Name("SF_Notify_CentralManager_Callback_IsScanning_DidChanged")
+public let SF_Notify_CentralManager_Callback_IsScanning_DidUpdated =                     NSNotification.Name("SF_Notify_CentralManager_Callback_IsScanning_DidUpdated")
 public let SF_Notify_CentralManager_Callback_State_DidUpdated =                          NSNotification.Name("SF_Notify_CentralManager_Callback_State_DidUpdated")
 public let SF_Notify_CentralManager_Callback_ANCSAuthorization_DidUpdated =              NSNotification.Name("SF_Notify_CentralManager_Callback_ANCSAuthorization_DidUpdated")
 public let SF_Notify_CentralManager_Callback_WillRestoreState =                          NSNotification.Name("SF_Notify_CentralManager_Callback_WillRestoreState")
@@ -25,7 +25,7 @@ public let SF_Notify_CentralManager_Callback_DisconnectPeripheralAutoReconnect_S
 public let SF_Notify_CentralManager_Callback_ConnectionEvents_Occur =                    NSNotification.Name("SF_Notify_CentralManager_Callback_ConnectionEvents_Occur")
 
 // MARK: - Tag
-public let SF_Tag_CentralManager_IsScanning_DidChanged =                        "Tag_CentralManager_IsScanning_DidChanged"
+public let SF_Tag_CentralManager_IsScanning_DidUpdated =                        "Tag_CentralManager_IsScanning_DidUpdated"
 public let SF_Tag_CentralManager_State_DidUpdated =                             "Tag_CentralManager_State_DidUpdated"
 public let SF_Tag_CentralManager_ANCSAuthorization_DidUpdated =                 "Tag_CentralManager_ANCSAuthorization_DidUpdated"
 public let SF_Tag_CentralManager_WillRestoreState =                             "Tag_CentralManager_WillRestoreState"
@@ -68,15 +68,14 @@ public struct SFBleCentralManagerLogOption: OptionSet {
     public static let connectionEventsRegister =                    SFBleCentralManagerLogOption(rawValue: 1 << 15)
     public static let connectionEventsOccur =                       SFBleCentralManagerLogOption(rawValue: 1 << 16)
     
-    public static let all: SFBleCentralManagerLogOption = [
-        .isScanningDidChanged, .stateDidUpdated, .ANCSAuthorizationDidUpdated, .willRestoreState, .retrievePeripherals, .retrieveConnectedPeripherals, .scanStart, .scanStop, .didDiscoverPeripheral, .connectPeripheralStart, .connectPeripheralSuccess, .connectPeripheralFailure, .disconnectPeripheralStart, .disconnectPeripheralSuccess, .disconnectPeripheralAutoReconnectSuccess, .connectionEventsRegister, .connectionEventsOccur
-    ]
+    public static let all: SFBleCentralManagerLogOption = [.isScanningDidChanged, .stateDidUpdated, .ANCSAuthorizationDidUpdated, .willRestoreState, .retrievePeripherals, .retrieveConnectedPeripherals, .scanStart, .scanStop, .didDiscoverPeripheral, .connectPeripheralStart, .connectPeripheralSuccess, .connectPeripheralFailure, .disconnectPeripheralStart, .disconnectPeripheralSuccess, .disconnectPeripheralAutoReconnectSuccess, .connectionEventsRegister, .connectionEventsOccur]
 }
 
 
 // MARK: - SFBleCentralManager
-public class SFBleCentralManager: SFBle {
+public class SFBleCentralManager: NSObject, SFBleProtocol {
     // MARK: var
+    public var id: UUID?
     public private(set) var centralManager: CBCentralManager!
     public var logOption: SFBleCentralManagerLogOption = .all
     public private(set) lazy var discoverLogger: SFDiscoveryLogger = {
@@ -104,15 +103,15 @@ extension SFBleCentralManager {
                 if logOption.contains(.isScanningDidChanged) {
                     let msg_centralManager = "centralManager=\(centralManager.sf.description)"
                     let msg_isScanning = "isScanning=\(isScanning)"
-                    logCallback(tag: SF_Tag_CentralManager_IsScanning_DidChanged,
+                    logCallback(tag: SF_Tag_CentralManager_IsScanning_DidUpdated,
                            msgs: [msg_centralManager, msg_isScanning])
                 }
                 
                 // notify
                 var userInfo = [String: Any]()
-                userInfo["central"] = centralManager
+                userInfo["centralManager"] = centralManager
                 userInfo["isScanning"] = isScanning
-                NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_IsScanning_DidChanged, object: nil, userInfo: userInfo)
+                NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_IsScanning_DidUpdated, object: nil, userInfo: userInfo)
                 return
             }
             return
@@ -124,7 +123,7 @@ extension SFBleCentralManager {
 // MARK: - func
 extension SFBleCentralManager {
     /// 检索外设
-    public func retrievePeripherals(id: String, identifiers: [UUID]) -> [CBPeripheral] {
+    public func retrievePeripherals(id: UUID, identifiers: [UUID]) -> [CBPeripheral] {
         // do
         self.id = id
         let peripherals = centralManager.retrievePeripherals(withIdentifiers: identifiers)
@@ -149,7 +148,7 @@ extension SFBleCentralManager {
     }
     
     /// 检索已连接的外设
-    public func retrieveConnectedPeripherals(id: String, services: [CBUUID]) -> [CBPeripheral] {
+    public func retrieveConnectedPeripherals(id: UUID, services: [CBUUID]) -> [CBPeripheral] {
         // do
         self.id = id
         let peripherals = centralManager.retrieveConnectedPeripherals(withServices: services)
@@ -174,7 +173,7 @@ extension SFBleCentralManager {
     }
     
     /// 开始扫描
-    public func scanForPeripherals(id: String, services: [CBUUID]?, options: [String: Any]?) {
+    public func scanForPeripherals(id: UUID, services: [CBUUID]?, options: [String: Any]?) {
         // do
         self.id = id
         centralManager.scanForPeripherals(withServices: services, options: options)
@@ -200,7 +199,7 @@ extension SFBleCentralManager {
     }
     
     /// 停止扫描
-    public func stopScan(id: String) {
+    public func stopScan(id: UUID) {
         // do
         self.id = id
         centralManager.stopScan()
@@ -214,7 +213,7 @@ extension SFBleCentralManager {
     }
     
     /// 连接外设
-    public func connect(id: String, peripheral: CBPeripheral, options: [String: Any]?) {
+    public func connect(id: UUID, peripheral: CBPeripheral, options: [String: Any]?) {
         // do
         self.id = id
         centralManager.connect(peripheral, options: options)
@@ -233,7 +232,7 @@ extension SFBleCentralManager {
     }
     
     /// 断开外设
-    public func disconnect(id: String, peripheral: CBPeripheral) {
+    public func disconnect(id: UUID, peripheral: CBPeripheral) {
         // do
         self.id = id
         centralManager.cancelPeripheralConnection(peripheral)
@@ -249,7 +248,7 @@ extension SFBleCentralManager {
     
     /// 注册连接事件
     @available(iOS 13.0, *)
-    public func registerForConnectionEvents(id: String, options: [CBConnectionEventMatchingOption : Any]?) {
+    public func registerForConnectionEvents(id: UUID, options: [CBConnectionEventMatchingOption : Any]?) {
         // do
         self.id = id
         centralManager.registerForConnectionEvents(options: options)
@@ -295,7 +294,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         }
         // notify
         var userInfo = [String: Any]()
-        userInfo["central"] = centralManager
+        userInfo["centralManager"] = centralManager
         NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_State_DidUpdated, object: nil, userInfo: userInfo)
     }
     
@@ -326,7 +325,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         }
         // notify
         var userInfo = [String: Any]()
-        userInfo["central"] = centralManager
+        userInfo["centralManager"] = centralManager
         userInfo["dict"] = dict
         NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_WillRestoreState, object: nil, userInfo: userInfo)
     }
@@ -362,7 +361,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         }
         // notify
         var userInfo = [String: Any]()
-        userInfo["central"] = centralManager
+        userInfo["centralManager"] = centralManager
         userInfo["peripheral"] = peripheral
         userInfo["advertisementData"] = advertisementData
         userInfo["RSSI"] = RSSI
@@ -390,7 +389,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         }
         // notify
         var userInfo = [String: Any]()
-        userInfo["central"] = centralManager
+        userInfo["centralManager"] = centralManager
         userInfo["peripheral"] = peripheral
         NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_ConnectPeripheral_Success, object: nil, userInfo: userInfo)
     }
@@ -422,7 +421,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         }
         // notify
         var userInfo = [String: Any]()
-        userInfo["central"] = centralManager
+        userInfo["centralManager"] = centralManager
         userInfo["peripheral"] = peripheral
         if let error = error {
             userInfo["error"] = error
@@ -458,7 +457,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         }
         // notify
         var userInfo = [String: Any]()
-        userInfo["central"] = centralManager
+        userInfo["centralManager"] = centralManager
         userInfo["peripheral"] = peripheral
         if let error = error {
             userInfo["error"] = error
@@ -501,7 +500,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         }
         // notify
         var userInfo = [String: Any]()
-        userInfo["central"] = centralManager
+        userInfo["centralManager"] = centralManager
         userInfo["peripheral"] = peripheral
         userInfo["timestamp"] = timestamp
         userInfo["isReconnecting"] = isReconnecting
@@ -534,7 +533,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         }
         // notify
         var userInfo = [String: Any]()
-        userInfo["central"] = centralManager
+        userInfo["centralManager"] = centralManager
         userInfo["event"] = event
         userInfo["peripheral"] = peripheral
         NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_ConnectionEvents_Occur, object: nil, userInfo: userInfo)
@@ -561,7 +560,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         }
         // notify
         var userInfo = [String: Any]()
-        userInfo["central"] = centralManager
+        userInfo["centralManager"] = centralManager
         userInfo["peripheral"] = peripheral
         NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_ANCSAuthorization_DidUpdated, object: nil, userInfo: userInfo)
     }

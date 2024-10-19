@@ -1,5 +1,5 @@
 //
-//  SFBle.swift
+//  SFBleProtocol.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/10/18.
@@ -13,16 +13,16 @@ import SFExtension
 import SFLogger
 
 // MARK: - SFBle
-public class SFBle: NSObject {
-    public var id: String?
+public protocol SFBleProtocol {
+    var id: UUID? { get set }
 }
 
 // MARK: - log
-extension SFBle {
+extension SFBleProtocol {
     
     public func logTry(tag: String, msgs: [String], result: String? = nil) {
         // id
-        let msg_id = "ID: \(id ?? "nil")"
+        let msg_id = "ID: \(id?.uuidString ?? "nil")"
         // try
         var msg_try = """
         Try:
@@ -47,7 +47,7 @@ extension SFBle {
     
     public func logCallback(tag: String, msgs: [String]) {
         // id
-        let msg_id = "ID: \(id ?? "nil")"
+        let msg_id = "ID: \(id?.uuidString ?? "nil")"
         // callback
         var msg_callback = """
         Callback:

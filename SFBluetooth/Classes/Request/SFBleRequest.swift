@@ -28,7 +28,6 @@ open class SFBleRequest {
         self.configBleCentralManagerNotify()
         self.configBlePeripheralCallback()
     }
-   
     
     // MARK: centralManager
     open func centralManagerDidUpdateIsScanning(isScanning: Bool) {}

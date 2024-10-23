@@ -13,78 +13,9 @@ import SFExtension
 import SFLogger
 
 
-// MARK: - Tag
-public let SF_Tag_Peripheral_State_DidUpdated =                                 "Tag_Peripheral_State_DidUpdated"
-public let SF_Tag_Peripheral_Name_DidUpdated =                                  "Tag_Peripheral_Name_DidUpdated"
-public let SF_Tag_Peripheral_Services_DidModified =                             "Tag_Peripheral_Services_DidModified"
-public let SF_Tag_Peripheral_RSSI_DidUpdated =                                  "Tag_Peripheral_RSSI_DidUpdated"
-public let SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse =                "Tag_Peripheral_IsReadyToSendWriteWithoutResponse"
-public let SF_Tag_Peripheral_ReadRSSI_Start =                                   "Tag_Peripheral_ReadRSSI_Start"
-public let SF_Tag_Peripheral_ReadRSSI_Success =                                 "Tag_Peripheral_ReadRSSI_Success"
-public let SF_Tag_Peripheral_DiscoverServices_Start =                           "Tag_Peripheral_DiscoverServices_Start"
-public let SF_Tag_Peripheral_DiscoverServices_Success =                         "Tag_Peripheral_DiscoverServices_Success"
-public let SF_Tag_Peripheral_DiscoverIncludedServices_Start =                   "Tag_Peripheral_DiscoverIncludedServices_Start"
-public let SF_Tag_Peripheral_DiscoverIncludedServices_Success =                 "Tag_Peripheral_DiscoverIncludedServices_Success"
-public let SF_Tag_Peripheral_DiscoverCharacteristics_Start =                    "Tag_Peripheral_DiscoverCharacteristics_Start"
-public let SF_Tag_Peripheral_DiscoverCharacteristics_Success =                  "Tag_Peripheral_DiscoverCharacteristics_Success"
-public let SF_Tag_Peripheral_DiscoverDescriptors_Start =                        "Tag_Peripheral_DiscoverDescriptors_Start"
-public let SF_Tag_Peripheral_DiscoverDescriptors_Success =                      "Tag_Peripheral_DiscoverDescriptors_Success"
-public let SF_Tag_Peripheral_SetCharacteristicNotificationState_Start =         "Tag_Peripheral_SetCharacteristicNotificationState_Start"
-public let SF_Tag_Peripheral_SetCharacteristicNotificationState_Success =       "Tag_Peripheral_SetCharacteristicNotificationState_Success"
-public let SF_Tag_Peripheral_GetMaximumWriteValueLength =                       "Tag_Peripheral_GetMaximumWriteValueLength"
-public let SF_Tag_Peripheral_ReadCharacteristicValue_Start =                    "Tag_Peripheral_ReadCharacteristicValue_Start"
-public let SF_Tag_Peripheral_ReadCharacteristicValue_Success =                  "Tag_Peripheral_ReadCharacteristicValue_Success"
-public let SF_Tag_Peripheral_WriteCharacteristicValue_Start =                   "Tag_Peripheral_WriteCharacteristicValue_Start"
-public let SF_Tag_Peripheral_WriteCharacteristicValue_Success =                 "Tag_Peripheral_WriteCharacteristicValue_Success"
-public let SF_Tag_Peripheral_ReadDescriptorValue_Start =                        "Tag_Peripheral_ReadDescriptorValue_Start"
-public let SF_Tag_Peripheral_ReadDescriptorValue_Success =                      "Tag_Peripheral_ReadDescriptorValue_Success"
-public let SF_Tag_Peripheral_WriteDescriptorValue_Start =                       "Tag_Peripheral_WriteDescriptorValue_Start"
-public let SF_Tag_Peripheral_WriteDescriptorValue_Success =                     "Tag_Peripheral_WriteDescriptorValue_Success"
-public let SF_Tag_Peripheral_OpenL2CAPChannel_Start =                           "Tag_Peripheral_OpenL2CAPChannel_Start"
-public let SF_Tag_Peripheral_OpenL2CAPChannel_Success =                         "Tag_Peripheral_OpenL2CAPChannel_Success"
-
-// MARK: - SFBlePeripheralLogOption
-public struct SFBlePeripheralLogOption: OptionSet {
-    public let rawValue: Int
-    public init(rawValue: Int) {
-        self.rawValue = rawValue
-    }
-    
-    public static let stateDidUpdated =                             SFBlePeripheralLogOption(rawValue: 1 << 0)
-    public static let nameDidUpdated =                              SFBlePeripheralLogOption(rawValue: 1 << 1)
-    public static let servicesDidModified =                         SFBlePeripheralLogOption(rawValue: 1 << 2)
-    public static let RSSIDidUpdated =                              SFBlePeripheralLogOption(rawValue: 1 << 3)
-    public static let isReadyToSendWriteWithoutResponse =           SFBlePeripheralLogOption(rawValue: 1 << 4)
-    public static let readRSSIStart =                               SFBlePeripheralLogOption(rawValue: 1 << 5)
-    public static let readRSSISuccess =                             SFBlePeripheralLogOption(rawValue: 1 << 6)
-    public static let discoverServicesStart =                       SFBlePeripheralLogOption(rawValue: 1 << 7)
-    public static let discoverServicesSuccess =                     SFBlePeripheralLogOption(rawValue: 1 << 8)
-    public static let discoverIncludedServicesStart =               SFBlePeripheralLogOption(rawValue: 1 << 9)
-    public static let discoverIncludedServicesSuccess =             SFBlePeripheralLogOption(rawValue: 1 << 10)
-    public static let discoverCharacteristicsStart =                SFBlePeripheralLogOption(rawValue: 1 << 11)
-    public static let discoverCharacteristicsSuccess =              SFBlePeripheralLogOption(rawValue: 1 << 12)
-    public static let discoverDescriptorsStart =                    SFBlePeripheralLogOption(rawValue: 1 << 13)
-    public static let discoverDescriptorsSuccess =                  SFBlePeripheralLogOption(rawValue: 1 << 14)
-    public static let setCharacteristicNotificationStateStart =     SFBlePeripheralLogOption(rawValue: 1 << 15)
-    public static let setCharacteristicNotificationStateSuccess =   SFBlePeripheralLogOption(rawValue: 1 << 16)
-    public static let getMaximumWriteValueLength =                  SFBlePeripheralLogOption(rawValue: 1 << 16)
-    public static let readCharacteristicValueStart =                SFBlePeripheralLogOption(rawValue: 1 << 18)
-    public static let readCharacteristicValueSuccess =              SFBlePeripheralLogOption(rawValue: 1 << 19)
-    public static let writeCharacteristicValueStart =               SFBlePeripheralLogOption(rawValue: 1 << 20)
-    public static let writeCharacteristicValueSuccess =             SFBlePeripheralLogOption(rawValue: 1 << 21)
-    public static let readDescriptorValueStart =                    SFBlePeripheralLogOption(rawValue: 1 << 22)
-    public static let readDescriptorValueSuccess =                  SFBlePeripheralLogOption(rawValue: 1 << 23)
-    public static let writeDescriptorValueStart =                   SFBlePeripheralLogOption(rawValue: 1 << 24)
-    public static let writeDescriptorValueSuccess =                 SFBlePeripheralLogOption(rawValue: 1 << 25)
-    public static let openL2CAPChannelStart =                       SFBlePeripheralLogOption(rawValue: 1 << 26)
-    public static let openL2CAPChannelSuccess =                     SFBlePeripheralLogOption(rawValue: 1 << 27)
-
-    public static let all: SFBlePeripheralLogOption = [.stateDidUpdated, .nameDidUpdated, .servicesDidModified, .RSSIDidUpdated, .isReadyToSendWriteWithoutResponse, .readRSSIStart, .readRSSISuccess, .discoverServicesStart, .discoverServicesSuccess, .discoverIncludedServicesStart, .discoverIncludedServicesSuccess, .discoverCharacteristicsStart, .discoverCharacteristicsSuccess, .discoverDescriptorsStart, .discoverDescriptorsSuccess, .setCharacteristicNotificationStateStart, .setCharacteristicNotificationStateSuccess, .getMaximumWriteValueLength, .readCharacteristicValueStart, .readCharacteristicValueSuccess, .writeCharacteristicValueStart, .writeCharacteristicValueSuccess, .readDescriptorValueStart, .readDescriptorValueSuccess, .writeDescriptorValueStart, .writeDescriptorValueSuccess, .openL2CAPChannelStart, .openL2CAPChannelSuccess]
-}
-
 
 // MARK: - SFBlePeripheral
-public class SFBlePeripheral: NSObject, SFBleProtocol {
+public class SFBlePeripheral: NSObject {
     // MARK: callback
     public var didUpdateState: ((_ peripheral: CBPeripheral, _ state: CBPeripheralState) -> ())?
     public var didUpdateName: ((_ peripheral: CBPeripheral) -> ())?
@@ -104,7 +35,8 @@ public class SFBlePeripheral: NSObject, SFBleProtocol {
     public var didOpenChannel: ((_ peripheral: CBPeripheral, _ channel: CBL2CAPChannel?, _ error: (any Error)?) -> ())?
     
     // MARK: var
-    public var id: UUID?
+    public var id = UUID()
+    public var plugins = [SFBlePeripheralPlugin]()
     public let peripheral: CBPeripheral
     public var logOption: SFBlePeripheralLogOption = .all
     
@@ -126,12 +58,9 @@ extension SFBlePeripheral {
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let peripheral = object as? CBPeripheral, peripheral == self.peripheral {
             if keyPath == "state", let state = change?[.newKey] as? CBPeripheralState {
-                // log
-                if logOption.contains(.stateDidUpdated) {
-                    let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-                    let msg_state = "state=\(state.sf.description)"
-                    logCallback(tag: SF_Tag_Peripheral_State_DidUpdated,
-                           msgs: [msg_peripheral, msg_state])
+                // plugins
+                plugins.forEach { plugin in
+                    plugin.peripheral(peripheral, didUpdateState: id, state: state)
                 }
                 // callback
                 didUpdateState?(peripheral, state)
@@ -157,13 +86,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.readRSSI()
-        // log
-        if logOption.contains(.readRSSIStart) {
-            let msg_tag = SF_Tag_Peripheral_ReadRSSI_Start
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            logTry(tag: SF_Tag_Peripheral_ReadRSSI_Start,
-                   msgs: [msg_peripheral],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, readRSSI: id)
         }
     }
 
@@ -182,16 +107,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.discoverServices(serviceUUIDs)
-        // log
-        if logOption.contains(.discoverServicesStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            var msg_serviceUUIDs = "serviceUUIDs=nil"
-            if let serviceUUIDs = serviceUUIDs {
-                msg_serviceUUIDs = "serviceUUIDs=\(serviceUUIDs)"
-            }
-            logTry(tag: SF_Tag_Peripheral_DiscoverServices_Start,
-                   msgs: [msg_peripheral, msg_serviceUUIDs],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, discoverServices: id, serviceUUIDs: serviceUUIDs)
         }
     }
 
@@ -211,17 +129,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.discoverIncludedServices(includedServiceUUIDs, for: service)
-        // log
-        if logOption.contains(.discoverIncludedServicesStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_service = "service=\(service.sf.description)"
-            var msg_includedServiceUUIDs = "includedServiceUUIDs=nil"
-            if let includedServiceUUIDs = includedServiceUUIDs {
-                msg_includedServiceUUIDs = "includedServiceUUIDs=\(includedServiceUUIDs)"
-            }
-            logTry(tag: SF_Tag_Peripheral_DiscoverIncludedServices_Start,
-                   msgs: [msg_peripheral, msg_service, msg_includedServiceUUIDs],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, discoverIncludedServices: id, includedServiceUUIDs: includedServiceUUIDs, for: service)
         }
     }
 
@@ -241,17 +151,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.discoverCharacteristics(characteristicUUIDs, for: service)
-        // log
-        if logOption.contains(.discoverCharacteristicsStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_service = "service=\(service.sf.description)"
-            var msg_characteristicUUIDs = "characteristicUUIDs=nil"
-            if let characteristicUUIDs = characteristicUUIDs {
-                msg_characteristicUUIDs = "characteristicUUIDs=\(characteristicUUIDs)"
-            }
-            logTry(tag: SF_Tag_Peripheral_DiscoverCharacteristics_Start,
-                   msgs: [msg_peripheral, msg_service, msg_characteristicUUIDs],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, discoverCharacteristics: id, characteristicUUIDs: characteristicUUIDs, for: service)
         }
     }
 
@@ -269,13 +171,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.readRSSI()
-        // log
-        if logOption.contains(.readCharacteristicValueStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-            logTry(tag: SF_Tag_Peripheral_ReadCharacteristicValue_Start,
-                   msgs: [msg_peripheral, msg_characteristic],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, readValue: id, for: characteristic)
         }
     }
 
@@ -292,13 +190,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         let length = peripheral.maximumWriteValueLength(for: type)
-        // log
-        if logOption.contains(.getMaximumWriteValueLength) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_type = "type=\(type.sf.description)"
-            logTry(tag: SF_Tag_Peripheral_GetMaximumWriteValueLength,
-                   msgs: [msg_peripheral, msg_type],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, getMaximumWriteValueLength: id, for: type, return: length)
         }
         return length
     }
@@ -326,15 +220,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.writeValue(data, for: characteristic, type: type)
-        // log
-        if logOption.contains(.writeCharacteristicValueStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-            let msg_type = "type=\(type.sf.description)"
-            let msg_data = "data=\(data.sf.toHex())"
-            logTry(tag: SF_Tag_Peripheral_WriteCharacteristicValue_Start,
-                   msgs: [msg_peripheral, msg_characteristic, msg_type, msg_data],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, writeValue: id, data: data, for: characteristic, type: type)
         }
     }
 
@@ -358,14 +246,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.setNotifyValue(enabled, for: characteristic)
-        // log
-        if logOption.contains(.setCharacteristicNotificationStateStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-            let msg_enabled = "enabled=\(enabled)"
-            logTry(tag: SF_Tag_Peripheral_SetCharacteristicNotificationState_Start,
-                   msgs: [msg_peripheral, msg_characteristic, msg_enabled],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, setNotifyValue: id, enabled: enabled, for: characteristic)
         }
     }
 
@@ -383,13 +266,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.discoverDescriptors(for: characteristic)
-        // log
-        if logOption.contains(.discoverDescriptorsStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-            logTry(tag: SF_Tag_Peripheral_DiscoverDescriptors_Start,
-                   msgs: [msg_peripheral, msg_characteristic],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, discoverDescriptors: id, for: characteristic)
         }
     }
 
@@ -407,13 +286,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.readValue(for: descriptor)
-        // log
-        if logOption.contains(.readDescriptorValueStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_descriptor = "descriptor=\(descriptor.sf.description)"
-            logTry(tag: SF_Tag_Peripheral_ReadDescriptorValue_Start,
-                   msgs: [msg_peripheral, msg_descriptor],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, readValue: id, for: descriptor)
         }
     }
 
@@ -433,14 +308,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.writeValue(data, for: descriptor)
-        // log
-        if logOption.contains(.writeDescriptorValueStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_descriptor = "descriptor=\(descriptor.sf.description)"
-            let msg_data = "data=\(data.sf.toHex())"
-            logTry(tag: SF_Tag_Peripheral_WriteDescriptorValue_Start,
-                   msgs: [msg_peripheral, msg_descriptor, msg_data],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, writeValue: id, data: data, for: descriptor)
         }
     }
 
@@ -459,13 +329,9 @@ extension SFBlePeripheral {
         // do
         self.id = id
         peripheral.openL2CAPChannel(PSM)
-        // log
-        if logOption.contains(.openL2CAPChannelStart) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_PSM = "PSM=\(PSM)"
-            logTry(tag: SF_Tag_Peripheral_OpenL2CAPChannel_Start,
-                   msgs: [msg_peripheral, msg_PSM],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, openL2CAPChannel: id, PSM: PSM)
         }
     }
 }
@@ -483,11 +349,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 6.0, *)
     public func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
-        // log
-        if logOption.contains(.nameDidUpdated) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            logCallback(tag: SF_Tag_Peripheral_Name_DidUpdated,
-                   msgs: [msg_peripheral])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didUpdateName: id, name: peripheral.name)
         }
         // callback
         didUpdateName?(peripheral)
@@ -506,16 +370,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 7.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-        // log
-        if logOption.contains(.servicesDidModified) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            var msg_invalidatedServices = "invalidatedServices=["
-            for invalidatedService in invalidatedServices {
-                msg_invalidatedServices.append(invalidatedService.sf.description)
-            }
-            msg_invalidatedServices.append("]")
-            logCallback(tag: SF_Tag_Peripheral_Services_DidModified,
-                   msgs: [msg_peripheral, msg_invalidatedServices])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didModifyServices: id, invalidatedServices: invalidatedServices)
         }
         // callback
         didModifyServices?(peripheral, invalidatedServices)
@@ -534,15 +391,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS, introduced: 5.0, deprecated: 8.0)
     public func peripheralDidUpdateRSSI(_ peripheral: CBPeripheral, error: (any Error)?) {
-        // log
-        if logOption.contains(.readRSSISuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_RSSI_DidUpdated,
-                   msgs: [msg_peripheral, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didUpdateRSSI: id, RSSI: peripheral.rssi, error: error)
         }
         // callback
         didUpdateRSSI?(peripheral, error)
@@ -560,16 +411,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 8.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: (any Error)?) {
-        // log
-        if logOption.contains(.readRSSISuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_RSSI = "RSSI=\(RSSI)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_ReadRSSI_Success,
-                   msgs: [msg_peripheral, msg_RSSI, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didReadRSSI: id, RSSI: RSSI, error: error)
         }
         // callback
         didReadRSSI?(peripheral, RSSI, error)
@@ -588,15 +432,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
-        // log
-        if logOption.contains(.discoverServicesSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_DiscoverServices_Success,
-                   msgs: [msg_peripheral, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didDiscoverServices: id, error: error)
         }
         // callback
         didDiscoverServices?(peripheral, error)
@@ -615,16 +453,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: (any Error)?) {
-        // log
-        if logOption.contains(.discoverIncludedServicesSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_service = "service=\(service.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_DiscoverIncludedServices_Success,
-                   msgs: [msg_peripheral, msg_service, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didDiscoverIncludedServices: id, for: service, error: error)
         }
         // callback
         didDiscoverIncludedServices?(peripheral, service, error)
@@ -643,16 +474,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
-        // log
-        if logOption.contains(.discoverCharacteristicsSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_service = "service=\(service.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_DiscoverCharacteristics_Success,
-                   msgs: [msg_peripheral, msg_service, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didDiscoverCharacteristics: id, for: service, error: error)
         }
         // callback
         didDiscoverCharacteristics?(peripheral, service, error)
@@ -670,16 +494,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
-        // log
-        if logOption.contains(.readCharacteristicValueSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_ReadCharacteristicValue_Success,
-                   msgs: [msg_peripheral, msg_characteristic, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didUpdateValue: id, for: characteristic, error: error)
         }
         // callback
         didUpdateValueForCharacteristic?(peripheral, characteristic, error)
@@ -697,16 +514,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
-        // log
-        if logOption.contains(.writeCharacteristicValueSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_WriteCharacteristicValue_Success,
-                   msgs: [msg_peripheral, msg_characteristic, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didWriteValue: id, for: characteristic, error: error)
         }
         // callback
         didWriteValueForCharacteristic?(peripheral, characteristic, error)
@@ -724,16 +534,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
-        // log
-        if logOption.contains(.setCharacteristicNotificationStateSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_SetCharacteristicNotificationState_Success,
-                   msgs: [msg_peripheral, msg_characteristic, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didUpdateNotificationState: id, for: characteristic, error: error)
         }
         // callback
         didUpdateNotificationStateForCharacteristic?(peripheral, characteristic, error)
@@ -752,16 +555,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: (any Error)?) {
-        // log
-        if logOption.contains(.discoverDescriptorsSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_DiscoverDescriptors_Success,
-                   msgs: [msg_peripheral, msg_characteristic, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didDiscoverDescriptors: id, for: characteristic, error: error)
         }
         // callback
         didDiscoverDescriptorsForCharacteristic?(peripheral, characteristic, error)
@@ -779,16 +575,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) {
-        // log
-        if logOption.contains(.readDescriptorValueSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_descriptor = "descriptor=\(descriptor.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_ReadDescriptorValue_Success,
-                   msgs: [msg_peripheral, msg_descriptor, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didUpdateValue: id, for: descriptor, error: error)
         }
         // callback
         didUpdateValueForDescriptor?(peripheral, descriptor, error)
@@ -806,16 +595,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
-        // log
-        if logOption.contains(.writeDescriptorValueSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_descriptor = "descriptor=\(descriptor.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_WriteDescriptorValue_Success,
-                   msgs: [msg_peripheral, msg_descriptor, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didWriteValue: id, for: descriptor, error: error)
         }
         // callback
         didWriteValueForDescriptor?(peripheral, descriptor, error)
@@ -833,11 +615,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 5.0, *)
     public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral) {
-        // log
-        if logOption.contains(.isReadyToSendWriteWithoutResponse) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            logCallback(tag: SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse,
-                   msgs: [msg_peripheral])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, isReadyToSendWriteWithoutResponse: id)
         }
         // callback
         isReadyToSendWriteWithoutResponse?(peripheral)
@@ -855,19 +635,9 @@ extension SFBlePeripheral: CBPeripheralDelegate {
      */
     @available(iOS 11.0, *)
     public func peripheral(_ peripheral: CBPeripheral, didOpen channel: CBL2CAPChannel?, error: (any Error)?) {
-        // log
-        if logOption.contains(.openL2CAPChannelSuccess) {
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            var msg_channel = "channel=nil"
-            if let channel = channel {
-                msg_channel = "channel=\(channel.description)"
-            }   
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_Peripheral_OpenL2CAPChannel_Success,
-                   msgs: [msg_peripheral, msg_channel, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.peripheral(peripheral, didOpen: id, channel: channel, error: error)
         }
         // callback
         didOpenChannel?(peripheral, channel, error)

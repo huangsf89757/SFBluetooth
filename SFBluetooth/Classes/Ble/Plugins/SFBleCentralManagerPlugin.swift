@@ -35,127 +35,93 @@ public let SF_Tag_CentralManager_ConnectionEvents_Occur =                       
 
 // MARK: - SFBleCentralManagerPlugin
 public protocol SFBleCentralManagerPlugin {
-    /// [Try] 检索外设
-    func retrievePeripherals(id: UUID,  central: CBCentralManager, identifiers: [UUID], return peripherals: [CBPeripheral])
+    func centralManager(_ central: CBCentralManager, retrievePeripherals id: UUID, identifiers: [UUID], return peripherals: [CBPeripheral])
     
-    /// [Try] 检索已连接的外设
-    func retrieveConnectedPeripherals(id: UUID,  central: CBCentralManager, services: [CBUUID], return peripherals: [CBPeripheral])
+    func centralManager(_ central: CBCentralManager, retrieveConnectedPeripherals id: UUID, services: [CBUUID], return peripherals: [CBPeripheral])
     
-    /// [Try] 开始扫描
-    func scanForPeripherals(id: UUID,  central: CBCentralManager, services: [CBUUID]?, options: [String: Any]?)
+    func centralManager(_ central: CBCentralManager, scanForPeripherals id: UUID, services: [CBUUID]?, options: [String: Any]?)
     
-    /// [Try] 停止扫描
-    func stopScan(id: UUID,  central: CBCentralManager)
+    func centralManager(_ central: CBCentralManager, stopScan id: UUID)
     
-    /// [Try] 连接外设
-    func connect(id: UUID,  central: CBCentralManager, peripheral: CBPeripheral, options: [String: Any]?)
+    func centralManager(_ central: CBCentralManager, connect id: UUID, peripheral: CBPeripheral, options: [String: Any]?)
     
-    /// [Try] 断开外设
-    func disconnect(id: UUID,  central: CBCentralManager, peripheral: CBPeripheral)
+    func centralManager(_ central: CBCentralManager, disconnect id: UUID, peripheral: CBPeripheral)
     
-    /// [Try] 注册连接事件
     @available(iOS 13.0, *)
-    func registerForConnectionEvents(id: UUID,  central: CBCentralManager, options: [CBConnectionEventMatchingOption : Any]?) 
+    func centralManager(_ central: CBCentralManager, registerForConnectionEvents id: UUID, options: [CBConnectionEventMatchingOption : Any]?)
     
-    /// [Callback] 扫描状态更新
-    func centralManagerDidUpdateIsScannig(id: UUID,  central: CBCentralManager, isScanning: Bool)
+    func centralManager(_ central: CBCentralManager, didUpdateIsScannig id: UUID, isScanning: Bool)
     
-    /// [Callback] 蓝牙状态更新
     @available(iOS 5.0, *)
-    func centralManagerDidUpdateState(id: UUID,  central: CBCentralManager)
+    func centralManager(_ central: CBCentralManager, didUpdateState id: UUID)
     
-    /// [Callback] 状态恢复
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, willRestoreState dict: [String : Any])
+    func centralManager(_ central: CBCentralManager, willRestoreState id: UUID, dict: [String : Any])
     
-    /// [Callback] 发现外设
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber)
+    func centralManager(_ central: CBCentralManager, didDiscover id: UUID, peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber)
     
-    /// [Callback] 连接外设成功
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didConnect peripheral: CBPeripheral)
+    func centralManager(_ central: CBCentralManager, didConnect id: UUID, peripheral: CBPeripheral)
     
-    /// [Callback] 连接外设失败
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?)
+    func centralManager(_ central: CBCentralManager, didFailToConnect id: UUID, peripheral: CBPeripheral, error: (any Error)?)
     
-    /// [Callback] 断开外设成功
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?)
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral id: UUID, peripheral: CBPeripheral, error: (any Error)?)
     
-    /// [Callback] 断开后重连外设
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?)
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral id: UUID, peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?)
     
-    /// [Callback] 连接事件
     @available(iOS 13.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral)
+    func centralManager(_ central: CBCentralManager, connectionEventDidOccur id: UUID, event: CBConnectionEvent, for peripheral: CBPeripheral)
     
-    /// [Callback] ANCS
     @available(iOS 13.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didUpdateANCSAuthorizationFor peripheral: CBPeripheral)
+    func centralManager(_ central: CBCentralManager, didUpdateANCSAuthorization id: UUID, for peripheral: CBPeripheral)
 }
 
 extension SFBleCentralManagerPlugin {
-    /// [Try] 检索外设
-    func retrievePeripherals(id: UUID,  central: CBCentralManager, identifiers: [UUID], return peripherals: [CBPeripheral]) {}
+    func centralManager(_ central: CBCentralManager, retrievePeripherals id: UUID, identifiers: [UUID], return peripherals: [CBPeripheral]) {}
     
-    /// [Try] 检索已连接的外设
-    func retrieveConnectedPeripherals(id: UUID,  central: CBCentralManager, services: [CBUUID], return peripherals: [CBPeripheral]) {}
+    func centralManager(_ central: CBCentralManager, retrieveConnectedPeripherals id: UUID, services: [CBUUID], return peripherals: [CBPeripheral]) {}
     
-    /// [Try] 开始扫描
-    func scanForPeripherals(id: UUID,  central: CBCentralManager, services: [CBUUID]?, options: [String: Any]?) {}
+    func centralManager(_ central: CBCentralManager, scanForPeripherals id: UUID, services: [CBUUID]?, options: [String: Any]?) {}
     
-    /// [Try] 停止扫描
-    func stopScan(id: UUID,  central: CBCentralManager) {}
+    func centralManager(_ central: CBCentralManager, stopScan id: UUID) {}
     
-    /// [Try] 连接外设
-    func connect(id: UUID,  central: CBCentralManager, peripheral: CBPeripheral, options: [String: Any]?) {}
+    func centralManager(_ central: CBCentralManager, connect id: UUID, peripheral: CBPeripheral, options: [String: Any]?) {}
     
-    /// [Try] 断开外设
-    func disconnect(id: UUID,  central: CBCentralManager, peripheral: CBPeripheral) {}
+    func centralManager(_ central: CBCentralManager, disconnect id: UUID, peripheral: CBPeripheral) {}
     
-    /// [Try] 注册连接事件
     @available(iOS 13.0, *)
-    func registerForConnectionEvents(id: UUID,  central: CBCentralManager, options: [CBConnectionEventMatchingOption : Any]?) {}
+    func centralManager(_ central: CBCentralManager, registerForConnectionEvents id: UUID, options: [CBConnectionEventMatchingOption : Any]?) {}
     
-    /// [Callback] 扫描状态更新
-    func centralManagerDidUpdateIsScannig(id: UUID,  central: CBCentralManager, isScanning: Bool) {}
+    func centralManager(_ central: CBCentralManager, didUpdateIsScannig id: UUID, isScanning: Bool) {}
     
-    /// [Callback] 蓝牙状态更新
     @available(iOS 5.0, *)
-    func centralManagerDidUpdateState(id: UUID,  central: CBCentralManager) {}
+    func centralManager(_ central: CBCentralManager, didUpdateState id: UUID) {}
     
-    /// [Callback] 状态恢复
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, willRestoreState dict: [String : Any]) {}
+    func centralManager(_ central: CBCentralManager, willRestoreState id: UUID, dict: [String : Any]) {}
     
-    /// [Callback] 发现外设
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {}
+    func centralManager(_ central: CBCentralManager, didDiscover id: UUID, peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {}
     
-    /// [Callback] 连接外设成功
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didConnect peripheral: CBPeripheral) {}
+    func centralManager(_ central: CBCentralManager, didConnect id: UUID, peripheral: CBPeripheral) {}
     
-    /// [Callback] 连接外设失败
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {}
+    func centralManager(_ central: CBCentralManager, didFailToConnect id: UUID, peripheral: CBPeripheral, error: (any Error)?) {}
     
-    /// [Callback] 断开外设成功
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {}
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral id: UUID, peripheral: CBPeripheral, error: (any Error)?) {}
     
-    /// [Callback] 断开后重连外设
     @available(iOS 5.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {}
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral id: UUID, peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {}
     
-    /// [Callback] 连接事件
     @available(iOS 13.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {}
+    func centralManager(_ central: CBCentralManager, connectionEventDidOccur id: UUID, event: CBConnectionEvent, for peripheral: CBPeripheral) {}
     
-    /// [Callback] ANCS
     @available(iOS 13.0, *)
-    func centralManager(id: UUID,  central: CBCentralManager, didUpdateANCSAuthorizationFor peripheral: CBPeripheral) {}
+    func centralManager(_ central: CBCentralManager, didUpdateANCSAuthorization id: UUID, for peripheral: CBPeripheral) {}
 }

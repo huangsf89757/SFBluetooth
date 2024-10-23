@@ -55,7 +55,7 @@ extension SFBleCentralManager {
             if keyPath == "isScanning", let isScanning = change?[.newKey] as? Bool {
                 // plugins
                 plugins.forEach { plugin in
-                    plugin.centralManagerDidUpdateIsScannig(id: id, central: centralManager, isScanning: isScanning)
+                    plugin.centralManager(centralManager, didUpdateIsScannig: id, isScanning: isScanning)
                 }
                 // notify
                 var userInfo = [String: Any]()
@@ -79,7 +79,7 @@ extension SFBleCentralManager {
         let peripherals = centralManager.retrievePeripherals(withIdentifiers: identifiers)
         // plugins
         plugins.forEach { plugin in
-            plugin.retrievePeripherals(id: id, central: centralManager, identifiers: identifiers, return: peripherals)
+            plugin.centralManager(centralManager, retrievePeripherals: id, identifiers: identifiers, return: peripherals)
         }
         return peripherals
     }
@@ -91,7 +91,7 @@ extension SFBleCentralManager {
         let peripherals = centralManager.retrieveConnectedPeripherals(withServices: services)
         // plugins
         plugins.forEach { plugin in
-            plugin.retrieveConnectedPeripherals(id: id, central: centralManager, services: services, return: peripherals)
+            plugin.centralManager(centralManager, retrieveConnectedPeripherals: id, services: services, return: peripherals)
         }
         return peripherals
     }
@@ -103,7 +103,7 @@ extension SFBleCentralManager {
         centralManager.scanForPeripherals(withServices: services, options: options)
         // plugins
         plugins.forEach { plugin in
-            plugin.scanForPeripherals(id: id, central: centralManager, services: services, options: options)
+            plugin.centralManager(centralManager, scanForPeripherals: id, services: services, options: options)
         }
     }
     
@@ -114,7 +114,7 @@ extension SFBleCentralManager {
         centralManager.stopScan()
         // plugins
         plugins.forEach { plugin in
-            plugin.stopScan(id: id, central: centralManager)
+            plugin.centralManager(centralManager, stopScan: id)
         }
     }
     
@@ -125,7 +125,7 @@ extension SFBleCentralManager {
         centralManager.connect(peripheral, options: options)
         // plugins
         plugins.forEach { plugin in
-            plugin.connect(id: id, central: centralManager, peripheral: peripheral, options: options)
+            plugin.centralManager(centralManager, connect: id, peripheral: peripheral, options: options)
         }
     }
     
@@ -136,7 +136,7 @@ extension SFBleCentralManager {
         centralManager.cancelPeripheralConnection(peripheral)
         // plugins
         plugins.forEach { plugin in
-            plugin.disconnect(id: id, central: centralManager, peripheral: peripheral)
+            plugin.centralManager(centralManager, disconnect: id, peripheral: peripheral)
         }
     }
     
@@ -148,7 +148,7 @@ extension SFBleCentralManager {
         centralManager.registerForConnectionEvents(options: options)
         // plugins
         plugins.forEach { plugin in
-            plugin.registerForConnectionEvents(id: id, central: centralManager, options: options)
+            plugin.centralManager(centralManager, registerForConnectionEvents: id, options: options)
         }
     }
 }
@@ -175,7 +175,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManagerDidUpdateState(id: id, central: central)
+            plugin.centralManager(central, didUpdateState: id)
         }
         // notify
         var userInfo = [String: Any]()
@@ -203,7 +203,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(id: id, central: central, willRestoreState: dict)
+            plugin.centralManager(central, willRestoreState: id, dict: dict)
         }
         // notify
         var userInfo = [String: Any]()
@@ -233,7 +233,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(id: id, central: central, didDiscover: peripheral, advertisementData: advertisementData, rssi: RSSI)
+            plugin.centralManager(central, didDiscover: id, peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI)
         }
         // notify
         var userInfo = [String: Any]()
@@ -258,7 +258,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(id: id, central: central, didConnect: peripheral)
+            plugin.centralManager(central, didConnect: id, peripheral: peripheral)
         }
         // notify
         var userInfo = [String: Any]()
@@ -283,7 +283,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(id: id, central: central, didFailToConnect: peripheral, error: error)
+            plugin.centralManager(central, didFailToConnect: id, peripheral: peripheral, error: error)
         }
         // notify
         var userInfo = [String: Any]()
@@ -312,7 +312,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(id: id, central: central, didDisconnectPeripheral: peripheral, error: error)
+            plugin.centralManager(central, didDisconnectPeripheral: id, peripheral: peripheral, error: error)
         }
         // notify
         var userInfo = [String: Any]()
@@ -346,7 +346,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(id: id, central: central, didDisconnectPeripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
+            plugin.centralManager(central, didDisconnectPeripheral: id, peripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
         }
         // notify
         var userInfo = [String: Any]()
@@ -375,7 +375,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(id: id, central: central, connectionEventDidOccur: event, for: peripheral)
+            plugin.centralManager(central, connectionEventDidOccur: id, event: event, for: peripheral)
         }
         // notify
         var userInfo = [String: Any]()
@@ -399,7 +399,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didUpdateANCSAuthorizationFor peripheral: CBPeripheral) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(id: id, central: central, didUpdateANCSAuthorizationFor: peripheral)
+            plugin.centralManager(central, didUpdateANCSAuthorization: id, for: peripheral)
         }
         // notify
         var userInfo = [String: Any]()

@@ -24,60 +24,14 @@ public let SF_Notify_CentralManager_Callback_DisconnectPeripheral_Success =     
 public let SF_Notify_CentralManager_Callback_DisconnectPeripheralAutoReconnect_Success = NSNotification.Name("SF_Notify_CentralManager_Callback_DisconnectPeripheralAutoReconnect_Success")
 public let SF_Notify_CentralManager_Callback_ConnectionEvents_Occur =                    NSNotification.Name("SF_Notify_CentralManager_Callback_ConnectionEvents_Occur")
 
-// MARK: - Tag
-public let SF_Tag_CentralManager_IsScanning_DidUpdated =                        "Tag_CentralManager_IsScanning_DidUpdated"
-public let SF_Tag_CentralManager_State_DidUpdated =                             "Tag_CentralManager_State_DidUpdated"
-public let SF_Tag_CentralManager_ANCSAuthorization_DidUpdated =                 "Tag_CentralManager_ANCSAuthorization_DidUpdated"
-public let SF_Tag_CentralManager_WillRestoreState =                             "Tag_CentralManager_WillRestoreState"
-public let SF_Tag_CentralManager_RetrievePeripherals =                          "Tag_CentralManager_RetrievePeripherals"
-public let SF_Tag_CentralManager_RetrieveConnectedPeripherals =                 "Tag_CentralManager_RetrieveConnectedPeripherals"
-public let SF_Tag_CentralManager_Scan_Start =                                   "Tag_CentralManager_Scan_Start"
-public let SF_Tag_CentralManager_Scan_Stop =                                    "Tag_CentralManager_Scan_Stop"
-public let SF_Tag_CentralManager_DidDiscoverPeripheral =                        "Tag_CentralManager_DidDiscoverPeripheral"
-public let SF_Tag_CentralManager_ConnectPeripheral_Start =                      "Tag_CentralManager_ConnectPeripheral_Start"
-public let SF_Tag_CentralManager_ConnectPeripheral_Success =                    "Tag_CentralManager_ConnectPeripheral_Success"
-public let SF_Tag_CentralManager_ConnectPeripheral_Failure =                    "Tag_CentralManager_ConnectPeripheral_Failure"
-public let SF_Tag_CentralManager_DisconnectPeripheral_Start =                   "Tag_CentralManager_DisconnectPeripheral_Start"
-public let SF_Tag_CentralManager_DisconnectPeripheral_Success =                 "Tag_CentralManager_DisconnectPeripheral_Success"
-public let SF_Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success =    "Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success"
-public let SF_Tag_CentralManager_ConnectionEvents_Register =                    "Tag_CentralManager_ConnectionEvents_Register"
-public let SF_Tag_CentralManager_ConnectionEvents_Occur =                       "Tag_CentralManager_ConnectionEvents_Occur"
-
-// MARK: - SFBleCentralManagerLogOption
-public struct SFBleCentralManagerLogOption: OptionSet {
-    public let rawValue: Int
-    public init(rawValue: Int) {
-        self.rawValue = rawValue
-    }
-    
-    public static let isScanningDidChanged =                        SFBleCentralManagerLogOption(rawValue: 1 << 0)
-    public static let stateDidUpdated =                             SFBleCentralManagerLogOption(rawValue: 1 << 1)
-    public static let ANCSAuthorizationDidUpdated =                 SFBleCentralManagerLogOption(rawValue: 1 << 2)
-    public static let willRestoreState =                            SFBleCentralManagerLogOption(rawValue: 1 << 3)
-    public static let retrievePeripherals =                         SFBleCentralManagerLogOption(rawValue: 1 << 4)
-    public static let retrieveConnectedPeripherals =                SFBleCentralManagerLogOption(rawValue: 1 << 5)
-    public static let scanStart =                                   SFBleCentralManagerLogOption(rawValue: 1 << 6)
-    public static let scanStop =                                    SFBleCentralManagerLogOption(rawValue: 1 << 7)
-    public static let didDiscoverPeripheral =                       SFBleCentralManagerLogOption(rawValue: 1 << 8)
-    public static let connectPeripheralStart =                      SFBleCentralManagerLogOption(rawValue: 1 << 9)
-    public static let connectPeripheralSuccess =                    SFBleCentralManagerLogOption(rawValue: 1 << 10)
-    public static let connectPeripheralFailure =                    SFBleCentralManagerLogOption(rawValue: 1 << 11)
-    public static let disconnectPeripheralStart =                   SFBleCentralManagerLogOption(rawValue: 1 << 12)
-    public static let disconnectPeripheralSuccess =                 SFBleCentralManagerLogOption(rawValue: 1 << 13)
-    public static let disconnectPeripheralAutoReconnectSuccess =    SFBleCentralManagerLogOption(rawValue: 1 << 14)
-    public static let connectionEventsRegister =                    SFBleCentralManagerLogOption(rawValue: 1 << 15)
-    public static let connectionEventsOccur =                       SFBleCentralManagerLogOption(rawValue: 1 << 16)
-    
-    public static let all: SFBleCentralManagerLogOption = [.isScanningDidChanged, .stateDidUpdated, .ANCSAuthorizationDidUpdated, .willRestoreState, .retrievePeripherals, .retrieveConnectedPeripherals, .scanStart, .scanStop, .didDiscoverPeripheral, .connectPeripheralStart, .connectPeripheralSuccess, .connectPeripheralFailure, .disconnectPeripheralStart, .disconnectPeripheralSuccess, .disconnectPeripheralAutoReconnectSuccess, .connectionEventsRegister, .connectionEventsOccur]
-}
-
 
 // MARK: - SFBleCentralManager
-public class SFBleCentralManager: NSObject, SFBleProtocol {
+public class SFBleCentralManager: NSObject {
     // MARK: var
-    public var id: UUID?
+    public var id = UUID()
     public private(set) var centralManager: CBCentralManager!
-    public var logOption: SFBleCentralManagerLogOption = .all
+    public var plugins = [SFBleCentralManagerPlugin]()
+   
     public private(set) lazy var discoverLogger: SFDiscoveryLogger = {
         return SFDiscoveryLogger()
     }()
@@ -99,12 +53,9 @@ extension SFBleCentralManager {
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let centralManager = object as? CBCentralManager, centralManager == self.centralManager {
             if keyPath == "isScanning", let isScanning = change?[.newKey] as? Bool {
-                // log
-                if logOption.contains(.isScanningDidChanged) {
-                    let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-                    let msg_isScanning = "isScanning=\(isScanning)"
-                    logCallback(tag: SF_Tag_CentralManager_IsScanning_DidUpdated,
-                           msgs: [msg_centralManager, msg_isScanning])
+                // plugins
+                plugins.forEach { plugin in
+                    plugin.centralManagerDidUpdateIsScannig(id: id, central: centralManager, isScanning: isScanning)
                 }
                 // notify
                 var userInfo = [String: Any]()
@@ -126,22 +77,9 @@ extension SFBleCentralManager {
         // do
         self.id = id
         let peripherals = centralManager.retrievePeripherals(withIdentifiers: identifiers)
-        // log
-        if logOption.contains(.retrievePeripherals) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            var msg_identifiers = "identifiers=["
-            for identifier in identifiers {
-                msg_identifiers.append(identifier.uuidString)
-            }
-            msg_identifiers.append("]")
-            var msg_peripherals = "peripherals=["
-            for peripheral in peripherals {
-                msg_peripherals.append(peripheral.sf.description)
-            }
-            msg_peripherals.append("]")
-            logTry(tag: SF_Tag_CentralManager_RetrievePeripherals,
-                   msgs: [msg_centralManager, msg_identifiers],
-                   result: msg_peripherals)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.retrievePeripherals(id: id, central: centralManager, identifiers: identifiers, return: peripherals)
         }
         return peripherals
     }
@@ -151,22 +89,9 @@ extension SFBleCentralManager {
         // do
         self.id = id
         let peripherals = centralManager.retrieveConnectedPeripherals(withServices: services)
-        // log
-        if logOption.contains(.retrieveConnectedPeripherals) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            var msg_services = "services=["
-            for service in services {
-                msg_services.append(service.uuidString)
-            }
-            msg_services.append("]")
-            var msg_peripherals = "peripherals=["
-            for peripheral in peripherals {
-                msg_peripherals.append(peripheral.sf.description)
-            }
-            msg_peripherals.append("]")
-            logTry(tag: SF_Tag_CentralManager_RetrieveConnectedPeripherals,
-                   msgs: [msg_centralManager, msg_services],
-                   result: msg_peripherals)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.retrieveConnectedPeripherals(id: id, central: centralManager, services: services, return: peripherals)
         }
         return peripherals
     }
@@ -176,24 +101,9 @@ extension SFBleCentralManager {
         // do
         self.id = id
         centralManager.scanForPeripherals(withServices: services, options: options)
-        // log
-        if logOption.contains(.scanStart) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            var msg_services = "services=nil"
-            if let services = services {
-                msg_services = "services=["
-                for service in services {
-                    msg_services.append(service.uuidString)
-                }
-                msg_services.append("]")
-            }
-            var msg_options = "options=nil"
-            if let options = options {
-                msg_options = "options=\(options)"
-            }
-            logTry(tag: SF_Tag_CentralManager_Scan_Start,
-                   msgs: [msg_centralManager, msg_services, msg_options],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.scanForPeripherals(id: id, central: centralManager, services: services, options: options)
         }
     }
     
@@ -202,12 +112,9 @@ extension SFBleCentralManager {
         // do
         self.id = id
         centralManager.stopScan()
-        // log
-        if logOption.contains(.scanStop) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            logTry(tag: SF_Tag_CentralManager_Scan_Stop,
-                   msgs: [msg_centralManager, ],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.stopScan(id: id, central: centralManager)
         }
     }
     
@@ -216,17 +123,9 @@ extension SFBleCentralManager {
         // do
         self.id = id
         centralManager.connect(peripheral, options: options)
-        // log
-        if logOption.contains(.connectPeripheralStart) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            var msg_options = "options=nil"
-            if let options = options {
-                msg_options = "options=\(options)"
-            }
-            logTry(tag: SF_Tag_CentralManager_ConnectPeripheral_Start,
-                   msgs: [msg_centralManager, msg_peripheral, msg_options],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.connect(id: id, central: centralManager, peripheral: peripheral, options: options)
         }
     }
     
@@ -235,13 +134,9 @@ extension SFBleCentralManager {
         // do
         self.id = id
         centralManager.cancelPeripheralConnection(peripheral)
-        // log
-        if logOption.contains(.disconnectPeripheralStart) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            logTry(tag: SF_Tag_CentralManager_DisconnectPeripheral_Start,
-                   msgs: [msg_centralManager, msg_peripheral],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.disconnect(id: id, central: centralManager, peripheral: peripheral)
         }
     }
     
@@ -251,16 +146,9 @@ extension SFBleCentralManager {
         // do
         self.id = id
         centralManager.registerForConnectionEvents(options: options)
-        // log
-        if logOption.contains(.connectionEventsRegister) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            var msg_options = "options=nil"
-            if let options = options {
-                msg_options = "options=\(options)"
-            }
-            logTry(tag: SF_Tag_CentralManager_ConnectionEvents_Register,
-                   msgs: [msg_centralManager, msg_options],
-                   result: nil)
+        // plugins
+        plugins.forEach { plugin in
+            plugin.registerForConnectionEvents(id: id, central: centralManager, options: options)
         }
     }
 }
@@ -285,11 +173,9 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        // log
-        if logOption.contains(.stateDidUpdated) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            logCallback(tag: SF_Tag_CentralManager_State_DidUpdated,
-                        msgs: [msg_centralManager, ])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.centralManagerDidUpdateState(id: id, central: central)
         }
         // notify
         var userInfo = [String: Any]()
@@ -315,12 +201,9 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        // log
-        if logOption.contains(.stateDidUpdated) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_dict = "dict=\(dict)"
-            logCallback(tag: SF_Tag_CentralManager_WillRestoreState,
-                        msgs: [msg_centralManager, msg_dict])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.centralManager(id: id, central: central, willRestoreState: dict)
         }
         // notify
         var userInfo = [String: Any]()
@@ -348,15 +231,9 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        // log
-        if logOption.contains(.didDiscoverPeripheral) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_advertisementData = "advertisementData=\(advertisementData)"
-            let msg_RSSI = "RSSI=\(RSSI)"
-            logCallback(tag: SF_Tag_CentralManager_DidDiscoverPeripheral,
-                        msgs: [msg_centralManager, msg_peripheral, msg_advertisementData, msg_RSSI])
-            
+        // plugins
+        plugins.forEach { plugin in
+            plugin.centralManager(id: id, central: central, didDiscover: peripheral, advertisementData: advertisementData, rssi: RSSI)
         }
         // notify
         var userInfo = [String: Any]()
@@ -379,12 +256,9 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        // log
-        if logOption.contains(.connectPeripheralSuccess) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            logCallback(tag: SF_Tag_CentralManager_ConnectPeripheral_Success,
-                        msgs: [msg_centralManager, msg_peripheral])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.centralManager(id: id, central: central, didConnect: peripheral)
         }
         // notify
         var userInfo = [String: Any]()
@@ -407,16 +281,9 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
-        // log
-        if logOption.contains(.connectPeripheralFailure) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_CentralManager_ConnectPeripheral_Failure,
-                        msgs: [msg_centralManager, msg_peripheral, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.centralManager(id: id, central: central, didFailToConnect: peripheral, error: error)
         }
         // notify
         var userInfo = [String: Any]()
@@ -443,16 +310,9 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
-        // log
-        if logOption.contains(.disconnectPeripheralSuccess) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_CentralManager_DisconnectPeripheral_Success,
-                        msgs: [msg_centralManager, msg_peripheral, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.centralManager(id: id, central: central, didDisconnectPeripheral: peripheral, error: error)
         }
         // notify
         var userInfo = [String: Any]()
@@ -484,18 +344,9 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 5.0, *)
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
-        // log
-        if logOption.contains(.disconnectPeripheralAutoReconnectSuccess) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            let msg_timestamp = "timestamp=\(timestamp)"
-            let msg_isReconnecting = "isReconnecting=\(isReconnecting)"
-            var msg_error = "error=nil"
-            if let error = error {
-                msg_error = "error=\(error.localizedDescription)"
-            }
-            logCallback(tag: SF_Tag_CentralManager_DisconnectPeripheralAutoReconnect_Success,
-                        msgs: [msg_centralManager, msg_peripheral, msg_timestamp, msg_isReconnecting, msg_error])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.centralManager(id: id, central: central, didDisconnectPeripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
         }
         // notify
         var userInfo = [String: Any]()
@@ -522,13 +373,9 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 13.0, *)
     public func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
-        // log
-        if logOption.contains(.connectionEventsOccur) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_event = "event=\(event.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            logCallback(tag: SF_Tag_CentralManager_ConnectionEvents_Occur,
-                        msgs: [msg_centralManager, msg_event, msg_peripheral])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.centralManager(id: id, central: central, connectionEventDidOccur: event, for: peripheral)
         }
         // notify
         var userInfo = [String: Any]()
@@ -550,12 +397,9 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
      */
     @available(iOS 13.0, *)
     public func centralManager(_ central: CBCentralManager, didUpdateANCSAuthorizationFor peripheral: CBPeripheral) {
-        // log
-        if logOption.contains(.ANCSAuthorizationDidUpdated) {
-            let msg_centralManager = "centralManager=\(centralManager.sf.description)"
-            let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-            logCallback(tag: SF_Tag_CentralManager_ANCSAuthorization_DidUpdated,
-                        msgs: [msg_centralManager, msg_peripheral])
+        // plugins
+        plugins.forEach { plugin in
+            plugin.centralManager(id: id, central: central, didUpdateANCSAuthorizationFor: peripheral)
         }
         // notify
         var userInfo = [String: Any]()

@@ -106,7 +106,6 @@ extension SFBleCentralManager {
                     logCallback(tag: SF_Tag_CentralManager_IsScanning_DidUpdated,
                            msgs: [msg_centralManager, msg_isScanning])
                 }
-                
                 // notify
                 var userInfo = [String: Any]()
                 userInfo["centralManager"] = centralManager

@@ -152,7 +152,7 @@ extension SFBleCentralManagerLogPlugin: SFBleCentralManagerPlugin {
         guard option.contains(.isScanningDidChanged) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
         let msg_isScanning = "isScanning=\(isScanning)"
-        Log.bleCallback(id: id, tag: SF_Tag_CentralManager_IsScanning_DidUpdated,
+        Log.bleCallback(id: id, tag: SF_Tag_CentralManager_DidUpdate_IsScanning,
                         msgs: [msg_centralManager, msg_isScanning])
     }
     
@@ -160,7 +160,7 @@ extension SFBleCentralManagerLogPlugin: SFBleCentralManagerPlugin {
     public func centralManager(_ central: CBCentralManager, didUpdateState id: UUID) {
         guard option.contains(.stateDidUpdated) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
-        Log.bleCallback(id: id, tag: SF_Tag_CentralManager_State_DidUpdated,
+        Log.bleCallback(id: id, tag: SF_Tag_CentralManager_DidUpdate_State,
                         msgs: [msg_centralManager, ])
     }
     
@@ -250,7 +250,7 @@ extension SFBleCentralManagerLogPlugin: SFBleCentralManagerPlugin {
         guard option.contains(.ANCSAuthorizationDidUpdated) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        Log.bleCallback(id: id, tag: SF_Tag_CentralManager_ANCSAuthorization_DidUpdated,
+        Log.bleCallback(id: id, tag: SF_Tag_CentralManager_WillRestoreState,
                         msgs: [msg_centralManager, msg_peripheral])
     }
 }

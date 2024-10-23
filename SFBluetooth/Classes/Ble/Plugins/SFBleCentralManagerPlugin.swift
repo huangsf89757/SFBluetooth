@@ -9,9 +9,9 @@ import Foundation
 import CoreBluetooth
 
 // MARK: - Tag
-public let SF_Tag_CentralManager_IsScanning_DidUpdated =                        "Tag_CentralManager_IsScanning_DidUpdated"
-public let SF_Tag_CentralManager_State_DidUpdated =                             "Tag_CentralManager_State_DidUpdated"
-public let SF_Tag_CentralManager_ANCSAuthorization_DidUpdated =                 "Tag_CentralManager_ANCSAuthorization_DidUpdated"
+public let SF_Tag_CentralManager_DidUpdate_IsScanning =                         "Tag_CentralManager_DidUpdate_IsScanning"
+public let SF_Tag_CentralManager_DidUpdate_State =                              "Tag_CentralManager_DidUpdate_State"
+public let SF_Tag_CentralManager_DidUpdate_ANCSAuthorization =                  "Tag_CentralManager_WillRestoreState"
 public let SF_Tag_CentralManager_WillRestoreState =                             "Tag_CentralManager_WillRestoreState"
 
 public let SF_Tag_CentralManager_RetrievePeripherals =                          "Tag_CentralManager_RetrievePeripherals"

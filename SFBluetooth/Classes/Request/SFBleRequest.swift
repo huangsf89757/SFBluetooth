@@ -14,85 +14,33 @@ import SFLogger
 
 
 // MARK: - SFBleRequest
-open class SFBleRequest: SFBleProtocol {
+open class SFBleRequest {
     // MARK: var
-    public var id: UUID?
-    public var step: SFBleStep = .start
-    public var bleCentralManager: SFBleCentralManager? {
-        didSet {
-            configBleCentralManagerNotify()
-        }
-    }
-    public var blePeripheral: SFBlePeripheral? {
-        didSet {
-            configBlePeripheralCallback()
-        }
-    }
+    public var id = UUID()
+    public var bleCentralManager: SFBleCentralManager
+    public var blePeripheral: SFBlePeripheral
     
-    // MARK: func
-    /// 下一步
-    open func next() {
-        #warning("在子类中实现")
+    // MARK: life cycle
+    public init(id: UUID = UUID(), bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral) {
+        self.id = id
+        self.bleCentralManager = bleCentralManager
+        self.blePeripheral = blePeripheral
+        self.configBleCentralManagerNotify()
+        self.configBlePeripheralCallback()
     }
-    
-    /// 执行
-    open func excute() {
-//        guard let id = id else { return }
-//        switch step {
-//        case .start:
-//            <#code#>
-//        case .startScan:
-//            bleCentralManager?.scanForPeripherals(id: id, services: <#T##[CBUUID]?#>, options: <#T##[String : Any]?#>)
-//        case .stopScan:
-//            bleCentralManager?.stopScan(id: id)
-//        case .connect:
-//            bleCentralManager?.connect(id: id, peripheral: <#T##CBPeripheral#>, options: <#T##[String : Any]?#>)
-//        case .disconnect:
-//            bleCentralManager?.disconnect(id: id, peripheral: <#T##CBPeripheral#>)
-//        case .registerEvents:
-//            if #available(iOS 13.0, *) {
-//                bleCentralManager?.registerForConnectionEvents(id: id, options: <#T##[CBConnectionEventMatchingOption : Any]?#>)
-//            } else {
-//                // Fallback on earlier versions
-//            }
-//        case .readRSSI:
-//            blePeripheral?.readRSSI(id: id)
-//        case .discoverServices:
-//            blePeripheral?.discoverServices(id: id, serviceUUIDs: <#T##[CBUUID]?#>)
-//        case .discoverIncludedServices:
-//            blePeripheral?.discoverIncludedServices(id: id, includedServiceUUIDs: <#T##[CBUUID]?#>, for: <#T##CBService#>)
-//        case .discoverCharacteristics:
-//            blePeripheral?.discoverCharacteristics(id: id, characteristicUUIDs: <#T##[CBUUID]?#>, for: <#T##CBService#>)
-//        case .readCharacteristicValue:
-//            blePeripheral?.readValue(id: id, for: <#T##CBCharacteristic#>)
-//        case .writeCharacteristicValue:
-//            blePeripheral?.writeValue(id: id, data: <#T##Data#>, for: <#T##CBCharacteristic#>, type: <#T##CBCharacteristicWriteType#>)
-//        case .setNotifyValue:
-//            blePeripheral?.setNotifyValue(id: id, enabled: <#T##Bool#>, for: <#T##CBCharacteristic#>)
-//        case .discoverDescriptors:
-//            blePeripheral?.discoverDescriptors(id: id, for: <#T##CBCharacteristic#>)
-//        case .readDescriptorValue:
-//            blePeripheral?.readValue(id: id, for: <#T##CBDescriptor#>)
-//        case .writeDescriptorValue:
-//            blePeripheral?.writeValue(id: id, data: <#T##Data#>, for: <#T##CBDescriptor#>)
-//        case .openL2CAPChannel:
-//            blePeripheral?.openL2CAPChannel(id: id, PSM: <#T##CBL2CAPPSM#>)
-//        case .end:
-//            <#code#>
-//        }
-    }
+   
     
     // MARK: centralManager
-    open func centralManagerIsScanningDidUpdated(isScanning: Bool) {}
-    open func centralManagerStateDidUpdated(state: CBManagerState) {}
+    open func centralManagerDidUpdateIsScanning(_ isScanning: Bool) {}
+    open func centralManagerDidUpdateState(_ state: CBManagerState) {}
     open func centralManagerWillRestoreState(dict: [String : Any]) {}
-    open func centralManagerDidDiscoverPeripheral(peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: NSNumber) {}
-    open func centralManagerConnectPeripheralSuccess(peripheral: CBPeripheral) {}
-    open func centralManagerConnectPeripheralFailure(peripheral: CBPeripheral, error: (any Error)?) {}
-    open func centralManagerDisconnectPeripheralSuccess(peripheral: CBPeripheral, error: (any Error)?) {}
-    open func centralManagerDisconnectPeripheralAutoReconnectSuccess(peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {}
-    open func centralManagerConnectionEventsOccur(peripheral: CBPeripheral, event: CBConnectionEvent) {}
-    open func centralManagerANCSAuthorizationDidUpdated(peripheral: CBPeripheral) {}
+    open func centralManagerDidDiscoverPeripheral(_ peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: NSNumber) {}
+    open func centralManagerDidConnectPeripheral(_ peripheral: CBPeripheral) {}
+    open func centralManagerDidFailConnectPeripheral(_ peripheral: CBPeripheral, error: (any Error)?) {}
+    open func centralManagerDidDisconnectPeripheral(_ peripheral: CBPeripheral, error: (any Error)?) {}
+    open func centralManagerDidDisconnectPeripheral(_ peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {}
+    open func centralManagerDidOccurConnectionEvents(peripheral: CBPeripheral, event: CBConnectionEvent) {}
+    open func centralManagerDidUpdateANCSAuthorization(peripheral: CBPeripheral) {}
     
     // MARK: peripheral
     open func peripheralDidUpdateState(peripheral: CBPeripheral, state: CBPeripheralState) -> () {}
@@ -116,37 +64,37 @@ open class SFBleRequest: SFBleProtocol {
 // MARK: - BleCentralManager
 extension SFBleRequest {
     private func configBleCentralManagerNotify() {
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackIsScanningDidUpdated), name: SF_Notify_CentralManager_Callback_IsScanning_DidUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackStateDidUpdated), name: SF_Notify_CentralManager_Callback_State_DidUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidUpdateIsScanning), name: SF_Notify_CentralManager_Callback_DidUpdateIsScanning, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidUpdateState), name: SF_Notify_CentralManager_Callback_DidUpdateState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackWillRestoreState), name: SF_Notify_CentralManager_Callback_WillRestoreState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidDiscoverPeripheral), name: SF_Notify_CentralManager_Callback_DidDiscoverPeripheral, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackConnectPeripheralSuccess), name: SF_Notify_CentralManager_Callback_ConnectPeripheral_Success, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackConnectPeripheralFailure), name: SF_Notify_CentralManager_Callback_ConnectPeripheral_Failure, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDisconnectPeripheralSuccess), name: SF_Notify_CentralManager_Callback_DisconnectPeripheral_Success, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDisconnectPeripheralAutoReconnectSuccess), name: SF_Notify_CentralManager_Callback_DisconnectPeripheralAutoReconnect_Success, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackConnectionEventsOccur), name: SF_Notify_CentralManager_Callback_ConnectionEvents_Occur, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackANCSAuthorizationDidUpdated), name: SF_Notify_CentralManager_Callback_ANCSAuthorization_DidUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidConnectPeripheral), name: SF_Notify_CentralManager_Callback_DidConnectPeripheral, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidFailConnectPeripheral), name: SF_Notify_CentralManager_Callback_DidFailConnectPeripheral, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidDisconnectPeripheral), name: SF_Notify_CentralManager_Callback_DidDisconnectPeripheral, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidDisconnectPeripheralAutoReconnect), name: SF_Notify_CentralManager_Callback_DidDisconnectPeripheralAutoReconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidOccurConnectionEvents), name: SF_Notify_CentralManager_Callback_DidOccurConnectionEvents, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidUpdateANCSAuthorization), name: SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization, object: nil)
     }
     
-    @objc private func notifyCentralManagerCallbackIsScanningDidUpdated(_ sender: NSNotification) {
+    @objc private func notifyCentralManagerCallbackDidUpdateIsScanning(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let isScanning = userInfo["isScanning"] as? Bool else { Log.error("isScanning=nil"); return }
-        centralManagerIsScanningDidUpdated(isScanning: isScanning)
+        centralManagerDidUpdateIsScanning(isScanning)
     }
     
-    @objc private func notifyCentralManagerCallbackStateDidUpdated(_ sender: NSNotification) {
+    @objc private func notifyCentralManagerCallbackDidUpdateState(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
-        centralManagerStateDidUpdated(state: centralManager.state)
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        centralManagerDidUpdateState(centralManager.state)
     }
     
     @objc private func notifyCentralManagerCallbackWillRestoreState(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let dict = userInfo["dict"] as? [String : Any] else { Log.error("dict=nil"); return }
         centralManagerWillRestoreState(dict: dict)
     }
@@ -154,141 +102,141 @@ extension SFBleRequest {
     @objc private func notifyCentralManagerCallbackDidDiscoverPeripheral(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let peripheral = userInfo["peripheral"] as? CBPeripheral else { Log.error("peripheral=nil"); return }
         guard let advertisementData = userInfo["advertisementData"] as? [String : Any] else { Log.error("advertisementData=nil"); return }
         guard let RSSI = userInfo["RSSI"] as? NSNumber else { Log.error("RSSI=nil"); return }
-        centralManagerDidDiscoverPeripheral(peripheral: peripheral, advertisementData: advertisementData, RSSI: RSSI)
+        centralManagerDidDiscoverPeripheral(peripheral, advertisementData: advertisementData, RSSI: RSSI)
     }
     
-    @objc private func notifyCentralManagerCallbackConnectPeripheralSuccess(_ sender: NSNotification) {
+    @objc private func notifyCentralManagerCallbackDidConnectPeripheral(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let peripheral = userInfo["peripheral"] as? CBPeripheral else { Log.error("peripheral=nil"); return }
-        centralManagerConnectPeripheralSuccess(peripheral: peripheral)
+        centralManagerDidConnectPeripheral(peripheral)
     }
     
-    @objc private func notifyCentralManagerCallbackConnectPeripheralFailure(_ sender: NSNotification) {
+    @objc private func notifyCentralManagerCallbackDidFailConnectPeripheral(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let peripheral = userInfo["peripheral"] as? CBPeripheral else { Log.error("peripheral=nil"); return }
         if let error = userInfo["error"] as? (any Error) { 
-            centralManagerConnectPeripheralFailure(peripheral: peripheral, error: error)
+            centralManagerDidFailConnectPeripheral(peripheral, error: error)
         } else {
-            centralManagerConnectPeripheralFailure(peripheral: peripheral, error: nil)
+            centralManagerDidFailConnectPeripheral(peripheral, error: nil)
         }
     }
     
-    @objc private func notifyCentralManagerCallbackDisconnectPeripheralSuccess(_ sender: NSNotification) {
+    @objc private func notifyCentralManagerCallbackDidDisconnectPeripheral(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let peripheral = userInfo["peripheral"] as? CBPeripheral else { Log.error("peripheral=nil"); return }
         if let error = userInfo["error"] as? (any Error) { 
-            centralManagerDisconnectPeripheralSuccess(peripheral: peripheral, error: error)
+            centralManagerDidDisconnectPeripheral(peripheral, error: error)
         } else {
-            centralManagerDisconnectPeripheralSuccess(peripheral: peripheral, error: nil)
+            centralManagerDidDisconnectPeripheral(peripheral, error: nil)
         }
     }
     
-    @objc private func notifyCentralManagerCallbackDisconnectPeripheralAutoReconnectSuccess(_ sender: NSNotification) {
+    @objc private func notifyCentralManagerCallbackDidDisconnectPeripheralAutoReconnect(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let peripheral = userInfo["peripheral"] as? CBPeripheral else { Log.error("peripheral=nil"); return }
         guard let timestamp = userInfo["timestamp"] as? CFAbsoluteTime else { Log.error("timestamp=nil"); return }
         guard let isReconnecting = userInfo["isReconnecting"] as? Bool else { Log.error("isReconnecting=nil"); return }
         if let error = userInfo["error"] as? (any Error) {
-            centralManagerDisconnectPeripheralAutoReconnectSuccess(peripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
+            centralManagerDidDisconnectPeripheral(peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
         } else {
-            centralManagerDisconnectPeripheralAutoReconnectSuccess(peripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: nil)
+            centralManagerDidDisconnectPeripheral(peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: nil)
         }
     }
     
-    @objc private func notifyCentralManagerCallbackConnectionEventsOccur(_ sender: NSNotification) {
+    @objc private func notifyCentralManagerCallbackDidOccurConnectionEvents(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let event = userInfo["event"] as? CBConnectionEvent else { Log.error("event=nil"); return }
         guard let peripheral = userInfo["peripheral"] as? CBPeripheral else { Log.error("peripheral=nil"); return }
-        centralManagerConnectionEventsOccur(peripheral: peripheral, event: event)
+        centralManagerDidOccurConnectionEvents(peripheral: peripheral, event: event)
     }
     
-    @objc private func notifyCentralManagerCallbackANCSAuthorizationDidUpdated(_ sender: NSNotification) {
+    @objc private func notifyCentralManagerCallbackDidUpdateANCSAuthorization(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo else { Log.error("userInfo=nil"); return }
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
-        guard centralManager === bleCentralManager?.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
+        guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let peripheral = userInfo["peripheral"] as? CBPeripheral else { Log.error("peripheral=nil"); return }
-        centralManagerANCSAuthorizationDidUpdated(peripheral: peripheral)
+        centralManagerDidUpdateANCSAuthorization(peripheral: peripheral)
     }
 }
 
 // MARK: - BlePeripheral
 extension SFBleRequest {
     private func configBlePeripheralCallback() {
-        blePeripheral?.didUpdateState = {
+        blePeripheral.didUpdateState = {
             [weak self] peripheral, state in
             self?.peripheralDidUpdateState(peripheral: peripheral, state: state)
         }
-        blePeripheral?.didUpdateName = {
+        blePeripheral.didUpdateName = {
             [weak self] peripheral in
             self?.peripheralDidUpdateName(peripheral: peripheral)
         }
-        blePeripheral?.didModifyServices = {
+        blePeripheral.didModifyServices = {
             [weak self] peripheral, invalidatedServices in
             self?.peripheralDidModifyServices(peripheral: peripheral, invalidatedServices: invalidatedServices)
         }
-        blePeripheral?.didUpdateRSSI = {
+        blePeripheral.didUpdateRSSI = {
             [weak self] peripheral, error in
             self?.peripheralDidUpdateRSSI(peripheral: peripheral, error: error)
         }
-        blePeripheral?.isReadyToSendWriteWithoutResponse = {
+        blePeripheral.isReadyToSendWriteWithoutResponse = {
             [weak self] peripheral in
             self?.peripheralIsReadyToSendWriteWithoutResponse(peripheral: peripheral)
         }
-        blePeripheral?.didReadRSSI = {
+        blePeripheral.didReadRSSI = {
             [weak self] peripheral, RSSI, error in
             self?.peripheralDidReadRSSI(peripheral: peripheral, RSSI: RSSI, error: error)
         }
-        blePeripheral?.didDiscoverServices = {
+        blePeripheral.didDiscoverServices = {
             [weak self] peripheral, error in
             self?.peripheralDidDiscoverServices(peripheral: peripheral, error: error)
         }
-        blePeripheral?.didDiscoverIncludedServices = {
+        blePeripheral.didDiscoverIncludedServices = {
             [weak self] peripheral, service, error in
             self?.peripheralDidDiscoverIncludedServices(peripheral: peripheral, service: service, error: error)
         }
-        blePeripheral?.didDiscoverCharacteristics = {
+        blePeripheral.didDiscoverCharacteristics = {
             [weak self] peripheral, service, error in
             self?.peripheralDidDiscoverCharacteristics(peripheral: peripheral, service: service, error: error)
         }
-        blePeripheral?.didUpdateValueForCharacteristic = {
+        blePeripheral.didUpdateValueForCharacteristic = {
             [weak self] peripheral, characteristic, error in
             self?.peripheralDidUpdateValueForCharacteristic(peripheral: peripheral, characteristic: characteristic, error: error)
         }
-        blePeripheral?.didWriteValueForCharacteristic = {
+        blePeripheral.didWriteValueForCharacteristic = {
             [weak self] peripheral, characteristic, error in
             self?.peripheralDidWriteValueForCharacteristic(peripheral: peripheral, characteristic: characteristic, error: error)
         }
-        blePeripheral?.didUpdateNotificationStateForCharacteristic = {
+        blePeripheral.didUpdateNotificationStateForCharacteristic = {
             [weak self] peripheral, characteristic, error in
             self?.peripheralDidUpdateNotificationStateForCharacteristic(peripheral: peripheral, characteristic: characteristic, error: error)
         }
-        blePeripheral?.didDiscoverDescriptorsForCharacteristic = {
+        blePeripheral.didDiscoverDescriptorsForCharacteristic = {
             [weak self] peripheral, characteristic, error in
             self?.peripheralDidDiscoverDescriptorsForCharacteristic(peripheral: peripheral, characteristic: characteristic, error: error)
         }
-        blePeripheral?.didUpdateValueForDescriptor = {
+        blePeripheral.didUpdateValueForDescriptor = {
             [weak self] peripheral, descriptor, error in
             self?.peripheralDidUpdateValueForDescriptor(peripheral: peripheral, descriptor: descriptor, error: error)
         }
-        blePeripheral?.didWriteValueForDescriptor = {
+        blePeripheral.didWriteValueForDescriptor = {
             [weak self] peripheral, descriptor, error in
             self?.peripheralDidWriteValueForDescriptor(peripheral: peripheral, descriptor: descriptor, error: error)
         }
-        blePeripheral?.didOpenChannel = {
+        blePeripheral.didOpenChannel = {
             [weak self] peripheral, channel, error in
             self?.peripheralDidOpenChannel(peripheral: peripheral, channel: channel, error: error)
         }

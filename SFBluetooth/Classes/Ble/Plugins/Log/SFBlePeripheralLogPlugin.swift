@@ -190,7 +190,7 @@ extension SFBlePeripheralLogPlugin: SFBlePeripheralPlugin {
         guard option.contains(.stateDidUpdated) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_state = "state=\(state.sf.description)"
-        Log.bleCallback(id: id, tag: SF_Tag_Peripheral_State_DidUpdated,
+        Log.bleCallback(id: id, tag: SF_Tag_Peripheral_DidUpdate_State,
                         msgs: [msg_peripheral, msg_state])
     }
     
@@ -212,7 +212,7 @@ extension SFBlePeripheralLogPlugin: SFBlePeripheralPlugin {
             msg_invalidatedServices.append(invalidatedService.sf.description)
         }
         msg_invalidatedServices.append("]")
-        Log.bleCallback(id: id, tag: SF_Tag_Peripheral_Services_DidModified,
+        Log.bleCallback(id: id, tag: SF_Tag_Peripheral_DidModifie_Services,
                         msgs: [msg_peripheral, msg_invalidatedServices])
     }
     
@@ -225,7 +225,7 @@ extension SFBlePeripheralLogPlugin: SFBlePeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(id: id, tag: SF_Tag_Peripheral_RSSI_DidUpdated,
+        Log.bleCallback(id: id, tag: SF_Tag_Peripheral_DidUpdate_RSSI,
                         msgs: [msg_peripheral, msg_RSSI, msg_error])
     }
     

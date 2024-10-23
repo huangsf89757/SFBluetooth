@@ -9,10 +9,10 @@ import Foundation
 import CoreBluetooth
 
 // MARK: - Tag
-public let SF_Tag_Peripheral_State_DidUpdated =                                 "Tag_Peripheral_State_DidUpdated"
-public let SF_Tag_Peripheral_Name_DidUpdated =                                  "Tag_Peripheral_Name_DidUpdated"
-public let SF_Tag_Peripheral_Services_DidModified =                             "Tag_Peripheral_Services_DidModified"
-public let SF_Tag_Peripheral_RSSI_DidUpdated =                                  "Tag_Peripheral_RSSI_DidUpdated"
+public let SF_Tag_Peripheral_DidUpdate_State =                                  "Tag_Peripheral_DidUpdate_State"
+public let SF_Tag_Peripheral_DidUpdate_Name =                                   "Tag_Peripheral_Name_DidUpdated"
+public let SF_Tag_Peripheral_DidModifie_Services =                              "Tag_Peripheral_DidModifie_Services"
+public let SF_Tag_Peripheral_DidUpdate_RSSI =                                   "Tag_Peripheral_DidUpdate_RSSI"
 
 public let SF_Tag_Peripheral_IsReadyToSendWriteWithoutResponse =                "Tag_Peripheral_IsReadyToSendWriteWithoutResponse"
 

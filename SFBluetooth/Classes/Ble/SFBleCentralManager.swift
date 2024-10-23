@@ -13,8 +13,8 @@ import SFExtension
 import SFLogger
 
 // MARK: - Notify
-public let SF_Notify_CentralManager_Callback_DidUpdateIsScanning =                     NSNotification.Name("SF_Notify_CentralManager_Callback_DidUpdateIsScanning")
 public let SF_Notify_CentralManager_Callback_DidUpdateState =                          NSNotification.Name("SF_Notify_CentralManager_Callback_DidUpdateState")
+public let SF_Notify_CentralManager_Callback_DidUpdateIsScanning =                     NSNotification.Name("SF_Notify_CentralManager_Callback_DidUpdateIsScanning")
 public let SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization =              NSNotification.Name("SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization")
 public let SF_Notify_CentralManager_Callback_WillRestoreState =                          NSNotification.Name("SF_Notify_CentralManager_Callback_WillRestoreState")
 public let SF_Notify_CentralManager_Callback_DidDiscoverPeripheral =                     NSNotification.Name("SF_Notify_CentralManager_Callback_DidDiscoverPeripheral")

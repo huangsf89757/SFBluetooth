@@ -16,13 +16,7 @@ import SFLogger
 public typealias SFBleSuccess = (_ data: Any?, _ msg: String?) -> Void
 public typealias SFBleFailure = (_ error: SFBleError) -> Void
 
-// MARK: - SFBleProcess
-public enum SFBleProcess {
-    case start
-    case waiting
-    case doing
-    case end
-}
+
 
 // MARK: - SFBleCmd
 open class SFBleCmd {
@@ -30,7 +24,7 @@ open class SFBleCmd {
     public private(set) var id = UUID()
     public private(set) var success: SFBleSuccess
     public private(set) var failure: SFBleFailure
-    public private(set) var process: SFBleProcess = .start
+    public private(set) var process: SFBleProcess = .none
     
     // MARK: life cycle
     public init(id: UUID = UUID(), success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
@@ -41,23 +35,36 @@ open class SFBleCmd {
     
     // MARK: func
     open func excute() {
-        self.process = .start
         self.id = UUID()
+        onStart()
     }
-//
-//    public func waiting() {
-//        self.process = .waiting
-//    }
-//    public func doing() {
-//        self.process = .doing
-//    }
-//    public func success(_ data: Any?, _ msg: String?) {
-//        self.process = .end
-//        successBlock(data, msg)
-//    }
-//    public func failure(_ error: SFBleError) {
-//        self.process = .end
-//        failureBlock(error)
-//    }
-    
+}
+
+
+// MARK: - SFBleProcess
+public enum SFBleProcess {
+    case none
+    case start
+    case waiting
+    case doing
+    case end
+}
+extension SFBleCmd {
+    public func onStart() {
+        self.process = .start
+    }
+    public func onWaiting() {
+        self.process = .waiting
+    }
+    public func onDoing() {
+        self.process = .doing
+    }
+    public func onSuccess(_ data: Any?, _ msg: String?) {
+        self.process = .end
+        success(data, msg)
+    }
+    public func onFailure(_ error: SFBleError) {
+        self.process = .end
+        failure(error)
+    }
 }

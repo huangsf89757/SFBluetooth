@@ -69,6 +69,30 @@ open class SFBleCmd {
     }
 }
 
+// TODO: 使用async/await改进代码，避免无限嵌套
+/*
+ let cmd1 = SFBleCmd(type: .client("cmd1")) { data, msg in
+     let cmd2 = SFBleCmd(type: .client("cmd2")) { data, msg in
+         let cmd3 = SFBleCmd(type: .client("cmd3")) { data, msg in
+             let cmd4 = SFBleCmd(type: .client("cmd4")) { data, msg in
+                 print("cmd4 success")
+             } failure: { error in
+                 print("cmd4 failure")
+             }
+             cmd4.excute()
+         } failure: { error in
+             print("cmd3 failure")
+         }
+         cmd3.excute()
+     } failure: { error in
+         print("cmd2 failure")
+     }
+     cmd2.excute()
+ } failure: { error in
+     print("cmd1 failure")
+ }
+ cmd1.excute()
+ */
 
 // MARK: - SFBleProcess
 public enum SFBleProcess {

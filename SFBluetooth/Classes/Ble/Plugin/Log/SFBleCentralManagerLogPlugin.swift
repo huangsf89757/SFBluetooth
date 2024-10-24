@@ -44,6 +44,12 @@ public struct SFBleCentralManagerLogOption: OptionSet {
 // MARK: - SFBleCentralManagerLogPlugin
 public class SFBleCentralManagerLogPlugin {
     public var option: SFBleCentralManagerLogOption = .all
+    
+    // TODO: discover的日志太多问题怎么处理！
+    public private(set) lazy var discoverLogger: SFDiscoveryLogger = {
+        return SFDiscoveryLogger()
+    }()
+    
 }
 
 

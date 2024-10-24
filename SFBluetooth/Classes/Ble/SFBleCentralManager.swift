@@ -28,14 +28,13 @@ public let SF_Notify_CentralManager_Callback_DidOccurConnectionEvents =         
 // MARK: - SFBleCentralManager
 public class SFBleCentralManager: NSObject {
     // MARK: var
+    /// 唯一标识
     public var id = UUID()
+    /// 中心设备
     public private(set) var centralManager: CBCentralManager!
-    public var plugins = [SFBleCentralManagerPlugin]()
+    /// 插件
+    public var plugins: [SFBleCentralManagerPlugin] = [SFBleCentralManagerLogPlugin()]
    
-    public private(set) lazy var discoverLogger: SFDiscoveryLogger = {
-        return SFDiscoveryLogger()
-    }()
-    
     // MARK: life cycle
     public init(queue: dispatch_queue_t?, options: [String : Any]?) {
         super.init()

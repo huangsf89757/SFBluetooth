@@ -43,7 +43,7 @@ open class SFBleCmd {
     /// 进程
     public private(set) var process: SFBleProcess = .none
     /// 插件
-    public var plugins = [SFBleCmdPlugin]()
+    public var plugins: [SFBleCmdPlugin] = [SFBleCmdLogPlugin()]
     /// 成功回调
     public private(set) var success: SFBleSuccess
     /// 失败回调

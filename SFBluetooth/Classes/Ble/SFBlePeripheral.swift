@@ -35,10 +35,12 @@ public class SFBlePeripheral: NSObject {
     public var didOpenChannel: ((_ peripheral: CBPeripheral, _ channel: CBL2CAPChannel?, _ error: (any Error)?) -> ())?
     
     // MARK: var
+    /// 唯一标识
     public var id = UUID()
-    public var plugins = [SFBlePeripheralPlugin]()
+    /// 外围设备
     public let peripheral: CBPeripheral
-    public var logOption: SFBlePeripheralLogOption = .all
+    /// 插件
+    public var plugins: [SFBlePeripheralPlugin] = [SFBlePeripheralLogPlugin()]
     
     // MARK: life cycle
     public init(peripheral: CBPeripheral) {

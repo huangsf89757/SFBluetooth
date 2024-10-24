@@ -24,7 +24,7 @@ public class SFBleCmdLogPlugin: SFBleCmdPlugin {
         Log.debug("\(type.description)doing \(msg ?? "")")
     }
     public func onSuccess(type: SFBleCmdType, data: Any?, msg: String?) {
-        Log.debug("\(type.description)success \(msg ?? "")")
+        Log.debug("\(type.description)success \(msg ?? "") data=\(data ?? "nil")")
     }
     public func onFailure(type: SFBleCmdType, error: SFBleError) {
         Log.debug("\(type.description)failure \(error.msg)(\(error.code)) ")

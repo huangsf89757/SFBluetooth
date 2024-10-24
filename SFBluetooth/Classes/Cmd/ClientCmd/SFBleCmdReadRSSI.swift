@@ -33,7 +33,7 @@ public class SFBleCmdReadRSSI: SFBleClientCmd {
     
     // MARK: peripheral
     public override func peripheralDidReadRSSI(peripheral: CBPeripheral, RSSI: NSNumber, error: (any Error)?) -> () {
-        onSuccess(data: RSSI, msg: "读取RSSI成功。")
+        onSuccess(data: RSSI)
     }
 
 }

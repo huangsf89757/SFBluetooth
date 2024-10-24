@@ -14,19 +14,20 @@ import SFLogger
 
 // MARK: - SFBleCmdLogPlugin
 public class SFBleCmdLogPlugin: SFBleCmdPlugin {
+    // 示例：Cmd[C]: readRssi > failure ? xxxx
     public func onStart(type: SFBleCmdType, msg: String?) {
-        Log.debug("\(type.description)start \(msg ?? "")")
+        Log.debug("\(type.name) > start ? \(msg ?? "")")
     }
     public func onWaiting(type: SFBleCmdType, msg: String?) {
-        Log.debug("\(type.description)waiting \(msg ?? "")")
+        Log.debug("\(type.name) > waiting ? \(msg ?? "")")
     }
     public func onDoing(type: SFBleCmdType, msg: String?) {
-        Log.debug("\(type.description)doing \(msg ?? "")")
+        Log.debug("\(type.name) > doing ? \(msg ?? "")")
     }
     public func onSuccess(type: SFBleCmdType, data: Any?, msg: String?) {
-        Log.debug("\(type.description)success \(msg ?? "") data=\(data ?? "nil")")
+        Log.debug("\(type.name) > success ? \(msg ?? "") data=\(data ?? "nil")")
     }
     public func onFailure(type: SFBleCmdType, error: SFBleError) {
-        Log.debug("\(type.description)failure \(error.msg)(\(error.code)) ")
+        Log.debug("\(type.name) > failure ? \(error.msg)(\(error.code)) ")
     }
 }

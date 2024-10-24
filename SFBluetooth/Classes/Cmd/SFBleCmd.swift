@@ -12,32 +12,17 @@ import SFExtension
 // Server
 import SFLogger
 
+
 // MARK: - SFBleResponse
 public typealias SFBleSuccess = (_ data: Any?, _ msg: String?) -> Void
 public typealias SFBleFailure = (_ error: SFBleError) -> Void
 
-// MARK: - SFBleCmdType
-public enum SFBleCmdType {
-    case client(String)
-    case server(String)
-    
-    var description: String {
-        switch self {
-        case .client(let name):
-            return "CMD[C]: \(name) > "
-        case .server(let name):
-            return "CMD[S]: \(name) > "
-        }
-    }
-}
 
 // MARK: - SFBleCmd
-open class SFBleCmd {
+public class SFBleCmd {
     // MARK: var
     /// 类型
     public var type: SFBleCmdType
-    /// 名称（read-only）
-    public private(set) var name: String!
     /// 唯一标识
     public private(set) var id = UUID()
     /// 进程
@@ -53,12 +38,7 @@ open class SFBleCmd {
     // MARK: life cycle
     public init(type: SFBleCmdType, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
         self.type = type
-        switch type {
-        case .client(let string):
-            self.name = string
-        case .server(let string):
-            self.name = string
-        }
+        
         self.success = success
         self.failure = failure
     }

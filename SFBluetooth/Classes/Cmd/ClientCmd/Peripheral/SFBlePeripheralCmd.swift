@@ -14,14 +14,14 @@ import SFLogger
 
 
 // MARK: - SFBlePeripheralCmd
-open class SFBlePeripheralCmd: SFBleCentralManagerCmd {
+public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
     // MARK: var
     public private(set) var blePeripheral: SFBlePeripheral
     
     // MARK: life cycle
-    public init(type: SFBleCmdType, bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(name: String, bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
         self.blePeripheral = blePeripheral
-        super.init(type: type, bleCentralManager: bleCentralManager, success: success, failure: failure)
+        super.init(name: name, bleCentralManager: bleCentralManager, success: success, failure: failure)
         self.configBlePeripheralCallback()
     }
     

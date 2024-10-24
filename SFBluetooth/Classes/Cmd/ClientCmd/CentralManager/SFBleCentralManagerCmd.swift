@@ -14,14 +14,14 @@ import SFLogger
 
 
 // MARK: - SFBleCentralManagerCmd
-open class SFBleCentralManagerCmd: SFBleClientCmd {
+public class SFBleCentralManagerCmd: SFBleClientCmd {
     // MARK: var
     public private(set) var bleCentralManager: SFBleCentralManager
     
     // MARK: life cycle
-    public init(type: SFBleCmdType, bleCentralManager: SFBleCentralManager, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(name: String, bleCentralManager: SFBleCentralManager, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
         self.bleCentralManager = bleCentralManager
-        super.init(type: type, success: success, failure: failure)
+        super.init(name: name, success: success, failure: failure)
         self.configBleCentralManagerNotify()
     }
     

@@ -14,5 +14,10 @@ import SFLogger
 
 
 // MARK: - SFBleClientCmd
-open class SFBleClientCmd: SFBleCmd {}
+public class SFBleClientCmd: SFBleCmd {
+    // MARK: life cycle
+    public init(name: String, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+        super.init(type: .client(name), success: success, failure: failure)
+    }
+}
 

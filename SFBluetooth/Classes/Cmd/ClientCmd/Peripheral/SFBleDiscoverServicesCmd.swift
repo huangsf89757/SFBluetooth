@@ -18,7 +18,7 @@ public class SFBleDiscoverServicesCmd: SFBlePeripheralCmd {
     
     // MARK: life cycle
     public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
-        super.init(type: .client("discoverServices"), bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
+        super.init(name: "discoverServices", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
     }
     
     // MARK: func

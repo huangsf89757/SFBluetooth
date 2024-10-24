@@ -42,31 +42,3 @@ public enum SFBleServerError: SFBleErrorProtocol {
     }
 }
 
-
-// MARK: - SFBlePeripheralManagerError
-public enum SFBlePeripheralManagerError: SFBleErrorProtocol {
-    case custom(String)
-    
-    public var code: Int {
-        return 0
-    }
-    
-    public var msg: String {
-        return ""
-    }
-}
-
-
-// MARK: - SFBleCentralError
-public enum SFBleCentralError: SFBleErrorProtocol {
-    case custom(String)
-    
-    public var code: Int {
-        return 0
-    }
-    
-    public var msg: String {
-        return ""
-    }
-}
-

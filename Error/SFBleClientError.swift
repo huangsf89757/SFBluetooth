@@ -111,6 +111,8 @@ public enum SFBleCentralManagerError: SFBleErrorProtocol {
 // MARK: - SFBlePeripheralError
 public enum SFBlePeripheralError: SFBleErrorProtocol {
     case custom(String)
+    case readRSSI(String)
+    case discoverServices(String)
     
     public var code: Int {
         return 0

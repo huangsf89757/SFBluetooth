@@ -9,11 +9,9 @@ import Foundation
 import CoreBluetooth
 // Basic
 import SFExtension
-// Server
-import SFLogger
 
 
-// MARK: - SFBleCmd
+// MARK: - SFBleCmdReadRSSI
 public class SFBleCmdReadRSSI: SFBleClientCmd {
     // MARK: life cycle
     public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
@@ -33,9 +31,12 @@ public class SFBleCmdReadRSSI: SFBleClientCmd {
     
     // MARK: peripheral
     public override func peripheralDidReadRSSI(peripheral: CBPeripheral, RSSI: NSNumber, error: (any Error)?) -> () {
-        onSuccess(data: RSSI)
+        if let error = error {
+            onFailure(error: .client(.peripheral(.readRSSI(error.localizedDescription))))
+        } else {
+            onSuccess(data: RSSI)
+        }
     }
-
 }
 
 

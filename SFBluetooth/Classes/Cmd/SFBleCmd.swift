@@ -16,19 +16,25 @@ import SFLogger
 public typealias SFBleSuccess = (_ data: Any?, _ msg: String?) -> Void
 public typealias SFBleFailure = (_ error: SFBleError) -> Void
 
-
+// MARK: - SFBleCmdType
+public enum SFBleCmdType {
+    case client
+    case server
+}
 
 // MARK: - SFBleCmd
 open class SFBleCmd {
     // MARK: var
+    public var type: SFBleCmdType
     public private(set) var id = UUID()
     public private(set) var success: SFBleSuccess
     public private(set) var failure: SFBleFailure
     public private(set) var process: SFBleProcess = .none
+    public var plugins = [SFBleCmdPlugin]()
     
     // MARK: life cycle
-    public init(id: UUID = UUID(), success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
-        self.id = id
+    public init(type: SFBleCmdType, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+        self.type = type
         self.success = success
         self.failure = failure
     }
@@ -52,19 +58,34 @@ public enum SFBleProcess {
 extension SFBleCmd {
     public func onStart() {
         self.process = .start
+        plugins.forEach { plugin in
+            plugin.onStart(type: type)
+        }
     }
     public func onWaiting() {
         self.process = .waiting
+        plugins.forEach { plugin in
+            plugin.onWaiting(type: type)
+        }
     }
     public func onDoing() {
         self.process = .doing
+        plugins.forEach { plugin in
+            plugin.onDoing(type: type)
+        }
     }
-    public func onSuccess(_ data: Any?, _ msg: String?) {
+    public func onSuccess(data: Any?, msg: String?) {
         self.process = .end
+        plugins.forEach { plugin in
+            plugin.onSuccess(type: type, data: data, msg: msg)
+        }
         success(data, msg)
     }
-    public func onFailure(_ error: SFBleError) {
+    public func onFailure(error: SFBleError) {
         self.process = .end
+        plugins.forEach { plugin in
+            plugin.onFailure(type: type, error: error)
+        }
         failure(error)
     }
 }

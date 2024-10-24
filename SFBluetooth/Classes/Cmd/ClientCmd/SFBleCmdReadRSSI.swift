@@ -19,6 +19,7 @@ public class SFBleCmdReadRSSI: SFBleClientCmd {
     public override func excute() {
         super.excute()
         blePeripheral.readRSSI(id: id)
+        onDoing()
     }
     
     // MARK: centralManager
@@ -26,7 +27,7 @@ public class SFBleCmdReadRSSI: SFBleClientCmd {
     
     // MARK: peripheral
     public override func peripheralDidReadRSSI(peripheral: CBPeripheral, RSSI: NSNumber, error: (any Error)?) -> () {
-        success(RSSI, "读取RSSI成功。")
+        onSuccess(data: RSSI, msg: "读取RSSI成功。")
     }
 
 }

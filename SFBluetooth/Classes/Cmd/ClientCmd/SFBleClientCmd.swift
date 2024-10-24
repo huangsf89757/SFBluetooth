@@ -20,10 +20,10 @@ open class SFBleClientCmd: SFBleCmd {
     public private(set) var blePeripheral: SFBlePeripheral
     
     // MARK: life cycle
-    public init(id: UUID = UUID(), bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
         self.bleCentralManager = bleCentralManager
         self.blePeripheral = blePeripheral
-        super.init(id: id, success: success, failure: failure)
+        super.init(type: .client, success: success, failure: failure)
         self.configBleCentralManagerNotify()
         self.configBlePeripheralCallback()
     }
@@ -33,17 +33,17 @@ open class SFBleClientCmd: SFBleCmd {
         super.excute()
         let centralManagerState = bleCentralManager.centralManager.state
         guard centralManagerState == .poweredOn else {
-            onFailure(.client(.centralManager(.state("蓝牙未开启。state: \(centralManagerState.sf.description)"))))
+            onFailure(error: .client(.centralManager(.state("蓝牙未开启。state: \(centralManagerState.sf.description)"))))
             return
         }
         let isScanning = bleCentralManager.centralManager.isScanning
         if isScanning {
-            onFailure(.client(.centralManager(.isScanning("当前扫描中，请先停止扫描。"))))
+            onFailure(error: .client(.centralManager(.isScanning("当前扫描中，请先停止扫描。"))))
             return
         }
         let peripheralState = blePeripheral.peripheral.state
         guard peripheralState == .connected else {
-            onFailure(.client(.centralManager(.connectPeripheral("外设不在连接中。state: \(peripheralState.sf.description)"))))
+            onFailure(error: .client(.centralManager(.connectPeripheral("外设不在连接中。state: \(peripheralState.sf.description)"))))
             return
         }
     }
@@ -51,12 +51,12 @@ open class SFBleClientCmd: SFBleCmd {
     // MARK: centralManager
     open func centralManagerDidUpdateState(state: CBManagerState) {
         if state != .poweredOn {
-            onFailure(.client(.centralManager(.state("蓝牙未开启。state: \(state.sf.description)"))))
+            onFailure(error: .client(.centralManager(.state("蓝牙未开启。state: \(state.sf.description)"))))
         }
     }
     open func centralManagerDidUpdateIsScanning(isScanning: Bool) {
         if isScanning {
-            onFailure(.client(.centralManager(.isScanning("当前处于扫描状态。"))))
+            onFailure(error: .client(.centralManager(.isScanning("当前处于扫描状态。"))))
         }
     }
     open func centralManagerWillRestoreState(dict: [String : Any]) {}

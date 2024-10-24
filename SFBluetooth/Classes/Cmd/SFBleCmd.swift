@@ -18,15 +18,15 @@ public typealias SFBleFailure = (_ error: SFBleError) -> Void
 
 // MARK: - SFBleCmdType
 public enum SFBleCmdType {
-    case client
-    case server
+    case client(String)
+    case server(String)
     
     var description: String {
         switch self {
-        case .client:
-            return "C"
-        case .server:
-            return "S"
+        case .client(let name):
+            return "CMD[C]: \(name) > "
+        case .server(let name):
+            return "CMD[S]: \(name) > "
         }
     }
 }
@@ -34,16 +34,31 @@ public enum SFBleCmdType {
 // MARK: - SFBleCmd
 open class SFBleCmd {
     // MARK: var
+    /// 类型
     public var type: SFBleCmdType
+    /// 名称（read-only）
+    public private(set) var name: String!
+    /// 唯一标识
     public private(set) var id = UUID()
-    public private(set) var success: SFBleSuccess
-    public private(set) var failure: SFBleFailure
+    /// 进程
     public private(set) var process: SFBleProcess = .none
+    /// 插件
     public var plugins = [SFBleCmdPlugin]()
+    /// 成功回调
+    public private(set) var success: SFBleSuccess
+    /// 失败回调
+    public private(set) var failure: SFBleFailure
+    
     
     // MARK: life cycle
     public init(type: SFBleCmdType, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
         self.type = type
+        switch type {
+        case .client(let string):
+            self.name = string
+        case .server(let string):
+            self.name = string
+        }
         self.success = success
         self.failure = failure
     }
@@ -51,7 +66,6 @@ open class SFBleCmd {
     // MARK: func
     open func excute() {
         self.id = UUID()
-        onStart()
     }
 }
 

@@ -20,10 +20,10 @@ open class SFBleClientCmd: SFBleCmd {
     public private(set) var blePeripheral: SFBlePeripheral
     
     // MARK: life cycle
-    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(type: SFBleCmdType, bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
         self.bleCentralManager = bleCentralManager
         self.blePeripheral = blePeripheral
-        super.init(type: .client, success: success, failure: failure)
+        super.init(type: type, success: success, failure: failure)
         self.configBleCentralManagerNotify()
         self.configBlePeripheralCallback()
     }

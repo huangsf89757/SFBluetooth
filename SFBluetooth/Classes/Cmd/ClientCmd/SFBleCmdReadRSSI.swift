@@ -15,8 +15,14 @@ import SFLogger
 
 // MARK: - SFBleCmd
 public class SFBleCmdReadRSSI: SFBleClientCmd {
+    // MARK: life cycle
+    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+        super.init(type: .client("readRSSI"), bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
+    }
+    
     // MARK: func
     public override func excute() {
+        onStart()
         super.excute()
         blePeripheral.readRSSI(id: id)
         onDoing()

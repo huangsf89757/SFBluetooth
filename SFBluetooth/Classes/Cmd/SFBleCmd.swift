@@ -20,6 +20,15 @@ public typealias SFBleFailure = (_ error: SFBleError) -> Void
 public enum SFBleCmdType {
     case client
     case server
+    
+    var description: String {
+        switch self {
+        case .client:
+            return "C"
+        case .server:
+            return "S"
+        }
+    }
 }
 
 // MARK: - SFBleCmd
@@ -56,25 +65,25 @@ public enum SFBleProcess {
     case end
 }
 extension SFBleCmd {
-    public func onStart() {
+    public func onStart(msg: String? = nil) {
         self.process = .start
         plugins.forEach { plugin in
-            plugin.onStart(type: type)
+            plugin.onStart(type: type, msg: msg)
         }
     }
-    public func onWaiting() {
+    public func onWaiting(msg: String? = nil) {
         self.process = .waiting
         plugins.forEach { plugin in
-            plugin.onWaiting(type: type)
+            plugin.onWaiting(type: type, msg: msg)
         }
     }
-    public func onDoing() {
+    public func onDoing(msg: String? = nil) {
         self.process = .doing
         plugins.forEach { plugin in
-            plugin.onDoing(type: type)
+            plugin.onDoing(type: type, msg: msg)
         }
     }
-    public func onSuccess(data: Any?, msg: String?) {
+    public func onSuccess(data: Any?, msg: String? = nil) {
         self.process = .end
         plugins.forEach { plugin in
             plugin.onSuccess(type: type, data: data, msg: msg)

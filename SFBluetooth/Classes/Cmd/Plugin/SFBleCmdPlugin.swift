@@ -9,17 +9,17 @@ import Foundation
 
 // MARK: - SFBleCmdPlugin
 public protocol SFBleCmdPlugin {
-    func onStart(type: SFBleCmdType)
-    func onWaiting(type: SFBleCmdType)
-    func onDoing(type: SFBleCmdType)
+    func onStart(type: SFBleCmdType, msg: String?)
+    func onWaiting(type: SFBleCmdType, msg: String?)
+    func onDoing(type: SFBleCmdType, msg: String?)
     func onSuccess(type: SFBleCmdType, data: Any?, msg: String?)
     func onFailure(type: SFBleCmdType, error: SFBleError)
 }
 
 extension SFBleCmdPlugin {
-    func onStart(type: SFBleCmdType) {}
-    func onWaiting(type: SFBleCmdType) {}
-    func onDoing(type: SFBleCmdType) {}
+    func onStart(type: SFBleCmdType, msg: String?) {}
+    func onWaiting(type: SFBleCmdType, msg: String?) {}
+    func onDoing(type: SFBleCmdType, msg: String?) {}
     func onSuccess(type: SFBleCmdType, data: Any?, msg: String?) {}
     func onFailure(type: SFBleCmdType, error: SFBleError) {}
 }

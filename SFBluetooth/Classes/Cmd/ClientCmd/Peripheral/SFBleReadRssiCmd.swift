@@ -1,8 +1,8 @@
 //
-//  SFBleCmdReadRSSI.swift
+//  SFBleReadRssiCmd.swift
 //  SFBluetooth
 //
-//  Created by hsf on 2024/10/23.
+//  Created by hsf on 2024/10/24.
 //
 
 import Foundation
@@ -11,8 +11,8 @@ import CoreBluetooth
 import SFExtension
 
 
-// MARK: - SFBleCmdReadRSSI
-public class SFBleCmdReadRSSI: SFBleClientCmd {
+// MARK: - SFBleReadRssiCmd
+public class SFBleReadRssiCmd: SFBlePeripheralCmd {
     // MARK: life cycle
     public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
         super.init(type: .client("readRSSI"), bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
@@ -38,5 +38,3 @@ public class SFBleCmdReadRSSI: SFBleClientCmd {
         }
     }
 }
-
-

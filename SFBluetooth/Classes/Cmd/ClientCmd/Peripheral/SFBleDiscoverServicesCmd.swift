@@ -1,5 +1,5 @@
 //
-//  SFBleCmdDiscoverServices.swift
+//  SFBleDiscoverServicesCmd.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/10/24.
@@ -11,8 +11,8 @@ import CoreBluetooth
 import SFExtension
 
 
-// MARK: - SFBleCmdDiscoverServices
-public class SFBleCmdDiscoverServices: SFBleClientCmd {
+// MARK: - SFBleDiscoverServicesCmd
+public class SFBleDiscoverServicesCmd: SFBlePeripheralCmd {
     // MARK: var
     public var serviceUUIDs: [CBUUID]?
     
@@ -41,4 +41,3 @@ public class SFBleCmdDiscoverServices: SFBleClientCmd {
         }
     }
 }
-

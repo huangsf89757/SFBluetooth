@@ -13,7 +13,7 @@ public protocol SFBleCmdPlugin {
     func onWaiting(type: SFBleCmdType, msg: String?)
     func onDoing(type: SFBleCmdType, msg: String?)
     func onSuccess(type: SFBleCmdType, data: Any?, msg: String?)
-    func onFailure(type: SFBleCmdType, error: SFBleError)
+    func onFailure(type: SFBleCmdType, error: SFBleCmdError)
 }
 
 extension SFBleCmdPlugin {
@@ -21,5 +21,5 @@ extension SFBleCmdPlugin {
     func onWaiting(type: SFBleCmdType, msg: String?) {}
     func onDoing(type: SFBleCmdType, msg: String?) {}
     func onSuccess(type: SFBleCmdType, data: Any?, msg: String?) {}
-    func onFailure(type: SFBleCmdType, error: SFBleError) {}
+    func onFailure(type: SFBleCmdType, error: SFBleCmdError) {}
 }

@@ -15,7 +15,7 @@ import SFLogger
 
 // MARK: - SFBleResponse
 public typealias SFBleSuccess = (_ data: Any?, _ msg: String?) -> Void
-public typealias SFBleFailure = (_ error: SFBleError) -> Void
+public typealias SFBleFailure = (_ error: SFBleCmdError) -> Void
 
 
 // MARK: - SFBleCmd
@@ -108,7 +108,7 @@ extension SFBleCmd {
         }
         success(data, msg)
     }
-    public func onFailure(error: SFBleError) {
+    public func onFailure(error: SFBleCmdError) {
         self.process = .end
         plugins.forEach { plugin in
             plugin.onFailure(type: type, error: error)

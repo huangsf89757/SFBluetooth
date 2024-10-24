@@ -1,5 +1,5 @@
 //
-//  SFBleCentralError.swift
+//  SFBlePeripheralManagerCmdError.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/10/24.
@@ -11,8 +11,8 @@ import CoreBluetooth
 import SFExtension
 
 
-// MARK: - SFBleCentralError
-public enum SFBleCentralError: SFBleErrorProtocol {
+// MARK: - SFBlePeripheralManagerCmdError
+public enum SFBlePeripheralManagerCmdError: SFBleCmdErrorProtocol {
     case custom(String)
     
     public var code: Int {

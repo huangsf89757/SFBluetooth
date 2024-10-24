@@ -199,7 +199,7 @@ extension SFBlePeripheralLogPlugin: SFBlePeripheralPlugin {
         guard option.contains(.nameDidUpdated) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_name = "name=\(name)"
-        Log.bleCallback(id: id, tag: SF_Tag_Peripheral_Name_DidUpdated,
+        Log.bleCallback(id: id, tag: SF_Tag_Peripheral_DidUpdate_Name,
                         msgs: [msg_peripheral, msg_name])
     }
     

@@ -1,8 +1,8 @@
 //
-//  SFBleError.swift
+//  SFBleClientError.swift
 //  SFBluetooth
 //
-//  Created by hsf on 2024/10/23.
+//  Created by hsf on 2024/10/24.
 //
 
 import Foundation
@@ -13,43 +13,38 @@ import SFExtension
 import SFLogger
 
 
-// MARK: - SFBleError
-public enum SFBleError {
+// MARK: - SFBleClientError
+public enum SFBleClientError: SFBleErrorProtocol {
     case custom(String)
     case centralManager(SFBleCentralManagerError)
     case peripheral(SFBlePeripheralError)
-
-    /// 状态码
+    
     public var code: Int {
         switch self {
         case .custom(let msg):
             return 0
         case .centralManager(let error):
-            return 10000
+            return 1000 + error.code
         case .peripheral(let error):
-            return 20000
+            return 2000 + error.code
         }
     }
     
-    /// 描述
-    public var description: String {
-        var code = self.code
+    public var msg: String {
         switch self {
-        case .custom(let msg):
-            return msg
+        case .custom(let string):
+            return string
         case .centralManager(let error):
-            code += error.code
-            return "\(code): \(error.description)"
+            return error.msg
         case .peripheral(let error):
-            code += error.code
-            return "\(code): \(error.description)"
+            return error.msg
         }
     }
 }
 
 
 // MARK: - SFBleCentralManagerError
-public enum SFBleCentralManagerError {
+public enum SFBleCentralManagerError: SFBleErrorProtocol {
     case custom(String)
     case isScanning(String)
     case state(String)
@@ -61,13 +56,32 @@ public enum SFBleCentralManagerError {
     case connectionEvent(String)
     case ANCSAuthorization(String)
     
-    /// 状态码
     public var code: Int {
-        return 0
+        switch self {
+        case .custom(let msg):
+            return 0
+        case .isScanning(let msg):
+            return 100
+        case .state(let msg):
+            return 200
+        case .restore(let msg):
+            return 300
+        case .discoverPeripheral(let msg):
+            return 400
+        case .connectPeripheral(let msg):
+            return 500
+        case .failToConnectPeripheral(let msg):
+            return 600
+        case .disconnectPeripheral(let msg):
+            return 700
+        case .connectionEvent(let msg):
+            return 800
+        case .ANCSAuthorization(let msg):
+            return 900
+        }
     }
     
-    /// 描述
-    public var description: String {
+    public var msg: String {
         switch self {
         case .custom(let msg):
             return msg
@@ -95,14 +109,14 @@ public enum SFBleCentralManagerError {
 
 
 // MARK: - SFBlePeripheralError
-public enum SFBlePeripheralError {
-    /// 状态码
-    public var code: Int { 
+public enum SFBlePeripheralError: SFBleErrorProtocol {
+    case custom(String)
+    
+    public var code: Int {
         return 0
     }
     
-    /// 描述
-    public var description: String {
+    public var msg: String {
         return ""
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SFBleRequestReadRSSI.swift
+//  SFBleCmdReadRSSI.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/10/23.
@@ -13,8 +13,8 @@ import SFExtension
 import SFLogger
 
 
-// MARK: - SFBleRequest
-public class SFBleRequestReadRSSI: SFBleRequest {
+// MARK: - SFBleCmd
+public class SFBleCmdReadRSSI: SFBleClientCmd {
     // MARK: func
     public override func excute() {
         super.excute()

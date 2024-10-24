@@ -1,8 +1,8 @@
 //
-//  SFBleRequest.swift
-//  IQKeyboardManagerSwift
+//  SFBleClientCmd.swift
+//  SFBluetooth
 //
-//  Created by hsf on 2024/10/18.
+//  Created by hsf on 2024/10/24.
 //
 
 import Foundation
@@ -12,57 +12,20 @@ import SFExtension
 // Server
 import SFLogger
 
-// MARK: - SFBleResponse
-public typealias SFBleSuccess = (_ data: Any?, _ msg: String?) -> Void
-public typealias SFBleFailure = (_ error: SFBleError) -> Void
 
-// MARK: - SFBleProcess
-public enum SFBleProcess {
-    case start
-    case waiting
-    case doing
-    case end
-}
-
-// MARK: - SFBleRequest
-open class SFBleRequest {
+// MARK: - SFBleClientCmd
+open class SFBleClientCmd: SFBleCmd {
     // MARK: var
-    public private(set) var id = UUID()
     public private(set) var bleCentralManager: SFBleCentralManager
     public private(set) var blePeripheral: SFBlePeripheral
-    public private(set) var successBlock: SFBleSuccess
-    public private(set) var failureBlock: SFBleFailure
-    public private(set) var process: SFBleProcess = .start
     
     // MARK: life cycle
-    public init(id: UUID = UUID(), bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, successBlock: @escaping SFBleSuccess, failureBlock: @escaping SFBleFailure) {
-        self.id = id
+    public init(id: UUID = UUID(), bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
         self.bleCentralManager = bleCentralManager
         self.blePeripheral = blePeripheral
-        self.successBlock = successBlock
-        self.failureBlock = failureBlock
+        super.init(id: id, success: success, failure: failure)
         self.configBleCentralManagerNotify()
         self.configBlePeripheralCallback()
-    }
-    
-    // MARK: func
-    open func excute() {
-        self.process = .start
-        self.id = UUID()
-    }
-    public func waiting() {
-        self.process = .waiting
-    }
-    public func doing() {
-        self.process = .doing
-    }
-    public func success(_ data: Any?, _ msg: String?) {
-        self.process = .end
-        successBlock(data, msg)
-    }
-    public func failure(_ error: SFBleError) {
-        self.process = .end
-        failureBlock(error)
     }
     
     // MARK: centralManager
@@ -97,7 +60,7 @@ open class SFBleRequest {
 }
 
 // MARK: - BleCentralManager
-extension SFBleRequest {
+extension SFBleClientCmd {
     private func configBleCentralManagerNotify() {
         NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidUpdateState), name: SF_Notify_CentralManager_Callback_DidUpdateState, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(notifyCentralManagerCallbackDidUpdateIsScanning), name: SF_Notify_CentralManager_Callback_DidUpdateIsScanning, object: nil)
@@ -157,7 +120,7 @@ extension SFBleRequest {
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
         guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let peripheral = userInfo["peripheral"] as? CBPeripheral else { Log.error("peripheral=nil"); return }
-        if let error = userInfo["error"] as? (any Error) { 
+        if let error = userInfo["error"] as? (any Error) {
             centralManagerDidFailToConnectPeripheral(peripheral: peripheral, error: error)
         } else {
             centralManagerDidFailToConnectPeripheral(peripheral: peripheral, error: nil)
@@ -169,7 +132,7 @@ extension SFBleRequest {
         guard let centralManager = userInfo["centralManager"] as? CBCentralManager else { Log.error("centralManager=nil"); return }
         guard centralManager === bleCentralManager.centralManager else { Log.debug("centralManager !== bleCentralManager.centralManager"); return }
         guard let peripheral = userInfo["peripheral"] as? CBPeripheral else { Log.error("peripheral=nil"); return }
-        if let error = userInfo["error"] as? (any Error) { 
+        if let error = userInfo["error"] as? (any Error) {
             centralManagerDidDisconnectPeripheral(peripheral: peripheral, error: error)
         } else {
             centralManagerDidDisconnectPeripheral(peripheral: peripheral, error: nil)
@@ -209,7 +172,7 @@ extension SFBleRequest {
 }
 
 // MARK: - BlePeripheral
-extension SFBleRequest {
+extension SFBleClientCmd {
     private func configBlePeripheralCallback() {
         blePeripheral.didUpdateState = {
             [weak self] peripheral, state in
@@ -277,3 +240,4 @@ extension SFBleRequest {
         }
     }
 }
+

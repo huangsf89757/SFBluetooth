@@ -47,6 +47,7 @@ public enum SFBleError {
     }
 }
 
+
 // MARK: - SFBleCentralManagerError
 public enum SFBleCentralManagerError {
     case custom(String)
@@ -91,6 +92,7 @@ public enum SFBleCentralManagerError {
         }
     }
 }
+
 
 // MARK: - SFBlePeripheralError
 public enum SFBlePeripheralError {

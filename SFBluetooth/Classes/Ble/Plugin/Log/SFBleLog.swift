@@ -56,4 +56,19 @@ extension Log {
         Log.info("\n\(msg)\n")
     }
     
+    public static func bleSummary(id: UUID, tag: String, msgs: [String]) {
+        // id
+        let msg_id = "ID: \(id.uuidString)"
+        // callback
+        var msg_callback = """
+        Summary:
+            \(tag)
+        """
+        if msgs.count > 0 {
+            msg_callback += "\n\(msgs.map { "    \($0)" }.joined(separator: "\n"))"
+        }
+        // msg
+        let msg = msg_id + "\n" + msg_callback + "\n" + "End"
+        Log.info("\n\(msg)\n")
+    }
 }

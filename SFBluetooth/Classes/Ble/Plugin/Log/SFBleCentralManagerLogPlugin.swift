@@ -44,12 +44,7 @@ public struct SFBleCentralManagerLogOption: OptionSet {
 // MARK: - SFBleCentralManagerLogPlugin
 public class SFBleCentralManagerLogPlugin {
     public var option: SFBleCentralManagerLogOption = .all
-    
-    // TODO: discover的日志太多问题怎么处理！
-    public private(set) lazy var discoverLogger: SFDiscoveryLogger = {
-        return SFDiscoveryLogger()
-    }()
-    
+    public private(set) var logSummaryMap = [UUID: SFBleDiscoverLogSummary]()
 }
 
 
@@ -186,9 +181,17 @@ extension SFBleCentralManagerLogPlugin: SFBleCentralManagerPlugin {
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_advertisementData = "advertisementData=\(advertisementData)"
         let msg_RSSI = "RSSI=\(RSSI)"
-        Log.bleCallback(id: id, tag: SF_Tag_CentralManager_DidDiscoverPeripheral,
-                        msgs: [msg_centralManager, msg_peripheral, msg_advertisementData, msg_RSSI])
-        
+//        Log.bleCallback(id: id, tag: SF_Tag_CentralManager_DidDiscoverPeripheral,
+//                        msgs: [msg_centralManager, msg_peripheral, msg_advertisementData, msg_RSSI])
+        var logSummary: SFBleDiscoverLogSummary
+        if let log = logSummaryMap[id] {
+            logSummary = log
+        } else {
+            let log = SFBleDiscoverLogSummary(id: id, tag: SF_Tag_CentralManager_DidDiscoverPeripheral)
+            logSummaryMap[id] = log
+            logSummary = log
+        }
+        logSummary.update(log: SFBleDiscoverLog(id: id, time: Date(), peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI))
     }
     
     @available(iOS 5.0, *)

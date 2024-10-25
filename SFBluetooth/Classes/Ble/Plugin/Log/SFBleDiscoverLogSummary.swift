@@ -23,6 +23,7 @@ public class SFBleDiscoverLogSummary {
     public let duration: TimeInterval
     public let itemThreshold: Int
     public let logThreshold: Int
+    public var firstTimeLogEnable = false
     public private(set) var items = [SFBleDiscoverLogItem]()
     public private(set) var summaryTime: Date?
     public var size: Int {
@@ -37,7 +38,7 @@ public class SFBleDiscoverLogSummary {
     public init(id: UUID,
                 tag: String,
                 duration: TimeInterval = 60,
-                itemThreshold: Int = 200,
+                itemThreshold: Int = 20,
                 logThreshold: Int = 10) {
         self.id = id
         self.tag = tag
@@ -58,7 +59,7 @@ public class SFBleDiscoverLogSummary {
         if let item = item {
             item.update(log: log)
         } else {
-            let item = SFBleDiscoverLogItem(id: id, tag: tag, identifier: identifier, threshold: logThreshold)
+            let item = SFBleDiscoverLogItem(id: id, tag: tag, identifier: identifier, threshold: logThreshold, firstTimeLogEnable: firstTimeLogEnable)
             item.update(log: log)
             items.append(item)
         }
@@ -69,15 +70,20 @@ public class SFBleDiscoverLogSummary {
     public func clean(because: String) {
         guard items.count > 0 else { return }
         let msg_because = "because: \(because)"
-        let msg_count = "count: \(items.count)"
-        let msg_detail = "\n========== DETAIL ==========\n"
+        let msg_count = "count: \(items.count)\n"
+        let msg_detail = "========== DETAIL ==========\n"
         var msgs = [String]()
         msgs.append(msg_because)
         msgs.append(msg_count)
         msgs.append(msg_detail)
-        items.forEach { item in
+        for i in 0..<items.count {
+            let item = items[i]
+            msgs.append("【\(i)】")
             msgs.append(contentsOf: item.summaryMsgs)
-            msgs.append("\n----------\n")
+            msgs.append("")
+            if i < items.count - 1 {
+                msgs.append("----------\n")
+            }
         }
         Log.bleSummary(id: id, tag: tag, msgs: msgs)
         summaryTime = Date()
@@ -91,6 +97,7 @@ public class SFBleDiscoverLogItem {
     public let tag: String
     public let identifier: UUID
     public let threshold: Int
+    public let firstTimeLogEnable: Bool
     public private(set) var logs = [SFBleDiscoverLog]()
     public var firstTime: Date {
         logs.first?.time ?? Date(timeIntervalSince1970: 0)
@@ -116,15 +123,17 @@ public class SFBleDiscoverLogItem {
     public init(id: UUID,
                 tag: String,
                 identifier: UUID,
-                threshold: Int) {
+                threshold: Int,
+                firstTimeLogEnable: Bool) {
         self.id = id
         self.tag = tag
         self.identifier = identifier
         self.threshold = threshold
+        self.firstTimeLogEnable = firstTimeLogEnable
     }
     public func update(log: SFBleDiscoverLog) {
         logs.append(log)
-        if logs.count == 1 {
+        if firstTimeLogEnable, logs.count == 1 {
             Log.bleSummary(id: id, tag: tag, msgs: summaryMsgs)
         }
         if logs.count > threshold {

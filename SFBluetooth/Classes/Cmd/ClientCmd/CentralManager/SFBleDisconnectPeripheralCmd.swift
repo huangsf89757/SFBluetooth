@@ -17,7 +17,7 @@ public class SFBleDisconnectPeripheralCmd: SFBleCentralManagerCmd {
     public let peripheral: CBPeripheral
     
     // MARK: life cycle
-    public init(name: String, bleCentralManager: SFBleCentralManager, peripheral: CBPeripheral) {
+    public init(bleCentralManager: SFBleCentralManager, peripheral: CBPeripheral) {
         self.peripheral = peripheral
         super.init(name: "connectPeripheral", bleCentralManager: bleCentralManager)
     }

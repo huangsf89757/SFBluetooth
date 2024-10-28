@@ -17,7 +17,7 @@ public class SFBleStopScanCmd: SFBleCentralManagerCmd {
     
     
     // MARK: life cycle
-    public override init(name: String, bleCentralManager: SFBleCentralManager) {
+    public init(bleCentralManager: SFBleCentralManager) {
         super.init(name: "stopScan", bleCentralManager: bleCentralManager)
     }
     

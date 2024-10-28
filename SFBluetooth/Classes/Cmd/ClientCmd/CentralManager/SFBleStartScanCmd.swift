@@ -23,9 +23,9 @@ public class SFBleStartScanCmd: SFBleCentralManagerCmd {
     }
     
     // MARK: func
-    public override func excute() {
+    public override func execute() {
         onStart()
-        super.excute()
+        super.execute()
         bleCentralManager.scanForPeripherals(id: id, services: services, options: options)
         onDoing()
     }

@@ -23,9 +23,9 @@ public class SFBleDiscoverDescriptorsCmd: SFBlePeripheralCmd {
     }
     
     // MARK: func
-    public override func excute() {
+    public override func execute() {
         onStart()
-        super.excute()
+        super.execute()
         blePeripheral.discoverDescriptors(id: id, for: characteristic)
         onDoing()
     }

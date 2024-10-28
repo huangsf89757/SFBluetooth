@@ -24,9 +24,9 @@ public class SFBleConnectPeripheralCmd: SFBleCentralManagerCmd {
     }
     
     // MARK: func
-    public override func excute() {
+    public override func execute() {
         onStart()
-        super.excute()
+        super.execute()
         bleCentralManager.connect(id: id, peripheral: peripheral, options: options)
         onDoing()
     }

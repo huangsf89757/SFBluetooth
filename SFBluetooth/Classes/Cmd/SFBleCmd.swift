@@ -30,49 +30,39 @@ public class SFBleCmd {
     /// 插件
     public var plugins: [SFBleCmdPlugin] = [SFBleCmdLogPlugin()]
     /// 成功回调
-    public private(set) var success: SFBleSuccess
+    public private(set) var success: SFBleSuccess?
     /// 失败回调
-    public private(set) var failure: SFBleFailure
+    public private(set) var failure: SFBleFailure?
+    /// continuation
+    public private(set) var continuation: CheckedContinuation<(data: Any?, msg: String?), Error>?
     
     
     // MARK: life cycle
-    public init(type: SFBleCmdType, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(type: SFBleCmdType) {
         self.type = type
-        
-        self.success = success
-        self.failure = failure
     }
     
-    // MARK: func
-    open func excute() {
+    // MARK: execute
+    /// 执行方式
+    open func execute() {
         self.id = UUID()
+    }
+    
+    /// 回调方式
+    public func executeCallback(success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+        self.success = success
+        self.failure = failure
+        self.execute()
+    }
+    /// async / await 方式
+    public func executeAsync() async throws -> (data: Any?, msg: String?) {
+        return try await withCheckedThrowingContinuation { continuation in
+            self.continuation = continuation
+            self.execute()
+        }
     }
 }
 
-// TODO: 使用async/await改进代码，避免无限嵌套
-/*
- let cmd1 = SFBleCmd(type: .client("cmd1")) { data, msg in
-     let cmd2 = SFBleCmd(type: .client("cmd2")) { data, msg in
-         let cmd3 = SFBleCmd(type: .client("cmd3")) { data, msg in
-             let cmd4 = SFBleCmd(type: .client("cmd4")) { data, msg in
-                 print("cmd4 success")
-             } failure: { error in
-                 print("cmd4 failure")
-             }
-             cmd4.excute()
-         } failure: { error in
-             print("cmd3 failure")
-         }
-         cmd3.excute()
-     } failure: { error in
-         print("cmd2 failure")
-     }
-     cmd2.excute()
- } failure: { error in
-     print("cmd1 failure")
- }
- cmd1.excute()
- */
 
 // MARK: - SFBleProcess
 public enum SFBleProcess {
@@ -82,6 +72,7 @@ public enum SFBleProcess {
     case doing
     case end
 }
+
 extension SFBleCmd {
     public func onStart(msg: String? = nil) {
         self.process = .start
@@ -106,13 +97,15 @@ extension SFBleCmd {
         plugins.forEach { plugin in
             plugin.onSuccess(type: type, data: data, msg: msg)
         }
-        success(data, msg)
+        success?(data, msg)
+        continuation?.resume(returning: (data, msg))
     }
     public func onFailure(error: SFBleCmdError) {
         self.process = .end
         plugins.forEach { plugin in
             plugin.onFailure(type: type, error: error)
         }
-        failure(error)
+        failure?(error)
+        continuation?.resume(throwing: error)
     }
 }

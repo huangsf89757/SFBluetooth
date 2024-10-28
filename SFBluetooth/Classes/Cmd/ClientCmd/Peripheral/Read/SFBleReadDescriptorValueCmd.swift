@@ -23,9 +23,9 @@ public class SFBleReadDescriptorValueCmd: SFBlePeripheralCmd {
     }
     
     // MARK: func
-    public override func excute() {
+    public override func execute() {
         onStart()
-        super.excute()
+        super.execute()
         blePeripheral.readValue(id: id, for: descriptor)
         onDoing()
     }

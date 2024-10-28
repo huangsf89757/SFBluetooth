@@ -26,8 +26,8 @@ public class SFBleCentralManagerCmd: SFBleClientCmd {
     }
     
     // MARK: func
-    open override func excute() {
-        super.excute()
+    open override func execute() {
+        super.execute()
         let centralManagerState = bleCentralManager.centralManager.state
         guard centralManagerState == .poweredOn else {
             onFailure(error: .client(.centralManager(.state("蓝牙未开启 state: \(centralManagerState.sf.description)"))))

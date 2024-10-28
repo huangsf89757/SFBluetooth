@@ -19,9 +19,9 @@ public class SFBleReadRssiCmd: SFBlePeripheralCmd {
     }
     
     // MARK: func
-    public override func excute() {
+    public override func execute() {
         onStart()
-        super.excute()
+        super.execute()
         blePeripheral.readRSSI(id: id)
         onDoing()
     }

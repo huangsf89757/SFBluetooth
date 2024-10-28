@@ -26,8 +26,8 @@ public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
     }
     
     // MARK: func
-    open override func excute() {
-        super.excute()
+    open override func execute() {
+        super.execute()
         let peripheralState = blePeripheral.peripheral.state
         guard peripheralState == .connected else {
             onFailure(error: .client(.centralManager(.state("外设不在连接中状态。state: \(peripheralState.sf.description)"))))

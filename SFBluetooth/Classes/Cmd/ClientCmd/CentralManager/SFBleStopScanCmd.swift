@@ -22,9 +22,9 @@ public class SFBleStopScanCmd: SFBleCentralManagerCmd {
     }
     
     // MARK: func
-    public override func excute() {
+    public override func execute() {
         onStart()
-        super.excute()
+        super.execute()
         bleCentralManager.stopScan(id: id)
         onDoing()
         onSuccess(data: nil)

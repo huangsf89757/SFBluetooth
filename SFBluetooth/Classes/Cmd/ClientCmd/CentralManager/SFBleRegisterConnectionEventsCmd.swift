@@ -22,14 +22,10 @@ public class SFBleRegisterConnectionEventsCmd: SFBleCentralManagerCmd {
     }
     
     // MARK: func
-    public override func excute() {
+    public override func execute() {
         onStart()
-        super.excute()
-        if #available(iOS 13.0, *) {
-            bleCentralManager.registerForConnectionEvents(id: id, options: options)
-        } else {
-            onFailure(error: .client(.centralManager(.event("iOS系统必须 >= 13.0"))))
-        }
+        super.execute()
+        bleCentralManager.registerForConnectionEvents(id: id, options: options)
         onDoing()
     }
     

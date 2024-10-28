@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - SFBleCmdErrorProtocol
-public protocol SFBleCmdErrorProtocol {
+public protocol SFBleCmdErrorProtocol: Error {
     var code: Int {get}
     var msg: String {get}
 }

@@ -22,9 +22,9 @@ public class SFBleDiscoverServicesCmd: SFBlePeripheralCmd {
     }
     
     // MARK: func
-    public override func excute() {
+    public override func execute() {
         onStart()
-        super.excute()
+        super.execute()
         blePeripheral.discoverServices(id: id, serviceUUIDs: serviceUUIDs)
         onDoing()
     }

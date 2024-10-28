@@ -19,9 +19,9 @@ public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
     public private(set) var blePeripheral: SFBlePeripheral
     
     // MARK: life cycle
-    public init(name: String, bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(name: String, bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral) {
         self.blePeripheral = blePeripheral
-        super.init(name: name, bleCentralManager: bleCentralManager, success: success, failure: failure)
+        super.init(name: name, bleCentralManager: bleCentralManager)
         self.configBlePeripheralCallback()
     }
     
@@ -43,7 +43,7 @@ public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
     // MARK: peripheral
     open func peripheralDidUpdateState(peripheral: CBPeripheral, state: CBPeripheralState) -> () {
         if state != .connected {
-            failure(.client(.centralManager(.state("外设状态变更。state: \(state.sf.description)"))))
+            onFailure(error: .client(.centralManager(.state("外设状态变更。state: \(state.sf.description)"))))
             return
         }
     }

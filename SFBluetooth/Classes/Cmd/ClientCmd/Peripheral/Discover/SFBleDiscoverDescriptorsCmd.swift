@@ -17,9 +17,9 @@ public class SFBleDiscoverDescriptorsCmd: SFBlePeripheralCmd {
     public let characteristic: CBCharacteristic
     
     // MARK: life cycle
-    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, characteristic: CBCharacteristic, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, characteristic: CBCharacteristic) {
         self.characteristic = characteristic
-        super.init(name: "discoverDescriptors", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
+        super.init(name: "discoverDescriptors", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
     // MARK: func

@@ -14,8 +14,8 @@ import SFExtension
 // MARK: - SFBleReadRssiCmd
 public class SFBleReadRssiCmd: SFBlePeripheralCmd {
     // MARK: life cycle
-    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
-        super.init(name: "readRSSI", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
+    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral) {
+        super.init(name: "readRSSI", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
     // MARK: func

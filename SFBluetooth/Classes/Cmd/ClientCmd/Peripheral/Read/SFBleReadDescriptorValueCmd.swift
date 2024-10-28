@@ -17,9 +17,9 @@ public class SFBleReadDescriptorValueCmd: SFBlePeripheralCmd {
     public let descriptor: CBDescriptor
     
     // MARK: life cycle
-    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, descriptor: CBDescriptor, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, descriptor: CBDescriptor) {
         self.descriptor = descriptor
-        super.init(name: "readDescriptorValue", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
+        super.init(name: "readDescriptorValue", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
     // MARK: func

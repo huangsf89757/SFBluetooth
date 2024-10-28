@@ -17,8 +17,8 @@ public class SFBleRegisterConnectionEventsCmd: SFBleCentralManagerCmd {
     public var options: [CBConnectionEventMatchingOption : Any]?
     
     // MARK: life cycle
-    public override init(name: String, bleCentralManager: SFBleCentralManager, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
-        super.init(name: "registerConnectionEvents", bleCentralManager: bleCentralManager, success: success, failure: failure)
+    public override init(name: String, bleCentralManager: SFBleCentralManager) {
+        super.init(name: "registerConnectionEvents", bleCentralManager: bleCentralManager)
     }
     
     // MARK: func

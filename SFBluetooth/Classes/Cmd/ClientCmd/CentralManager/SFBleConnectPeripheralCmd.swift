@@ -18,9 +18,9 @@ public class SFBleConnectPeripheralCmd: SFBleCentralManagerCmd {
     public var options: [String: Any]?
     
     // MARK: life cycle
-    public init(name: String, bleCentralManager: SFBleCentralManager, peripheral: CBPeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(name: String, bleCentralManager: SFBleCentralManager, peripheral: CBPeripheral) {
         self.peripheral = peripheral
-        super.init(name: "connectPeripheral", bleCentralManager: bleCentralManager, success: success, failure: failure)
+        super.init(name: "connectPeripheral", bleCentralManager: bleCentralManager)
     }
     
     // MARK: func

@@ -17,9 +17,9 @@ public class SFBleOpenL2CAPChannelCmd: SFBlePeripheralCmd {
     public let PSM: CBL2CAPPSM
     
     // MARK: life cycle
-    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, PSM: CBL2CAPPSM, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, PSM: CBL2CAPPSM) {
         self.PSM = PSM
-        super.init(name: "openL2CAPChannel", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
+        super.init(name: "openL2CAPChannel", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
     // MARK: func

@@ -17,8 +17,8 @@ public class SFBleDiscoverServicesCmd: SFBlePeripheralCmd {
     public var serviceUUIDs: [CBUUID]?
     
     // MARK: life cycle
-    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
-        super.init(name: "discoverServices", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
+    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral) {
+        super.init(name: "discoverServices", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
     // MARK: func

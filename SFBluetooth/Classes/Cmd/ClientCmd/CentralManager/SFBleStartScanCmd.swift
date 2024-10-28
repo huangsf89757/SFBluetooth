@@ -18,8 +18,8 @@ public class SFBleStartScanCmd: SFBleCentralManagerCmd {
     public var options: [String: Any]?
     
     // MARK: life cycle
-    public override init(name: String, bleCentralManager: SFBleCentralManager, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
-        super.init(name: "startScan", bleCentralManager: bleCentralManager, success: success, failure: failure)
+    public override init(name: String, bleCentralManager: SFBleCentralManager) {
+        super.init(name: "startScan", bleCentralManager: bleCentralManager)
     }
     
     // MARK: func

@@ -19,11 +19,11 @@ public class SFBleWriteCharacteristicValueCmd: SFBlePeripheralCmd {
     public let writeType: CBCharacteristicWriteType
     
     // MARK: life cycle
-    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, characteristic: CBCharacteristic, data: Data, writeType: CBCharacteristicWriteType, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, characteristic: CBCharacteristic, data: Data, writeType: CBCharacteristicWriteType) {
         self.characteristic = characteristic
         self.data = data
         self.writeType = writeType
-        super.init(name: "writeCharacteristicValue", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
+        super.init(name: "writeCharacteristicValue", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
     // MARK: func

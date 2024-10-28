@@ -18,10 +18,10 @@ public class SFBleWriteDescriptorValueCmd: SFBlePeripheralCmd {
     public let data: Data
     
     // MARK: life cycle
-    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, descriptor: CBDescriptor, data: Data, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, descriptor: CBDescriptor, data: Data) {
         self.descriptor = descriptor
         self.data = data
-        super.init(name: "writeDescriptorValue", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral, success: success, failure: failure)
+        super.init(name: "writeDescriptorValue", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
     // MARK: func

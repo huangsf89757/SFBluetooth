@@ -35,7 +35,7 @@ public class SFBleDiscoverServicesCmd: SFBlePeripheralCmd {
     // MARK: peripheral
     public override func peripheralDidDiscoverServices(peripheral: CBPeripheral, error: (any Error)?) {
         if let error = error {
-            onFailure(error: .client(.peripheral(.discoverServices(error.localizedDescription))))
+            onFailure(error: .client(.peripheral(.discover(.services(error.localizedDescription)))))
         } else {
             onSuccess(data: peripheral.services)
         }

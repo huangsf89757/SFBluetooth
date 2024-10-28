@@ -14,8 +14,10 @@ import SFExtension
 // MARK: - SFBlePeripheralCmdError
 public enum SFBlePeripheralCmdError: SFBleCmdErrorProtocol {
     case custom(String)
-    case readRSSI(String)
-    case discoverServices(String)
+    case discover(SFBlePeripheralDiscoverCmdError)
+    case read(SFBlePeripheralReadCmdError)
+    case write(SFBlePeripheralWriteCmdError)
+    case L2CAP
     
     public var code: Int {
         return 0
@@ -25,3 +27,28 @@ public enum SFBlePeripheralCmdError: SFBleCmdErrorProtocol {
         return ""
     }
 }
+
+// MARK: - SFBlePeripheralDiscoverCmdError
+public enum SFBlePeripheralDiscoverCmdError {
+    case services(String)
+    case includedServices(String)
+    case characteristics(String)
+    case descriptors(String)
+}
+
+// MARK: - SFBlePeripheralReadCmdError
+public enum SFBlePeripheralReadCmdError {
+    case characteristic(String)
+    case descriptor(String)
+    case rssi(String)
+}
+
+
+// MARK: - SFBlePeripheralWriteCmdError
+public enum SFBlePeripheralWriteCmdError {
+    case characteristic(String)
+    case descriptor(String)
+}
+
+
+

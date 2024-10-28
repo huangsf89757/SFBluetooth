@@ -28,6 +28,6 @@ public class SFBleCmdLogPlugin: SFBleCmdPlugin {
         Log.debug("\(type.name) > success ? \(msg ?? "") data=\(data ?? "nil")")
     }
     public func onFailure(type: SFBleCmdType, error: SFBleCmdError) {
-        Log.debug("\(type.name) > failure ? \(error.msg)(\(error.code)) ")
+        Log.debug("\(type.name) > failure ? error=\(error.msg)(\(error.code)) ")
     }
 }

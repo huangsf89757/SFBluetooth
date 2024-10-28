@@ -28,7 +28,7 @@ public class SFBleRegisterConnectionEventsCmd: SFBleCentralManagerCmd {
         if #available(iOS 13.0, *) {
             bleCentralManager.registerForConnectionEvents(id: id, options: options)
         } else {
-            onFailure(error: .client(.centralManager(.connectionEvent("iOS系统必须 >= 13.0"))))
+            onFailure(error: .client(.centralManager(.event("iOS系统必须 >= 13.0"))))
         }
         onDoing()
     }

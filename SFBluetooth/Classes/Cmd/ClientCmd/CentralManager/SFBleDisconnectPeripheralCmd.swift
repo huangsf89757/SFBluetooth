@@ -14,10 +14,11 @@ import SFExtension
 // MARK: - SFBleDisconnectPeripheralCmd
 public class SFBleDisconnectPeripheralCmd: SFBleCentralManagerCmd {
     // MARK: var
-    public var peripheral: CBPeripheral?
+    public let peripheral: CBPeripheral
     
     // MARK: life cycle
-    public override init(name: String, bleCentralManager: SFBleCentralManager, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(name: String, bleCentralManager: SFBleCentralManager, peripheral: CBPeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+        self.peripheral = peripheral
         super.init(name: "connectPeripheral", bleCentralManager: bleCentralManager, success: success, failure: failure)
     }
     
@@ -25,10 +26,6 @@ public class SFBleDisconnectPeripheralCmd: SFBleCentralManagerCmd {
     public override func excute() {
         onStart()
         super.excute()
-        guard let peripheral = peripheral else {
-            onFailure(error: .client(.centralManager(.discoverPeripheral("peripheral = nil"))))
-            return
-        }
         bleCentralManager.disconnect(id: id, peripheral: peripheral)
         onDoing()
     }

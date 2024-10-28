@@ -14,11 +14,12 @@ import SFExtension
 // MARK: - SFBleConnectPeripheralCmd
 public class SFBleConnectPeripheralCmd: SFBleCentralManagerCmd {
     // MARK: var
-    public var peripheral: CBPeripheral?
+    public let peripheral: CBPeripheral
     public var options: [String: Any]?
     
     // MARK: life cycle
-    public override init(name: String, bleCentralManager: SFBleCentralManager, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public init(name: String, bleCentralManager: SFBleCentralManager, peripheral: CBPeripheral, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+        self.peripheral = peripheral
         super.init(name: "connectPeripheral", bleCentralManager: bleCentralManager, success: success, failure: failure)
     }
     
@@ -26,10 +27,6 @@ public class SFBleConnectPeripheralCmd: SFBleCentralManagerCmd {
     public override func excute() {
         onStart()
         super.excute()
-        guard let peripheral = peripheral else {
-            onFailure(error: .client(.centralManager(.connectPeripheral("peripheral = nil"))))
-            return
-        }
         bleCentralManager.connect(id: id, peripheral: peripheral, options: options)
         onDoing()
     }
@@ -39,7 +36,7 @@ public class SFBleConnectPeripheralCmd: SFBleCentralManagerCmd {
         onSuccess(data: nil)
     }
     public override func centralManagerDidFailToConnectPeripheral(peripheral: CBPeripheral, error: (Error)?) {
-        onFailure(error: .client(.centralManager(.connectPeripheral(error?.localizedDescription ?? "connect failed"))))
+        onFailure(error: .client(.centralManager(.connect(error?.localizedDescription ?? "unknown error"))))
     }
     
 }

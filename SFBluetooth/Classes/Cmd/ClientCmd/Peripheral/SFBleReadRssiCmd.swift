@@ -32,7 +32,7 @@ public class SFBleReadRssiCmd: SFBlePeripheralCmd {
     // MARK: peripheral
     public override func peripheralDidReadRSSI(peripheral: CBPeripheral, RSSI: NSNumber, error: (any Error)?) -> () {
         if let error = error {
-            onFailure(error: .client(.peripheral(.readRSSI(error.localizedDescription))))
+            onFailure(error: .client(.peripheral(.read(.rssi(error.localizedDescription)))))
         } else {
             onSuccess(data: RSSI)
         }

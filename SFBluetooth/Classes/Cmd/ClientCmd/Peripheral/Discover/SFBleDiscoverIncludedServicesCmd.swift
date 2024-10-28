@@ -14,8 +14,8 @@ import SFExtension
 // MARK: - SFBleDiscoverIncludedServicesCmd
 public class SFBleDiscoverIncludedServicesCmd: SFBlePeripheralCmd {
     // MARK: var
-    public var includedServiceUUIDs: [CBUUID]?
     public let service: CBService
+    public var includedServiceUUIDs: [CBUUID]?
     
     // MARK: life cycle
     public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, service: CBService, success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {

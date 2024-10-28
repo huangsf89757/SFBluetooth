@@ -17,7 +17,7 @@ public enum SFBlePeripheralCmdError: SFBleCmdErrorProtocol {
     case discover(SFBlePeripheralDiscoverCmdError)
     case read(SFBlePeripheralReadCmdError)
     case write(SFBlePeripheralWriteCmdError)
-    case L2CAP
+    case L2CAP(String)
     
     public var code: Int {
         return 0

@@ -2,24 +2,15 @@
 //  SFBleCmdPlugin.swift
 //  SFBluetooth
 //
-//  Created by hsf on 2024/10/24.
+//  Created by hsf on 2024/10/29.
 //
 
 import Foundation
+import CoreBluetooth
+// Basic
+import SFExtension
+// Server
+import SFLogger
 
 // MARK: - SFBleCmdPlugin
-public protocol SFBleCmdPlugin {
-    func onStart(type: SFBleCmdType, msg: String?)
-    func onWaiting(type: SFBleCmdType, msg: String?)
-    func onDoing(type: SFBleCmdType, msg: String?)
-    func onSuccess(type: SFBleCmdType, data: Any?, msg: String?)
-    func onFailure(type: SFBleCmdType, error: SFBleCmdError)
-}
-
-extension SFBleCmdPlugin {
-    func onStart(type: SFBleCmdType, msg: String?) {}
-    func onWaiting(type: SFBleCmdType, msg: String?) {}
-    func onDoing(type: SFBleCmdType, msg: String?) {}
-    func onSuccess(type: SFBleCmdType, data: Any?, msg: String?) {}
-    func onFailure(type: SFBleCmdType, error: SFBleCmdError) {}
-}
+public class SFBleCmdPlugin: SFBleCmdProcess {}

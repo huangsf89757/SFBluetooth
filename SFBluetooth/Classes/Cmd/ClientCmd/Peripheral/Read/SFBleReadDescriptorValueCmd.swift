@@ -24,10 +24,10 @@ public class SFBleReadDescriptorValueCmd: SFBlePeripheralCmd {
     
     // MARK: func
     public override func execute() {
-        onStart()
+        onStart(type: type)
         super.execute()
         blePeripheral.readValue(id: id, for: descriptor)
-        onDoing()
+        onDoing(type: type)
     }
     
     // MARK: centralManager
@@ -36,9 +36,9 @@ public class SFBleReadDescriptorValueCmd: SFBlePeripheralCmd {
     // MARK: peripheral
     public override func peripheralDidUpdateValueForDescriptor(peripheral: CBPeripheral, descriptor: CBDescriptor, error: (any Error)?) {
         if let error = error {
-            onFailure(error: .client(.peripheral(.read(.descriptor(error.localizedDescription)))))
+            onFailure(type: type, error: .client(.peripheral(.read(.descriptor(error.localizedDescription)))))
         } else {
-            onSuccess(data: descriptor.value)
+            onSuccess(type: type, data: descriptor.value)
         }
     }
 }

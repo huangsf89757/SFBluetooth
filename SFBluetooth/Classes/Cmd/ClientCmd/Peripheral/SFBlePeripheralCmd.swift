@@ -26,24 +26,24 @@ public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
     }
     
     // MARK: func
-    open override func execute() {
-        super.execute()
+    public override func check() -> Bool {
         let peripheralState = blePeripheral.peripheral.state
         guard peripheralState == .connected else {
-            onFailure(error: .client(.centralManager(.state("外设不在连接中状态。state: \(peripheralState.sf.description)"))))
-            return
+            onFailure(type: type, error: .client(.centralManager(.state("外设不在连接中状态。state: \(peripheralState.sf.description)"))))
+            return false
         }
         let isScanning = bleCentralManager.centralManager.isScanning
         if isScanning {
-            onFailure(error: .client(.centralManager(.scan("当前扫描中，请先停止扫描。"))))
-            return
+            onFailure(type: type, error: .client(.centralManager(.scan("当前扫描中，请先停止扫描。"))))
+            return false
         }
+        return true
     }
     
     // MARK: peripheral
     open func peripheralDidUpdateState(peripheral: CBPeripheral, state: CBPeripheralState) -> () {
         if state != .connected {
-            onFailure(error: .client(.centralManager(.state("外设状态变更。state: \(state.sf.description)"))))
+            onFailure(type: type, error: .client(.centralManager(.state("外设状态变更。state: \(state.sf.description)"))))
             return
         }
     }

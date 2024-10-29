@@ -26,19 +26,22 @@ public class SFBleCentralManagerCmd: SFBleClientCmd {
     }
     
     // MARK: func
-    open override func execute() {
-        super.execute()
+    public override func check() -> Bool {
+        guard super.check() else {
+            return false
+        }
         let centralManagerState = bleCentralManager.centralManager.state
         guard centralManagerState == .poweredOn else {
-            onFailure(error: .client(.centralManager(.state("蓝牙未开启 state: \(centralManagerState.sf.description)"))))
-            return
+            onFailure(type: type, error: .client(.centralManager(.state("蓝牙未开启 state: \(centralManagerState.sf.description)"))))
+            return false
         }
+        return true
     }
     
     // MARK: centralManager
     open func centralManagerDidUpdateState(state: CBManagerState) {
         if state != .poweredOn {
-            onFailure(error: .client(.centralManager(.state("蓝牙状态变更 state: \(state.sf.description)"))))
+            onFailure(type: type, error: .client(.centralManager(.state("蓝牙状态变更 state: \(state.sf.description)"))))
         }
     }
     open func centralManagerDidUpdateIsScanning(isScanning: Bool) {}

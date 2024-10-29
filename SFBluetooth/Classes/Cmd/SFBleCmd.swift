@@ -25,10 +25,9 @@ public class SFBleCmd {
     public var type: SFBleCmdType
     /// 唯一标识
     public private(set) var id = UUID()
-    /// 进程
-    public private(set) var process: SFBleProcess = .none
     /// 插件
     public var plugins: [SFBleCmdPlugin] = [SFBleCmdLogPlugin()]
+    
     /// 成功回调
     public private(set) var success: SFBleSuccess?
     /// 失败回调
@@ -43,19 +42,27 @@ public class SFBleCmd {
     }
     
     // MARK: execute
-    /// 执行方式
+    /// 检查前提条件
+    open func check() -> Bool {
+        return true
+    }
+    /// 执行
     open func execute() {
+        guard check() else {
+//            onFailure(type: type, error: .custom("不满足前提条件")) // !!!: 注意这里会多回调一次
+            return
+        }
         self.id = UUID()
     }
     
     /// 回调方式
-    public func executeCallback(success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public final func executeCallback(success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
         self.success = success
         self.failure = failure
         self.execute()
     }
     /// async / await 方式
-    public func executeAsync() async throws -> (data: Any?, msg: String?) {
+    public final func executeAsync() async throws -> (data: Any?, msg: String?) {
         return try await withCheckedThrowingContinuation { continuation in
             self.continuation = continuation
             self.execute()
@@ -64,44 +71,31 @@ public class SFBleCmd {
 }
 
 
-// MARK: - SFBleProcess
-public enum SFBleProcess {
-    case none
-    case start
-    case waiting
-    case doing
-    case end
-}
-
-extension SFBleCmd {
-    public func onStart(msg: String? = nil) {
-        self.process = .start
+// MARK: - SFBleCmdProcess
+extension SFBleCmd: SFBleCmdProcess {
+    public func onStart(type: SFBleCmdType, msg: String? = nil) {
         plugins.forEach { plugin in
             plugin.onStart(type: type, msg: msg)
         }
     }
-    public func onWaiting(msg: String? = nil) {
-        self.process = .waiting
+    public func onWaiting(type: SFBleCmdType, msg: String? = nil) {
         plugins.forEach { plugin in
             plugin.onWaiting(type: type, msg: msg)
         }
     }
-    public func onDoing(msg: String? = nil) {
-        self.process = .doing
+    public func onDoing(type: SFBleCmdType, msg: String? = nil) {
         plugins.forEach { plugin in
             plugin.onDoing(type: type, msg: msg)
         }
     }
-    public func onSuccess(data: Any?, msg: String? = nil) {
-        self.process = .end
+    public func onSuccess(type: SFBleCmdType, data: Any? = nil, msg: String? = nil) {
         plugins.forEach { plugin in
             plugin.onSuccess(type: type, data: data, msg: msg)
         }
         success?(data, msg)
         continuation?.resume(returning: (data, msg))
     }
-    public func onFailure(error: SFBleCmdError) {
-        self.process = .end
+    public func onFailure(type: SFBleCmdType, error: SFBleCmdError) {
         plugins.forEach { plugin in
             plugin.onFailure(type: type, error: error)
         }

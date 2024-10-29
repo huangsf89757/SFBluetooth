@@ -23,15 +23,15 @@ public class SFBleRegisterConnectionEventsCmd: SFBleCentralManagerCmd {
     
     // MARK: func
     public override func execute() {
-        onStart()
+        onStart(type: type)
         super.execute()
         bleCentralManager.registerForConnectionEvents(id: id, options: options)
-        onDoing()
+        onDoing(type: type)
     }
     
     // MARK: centralManager
     public override func centralManagerDidOccurConnectionEvents(peripheral: CBPeripheral, event: CBConnectionEvent) {
-        onSuccess(data: (peripheral, event))
+        onSuccess(type: type, data: (peripheral, event))
     }
     
 }

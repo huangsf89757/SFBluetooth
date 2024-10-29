@@ -24,10 +24,10 @@ public class SFBleReadCharacteristicValueCmd: SFBlePeripheralCmd {
     
     // MARK: func
     public override func execute() {
-        onStart()
+        onStart(type: type)
         super.execute()
         blePeripheral.readValue(id: id, for: characteristic)
-        onDoing()
+        onDoing(type: type)
     }
     
     // MARK: centralManager
@@ -36,9 +36,9 @@ public class SFBleReadCharacteristicValueCmd: SFBlePeripheralCmd {
     // MARK: peripheral
     public override func peripheralDidUpdateValueForCharacteristic(peripheral: CBPeripheral, characteristic: CBCharacteristic, error: (any Error)?) {
         if let error = error {
-            onFailure(error: .client(.peripheral(.read(.descriptor(error.localizedDescription)))))
+            onFailure(type: type, error: .client(.peripheral(.read(.descriptor(error.localizedDescription)))))
         } else {
-            onSuccess(data: characteristic.value)
+            onSuccess(type: type, data: characteristic.value)
         }
     }
 }

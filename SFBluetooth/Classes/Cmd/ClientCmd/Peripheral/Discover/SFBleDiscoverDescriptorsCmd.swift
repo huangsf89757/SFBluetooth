@@ -24,10 +24,10 @@ public class SFBleDiscoverDescriptorsCmd: SFBlePeripheralCmd {
     
     // MARK: func
     public override func execute() {
-        onStart()
+        onStart(type: type)
         super.execute()
         blePeripheral.discoverDescriptors(id: id, for: characteristic)
-        onDoing()
+        onDoing(type: type)
     }
     
     // MARK: centralManager
@@ -36,9 +36,9 @@ public class SFBleDiscoverDescriptorsCmd: SFBlePeripheralCmd {
     // MARK: peripheral
     public override func peripheralDidDiscoverDescriptorsForCharacteristic(peripheral: CBPeripheral, characteristic: CBCharacteristic, error: (any Error)?) {
         if let error = error {
-            onFailure(error: .client(.peripheral(.discover(.descriptors(error.localizedDescription)))))
+            onFailure(type: type, error: .client(.peripheral(.discover(.descriptors(error.localizedDescription)))))
         } else {
-            onSuccess(data: characteristic.descriptors)
+            onSuccess(type: type, data: characteristic.descriptors)
         }
     }
 }

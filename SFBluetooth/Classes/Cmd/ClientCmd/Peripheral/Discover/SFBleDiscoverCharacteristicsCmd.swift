@@ -25,10 +25,10 @@ public class SFBleDiscoverCharacteristicsCmd: SFBlePeripheralCmd {
     
     // MARK: func
     public override func execute() {
-        onStart()
+        onStart(type: type)
         super.execute()
         blePeripheral.discoverCharacteristics(id: id, characteristicUUIDs: characteristicUUIDs, for: service)
-        onDoing()
+        onDoing(type: type)
     }
     
     // MARK: centralManager
@@ -37,9 +37,9 @@ public class SFBleDiscoverCharacteristicsCmd: SFBlePeripheralCmd {
     // MARK: peripheral
     public override func peripheralDidDiscoverCharacteristics(peripheral: CBPeripheral, service: CBService, error: (any Error)?) {
         if let error = error {
-            onFailure(error: .client(.peripheral(.discover(.characteristics(error.localizedDescription)))))
+            onFailure(type: type, error: .client(.peripheral(.discover(.characteristics(error.localizedDescription)))))
         } else {
-            onSuccess(data: service.characteristics)
+            onSuccess(type: type, data: service.characteristics)
         }
     }
 }

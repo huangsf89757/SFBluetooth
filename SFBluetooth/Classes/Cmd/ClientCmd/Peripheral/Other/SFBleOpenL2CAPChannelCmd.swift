@@ -24,10 +24,10 @@ public class SFBleOpenL2CAPChannelCmd: SFBlePeripheralCmd {
     
     // MARK: func
     public override func execute() {
-        onStart()
+        onStart(type: type)
         super.execute()
         blePeripheral.openL2CAPChannel(id: id, PSM: PSM)
-        onDoing()
+        onDoing(type: type)
     }
     
     // MARK: centralManager
@@ -36,9 +36,9 @@ public class SFBleOpenL2CAPChannelCmd: SFBlePeripheralCmd {
     // MARK: peripheral
     public override func peripheralDidOpenChannel(peripheral: CBPeripheral, channel: CBL2CAPChannel?, error: (any Error)?) {
         if let error = error {
-            onFailure(error: .client(.peripheral(.L2CAP(error.localizedDescription))))
+            onFailure(type: type, error: .client(.peripheral(.L2CAP(error.localizedDescription))))
         } else {
-            onSuccess(data: channel)
+            onSuccess(type: type, data: channel)
         }
     }
 }

@@ -25,18 +25,18 @@ public class SFBleConnectPeripheralCmd: SFBleCentralManagerCmd {
     
     // MARK: func
     public override func execute() {
-        onStart()
+        onStart(type: type)
         super.execute()
         bleCentralManager.connect(id: id, peripheral: peripheral, options: options)
-        onDoing()
+        onDoing(type: type)
     }
     
     // MARK: centralManager
     public override func centralManagerDidConnectPeripheral(peripheral: CBPeripheral) {
-        onSuccess(data: nil)
+        onSuccess(type: type)
     }
     public override func centralManagerDidFailToConnectPeripheral(peripheral: CBPeripheral, error: (Error)?) {
-        onFailure(error: .client(.centralManager(.connect(error?.localizedDescription ?? "unknown error"))))
+        onFailure(type: type, error: .client(.centralManager(.connect(error?.localizedDescription ?? "unknown error"))))
     }
     
 }

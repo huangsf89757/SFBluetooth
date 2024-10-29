@@ -20,10 +20,10 @@ public class SFBleReadRssiCmd: SFBlePeripheralCmd {
     
     // MARK: func
     public override func execute() {
-        onStart()
+        onStart(type: type)
         super.execute()
         blePeripheral.readRSSI(id: id)
-        onDoing()
+        onDoing(type: type)
     }
     
     // MARK: centralManager
@@ -32,9 +32,9 @@ public class SFBleReadRssiCmd: SFBlePeripheralCmd {
     // MARK: peripheral
     public override func peripheralDidReadRSSI(peripheral: CBPeripheral, RSSI: NSNumber, error: (any Error)?) -> () {
         if let error = error {
-            onFailure(error: .client(.peripheral(.read(.rssi(error.localizedDescription)))))
+            onFailure(type: type, error: .client(.peripheral(.read(.rssi(error.localizedDescription)))))
         } else {
-            onSuccess(data: RSSI)
+            onSuccess(type: type, data: RSSI)
         }
     }
 }

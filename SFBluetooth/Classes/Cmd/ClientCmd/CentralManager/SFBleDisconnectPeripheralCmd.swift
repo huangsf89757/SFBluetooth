@@ -24,18 +24,18 @@ public class SFBleDisconnectPeripheralCmd: SFBleCentralManagerCmd {
     
     // MARK: func
     public override func execute() {
-        onStart()
+        onStart(type: type)
         super.execute()
         bleCentralManager.disconnect(id: id, peripheral: peripheral)
-        onDoing()
+        onDoing(type: type)
     }
     
     // MARK: centralManager
     public override func centralManagerDidDisconnectPeripheral(peripheral: CBPeripheral, error: (Error)?) {
-        onSuccess(data: nil, msg: error?.localizedDescription)
+        onSuccess(type: type, msg: error?.localizedDescription)
     }
     public override func centralManagerDidDisconnectPeripheral(peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (Error)?) {
-        onSuccess(data: nil, msg: error?.localizedDescription)
+        onSuccess(type: type, msg: error?.localizedDescription)
     }
     
 }

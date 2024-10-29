@@ -6,3 +6,25 @@
 //
 
 import Foundation
+import CoreBluetooth
+// Basic
+import SFExtension
+// Server
+import SFLogger
+
+
+// MARK: - SFBleRequestError
+public enum SFBleRequestError: SFBleCmdErrorProtocol {
+    case custom(String)
+//    case client(SFBleClientCmdError)
+//    case server(SFBleServerCmdError)
+
+    public var code: Int {
+       return 0
+    }
+    
+    public var msg: String {
+        return ""
+    }
+}
+

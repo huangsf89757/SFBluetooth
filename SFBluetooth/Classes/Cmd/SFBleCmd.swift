@@ -13,9 +13,9 @@ import SFExtension
 import SFLogger
 
 
-// MARK: - SFBleResponse
-public typealias SFBleSuccess = (_ data: Any?, _ msg: String?) -> Void
-public typealias SFBleFailure = (_ error: SFBleCmdError) -> Void
+// MARK: - SFBleCmdResponse
+public typealias SFBleCmdSuccess = (_ data: Any?, _ msg: String?) -> Void
+public typealias SFBleCmdFailure = (_ error: SFBleCmdError) -> Void
 
 
 // MARK: - SFBleCmd
@@ -29,9 +29,9 @@ public class SFBleCmd {
     public var plugins: [SFBleCmdPlugin] = [SFBleCmdLogPlugin()]
     
     /// 成功回调
-    public private(set) var success: SFBleSuccess?
+    public private(set) var success: SFBleCmdSuccess?
     /// 失败回调
-    public private(set) var failure: SFBleFailure?
+    public private(set) var failure: SFBleCmdFailure?
     /// continuation
     public private(set) var continuation: CheckedContinuation<(data: Any?, msg: String?), Error>?
     
@@ -56,7 +56,7 @@ public class SFBleCmd {
     }
     
     /// 回调方式
-    public final func executeCallback(success: @escaping SFBleSuccess, failure: @escaping SFBleFailure) {
+    public final func executeCallback(success: @escaping SFBleCmdSuccess, failure: @escaping SFBleCmdFailure) {
         self.success = success
         self.failure = failure
         self.execute()

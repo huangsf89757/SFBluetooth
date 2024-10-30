@@ -45,7 +45,7 @@ public class SFBleDiscoverCharacteristicsCmd: SFBlePeripheralCmd {
             guard let condition = condition else { return }
             let (isMatch, isContinue) = condition(characteristics)
             guard isMatch else { return }
-            onSuccess(type: type, data: characteristics, msg: "发现特征成功", isDone: !isContinue)
+            onSuccess(type: type, data: characteristics, msg: "did discover characteristics", isDone: !isContinue)
         }
     }
 }

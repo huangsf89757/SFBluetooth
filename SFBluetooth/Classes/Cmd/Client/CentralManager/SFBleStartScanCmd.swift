@@ -34,7 +34,7 @@ public class SFBleStartScanCmd: SFBleCentralManagerCmd {
             return true
         } else {
             if bleCentralManager.centralManager.isScanning {
-                onSuccess(type: type, msg: "正在扫描中")
+                onSuccess(type: type, msg: "centralManager.isScanning is already true")
                 return false
             } else {
                 return true
@@ -51,16 +51,16 @@ public class SFBleStartScanCmd: SFBleCentralManagerCmd {
     // MARK: centralManager
     public override func centralManagerDidUpdateIsScanning(isScanning: Bool) {
         if isScanning {
-            onSuccess(type: type, msg: "开启扫描成功", isDone: false)
+            onSuccess(type: type, msg: "did update centralManager.isScanning(true)", isDone: false)
         } else {
-            onFailure(type: type, error: .client(.centralManager(.scan("扫描状态变更 isScanning=false"))))
+            onFailure(type: type, error: .client(.centralManager(.scan("did update centralManager.isScanning(false)"))))
         }
     }
     public override func centralManagerDidDiscoverPeripheral(peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: NSNumber) {
         guard let condition = condition else { return }
         let (isMatch, isContinue) = condition(peripheral, advertisementData, RSSI)
         guard isMatch else { return }
-        onSuccess(type: type, data: (peripheral, advertisementData, RSSI), msg: "扫描成功", isDone: !isContinue)
+        onSuccess(type: type, data: (peripheral, advertisementData, RSSI), msg: "did discover peripheral", isDone: !isContinue)
     }
     
 }

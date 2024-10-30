@@ -31,7 +31,7 @@ public class SFBleRegisterConnectionEventsCmd: SFBleCentralManagerCmd {
     
     // MARK: centralManager
     public override func centralManagerDidOccurConnectionEvents(peripheral: CBPeripheral, event: CBConnectionEvent) {
-        onSuccess(type: type, data: (peripheral, event))
+        onSuccess(type: type, data: (peripheral, event), msg: "did occur connection event")
     }
     
 }

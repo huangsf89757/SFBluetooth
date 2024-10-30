@@ -27,14 +27,14 @@ public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
     
     // MARK: func
     public override func check() -> Bool {
-        let peripheralState = blePeripheral.peripheral.state
-        guard peripheralState == .connected else {
-            onFailure(type: type, error: .client(.centralManager(.state("外设不在连接中状态。state: \(peripheralState.sf.description)"))))
-            return false
-        }
         let isScanning = bleCentralManager.centralManager.isScanning
         if isScanning {
-            onFailure(type: type, error: .client(.centralManager(.scan("当前扫描中，请先停止扫描。"))))
+            onFailure(type: type, error: .client(.centralManager(.scan("centralManager.isScanning != true. isScanning:\(isScanning)"))))
+            return false
+        }
+        let peripheralState = blePeripheral.peripheral.state
+        guard peripheralState == .connected else {
+            onFailure(type: type, error: .client(.centralManager(.state("peripheral.state != connected. state: \(peripheralState.sf.description)."))))
             return false
         }
         return true
@@ -43,7 +43,7 @@ public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
     // MARK: peripheral
     open func peripheralDidUpdateState(peripheral: CBPeripheral, state: CBPeripheralState) -> () {
         if state != .connected {
-            onFailure(type: type, error: .client(.centralManager(.state("外设状态变更。state: \(state.sf.description)"))))
+            onFailure(type: type, error: .client(.centralManager(.state("did update peripheral.state( \(state.sf.description))."))))
             return
         }
     }
@@ -51,7 +51,7 @@ public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
     open func peripheralDidModifyServices(peripheral: CBPeripheral, invalidatedServices: [CBService]) -> () {}
     open func peripheralDidUpdateRSSI(peripheral: CBPeripheral, error: (any Error)?) -> () {}
     open func peripheralIsReadyToSendWriteWithoutResponse(peripheral: CBPeripheral) -> () {}
-    open func peripheralDidReadRSSI(peripheral: CBPeripheral, RSSI: NSNumber, error: (any Error)?) -> () {}
+    open func peripheralDidReadRssi(peripheral: CBPeripheral, RSSI: NSNumber, error: (any Error)?) -> () {}
     open func peripheralDidDiscoverServices(peripheral: CBPeripheral, error: (any Error)?) -> () {}
     open func peripheralDidDiscoverIncludedServices(peripheral: CBPeripheral, service: CBService, error: (any Error)?) -> () {}
     open func peripheralDidDiscoverCharacteristics(peripheral: CBPeripheral, service: CBService, error: (any Error)?) -> () {}
@@ -90,7 +90,7 @@ extension SFBlePeripheralCmd {
         }
         blePeripheral.didReadRSSI = {
             [weak self] peripheral, RSSI, error in
-            self?.peripheralDidReadRSSI(peripheral: peripheral, RSSI: RSSI, error: error)
+            self?.peripheralDidReadRssi(peripheral: peripheral, RSSI: RSSI, error: error)
         }
         blePeripheral.didDiscoverServices = {
             [weak self] peripheral, error in

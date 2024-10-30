@@ -30,7 +30,7 @@ public class SFBleStopScanCmd: SFBleCentralManagerCmd {
             return true
         } else {
             if !bleCentralManager.centralManager.isScanning {
-                onSuccess(type: type, msg: "已经停止扫描")
+                onSuccess(type: type, msg: "centralManager.isScanning is already false")
                 return false
             } else {
                 return true
@@ -50,7 +50,7 @@ public class SFBleStopScanCmd: SFBleCentralManagerCmd {
         if !isScanning {
             onSuccess(type: type)
         } else {
-            onFailure(type: type, error: .client(.centralManager(.scan("扫描状态变更 isScanning=true"))))
+            onFailure(type: type, error: .client(.centralManager(.scan("did update centralManager.isScanning(true)"))))
         }
     }
     

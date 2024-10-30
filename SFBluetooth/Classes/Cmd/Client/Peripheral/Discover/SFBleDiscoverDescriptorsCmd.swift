@@ -44,7 +44,7 @@ public class SFBleDiscoverDescriptorsCmd: SFBlePeripheralCmd {
             guard let condition = condition else { return }
             let (isMatch, isContinue) = condition(descriptors)
             guard isMatch else { return }
-            onSuccess(type: type, data: descriptors, msg: "发现描述成功", isDone: !isContinue)
+            onSuccess(type: type, data: descriptors, msg: "did discover descriptors", isDone: !isContinue)
         }
     }
 }

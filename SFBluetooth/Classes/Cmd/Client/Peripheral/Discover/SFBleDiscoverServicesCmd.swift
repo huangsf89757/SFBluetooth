@@ -43,7 +43,7 @@ public class SFBleDiscoverServicesCmd: SFBlePeripheralCmd {
             guard let condition = condition else { return }
             let (isMatch, isContinue) = condition(services)
             guard isMatch else { return }
-            onSuccess(type: type, data: services, msg: "发现服务成功", isDone: !isContinue)
+            onSuccess(type: type, data: services, msg: "did discover services", isDone: !isContinue)
         }
     }
 }

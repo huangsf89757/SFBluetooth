@@ -38,7 +38,7 @@ public class SFBleOpenL2CAPChannelCmd: SFBlePeripheralCmd {
         if let error = error {
             onFailure(type: type, error: .client(.peripheral(.L2CAP(error.localizedDescription))))
         } else {
-            onSuccess(type: type, data: channel)
+            onSuccess(type: type, data: channel, msg: "did open channel")
         }
     }
 }

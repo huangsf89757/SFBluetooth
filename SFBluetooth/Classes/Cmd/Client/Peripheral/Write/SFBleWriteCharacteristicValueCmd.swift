@@ -42,7 +42,7 @@ public class SFBleWriteCharacteristicValueCmd: SFBlePeripheralCmd {
         if let error = error {
             onFailure(type: type, error: .client(.peripheral(.write(.descriptor(error.localizedDescription)))))
         } else {
-            onSuccess(type: type, data: characteristic.value)
+            onSuccess(type: type, data: characteristic.value, msg: "did write characteristic value")
         }
     }
 }

@@ -33,7 +33,7 @@ public class SFBleConnectPeripheralCmd: SFBleCentralManagerCmd {
     
     // MARK: centralManager
     public override func centralManagerDidConnectPeripheral(peripheral: CBPeripheral) {
-        onSuccess(type: type)
+        onSuccess(type: type, msg: "did connect perpheral")
     }
     public override func centralManagerDidFailToConnectPeripheral(peripheral: CBPeripheral, error: (Error)?) {
         onFailure(type: type, error: .client(.centralManager(.connect(error?.localizedDescription ?? "unknown error"))))

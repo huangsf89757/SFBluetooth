@@ -38,7 +38,7 @@ public class SFBleReadCharacteristicValueCmd: SFBlePeripheralCmd {
         if let error = error {
             onFailure(type: type, error: .client(.peripheral(.read(.descriptor(error.localizedDescription)))))
         } else {
-            onSuccess(type: type, data: characteristic.value)
+            onSuccess(type: type, data: characteristic.value, msg: "did read characteristic value")
         }
     }
 }

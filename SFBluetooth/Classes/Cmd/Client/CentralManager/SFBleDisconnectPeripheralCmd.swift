@@ -32,10 +32,18 @@ public class SFBleDisconnectPeripheralCmd: SFBleCentralManagerCmd {
     
     // MARK: centralManager
     public override func centralManagerDidDisconnectPeripheral(peripheral: CBPeripheral, error: (Error)?) {
-        onSuccess(type: type, msg: error?.localizedDescription)
+        if let error = error {
+            onFailure(type: type, error: .client(.centralManager(.disconnect(error.localizedDescription))))
+        } else {
+            onSuccess(type: type, msg: "did disconnect peripheral.")
+        }
     }
     public override func centralManagerDidDisconnectPeripheral(peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (Error)?) {
-        onSuccess(type: type, msg: error?.localizedDescription)
+        if let error = error {
+            onFailure(type: type, error: .client(.centralManager(.disconnect(error.localizedDescription))))
+        } else {
+            onSuccess(type: type, msg: "did disconnect peripheral and then reconnect.")
+        }
     }
     
 }

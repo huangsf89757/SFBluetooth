@@ -21,7 +21,7 @@ public typealias SFBleRequestFailure = (_ error: SFBleRequestError) -> Void
 open class SFBleRequest {
     // MARK: var
     /// 类型
-    public var type: SFBleRequestType
+    public let type: SFBleRequestType
     /// 唯一标识
     public private(set) var id = UUID()
     /// 插件
@@ -31,11 +31,11 @@ open class SFBleRequest {
     public private(set) var success: SFBleRequestSuccess?
     /// 失败回调
     public private(set) var failure: SFBleRequestFailure?
-    /// continuation
-    public private(set) var continuation: CheckedContinuation<(data: Any?, msg: String?), Error>?
         
     /// 当前正在执行的cmd
     public private(set) var cmd: SFBleCmd?
+    /// 执行结果
+    public private(set) var result: (Any?, String?)?
     
     // MARK: life cycle
     public init(type: SFBleRequestType) {
@@ -59,21 +59,25 @@ open class SFBleRequest {
     private func doNext() {
         let (isSuccess, cmd) = getNextCmd()
         guard isSuccess else {
-            // failure
+            onFailure(type: type, error: .custom("get next cmd failed"))
             return
         }
         self.cmd = cmd
         guard let cmd = cmd else {
-            // success
+            if let (data, msg) = result {
+                onSuccess(type: type, data: data, msg: msg)
+            } else {
+                onSuccess(type: type)
+            }
             return
         }
-        Task {
-            do {
-                try await cmd.executeAsync()
-                doNext()
-            } catch let error {
-                // failure
+        cmd.executeCallback { [weak self] data, msg, isDone in
+            self?.result = (data, msg)
+            if isDone {
+                self?.doNext()
             }
+        } failure: { [weak self] error in
+            self?.onFailure(type: self?.type!, error: .cmd(error))
         }
     }
 }
@@ -101,13 +105,11 @@ extension SFBleRequest: SFBleRequestProcess {
             plugin.onSuccess(type: type, data: data, msg: msg)
         }
         success?(data, msg)
-        continuation?.resume(returning: (data, msg))
     }
     public func onFailure(type: SFBleRequestType, error: SFBleRequestError) {
         plugins.forEach { plugin in
             plugin.onFailure(type: type, error: error)
         }
         failure?(error)
-        continuation?.resume(throwing: error)
     }
 }

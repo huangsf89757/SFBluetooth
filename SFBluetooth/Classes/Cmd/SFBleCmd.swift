@@ -22,7 +22,7 @@ public typealias SFBleCmdFailure = (_ error: SFBleCmdError) -> Void
 public class SFBleCmd {
     // MARK: var
     /// 类型
-    public var type: SFBleCmdType
+    public let type: SFBleCmdType
     /// 唯一标识
     public private(set) var id = UUID()
     /// 插件

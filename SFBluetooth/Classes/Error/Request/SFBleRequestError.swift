@@ -16,6 +16,7 @@ import SFLogger
 // MARK: - SFBleRequestError
 public enum SFBleRequestError: SFBleCmdErrorProtocol {
     case custom(String)
+    case cmd(SFBleCmdError)
 //    case client(SFBleClientCmdError)
 //    case server(SFBleServerCmdError)
 

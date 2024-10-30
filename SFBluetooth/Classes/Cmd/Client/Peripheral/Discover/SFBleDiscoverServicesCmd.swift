@@ -15,6 +15,8 @@ import SFExtension
 public class SFBleDiscoverServicesCmd: SFBlePeripheralCmd {
     // MARK: var
     public var serviceUUIDs: [CBUUID]?
+    /// (services) -> (isMatch, isContinue)
+    public var condition: ((_ services: [CBService]?) -> (Bool, Bool))?
     
     // MARK: life cycle
     public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral) {
@@ -37,7 +39,11 @@ public class SFBleDiscoverServicesCmd: SFBlePeripheralCmd {
         if let error = error {
             onFailure(type: type, error: .client(.peripheral(.discover(.services(error.localizedDescription)))))
         } else {
-            onSuccess(type: type, data: peripheral.services)
+            let services = peripheral.services
+            guard let condition = condition else { return }
+            let (isMatch, isContinue) = condition(services)
+            guard isMatch else { return }
+            onSuccess(type: type, data: services, msg: "发现服务成功", isDone: !isContinue)
         }
     }
 }

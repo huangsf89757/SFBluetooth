@@ -16,6 +16,8 @@ public class SFBleDiscoverCharacteristicsCmd: SFBlePeripheralCmd {
     // MARK: var
     public let service: CBService
     public var characteristicUUIDs: [CBUUID]?
+    /// (characteristics) -> (isMatch, isContinue)
+    public var condition: ((_ characteristics: [CBCharacteristic]?) -> (Bool, Bool))?
     
     // MARK: life cycle
     public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, service: CBService) {
@@ -39,7 +41,11 @@ public class SFBleDiscoverCharacteristicsCmd: SFBlePeripheralCmd {
         if let error = error {
             onFailure(type: type, error: .client(.peripheral(.discover(.characteristics(error.localizedDescription)))))
         } else {
-            onSuccess(type: type, data: service.characteristics)
+            let characteristics = service.characteristics
+            guard let condition = condition else { return }
+            let (isMatch, isContinue) = condition(characteristics)
+            guard isMatch else { return }
+            onSuccess(type: type, data: characteristics, msg: "发现特征成功", isDone: !isContinue)
         }
     }
 }

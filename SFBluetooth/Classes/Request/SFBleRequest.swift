@@ -47,12 +47,15 @@ open class SFBleRequest {
     open func getStartCmd() -> SFBleCmd? {
         return nil
     }
+   
     open func getNextCmd() -> (Bool, SFBleCmd?) {
         return (false, nil)
     }
+   
     public final func start() {
         doNext()
     }
+   
     private func doNext() {
         let (isSuccess, cmd) = getNextCmd()
         guard isSuccess else {

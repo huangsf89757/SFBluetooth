@@ -14,7 +14,7 @@ import SFLogger
 
 
 // MARK: - SFBleReadRssiRequest
-public class SFBleReadRssiRequest: SFBleRequest {
+public class SFBleReadRssiRequest: SFBleClientRequest {
     // MARK: var
     public var startScanCmd: SFBleStartScanCmd!
     public var stopScanCmd: SFBleStopScanCmd!

@@ -14,7 +14,7 @@ import SFLogger
 
 
 // MARK: - SFBleCmdResponse
-public typealias SFBleCmdSuccess = (_ data: Any?, _ msg: String?) -> Void
+public typealias SFBleCmdSuccess = (_ data: Any?, _ msg: String?, _ isDone: Bool) -> Void
 public typealias SFBleCmdFailure = (_ error: SFBleCmdError) -> Void
 
 
@@ -33,7 +33,8 @@ public class SFBleCmd {
     /// 失败回调
     public private(set) var failure: SFBleCmdFailure?
     /// continuation
-    public private(set) var continuation: CheckedContinuation<(data: Any?, msg: String?), Error>?
+    public private(set) var continuation: AsyncThrowingStream<(data: Any?, msg: String?), Error>.Continuation?
+
     
     
     // MARK: life cycle
@@ -49,7 +50,6 @@ public class SFBleCmd {
     /// 执行
     open func execute() {
         guard check() else {
-//            onFailure(type: type, error: .custom("不满足前提条件")) // !!!: 注意这里会多回调一次
             return
         }
         self.id = UUID()
@@ -61,9 +61,10 @@ public class SFBleCmd {
         self.failure = failure
         self.execute()
     }
+   
     /// async / await 方式
-    public final func executeAsync() async throws -> (data: Any?, msg: String?) {
-        return try await withCheckedThrowingContinuation { continuation in
+    public final func executeAsync() -> AsyncThrowingStream<(data: Any?, msg: String?), Error> {
+        return AsyncThrowingStream { continuation in
             self.continuation = continuation
             self.execute()
         }
@@ -88,18 +89,23 @@ extension SFBleCmd: SFBleCmdProcess {
             plugin.onDoing(type: type, msg: msg)
         }
     }
-    public func onSuccess(type: SFBleCmdType, data: Any? = nil, msg: String? = nil) {
+    public func onSuccess(type: SFBleCmdType, data: Any? = nil, msg: String? = nil, isDone: Bool = true) {
         plugins.forEach { plugin in
-            plugin.onSuccess(type: type, data: data, msg: msg)
+            plugin.onSuccess(type: type, data: data, msg: msg, isDone: isDone)
         }
-        success?(data, msg)
-        continuation?.resume(returning: (data, msg))
+        success?(data, msg, isDone)
+        if isDone {
+            continuation?.yield((data, msg))
+            continuation?.finish()
+        } else {
+            continuation?.yield((data, msg))
+        }
     }
     public func onFailure(type: SFBleCmdType, error: SFBleCmdError) {
         plugins.forEach { plugin in
             plugin.onFailure(type: type, error: error)
         }
         failure?(error)
-        continuation?.resume(throwing: error)
+        continuation?.finish(throwing: error)
     }
 }

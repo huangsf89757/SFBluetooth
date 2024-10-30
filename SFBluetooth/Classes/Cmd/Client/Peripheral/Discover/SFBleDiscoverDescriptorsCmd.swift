@@ -15,6 +15,8 @@ import SFExtension
 public class SFBleDiscoverDescriptorsCmd: SFBlePeripheralCmd {
     // MARK: var
     public let characteristic: CBCharacteristic
+    /// (descriptors) -> (isMatch, isContinue)
+    public var condition: ((_ descriptors: [CBDescriptor]?) -> (Bool, Bool))?
     
     // MARK: life cycle
     public init(bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral, characteristic: CBCharacteristic) {
@@ -38,7 +40,11 @@ public class SFBleDiscoverDescriptorsCmd: SFBlePeripheralCmd {
         if let error = error {
             onFailure(type: type, error: .client(.peripheral(.discover(.descriptors(error.localizedDescription)))))
         } else {
-            onSuccess(type: type, data: characteristic.descriptors)
+            let descriptors = characteristic.descriptors
+            guard let condition = condition else { return }
+            let (isMatch, isContinue) = condition(descriptors)
+            guard isMatch else { return }
+            onSuccess(type: type, data: descriptors, msg: "发现描述成功", isDone: !isContinue)
         }
     }
 }

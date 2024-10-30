@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import CoreBluetooth
+// Basic
+import SFExtension
+// Server
+import SFLogger
+
+
+// MARK: - SFBleClientRequest
+public class SFBleClientRequest: SFBleRequest {
+    
+}

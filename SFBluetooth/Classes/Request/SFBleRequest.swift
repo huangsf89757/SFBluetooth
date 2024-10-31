@@ -104,6 +104,7 @@ open class SFBleRequest {
             }
             return
         }
+        onDoing(type: type, cmd: cmd)
         Task {
             do {
                 for try await (data, msg, isDone) in cmd.executeAsync() {

@@ -18,11 +18,8 @@ public class SFBleRequestLogPlugin: SFBleRequestPlugin {
     func onStart(type: SFBleRequestType, msg: String?) {
         Log.debug("\(type.name) > start ? \(msg ?? "")")
     }
-    func onWaiting(type: SFBleRequestType, msg: String?) {
-        Log.debug("\(type.name) > waiting ? \(msg ?? "")")
-    }
-    func onDoing(type: SFBleRequestType, msg: String?) {
-        Log.debug("\(type.name) > doing ? \(msg ?? "")")
+    func onDoing(type: SFBleRequestType, cmd: SFBleCmd, msg: String?) {
+        Log.debug("\(type.name) > doing ? \(cmd.type.name) \(msg ?? "")")
     }
     func onSuccess(type: SFBleRequestType, data: Any?, msg: String?, isDone: Bool) {
         Log.debug("\(type.name) > success\(isDone ? "" : "[ing]") ? \(msg ?? "") data=\(data ?? "nil")")

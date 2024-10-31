@@ -33,7 +33,7 @@ public class SFBleCmd {
     /// 失败回调
     public private(set) var failure: SFBleCmdFailure?
     /// continuation
-    public private(set) var continuation: AsyncThrowingStream<(data: Any?, msg: String?), Error>.Continuation?
+    public private(set) var continuation: AsyncThrowingStream<(data: Any?, msg: String?, isDone: Bool), Error>.Continuation?
 
     
     
@@ -65,7 +65,7 @@ public class SFBleCmd {
     }
    
     /// async / await 方式
-    public final func executeAsync() -> AsyncThrowingStream<(data: Any?, msg: String?), Error> {
+    public final func executeAsync() -> AsyncThrowingStream<(data: Any?, msg: String?, isDone: Bool), Error> {
         return AsyncThrowingStream { continuation in
             self.continuation = continuation
             self.execute()
@@ -81,11 +81,6 @@ extension SFBleCmd: SFBleCmdProcess {
             plugin.onStart(type: type, msg: msg)
         }
     }
-    public func onWaiting(type: SFBleCmdType, msg: String? = nil) {
-        plugins.forEach { plugin in
-            plugin.onWaiting(type: type, msg: msg)
-        }
-    }
     public func onDoing(type: SFBleCmdType, msg: String? = nil) {
         plugins.forEach { plugin in
             plugin.onDoing(type: type, msg: msg)
@@ -96,12 +91,10 @@ extension SFBleCmd: SFBleCmdProcess {
             plugin.onSuccess(type: type, data: data, msg: msg, isDone: isDone)
         }
         success?(data, msg, isDone)
+        continuation?.yield((data, msg, isDone))
         if isDone {
-            continuation?.yield((data, msg))
             continuation?.finish()
-        } else {
-            continuation?.yield((data, msg))
-        }
+        } 
     }
     public func onFailure(type: SFBleCmdType, error: SFBleCmdError) {
         plugins.forEach { plugin in

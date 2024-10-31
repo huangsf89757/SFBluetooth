@@ -54,13 +54,21 @@ open class SFBleRequest {
         return (false, nil)
     }
     
-    private func doNext() {
+    private func readyCmd() -> Bool {
         let (isSuccess, cmd) = getNextCmd()
         guard isSuccess else {
             onFailure(type: type, error: .custom("get next cmd failed"))
-            return
+            return false
         }
         self.cmd = cmd
+        return true
+    }
+    
+    private func doNextCallback() {
+        guard readyCmd() else {
+            onFailure(type: self.type, error: .custom("ready cmd failed"))
+            return
+        }
         guard let cmd = cmd else {
             if let (data, msg, isDone) = result {
                 onSuccess(type: type, data: data, msg: msg, isDone: isDone)
@@ -69,15 +77,50 @@ open class SFBleRequest {
             }
             return
         }
+        onDoing(type: type, cmd: cmd)
         cmd.executeCallback { [weak self] data, msg, isDone in
             guard let self = self else { return }
             self.result = (data, msg, isDone)
+            self.onSuccess(type: self.type, data: data, msg: msg, isDone: isDone)
             if isDone {
-                self.doNext()
+                self.doNextCallback()
             }
         } failure: { [weak self] error in
             guard let self = self else { return }
             self.onFailure(type: self.type, error: .cmd(error))
+        }
+    }
+    
+    private func doNextAsync() {
+        guard readyCmd() else {
+            onFailure(type: self.type, error: .custom("ready cmd failed"))
+            return
+        }
+        guard let cmd = cmd else {
+            if let (data, msg, isDone) = result {
+                onSuccess(type: type, data: data, msg: msg, isDone: isDone)
+            } else {
+                onSuccess(type: type)
+            }
+            return
+        }
+        Task {
+            do {
+                for try await (data, msg, isDone) in cmd.executeAsync() {
+                    result = (data, msg, isDone)
+                    onSuccess(type: type, data: data, msg: msg, isDone: isDone)
+                    if isDone {
+                        try await doNextAsync()
+                        break
+                    }
+                }
+            } catch let error {
+                if let error = error as? SFBleCmdError {
+                    onFailure(type: self.type, error: .cmd(error))
+                } else {
+                    onFailure(type: self.type, error: .custom(error.localizedDescription))
+                }
+            }
         }
     }
    
@@ -87,14 +130,15 @@ open class SFBleRequest {
     public final func startCallback(success: @escaping SFBleRequestSuccess, failure: @escaping SFBleRequestFailure) {
         self.success = success
         self.failure = failure
-        self.doNext()
+        self.onStart(type: type)
+        self.doNextCallback()
     }
    
     /// async / await 方式
     public final func startAsync() -> AsyncThrowingStream<(data: Any?, msg: String?), Error> {
         return AsyncThrowingStream { continuation in
             self.continuation = continuation
-            self.doNext()
+            self.doNextAsync()
         }
     }
     
@@ -108,14 +152,9 @@ extension SFBleRequest: SFBleRequestProcess {
             plugin.onStart(type: type, msg: msg)
         }
     }
-    public func onWaiting(type: SFBleRequestType, msg: String? = nil) {
+    public func onDoing(type: SFBleRequestType, cmd: SFBleCmd, msg: String? = nil) {
         plugins.forEach { plugin in
-            plugin.onWaiting(type: type, msg: msg)
-        }
-    }
-    public func onDoing(type: SFBleRequestType, msg: String? = nil) {
-        plugins.forEach { plugin in
-            plugin.onDoing(type: type, msg: msg)
+            plugin.onDoing(type: type, cmd: cmd, msg: msg)
         }
     }
     public func onSuccess(type: SFBleRequestType, data: Any? = nil, msg: String? = nil, isDone: Bool = true) {

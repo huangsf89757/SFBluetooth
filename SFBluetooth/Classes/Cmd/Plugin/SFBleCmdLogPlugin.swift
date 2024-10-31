@@ -18,9 +18,6 @@ public class SFBleCmdLogPlugin: SFBleCmdPlugin {
     public func onStart(type: SFBleCmdType, msg: String?) {
         Log.debug("\(type.name) > start ? \(msg ?? "")")
     }
-    public func onWaiting(type: SFBleCmdType, msg: String?) {
-        Log.debug("\(type.name) > waiting ? \(msg ?? "")")
-    }
     public func onDoing(type: SFBleCmdType, msg: String?) {
         Log.debug("\(type.name) > doing ? \(msg ?? "")")
     }

@@ -14,7 +14,6 @@ import SFExtension
 // MARK: - SFBleCmdProcess
 public protocol SFBleCmdProcess {
     func onStart(type: SFBleCmdType, msg: String?)
-    func onWaiting(type: SFBleCmdType, msg: String?)
     func onDoing(type: SFBleCmdType, msg: String?)
     func onSuccess(type: SFBleCmdType, data: Any?, msg: String?, isDone: Bool)
     func onFailure(type: SFBleCmdType, error: SFBleCmdError)
@@ -22,7 +21,6 @@ public protocol SFBleCmdProcess {
 
 public extension SFBleCmdProcess {
     func onStart(type: SFBleCmdType, msg: String?) {}
-    func onWaiting(type: SFBleCmdType, msg: String?) {}
     func onDoing(type: SFBleCmdType, msg: String?) {}
     func onSuccess(type: SFBleCmdType, data: Any?, msg: String?, isDone: Bool) {}
     func onFailure(type: SFBleCmdType, error: SFBleCmdError) {}

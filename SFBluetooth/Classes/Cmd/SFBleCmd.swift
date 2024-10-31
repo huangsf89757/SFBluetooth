@@ -42,7 +42,7 @@ public class SFBleCmd {
         self.type = type
     }
     
-    // MARK: func
+    // MARK: override
     /// 检查前提条件
     open func check() -> Bool {
         return true

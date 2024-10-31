@@ -16,7 +16,7 @@ import SFLogger
 // MARK: - SFBleCentralManagerCmd
 public class SFBleCentralManagerCmd: SFBleClientCmd {
     // MARK: var
-    public private(set) var bleCentralManager: SFBleCentralManager
+    public let bleCentralManager: SFBleCentralManager
     
     // MARK: life cycle
     public init(name: String, bleCentralManager: SFBleCentralManager) {

@@ -16,7 +16,7 @@ import SFLogger
 // MARK: - SFBlePeripheralCmd
 public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
     // MARK: var
-    public private(set) var blePeripheral: SFBlePeripheral
+    public let blePeripheral: SFBlePeripheral
     
     // MARK: life cycle
     public init(name: String, bleCentralManager: SFBleCentralManager, blePeripheral: SFBlePeripheral) {

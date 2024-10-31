@@ -37,7 +37,8 @@ open class SFBleRequest {
     /// 当前正在执行的cmd
     public private(set) var cmd: SFBleCmd?
     /// 执行结果
-    public private(set) var result: (Any?, String?, Bool)?
+    public internal(set) var result: (Any?, String?, Bool)?
+    
     
     // MARK: life cycle
     public init(type: SFBleRequestType) {
@@ -80,7 +81,6 @@ open class SFBleRequest {
         onDoing(type: type, cmd: cmd)
         cmd.executeCallback { [weak self] data, msg, isDone in
             guard let self = self else { return }
-            self.result = (data, msg, isDone)
             self.onSuccess(type: self.type, data: data, msg: msg, isDone: isDone)
             if isDone {
                 self.doNextCallback()
@@ -108,10 +108,9 @@ open class SFBleRequest {
         Task {
             do {
                 for try await (data, msg, isDone) in cmd.executeAsync() {
-                    result = (data, msg, isDone)
                     onSuccess(type: type, data: data, msg: msg, isDone: isDone)
                     if isDone {
-                        try await doNextAsync()
+                        doNextAsync()
                         break
                     }
                 }
@@ -159,6 +158,7 @@ extension SFBleRequest: SFBleRequestProcess {
         }
     }
     public func onSuccess(type: SFBleRequestType, data: Any? = nil, msg: String? = nil, isDone: Bool = true) {
+        result = (data, msg, isDone)
         plugins.forEach { plugin in
             plugin.onSuccess(type: type, data: data, msg: msg, isDone: isDone)
         }
@@ -171,6 +171,7 @@ extension SFBleRequest: SFBleRequestProcess {
         }
     }
     public func onFailure(type: SFBleRequestType, error: SFBleRequestError) {
+        result = nil
         plugins.forEach { plugin in
             plugin.onFailure(type: type, error: error)
         }

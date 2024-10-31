@@ -15,5 +15,8 @@ import SFLogger
 
 // MARK: - SFBleClientRequest
 public class SFBleClientRequest: SFBleRequest {
-    
+    // MARK: life cycle
+    public init(name: String) {
+        super.init(type: .client(name))
+    }
 }

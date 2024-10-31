@@ -15,19 +15,19 @@ import SFLogger
 // MARK: - SFBleRequestLogPlugin
 public class SFBleRequestLogPlugin: SFBleRequestPlugin {
     // 示例：Request[C]: readRssi > failure ? xxxx
-    public func onStart(type: SFBleRequestType, msg: String?) {
+    func onStart(type: SFBleRequestType, msg: String?) {
         Log.debug("\(type.name) > start ? \(msg ?? "")")
     }
-    public func onWaiting(type: SFBleRequestType, msg: String?) {
+    func onWaiting(type: SFBleRequestType, msg: String?) {
         Log.debug("\(type.name) > waiting ? \(msg ?? "")")
     }
-    public func onDoing(type: SFBleRequestType, msg: String?) {
+    func onDoing(type: SFBleRequestType, msg: String?) {
         Log.debug("\(type.name) > doing ? \(msg ?? "")")
     }
-    public func onSuccess(type: SFBleRequestType, data: Any?, msg: String?) {
-        Log.debug("\(type.name) > success ? \(msg ?? "") data=\(data ?? "nil")")
+    func onSuccess(type: SFBleRequestType, data: Any?, msg: String?, isDone: Bool) {
+        Log.debug("\(type.name) > success\(isDone ? "" : "[ing]") ? \(msg ?? "") data=\(data ?? "nil")")
     }
-    public func onFailure(type: SFBleRequestType, error: SFBleRequestError) {
+    func onFailure(type: SFBleRequestType, error: SFBleRequestError) {
         Log.debug("\(type.name) > failure ? error=\(error.msg)(\(error.code)) ")
     }
 }

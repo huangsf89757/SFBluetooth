@@ -14,7 +14,7 @@ import SFLogger
 
 
 // MARK: - SFBleRequestResponse
-public typealias SFBleRequestSuccess = (_ data: Any?, _ msg: String?) -> Void
+public typealias SFBleRequestSuccess = (_ data: Any?, _ msg: String?, _ isDone: Bool) -> Void
 public typealias SFBleRequestFailure = (_ error: SFBleRequestError) -> Void
 
 // MARK: - SFBleRequest
@@ -31,11 +31,13 @@ open class SFBleRequest {
     public private(set) var success: SFBleRequestSuccess?
     /// 失败回调
     public private(set) var failure: SFBleRequestFailure?
+    /// continuation
+    public private(set) var continuation: AsyncThrowingStream<(data: Any?, msg: String?), Error>.Continuation?
         
     /// 当前正在执行的cmd
     public private(set) var cmd: SFBleCmd?
     /// 执行结果
-    public private(set) var result: (Any?, String?)?
+    public private(set) var result: (Any?, String?, Bool)?
     
     // MARK: life cycle
     public init(type: SFBleRequestType) {
@@ -51,11 +53,7 @@ open class SFBleRequest {
     open func getNextCmd() -> (Bool, SFBleCmd?) {
         return (false, nil)
     }
-   
-    public final func start() {
-        doNext()
-    }
-   
+    
     private func doNext() {
         let (isSuccess, cmd) = getNextCmd()
         guard isSuccess else {
@@ -64,22 +62,42 @@ open class SFBleRequest {
         }
         self.cmd = cmd
         guard let cmd = cmd else {
-            if let (data, msg) = result {
-                onSuccess(type: type, data: data, msg: msg)
+            if let (data, msg, isDone) = result {
+                onSuccess(type: type, data: data, msg: msg, isDone: isDone)
             } else {
                 onSuccess(type: type)
             }
             return
         }
         cmd.executeCallback { [weak self] data, msg, isDone in
-            self?.result = (data, msg)
+            guard let self = self else { return }
+            self.result = (data, msg, isDone)
             if isDone {
-                self?.doNext()
+                self.doNext()
             }
         } failure: { [weak self] error in
-            self?.onFailure(type: self?.type!, error: .cmd(error))
+            guard let self = self else { return }
+            self.onFailure(type: self.type, error: .cmd(error))
         }
     }
+   
+    
+    // MARK: start
+    /// 回调方式
+    public final func startCallback(success: @escaping SFBleRequestSuccess, failure: @escaping SFBleRequestFailure) {
+        self.success = success
+        self.failure = failure
+        self.doNext()
+    }
+   
+    /// async / await 方式
+    public final func startAsync() -> AsyncThrowingStream<(data: Any?, msg: String?), Error> {
+        return AsyncThrowingStream { continuation in
+            self.continuation = continuation
+            self.doNext()
+        }
+    }
+    
 }
 
 
@@ -100,16 +118,23 @@ extension SFBleRequest: SFBleRequestProcess {
             plugin.onDoing(type: type, msg: msg)
         }
     }
-    public func onSuccess(type: SFBleRequestType, data: Any? = nil, msg: String? = nil) {
+    public func onSuccess(type: SFBleRequestType, data: Any? = nil, msg: String? = nil, isDone: Bool = true) {
         plugins.forEach { plugin in
-            plugin.onSuccess(type: type, data: data, msg: msg)
+            plugin.onSuccess(type: type, data: data, msg: msg, isDone: isDone)
         }
-        success?(data, msg)
+        success?(data, msg, isDone)
+        if isDone {
+            continuation?.yield((data, msg))
+            continuation?.finish()
+        } else {
+            continuation?.yield((data, msg))
+        }
     }
     public func onFailure(type: SFBleRequestType, error: SFBleRequestError) {
         plugins.forEach { plugin in
             plugin.onFailure(type: type, error: error)
         }
         failure?(error)
+        continuation?.finish(throwing: error)
     }
 }

@@ -42,12 +42,13 @@ public class SFBleCmd {
         self.type = type
     }
     
-    // MARK: execute
+    // MARK: func
     /// 检查前提条件
     open func check() -> Bool {
         return true
     }
     /// 执行
+    /// 外部调用请使用：executeCallback / executeAsync
     open func execute() {
         guard check() else {
             return
@@ -55,6 +56,7 @@ public class SFBleCmd {
         self.id = UUID()
     }
     
+    // MARK: execute
     /// 回调方式
     public final func executeCallback(success: @escaping SFBleCmdSuccess, failure: @escaping SFBleCmdFailure) {
         self.success = success

@@ -38,7 +38,7 @@ public class SFBleReadDescriptorValueCmd: SFBlePeripheralCmd {
         if let error = error {
             onFailure(type: type, error: .client(.peripheral(.read(.descriptor(error.localizedDescription)))))
         } else {
-            onSuccess(type: type, data: descriptor.value, "did read descriptor value")
+            onSuccess(type: type, data: descriptor.value, msg: "did read descriptor value")
         }
     }
 }

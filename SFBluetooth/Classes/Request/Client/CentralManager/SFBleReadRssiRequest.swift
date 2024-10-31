@@ -78,8 +78,5 @@ public class SFBleReadRssiRequest: SFBleClientRequest {
     }
     
     // MARK: cmd
-    private func startScanCmd() -> SFBleStartScanCmd? {
-        
-        SFBleStartScanCmd(bleCentralManager: <#T##SFBleCentralManager#>)
-    }
+    
 }

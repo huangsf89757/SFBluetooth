@@ -21,7 +21,7 @@ public class SFBleRegisterConnectionEventsCmd: SFBleCentralManagerCmd {
         super.init(name: "registerConnectionEvents", bleCentralManager: bleCentralManager)
     }
     
-    // MARK: func
+    // MARK: override
     public override func execute() {
         onStart(type: type)
         super.execute()

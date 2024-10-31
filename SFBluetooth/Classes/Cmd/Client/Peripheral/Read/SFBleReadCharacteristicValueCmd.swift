@@ -22,7 +22,7 @@ public class SFBleReadCharacteristicValueCmd: SFBlePeripheralCmd {
         super.init(name: "readCharacteristicValue", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
-    // MARK: func
+    // MARK: override
     public override func execute() {
         onStart(type: type)
         super.execute()

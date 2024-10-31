@@ -25,7 +25,7 @@ public class SFBleStartScanCmd: SFBleCentralManagerCmd {
         super.init(name: "startScan", bleCentralManager: bleCentralManager)
     }
     
-    // MARK: func
+    // MARK: override
     public override func check() -> Bool {
         guard super.check() else {
             return false

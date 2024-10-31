@@ -26,7 +26,7 @@ public class SFBleWriteCharacteristicValueCmd: SFBlePeripheralCmd {
         super.init(name: "writeCharacteristicValue", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
-    // MARK: func
+    // MARK: override
     public override func execute() {
         onStart(type: type)
         super.execute()

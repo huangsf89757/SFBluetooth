@@ -25,7 +25,7 @@ public class SFBleDiscoverIncludedServicesCmd: SFBlePeripheralCmd {
         super.init(name: "discoverIncludedServices", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
-    // MARK: func
+    // MARK: override
     public override func execute() {
         onStart(type: type)
         super.execute()

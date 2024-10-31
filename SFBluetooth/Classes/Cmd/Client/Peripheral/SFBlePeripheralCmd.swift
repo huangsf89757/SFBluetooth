@@ -25,7 +25,7 @@ public class SFBlePeripheralCmd: SFBleCentralManagerCmd {
         self.configBlePeripheralCallback()
     }
     
-    // MARK: func
+    // MARK: override
     public override func check() -> Bool {
         let isScanning = bleCentralManager.centralManager.isScanning
         if isScanning {

@@ -22,7 +22,7 @@ public class SFBleDisconnectPeripheralCmd: SFBleCentralManagerCmd {
         super.init(name: "connectPeripheral", bleCentralManager: bleCentralManager)
     }
     
-    // MARK: func
+    // MARK: override
     public override func execute() {
         onStart(type: type)
         super.execute()

@@ -24,7 +24,7 @@ public class SFBleDiscoverDescriptorsCmd: SFBlePeripheralCmd {
         super.init(name: "discoverDescriptors", bleCentralManager: bleCentralManager, blePeripheral: blePeripheral)
     }
     
-    // MARK: func
+    // MARK: override
     public override func execute() {
         onStart(type: type)
         super.execute()

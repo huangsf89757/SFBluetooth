@@ -46,7 +46,7 @@ open class SFBleRequest {
     }
     
     
-    // MARK: func
+    // MARK: override
     open func getStartCmd() -> SFBleCmd? {
         return nil
     }
@@ -55,6 +55,8 @@ open class SFBleRequest {
         return (false, nil)
     }
     
+    
+    // MARK: func
     private func readyCmd() -> Bool {
         let (isSuccess, cmd) = getNextCmd()
         guard isSuccess else {

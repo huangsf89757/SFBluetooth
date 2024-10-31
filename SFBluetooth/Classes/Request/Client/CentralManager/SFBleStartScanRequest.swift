@@ -47,7 +47,7 @@ public class SFBleStartScanRequest: SFBleCentralManagerRequest {
     }
     
     
-    // MARK: func
+    // MARK: override
     public override func getStartCmd() -> SFBleCmd? {
         let stopScanCmd = getStopScanCmd()
         if let (peripheral, advertisementData, RSSI) = result_startScanCmd,

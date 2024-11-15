@@ -13,7 +13,7 @@ import SFExtension
 import SFLogger
 
 // MARK: - SFPeripheralAgentDelegate
-public class SFPeripheralAgentDelegate: SFPeripheralPlugin { }
+public protocol SFPeripheralAgentDelegate: AnyObject, SFPeripheralPlugin { }
 
 // MARK: - SFPeripheralAgent
 public class SFPeripheralAgent: NSObject {

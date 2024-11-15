@@ -1,13 +1,53 @@
+source 'https://github.com/CocoaPods/Specs.git'
+# 使用frameworks
 use_frameworks!
+# 忽略pod里面警告
+inhibit_all_warnings!
+# 支持的平台
+platform :ios, '14.0'
 
-platform :ios, '10.0'
 
+##################
+#      PODS      #
+##################
+
+# === 私有组件 === #
+def pods_private
+  # 本地路径
+  $root = '../../../'
+  $business = 'Business/'
+  $ui = 'UI/'
+  $basic = 'Basic/'
+  $server = 'Server/'
+  
+  # Business
+  
+  # UI
+  
+  # Basic
+    
+  # Server
+  pod 'SFLogger',       :path => $root + $server + 'SFLogger/'
+  pod 'SFBluetooth',    :path => $root + $server + 'SFBluetooth/'
+ 
+ 
+end
+
+# === 第三方组件 === #
+def pods_third
+  
+  
+end
+
+
+##################
+#     TARGET     #
+##################
+
+# === SFCgmsApp === #
 target 'SFBluetooth_Example' do
-  pod 'SFBluetooth', :path => '../'
-
-  target 'SFBluetooth_Tests' do
-    inherit! :search_paths
-
-    pod 'FBSnapshotTestCase' , '~> 2.1.4'
-  end
+  
+  pods_private
+  pods_third
+  
 end

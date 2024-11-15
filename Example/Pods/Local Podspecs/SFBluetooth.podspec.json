@@ -16,7 +16,17 @@
     "tag": "0.1.0"
   },
   "platforms": {
-    "ios": "10.0"
+    "ios": "14.0"
   },
-  "source_files": "SFBluetooth/Classes/**/*"
+  "swift_versions": "5.0",
+  "source_files": "SFBluetooth/Classes/**/*",
+  "dependencies": {
+    "SFExtension": [
+      "~> 0.1.0"
+    ],
+    "SFLogger": [
+      "~> 0.1.0"
+    ]
+  },
+  "swift_version": "5.0"
 }

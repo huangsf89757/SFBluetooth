@@ -7,475 +7,709 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07478A4B7C645BC03F77A398EAAC41C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57221B54D014471C3D3E1925EFC917C8 /* Foundation.framework */; };
-		0BF0478C75FA91A65CB86F4B75314C5B /* Pods-SFBluetooth_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FE2424223BFC5F325C53312B33239600 /* Pods-SFBluetooth_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F84FE646CD1D7BAFFB58C243277AFF8 /* FBSnapshotTestCase-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E5923010B02074CAA9AAF6EA02D66AA /* FBSnapshotTestCase-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2975A09730FD83DC0897129A11EA6585 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D66CF296ABBC57EC4D0452397E235 /* SwiftSupport.swift */; };
-		2B88C28DD20CBFA7B3AEB21A365197FE /* FBSnapshotTestController.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9FF9459FBCDC4AF88FB6B5A4CC1439 /* FBSnapshotTestController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2CB61F6FA511CAACB43A50DC3A82E0DD /* UIImage+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = D872A3EE224412D4057C234FBC629F9C /* UIImage+Snapshot.m */; };
-		2ECCAC52EF4C74E1032E0BC646BBE5B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57221B54D014471C3D3E1925EFC917C8 /* Foundation.framework */; };
-		30D475DF57C0C682A723231E7BCA0D14 /* FBSnapshotTestCasePlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABB3EB3CCC5BCA82F40FE8DC87BB778 /* FBSnapshotTestCasePlatform.m */; };
-		373413256658309F9053CE22BF62077E /* UIImage+Snapshot.h in Headers */ = {isa = PBXBuildFile; fileRef = 284833D18C244D2B42966B6EE425AA59 /* UIImage+Snapshot.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		51641ECF7DD52791FDEB0D99849EDDFC /* Pods-SFBluetooth_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FA7F1B387050B506AC244CC5C764D36E /* Pods-SFBluetooth_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5558B876B579BC1E79BD3D2B19148329 /* UIApplication+StrictKeyWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 99A67367E018411D614EC8536A8A1C5B /* UIApplication+StrictKeyWindow.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		5B08F07DA1BE64181748C963F23F4AAD /* SFBluetooth-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 62E41D0DD0D0E0E87FF2C0A611EC2A58 /* SFBluetooth-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5BE525FF6FA14B999ED2CCC0AA4FA0CF /* FBSnapshotTestCase-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADA6E655DC84D06359BD0ED5E36C783 /* FBSnapshotTestCase-dummy.m */; };
-		640CCE9C3A28AA3CA15510899F9140EE /* FBSnapshotTestCasePlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 88B1DEEBF6316A84D7413645212492FF /* FBSnapshotTestCasePlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		67F1963AA7C9EDB78127AD5F566A4949 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = 96187BF3038121CC146335E9FF0B0AFF /* UIImage+Diff.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		74339C58AC4E5631FB8C0E662668A796 /* UIApplication+StrictKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F538C426803AE34255FC6E35B408CCA /* UIApplication+StrictKeyWindow.m */; };
-		78A0CA17F54DD75F8C7CE2D7FE73B1C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57221B54D014471C3D3E1925EFC917C8 /* Foundation.framework */; };
-		7C67CBD15D9B5D0B7769B2F469478332 /* FBSnapshotTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 277B6BE10C665F515606A22FD60C6DCC /* FBSnapshotTestCase.m */; };
-		875A310EAF4D0C136C3FFFF5E0335BE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA24A38BA9EE106B59E3D4C8DD1CE0E /* UIKit.framework */; };
-		8AE19756F0126FE92AF625E36F3D70FE /* UIImage+Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = 656116C8FA5458F45D4707110C9530EC /* UIImage+Compare.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		90D9E79396BC6A83E6E64C1EEF92EF2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57221B54D014471C3D3E1925EFC917C8 /* Foundation.framework */; };
-		9D3C5E2F56838937146191468A893244 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E658F388F01C72599CA75537950B6095 /* XCTest.framework */; };
-		B52281F9F4340D4FC8ABB2FEB1FEC08E /* UIImage+Compare.m in Sources */ = {isa = PBXBuildFile; fileRef = 235A78CFFA6D8B8D86CACD733531CB13 /* UIImage+Compare.m */; };
-		C390C6005353FB986CB52F474CEF8588 /* FBSnapshotTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B7EA746BF6557FD565BAE12AF9198 /* FBSnapshotTestController.m */; };
-		C9F76407497DF0205D7460B36D22259F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3280BB5E7B57C31D41117A74F76E9DF3 /* QuartzCore.framework */; };
-		CA54C09A12400567AFFCB407EEB7E154 /* UIImage+Diff.m in Sources */ = {isa = PBXBuildFile; fileRef = 4568279DE47DC3AB91598E1317503995 /* UIImage+Diff.m */; };
-		CC905147576A788491C414EA3AE6B640 /* SFBluetooth-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BECB031F78FB381EF48145C4CC60D87D /* SFBluetooth-dummy.m */; };
-		E40E3E554E2A5F70F7F2B62009C7B948 /* Pods-SFBluetooth_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145CEBC75D06903579C03C48265939F /* Pods-SFBluetooth_Tests-dummy.m */; };
-		EE9EF94783D2631A93C62BBFA551737F /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFAE6EE0788F33798617B59A051C141 /* ReplaceMe.swift */; };
-		F96421201FB78C9424BAE540F2A5FD59 /* Pods-SFBluetooth_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FF6FC5DFC856C6ECBF974FB698AA82 /* Pods-SFBluetooth_Example-dummy.m */; };
-		FF8307B7346F4D3BA13C11AECFE6EDD0 /* FBSnapshotTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FEE661E58CA6655B39AA49AA4C021C33 /* FBSnapshotTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		013B73D3B07BD31CD15EA7F5367B3263 /* SFBleDiscoverLogSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5A96466039E500BD8F0FF757433313 /* SFBleDiscoverLogSummary.swift */; };
+		02FF0F5AD3DBF8D8180F8673423FADA5 /* UITextField+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C64B5662AB6284C9A24586B80DC8642 /* UITextField+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0595C5D58BCE35E23B888B1B28DA7ECD /* SFPeripheralAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EDAEE419E9951EB07A0F22F6B359BC /* SFPeripheralAgent.swift */; };
+		0A697BE01375D9E9A8769F751FE40B46 /* SFCentralManagerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1205963CAF040B632C8A115A636C49F /* SFCentralManagerPlugin.swift */; };
+		0A8E103352060230906A420610881BD2 /* Pods-SFBluetooth_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 58FFD67B8D471503432AC509FD928D4A /* Pods-SFBluetooth_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C60A6E673C12C22E08322D392BB251D /* SwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4381699DA4C5B374D7ADC9ECE935160 /* SwiftyBeaver.swift */; };
+		1E30644E60F73E9927F1D67C8DDBE92F /* SFLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9177F7F4A73A30936017511DEA7E60AB /* SFLogger.swift */; };
+		1E98E0D1016794C1E826EB86F32CD26F /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20564466CAE519C08F2B4914213AD55A /* ConsoleDestination.swift */; };
+		23B20EB334EC9EF40836CCFEFCA6A9CF /* NSTimer+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = DF040F927452B6CEA9E54FA3DE7E2CD0 /* NSTimer+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		24FC185F6C60E492194C9269EEB1AC36 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCAE86AF404846721DF8573D9B3DDA /* Extensions.swift */; };
+		2BCF9F3EF63A24272A46F0CF84E4A8AD /* FilterValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F145C5D24F2837C63A80E1EC8C83A2 /* FilterValidator.swift */; };
+		325FB56972BEE36A758624C8ECD54F02 /* SFCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 328C6094652C2E70657223CF6C0A283A /* SFCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34064991AE90926E841B633D0892810F /* NSObject+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = EA789814C5DF15DADD2F4BA4FE4E2E53 /* NSObject+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AE55CDED8402A131B4C950127EB304E /* NSObject+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1387A6C9B105B87712CCD29A7B9CA0 /* NSObject+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		3F8F4FDF6EDA758C1ABE6938C721130C /* SFPeripheralPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8EA0AA09279260AED0A72650DA74D4 /* SFPeripheralPlugin.swift */; };
+		40B1713C369CDEFA734727095AECCEA6 /* UIView+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = F657D984DB3BFDBBFCBBCEB1CBC9C255 /* UIView+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4199764E268373B72B6EB1FCFFCCF88F /* SFExtension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DFBD0BD9FF0C29891F787A7D2C1CB17 /* SFExtension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42A526A1A586A2A0378917E3923A2BA2 /* SFBluetooth-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8B780D729791F3F6BD09DC6F5A09E3 /* SFBluetooth-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42CF6E39C6A1E82666EE977CEE96D212 /* SFBluetooth-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1D629FAEE4C926353163CAA53D1C43 /* SFBluetooth-dummy.m */; };
+		45EEE80B88CD1F536AE164ED450A029E /* UIColor+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9155ED740418C8C619A727FDAC3F7775 /* UIColor+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		468B8ACA3BD097C26632B2F0FF44640B /* UIView+SFFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = ADDDAACB48B335AF4652826B280D5E21 /* UIView+SFFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A7A25EA9E5BA7D664356AA5AE1A83E4 /* NSString+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6B71962A4B9A649D9E1C3D36A12971 /* NSString+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		571108D98117599B37610A3DABFCA6DD /* SFPeripheralLogPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760145BAD425C2EE89070EC951F8FB66 /* SFPeripheralLogPlugin.swift */; };
+		57ED93F43DC9B06A677D1548173ECB3F /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55C6D88807C1EC039CC0FB9F15A356A /* Base64.swift */; };
+		59B20B26A821365E4F1BD7309BC05F25 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B6D8CE422BCF08F2EF99E80524CF8 /* FileDestination.swift */; };
+		5B4B7DE1EEAB0B1014BB52C4A7BA4693 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		5D1CA5CD84CA5D867955FC61D6F385C7 /* NSDictionary+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FFD17BA9227073B6BB7602D5460E5 /* NSDictionary+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		68B3F20EFB1BD19419B8BDB73A18DEA6 /* SFLogger-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 81B586B3836A0DCA4EB47D3827E8BE25 /* SFLogger-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		707AE29B803507B5D6CF8AA0FA7D449A /* UIActionSheet+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF917A7CC0C8CCDFBE984F53FC9A0B /* UIActionSheet+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		7566F4167EDF7F23D0E808327FE91F2A /* SFExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF505B70016359D03080414F54C0602 /* SFExtension-dummy.m */; };
+		76DD23D075E3DA68E7F05A631BF8824C /* NSArray+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D03E29981DB89560AFE0A440D5FA66 /* NSArray+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		7809C6DC78798F6826455D78D7203804 /* UIView+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C592BD5688A3B37172E43BD6977D42 /* UIView+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		78B1C7F8600111FFF2826BA352DB9C62 /* SFCentralManagerAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A0DF4E60CABF84A52C08D308CD1AB4 /* SFCentralManagerAgent.swift */; };
+		7A80374E98C09E363ED1A847C654A4F1 /* UIWebView+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = C08EC304924B434147895B952DB8642F /* UIWebView+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AEB639D8928A0CF5C544AA613388020 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		7CF7CC2FBC80837B1FDEA565B3E4B06D /* SFConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 203F514487C4124313B79028ECF2AFF3 /* SFConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D4D668C5A07459571D3F92635BC6453 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		80F35AB03C8090922D868B835F84EB01 /* SFCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7810FAE83076EB3EBB171422B7F340 /* SFCommon.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		82663402EF187AB92BF2363E6753CC8A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		83EBCB58C1DF8279C75E32E3FABA716D /* UIAlertView+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = AB27C5130885DD3FF30953C4B9E3DB5E /* UIAlertView+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		90C91F103450EB2A1F23CCD99F729E66 /* UIColor+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 9349DB6201BBB0645C4492E595C79610 /* UIColor+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A09692FEBAFA6B0DF5F827B2D5E984AF /* UIView+SFGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = C71F545ECB74A1A9294A083B4C8D7AC2 /* UIView+SFGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A32CE55B55E021CC0A9846C664FA93C0 /* UIWebView+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1D093513710608CBC41015F6F6008 /* UIWebView+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A5FA6EF879F3C4AE779F6FE2A0C3287D /* NSDictionary+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = A8C49FA814BB18000C4DDBCE12909399 /* NSDictionary+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A658041640F704C4E97A2C9C11140DFC /* UIView+SFFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D227FCCCA64DC5592EE5C46C936C7C /* UIView+SFFrame.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A6897D6349889A92E40E7B1C2B97A8ED /* SFMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = BEAC65A1441D329B0629406A2DADE5A5 /* SFMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B30A5A073BE536B2B8D7DA87E5F2FA7B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3577FBB00E7A20D18C33CB1444A90C2 /* Filter.swift */; };
+		BD3C987582112C1D6B8F3DAE65875C6D /* NSArray+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = DE002DF9D7FB3275FE5DD4B252F74391 /* NSArray+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE117630A12E2BD2DC2EC45166C2D224 /* SFBleLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E6AF486D9387FA0194E54FBF1B23F /* SFBleLog.swift */; };
+		BE6D76D229C2EBDF3761F9B57B941969 /* UIView+SFGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C47A6FA07E9321331606AB7190AEA9 /* UIView+SFGesture.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		C21F36121D5C876E1B69A0C73731CBED /* UITextField+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D064465C2B956DDD47D3B6F1939B71 /* UITextField+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		C678949E912559B7AEAEC362062F6BA1 /* SFLogger-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AA08562B82A50425B2A4D214C716CF /* SFLogger-dummy.m */; };
+		C90D07A3FBD870236FBF6CC2AE1CD7BD /* Pods-SFBluetooth_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A21DE2E8B2A248D4A8C6DE5B49C68C /* Pods-SFBluetooth_Example-dummy.m */; };
+		C941B0932EEC622C9163DEF914F74AEB /* UIImageView+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = B8EE873527F58BABEAEB16657DD5F9EC /* UIImageView+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9641D62EB780A2BB311E15102D4C694 /* UIResponder+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 82DBEBEBBFE848BF5C4E12DB644841BA /* UIResponder+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0D3DDC6E7E4955C028619639E8974E8 /* SwiftyBeaver-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EF0DE0B28DAE2F51DD399856CA3D12A9 /* SwiftyBeaver-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D2CFF43C8A25DBE9DA95927493CD3324 /* SFConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9249A238FB2C919B00E1DEA36C1770 /* SFConstants.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		D39842BC0205E6776795C27150C7B54C /* UIAlertView+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E3618A3072A3DC3F369851644D85AB /* UIAlertView+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		DE0D2DFC37C03EB9E102C2C5E20F734D /* NSTimer+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 42523ED5728DA22E4597FBE41F012D8C /* NSTimer+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		DF39DA252D2B546FE53D8931ED1031C6 /* UIActionSheet+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BD52A0907E069193B5FFB8C1F95DEC3 /* UIActionSheet+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E5197C40E6F901790432B90AC2E8622A /* SFCentralManagerLogPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77BAC3E483C3738C64528C35390053 /* SFCentralManagerLogPlugin.swift */; };
+		E597B927036FD5D4508FC341404E3651 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33642B90B33BFF97DE4018496DE796A1 /* BaseDestination.swift */; };
+		E60320AABCC5FF0641EDA7EFF6EBDD19 /* SwiftyBeaver-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A945B6A1E9DB9BCB42381A4319678895 /* SwiftyBeaver-dummy.m */; };
+		EA90C6BE62401169CBF506247EEA98D4 /* UIImageView+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A2410E8327DC64F742A36A3576B56 /* UIImageView+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		EEFF47828C7EC8A18CB5772013D85229 /* UIResponder+SFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A96B92BC1BAEF6EF235861AACD68FB64 /* UIResponder+SFExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		F5574C4C7835DBD4AD06E793553E2D5E /* GoogleCloudDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E9BC900DE181F6A0037A2655AC336 /* GoogleCloudDestination.swift */; };
+		F5C9B7F0BDF48BD015D47E672B18D56D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		FE7881A52F178AAE8AE64E21DED869DA /* NSString+SFExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = DD9BAF297016D633DB3F824149E0CA4F /* NSString+SFExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		501E93AA5D27ACA7EB5CDAC3B3508E5B /* PBXContainerItemProxy */ = {
+		0803C4F15A96374F19CA367D897465FD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 92F683694DA4125E5AA5AA54C1819FE3;
-			remoteInfo = "Pods-SFBluetooth_Example";
+			remoteGlobalIDString = C6CEA71E753675D90FBC51D4748FAF46;
+			remoteInfo = SFLogger;
 		};
-		BBA3A6B08320D342AD53B310DB1EC2C8 /* PBXContainerItemProxy */ = {
+		0A30E450D020B89829C818E449991652 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1740FECD5A74A42ADAE96F3A8246787A;
+			remoteInfo = SwiftyBeaver;
+		};
+		2444F051AC4FE8A98FCF124B816E5F74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6CEA71E753675D90FBC51D4748FAF46;
+			remoteInfo = SFLogger;
+		};
+		2A128752B19B22797C72F1327CB1D438 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 45960635ABAE4024B79486C943B772DE;
 			remoteInfo = SFBluetooth;
 		};
-		E348DDBD176639E45D5889A581A7C3BF /* PBXContainerItemProxy */ = {
+		AAB5AC14EED9ACB90C7F59C18D31DF5D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 98A98149697C80CEF8D5772791E92E66;
-			remoteInfo = FBSnapshotTestCase;
+			remoteGlobalIDString = 1740FECD5A74A42ADAE96F3A8246787A;
+			remoteInfo = SwiftyBeaver;
+		};
+		C5B003DBEB21E2CE443D3CE6BBF37B63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C0BA0F9599234D0D75DC7B2C5636276;
+			remoteInfo = SFExtension;
+		};
+		CAE5D2C80F0FEFF7B85D29BC6A1D246B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C0BA0F9599234D0D75DC7B2C5636276;
+			remoteInfo = SFExtension;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		08242C358FE26C4EB53B5D5A44DD06C2 /* Pods-SFBluetooth_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SFBluetooth_Example-frameworks.sh"; sourceTree = "<group>"; };
-		0F538C426803AE34255FC6E35B408CCA /* UIApplication+StrictKeyWindow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+StrictKeyWindow.m"; path = "FBSnapshotTestCase/Categories/UIApplication+StrictKeyWindow.m"; sourceTree = "<group>"; };
-		1145CEBC75D06903579C03C48265939F /* Pods-SFBluetooth_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SFBluetooth_Tests-dummy.m"; sourceTree = "<group>"; };
-		18D3ED9BF759E97D08CD5CF290E6D160 /* Pods-SFBluetooth_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SFBluetooth_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		1ADA6E655DC84D06359BD0ED5E36C783 /* FBSnapshotTestCase-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FBSnapshotTestCase-dummy.m"; sourceTree = "<group>"; };
-		1DA24A38BA9EE106B59E3D4C8DD1CE0E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		235A78CFFA6D8B8D86CACD733531CB13 /* UIImage+Compare.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Compare.m"; path = "FBSnapshotTestCase/Categories/UIImage+Compare.m"; sourceTree = "<group>"; };
-		277B6BE10C665F515606A22FD60C6DCC /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = "<group>"; };
-		284833D18C244D2B42966B6EE425AA59 /* UIImage+Snapshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Snapshot.h"; path = "FBSnapshotTestCase/Categories/UIImage+Snapshot.h"; sourceTree = "<group>"; };
-		3280BB5E7B57C31D41117A74F76E9DF3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		3AD5C5218D20645E619B12F25C4127F6 /* Pods-SFBluetooth_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SFBluetooth_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		3B0B623AF04FB9DBE3DE2E35BCA6A641 /* Pods-SFBluetooth_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SFBluetooth_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		3D0511ADAAAD676149162E7DA68C769F /* Pods-SFBluetooth_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SFBluetooth_Example.modulemap"; sourceTree = "<group>"; };
-		3F0D66CF296ABBC57EC4D0452397E235 /* SwiftSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSupport.swift; path = FBSnapshotTestCase/SwiftSupport.swift; sourceTree = "<group>"; };
-		43FF6FC5DFC856C6ECBF974FB698AA82 /* Pods-SFBluetooth_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SFBluetooth_Example-dummy.m"; sourceTree = "<group>"; };
-		4568279DE47DC3AB91598E1317503995 /* UIImage+Diff.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Diff.m"; path = "FBSnapshotTestCase/Categories/UIImage+Diff.m"; sourceTree = "<group>"; };
-		4C6513B09838318BD763CFD5390D1DE0 /* FBSnapshotTestCase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FBSnapshotTestCase.release.xcconfig; sourceTree = "<group>"; };
-		5394B5203F6FFDF3E601FC4A7B7B8D6F /* Pods-SFBluetooth_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SFBluetooth_Tests-Info.plist"; sourceTree = "<group>"; };
-		57221B54D014471C3D3E1925EFC917C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		5A990E74A19CFE08A11CF8CB5935EA40 /* SFBluetooth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SFBluetooth.debug.xcconfig; sourceTree = "<group>"; };
-		5C4F31330DFA99D699E4BDC8C3573D73 /* FBSnapshotTestCase */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FBSnapshotTestCase; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		62E41D0DD0D0E0E87FF2C0A611EC2A58 /* SFBluetooth-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SFBluetooth-umbrella.h"; sourceTree = "<group>"; };
-		64B41EFE10090B661617C78BD41E0BF3 /* Pods-SFBluetooth_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SFBluetooth_Example.release.xcconfig"; sourceTree = "<group>"; };
-		656116C8FA5458F45D4707110C9530EC /* UIImage+Compare.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Compare.h"; path = "FBSnapshotTestCase/Categories/UIImage+Compare.h"; sourceTree = "<group>"; };
-		6ABB3EB3CCC5BCA82F40FE8DC87BB778 /* FBSnapshotTestCasePlatform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCasePlatform.m; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.m; sourceTree = "<group>"; };
+		0883ACD70DB48998A293B466B7DD1450 /* SFExtension */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SFExtension; path = SFExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A2B6D8CE422BCF08F2EF99E80524CF8 /* FileDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileDestination.swift; path = Sources/FileDestination.swift; sourceTree = "<group>"; };
+		0D5A96466039E500BD8F0FF757433313 /* SFBleDiscoverLogSummary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SFBleDiscoverLogSummary.swift; sourceTree = "<group>"; };
+		0D81631DE4C19EE667CCFB5955631336 /* SFLogger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SFLogger.release.xcconfig; sourceTree = "<group>"; };
+		117E7AB7BB5CF03E04A2E187CAE5AE50 /* SFExtension-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SFExtension-Info.plist"; sourceTree = "<group>"; };
+		11D227FCCCA64DC5592EE5C46C936C7C /* UIView+SFFrame.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+SFFrame.m"; path = "SFExtension/Classes/UIKit/UIView+SFFrame.m"; sourceTree = "<group>"; };
+		13AA08562B82A50425B2A4D214C716CF /* SFLogger-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SFLogger-dummy.m"; sourceTree = "<group>"; };
+		175F4D2A0B6300C4BB3B8CA8A3018C5D /* Pods-SFBluetooth_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SFBluetooth_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		1A1387A6C9B105B87712CCD29A7B9CA0 /* NSObject+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SFExtension.m"; path = "SFExtension/Classes/Foundation/NSObject+SFExtension.m"; sourceTree = "<group>"; };
+		1C94A28F870CD5F185BAFA8A66772C54 /* SwiftyBeaver-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyBeaver-Info.plist"; sourceTree = "<group>"; };
+		1CF8F754250A1CC2DDCCDC544243ED70 /* Pods-SFBluetooth_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SFBluetooth_Example-frameworks.sh"; sourceTree = "<group>"; };
+		203F514487C4124313B79028ECF2AFF3 /* SFConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFConstants.h; path = SFExtension/Classes/Common/SFConstants.h; sourceTree = "<group>"; };
+		20564466CAE519C08F2B4914213AD55A /* ConsoleDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsoleDestination.swift; path = Sources/ConsoleDestination.swift; sourceTree = "<group>"; };
+		21D064465C2B956DDD47D3B6F1939B71 /* UITextField+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextField+SFExtension.m"; path = "SFExtension/Classes/UIKit/UITextField+SFExtension.m"; sourceTree = "<group>"; };
+		247DC4CD53576B7052C9892934A34F6B /* SwiftyBeaver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyBeaver.debug.xcconfig; sourceTree = "<group>"; };
+		24A842F9F3CB0DF65E8BC71662EBD296 /* SFBluetooth.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SFBluetooth.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2F1D629FAEE4C926353163CAA53D1C43 /* SFBluetooth-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SFBluetooth-dummy.m"; sourceTree = "<group>"; };
+		312FA998A3D584E9E31283B0AA4612DC /* SFExtension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SFExtension.modulemap; sourceTree = "<group>"; };
+		328C6094652C2E70657223CF6C0A283A /* SFCommon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCommon.h; path = SFExtension/Classes/Common/SFCommon.h; sourceTree = "<group>"; };
+		33642B90B33BFF97DE4018496DE796A1 /* BaseDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseDestination.swift; path = Sources/BaseDestination.swift; sourceTree = "<group>"; };
+		3A0A2410E8327DC64F742A36A3576B56 /* UIImageView+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+SFExtension.m"; path = "SFExtension/Classes/UIKit/UIImageView+SFExtension.m"; sourceTree = "<group>"; };
+		3C7FF7BB5C4F4E47CD250EBDC27D4309 /* Pods-SFBluetooth_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SFBluetooth_Example.modulemap"; sourceTree = "<group>"; };
+		3E97ECB3E43F9B47E1EB1ECBFAEC4D67 /* SFLogger.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SFLogger.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		42523ED5728DA22E4597FBE41F012D8C /* NSTimer+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSTimer+SFExtension.m"; path = "SFExtension/Classes/Foundation/NSTimer+SFExtension.m"; sourceTree = "<group>"; };
+		47E3618A3072A3DC3F369851644D85AB /* UIAlertView+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIAlertView+SFExtension.m"; path = "SFExtension/Classes/UIKit/UIAlertView+SFExtension.m"; sourceTree = "<group>"; };
+		4ADA9B0A7613B38098E78DA19931EACB /* SwiftyBeaver-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyBeaver-prefix.pch"; sourceTree = "<group>"; };
+		4CF505B70016359D03080414F54C0602 /* SFExtension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SFExtension-dummy.m"; sourceTree = "<group>"; };
+		4D7810FAE83076EB3EBB171422B7F340 /* SFCommon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCommon.m; path = SFExtension/Classes/Common/SFCommon.m; sourceTree = "<group>"; };
+		507B7B9952A5D953FF5D79ED0942B4C1 /* SFLogger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SFLogger.debug.xcconfig; sourceTree = "<group>"; };
+		509877449B06E1D7467C8601F6428285 /* SFLogger-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SFLogger-Info.plist"; sourceTree = "<group>"; };
+		58FFD67B8D471503432AC509FD928D4A /* Pods-SFBluetooth_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SFBluetooth_Example-umbrella.h"; sourceTree = "<group>"; };
+		5BCF917A7CC0C8CCDFBE984F53FC9A0B /* UIActionSheet+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIActionSheet+SFExtension.m"; path = "SFExtension/Classes/UIKit/UIActionSheet+SFExtension.m"; sourceTree = "<group>"; };
+		5DFBD0BD9FF0C29891F787A7D2C1CB17 /* SFExtension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SFExtension-umbrella.h"; sourceTree = "<group>"; };
+		62A0DF4E60CABF84A52C08D308CD1AB4 /* SFCentralManagerAgent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SFCentralManagerAgent.swift; path = SFBluetooth/Classes/SFCentralManagerAgent.swift; sourceTree = "<group>"; };
+		65D1D093513710608CBC41015F6F6008 /* UIWebView+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+SFExtension.m"; path = "SFExtension/Classes/UIKit/UIWebView+SFExtension.m"; sourceTree = "<group>"; };
+		6BD52A0907E069193B5FFB8C1F95DEC3 /* UIActionSheet+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActionSheet+SFExtension.h"; path = "SFExtension/Classes/UIKit/UIActionSheet+SFExtension.h"; sourceTree = "<group>"; };
+		6C69AC4A8F1A7D32672768A8FDA0388D /* Pods-SFBluetooth_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SFBluetooth_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		760145BAD425C2EE89070EC951F8FB66 /* SFPeripheralLogPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SFPeripheralLogPlugin.swift; sourceTree = "<group>"; };
 		76B7B1751C764B0D0BFAEE9B544656AA /* SFBluetooth */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SFBluetooth; path = SFBluetooth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E1B7EA746BF6557FD565BAE12AF9198 /* FBSnapshotTestController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestController.m; path = FBSnapshotTestCase/FBSnapshotTestController.m; sourceTree = "<group>"; };
-		82F732A8AD9F02914D698529D0E4C531 /* SFBluetooth.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SFBluetooth.modulemap; sourceTree = "<group>"; };
-		88B1DEEBF6316A84D7413645212492FF /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCasePlatform.h; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
-		8E40801D9141912F7B0C06C6C007CEE3 /* SFBluetooth-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SFBluetooth-Info.plist"; sourceTree = "<group>"; };
-		8E5923010B02074CAA9AAF6EA02D66AA /* FBSnapshotTestCase-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCase-umbrella.h"; sourceTree = "<group>"; };
-		9468E867498BBAF36F9AFFE4845F8B09 /* FBSnapshotTestCase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FBSnapshotTestCase.debug.xcconfig; sourceTree = "<group>"; };
-		96187BF3038121CC146335E9FF0B0AFF /* UIImage+Diff.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Diff.h"; path = "FBSnapshotTestCase/Categories/UIImage+Diff.h"; sourceTree = "<group>"; };
-		99A67367E018411D614EC8536A8A1C5B /* UIApplication+StrictKeyWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIApplication+StrictKeyWindow.h"; path = "FBSnapshotTestCase/Categories/UIApplication+StrictKeyWindow.h"; sourceTree = "<group>"; };
+		7A5F7001277980B8F3EEA75BCD346E53 /* SwiftyBeaver */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyBeaver; path = SwiftyBeaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D3B9F5BF1C23D094D6B700A19CF1D6A /* SFLogger.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SFLogger.modulemap; sourceTree = "<group>"; };
+		80DCAE86AF404846721DF8573D9B3DDA /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Sources/Extensions.swift; sourceTree = "<group>"; };
+		81B586B3836A0DCA4EB47D3827E8BE25 /* SFLogger-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SFLogger-umbrella.h"; sourceTree = "<group>"; };
+		82DBEBEBBFE848BF5C4E12DB644841BA /* UIResponder+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIResponder+SFExtension.h"; path = "SFExtension/Classes/UIKit/UIResponder+SFExtension.h"; sourceTree = "<group>"; };
+		84388C6F4D4388DC2C6527BE38332F90 /* SFBluetooth-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SFBluetooth-prefix.pch"; sourceTree = "<group>"; };
+		9155ED740418C8C619A727FDAC3F7775 /* UIColor+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+SFExtension.m"; path = "SFExtension/Classes/UIKit/UIColor+SFExtension.m"; sourceTree = "<group>"; };
+		9177F7F4A73A30936017511DEA7E60AB /* SFLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SFLogger.swift; path = SFLogger/Classes/SFLogger.swift; sourceTree = "<group>"; };
+		9349DB6201BBB0645C4492E595C79610 /* UIColor+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+SFExtension.h"; path = "SFExtension/Classes/UIKit/UIColor+SFExtension.h"; sourceTree = "<group>"; };
+		95267B17AF6F2F45371EE0609F89AC46 /* SwiftyBeaver.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyBeaver.modulemap; sourceTree = "<group>"; };
+		98A21DE2E8B2A248D4A8C6DE5B49C68C /* Pods-SFBluetooth_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SFBluetooth_Example-dummy.m"; sourceTree = "<group>"; };
+		9C64B5662AB6284C9A24586B80DC8642 /* UITextField+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextField+SFExtension.h"; path = "SFExtension/Classes/UIKit/UITextField+SFExtension.h"; sourceTree = "<group>"; };
+		9C9249A238FB2C919B00E1DEA36C1770 /* SFConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFConstants.m; path = SFExtension/Classes/Common/SFConstants.m; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		AE9FF9459FBCDC4AF88FB6B5A4CC1439 /* FBSnapshotTestController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestController.h; path = FBSnapshotTestCase/FBSnapshotTestController.h; sourceTree = "<group>"; };
-		B23240B2A1B906822D29823DBB43C027 /* SFBluetooth-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SFBluetooth-prefix.pch"; sourceTree = "<group>"; };
-		B7103CA00AED20722C5B69CA5B4F6938 /* FBSnapshotTestCase-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FBSnapshotTestCase-Info.plist"; sourceTree = "<group>"; };
-		BECB031F78FB381EF48145C4CC60D87D /* SFBluetooth-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SFBluetooth-dummy.m"; sourceTree = "<group>"; };
-		C167CE2966560851C38B4E8501A762B1 /* Pods-SFBluetooth_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SFBluetooth_Example-Info.plist"; sourceTree = "<group>"; };
-		C3B194443EE7172D43CEEAF071C7DC6E /* SFBluetooth.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SFBluetooth.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		CBFF6C5FD9C3A84274A9314D3E940B6E /* FBSnapshotTestCase.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FBSnapshotTestCase.modulemap; sourceTree = "<group>"; };
-		CCFAE6EE0788F33798617B59A051C141 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = SFBluetooth/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
-		CD0D6B7AE26AC6E3BABF4DB65DFC5728 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		D08CEBB9BDD9EF7A662ECFC0305C169E /* FBSnapshotTestCase-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCase-prefix.pch"; sourceTree = "<group>"; };
-		D872A3EE224412D4057C234FBC629F9C /* UIImage+Snapshot.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Snapshot.m"; path = "FBSnapshotTestCase/Categories/UIImage+Snapshot.m"; sourceTree = "<group>"; };
-		E12C76061E72886EC8A4AA3F6A91A0A9 /* Pods-SFBluetooth_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SFBluetooth_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E658F388F01C72599CA75537950B6095 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		EC4217A5827D7F28D5C2447D79A68F8D /* Pods-SFBluetooth_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SFBluetooth_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		EE9E10DE76CCF93A10D9D95387D55E34 /* Pods-SFBluetooth_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SFBluetooth_Tests.modulemap"; sourceTree = "<group>"; };
-		F26C9D549F8CA4AFD78F0F2A01D94C7F /* Pods-SFBluetooth_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SFBluetooth_Tests"; path = Pods_SFBluetooth_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6034AEBF2340FDA6611D0BA439C8113 /* Pods-SFBluetooth_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SFBluetooth_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		F7D7B423506A09082207781190CF853E /* Pods-SFBluetooth_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SFBluetooth_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		F83373D231175A7EF87B3B2ECA027244 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		FA7F1B387050B506AC244CC5C764D36E /* Pods-SFBluetooth_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SFBluetooth_Example-umbrella.h"; sourceTree = "<group>"; };
-		FC937B82DE393D2EE1894244996553FC /* SFBluetooth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SFBluetooth.release.xcconfig; sourceTree = "<group>"; };
-		FE2424223BFC5F325C53312B33239600 /* Pods-SFBluetooth_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SFBluetooth_Tests-umbrella.h"; sourceTree = "<group>"; };
+		9EC2768936E72379B65DE12DF31AFA97 /* SFExtension-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SFExtension-prefix.pch"; sourceTree = "<group>"; };
+		9ED2D84D5E1EC54D92BC64B50B3DEF73 /* SFBluetooth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SFBluetooth.debug.xcconfig; sourceTree = "<group>"; };
+		A1EDAEE419E9951EB07A0F22F6B359BC /* SFPeripheralAgent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SFPeripheralAgent.swift; path = SFBluetooth/Classes/SFPeripheralAgent.swift; sourceTree = "<group>"; };
+		A5D03E29981DB89560AFE0A440D5FA66 /* NSArray+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+SFExtension.m"; path = "SFExtension/Classes/Foundation/NSArray+SFExtension.m"; sourceTree = "<group>"; };
+		A6A9BBD41FF761006EC865158D746AFB /* Pods-SFBluetooth_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SFBluetooth_Example-Info.plist"; sourceTree = "<group>"; };
+		A8C49FA814BB18000C4DDBCE12909399 /* NSDictionary+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+SFExtension.h"; path = "SFExtension/Classes/Foundation/NSDictionary+SFExtension.h"; sourceTree = "<group>"; };
+		A945B6A1E9DB9BCB42381A4319678895 /* SwiftyBeaver-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyBeaver-dummy.m"; sourceTree = "<group>"; };
+		A96B92BC1BAEF6EF235861AACD68FB64 /* UIResponder+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIResponder+SFExtension.m"; path = "SFExtension/Classes/UIKit/UIResponder+SFExtension.m"; sourceTree = "<group>"; };
+		AB27C5130885DD3FF30953C4B9E3DB5E /* UIAlertView+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+SFExtension.h"; path = "SFExtension/Classes/UIKit/UIAlertView+SFExtension.h"; sourceTree = "<group>"; };
+		AB8B780D729791F3F6BD09DC6F5A09E3 /* SFBluetooth-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SFBluetooth-umbrella.h"; sourceTree = "<group>"; };
+		ADDDAACB48B335AF4652826B280D5E21 /* UIView+SFFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+SFFrame.h"; path = "SFExtension/Classes/UIKit/UIView+SFFrame.h"; sourceTree = "<group>"; };
+		AE6B71962A4B9A649D9E1C3D36A12971 /* NSString+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+SFExtension.m"; path = "SFExtension/Classes/Foundation/NSString+SFExtension.m"; sourceTree = "<group>"; };
+		AF4FFD17BA9227073B6BB7602D5460E5 /* NSDictionary+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+SFExtension.m"; path = "SFExtension/Classes/Foundation/NSDictionary+SFExtension.m"; sourceTree = "<group>"; };
+		B21AF3C402E77CEF3D5FE5AFFA1D5B7B /* SFExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SFExtension.debug.xcconfig; sourceTree = "<group>"; };
+		B23FEFA52C6D343F1FB8062289E2B7DD /* SFBluetooth.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SFBluetooth.modulemap; sourceTree = "<group>"; };
+		B62B2D3D45895FE481417513DA5F64D1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		B8EE873527F58BABEAEB16657DD5F9EC /* UIImageView+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+SFExtension.h"; path = "SFExtension/Classes/UIKit/UIImageView+SFExtension.h"; sourceTree = "<group>"; };
+		BCF7842937DAA90FE3E527B9A9F94B1A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		BE9F48462F131D0A4F989B225450B1F6 /* SFBluetooth-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SFBluetooth-Info.plist"; sourceTree = "<group>"; };
+		BEAC65A1441D329B0629406A2DADE5A5 /* SFMacro.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFMacro.h; path = SFExtension/Classes/Common/SFMacro.h; sourceTree = "<group>"; };
+		C08EC304924B434147895B952DB8642F /* UIWebView+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIWebView+SFExtension.h"; path = "SFExtension/Classes/UIKit/UIWebView+SFExtension.h"; sourceTree = "<group>"; };
+		C0C592BD5688A3B37172E43BD6977D42 /* UIView+SFExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+SFExtension.m"; path = "SFExtension/Classes/UIKit/UIView+SFExtension.m"; sourceTree = "<group>"; };
+		C55C6D88807C1EC039CC0FB9F15A356A /* Base64.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Base64.swift; path = Sources/Base64.swift; sourceTree = "<group>"; };
+		C665164F3FA3674169A749A3B980B0D7 /* SwiftyBeaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyBeaver.release.xcconfig; sourceTree = "<group>"; };
+		C71F545ECB74A1A9294A083B4C8D7AC2 /* UIView+SFGesture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+SFGesture.h"; path = "SFExtension/Classes/UIKit/UIView+SFGesture.h"; sourceTree = "<group>"; };
+		D3839C9210501F9A4E771E60A70E9DD5 /* SFBluetooth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SFBluetooth.release.xcconfig; sourceTree = "<group>"; };
+		DD8EA0AA09279260AED0A72650DA74D4 /* SFPeripheralPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SFPeripheralPlugin.swift; sourceTree = "<group>"; };
+		DD9BAF297016D633DB3F824149E0CA4F /* NSString+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+SFExtension.h"; path = "SFExtension/Classes/Foundation/NSString+SFExtension.h"; sourceTree = "<group>"; };
+		DE002DF9D7FB3275FE5DD4B252F74391 /* NSArray+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+SFExtension.h"; path = "SFExtension/Classes/Foundation/NSArray+SFExtension.h"; sourceTree = "<group>"; };
+		DE2F0938B1F9A9DFF498CDD4EA60539A /* SFExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SFExtension.release.xcconfig; sourceTree = "<group>"; };
+		DF040F927452B6CEA9E54FA3DE7E2CD0 /* NSTimer+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSTimer+SFExtension.h"; path = "SFExtension/Classes/Foundation/NSTimer+SFExtension.h"; sourceTree = "<group>"; };
+		E0E651AA55C3EBB02C5B431B277AB16B /* SFLogger-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SFLogger-prefix.pch"; sourceTree = "<group>"; };
+		E4381699DA4C5B374D7ADC9ECE935160 /* SwiftyBeaver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyBeaver.swift; path = Sources/SwiftyBeaver.swift; sourceTree = "<group>"; };
+		E50820A8EDF537FCA69E0F2671BE1659 /* SFLogger */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SFLogger; path = SFLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6F9C4D3C86F25400FDADF4A1319AF18 /* Pods-SFBluetooth_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SFBluetooth_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E7117EF0AB9DDA24A28AEDC68F05A65D /* Pods-SFBluetooth_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SFBluetooth_Example.release.xcconfig"; sourceTree = "<group>"; };
+		E822BE80333C275046D0215AC77108BF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		E87E6AF486D9387FA0194E54FBF1B23F /* SFBleLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SFBleLog.swift; sourceTree = "<group>"; };
+		E87E9BC900DE181F6A0037A2655AC336 /* GoogleCloudDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GoogleCloudDestination.swift; path = Sources/GoogleCloudDestination.swift; sourceTree = "<group>"; };
+		E8F145C5D24F2837C63A80E1EC8C83A2 /* FilterValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FilterValidator.swift; path = Sources/FilterValidator.swift; sourceTree = "<group>"; };
+		EA789814C5DF15DADD2F4BA4FE4E2E53 /* NSObject+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+SFExtension.h"; path = "SFExtension/Classes/Foundation/NSObject+SFExtension.h"; sourceTree = "<group>"; };
+		EF0DE0B28DAE2F51DD399856CA3D12A9 /* SwiftyBeaver-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyBeaver-umbrella.h"; sourceTree = "<group>"; };
+		F1205963CAF040B632C8A115A636C49F /* SFCentralManagerPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SFCentralManagerPlugin.swift; sourceTree = "<group>"; };
+		F3577FBB00E7A20D18C33CB1444A90C2 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Filter.swift; sourceTree = "<group>"; };
+		F657D984DB3BFDBBFCBBCEB1CBC9C255 /* UIView+SFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+SFExtension.h"; path = "SFExtension/Classes/UIKit/UIView+SFExtension.h"; sourceTree = "<group>"; };
+		F6C47A6FA07E9321331606AB7190AEA9 /* UIView+SFGesture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+SFGesture.m"; path = "SFExtension/Classes/UIKit/UIView+SFGesture.m"; sourceTree = "<group>"; };
+		FA77BAC3E483C3738C64528C35390053 /* SFCentralManagerLogPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SFCentralManagerLogPlugin.swift; sourceTree = "<group>"; };
+		FD6A02B5DFECF33F24905565C6040560 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		FEE3740407ED626B0B0286245857969F /* Pods-SFBluetooth_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SFBluetooth_Example"; path = Pods_SFBluetooth_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FEE661E58CA6655B39AA49AA4C021C33 /* FBSnapshotTestCase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCase.h; path = FBSnapshotTestCase/FBSnapshotTestCase.h; sourceTree = "<group>"; };
-		FF23DD2D8246E092E5F41DE471194BCD /* Pods-SFBluetooth_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SFBluetooth_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		167C48872D6BAF438ACF1416300E6BE2 /* Frameworks */ = {
+		32C8FB47BF273CD4D2A65A94F89E7424 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78A0CA17F54DD75F8C7CE2D7FE73B1C9 /* Foundation.framework in Frameworks */,
+				F5C9B7F0BDF48BD015D47E672B18D56D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2C360C6D6A4E6774A2F62D0A237A3678 /* Frameworks */ = {
+		737D18B459D6A6E12BFD49481D3EB41D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90D9E79396BC6A83E6E64C1EEF92EF2E /* Foundation.framework in Frameworks */,
+				7D4D668C5A07459571D3F92635BC6453 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4AAAC429AE4FD5542FEC063DFE924CC8 /* Frameworks */ = {
+		AEE6C643C81F0DB458CD80D7D6229D65 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07478A4B7C645BC03F77A398EAAC41C4 /* Foundation.framework in Frameworks */,
+				5B4B7DE1EEAB0B1014BB52C4A7BA4693 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E3B880388FF17A336FBF90E30E537508 /* Frameworks */ = {
+		AFCE2F4AD84417C34AD8369BC894AE38 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ECCAC52EF4C74E1032E0BC646BBE5B9 /* Foundation.framework in Frameworks */,
-				C9F76407497DF0205D7460B36D22259F /* QuartzCore.framework in Frameworks */,
-				875A310EAF4D0C136C3FFFF5E0335BE4 /* UIKit.framework in Frameworks */,
-				9D3C5E2F56838937146191468A893244 /* XCTest.framework in Frameworks */,
+				7AEB639D8928A0CF5C544AA613388020 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC6ABF4687B13839BCDA9DFA235D871C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82663402EF187AB92BF2363E6753CC8A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		176538DB5AE64F84B768C823E876B341 /* Pods-SFBluetooth_Tests */ = {
+		0D96AEDDA37155532152615347B6F991 /* Pods-SFBluetooth_Example */ = {
 			isa = PBXGroup;
 			children = (
-				EE9E10DE76CCF93A10D9D95387D55E34 /* Pods-SFBluetooth_Tests.modulemap */,
-				18D3ED9BF759E97D08CD5CF290E6D160 /* Pods-SFBluetooth_Tests-acknowledgements.markdown */,
-				3B0B623AF04FB9DBE3DE2E35BCA6A641 /* Pods-SFBluetooth_Tests-acknowledgements.plist */,
-				1145CEBC75D06903579C03C48265939F /* Pods-SFBluetooth_Tests-dummy.m */,
-				F7D7B423506A09082207781190CF853E /* Pods-SFBluetooth_Tests-frameworks.sh */,
-				5394B5203F6FFDF3E601FC4A7B7B8D6F /* Pods-SFBluetooth_Tests-Info.plist */,
-				FE2424223BFC5F325C53312B33239600 /* Pods-SFBluetooth_Tests-umbrella.h */,
-				F6034AEBF2340FDA6611D0BA439C8113 /* Pods-SFBluetooth_Tests.debug.xcconfig */,
-				FF23DD2D8246E092E5F41DE471194BCD /* Pods-SFBluetooth_Tests.release.xcconfig */,
+				3C7FF7BB5C4F4E47CD250EBDC27D4309 /* Pods-SFBluetooth_Example.modulemap */,
+				E6F9C4D3C86F25400FDADF4A1319AF18 /* Pods-SFBluetooth_Example-acknowledgements.markdown */,
+				6C69AC4A8F1A7D32672768A8FDA0388D /* Pods-SFBluetooth_Example-acknowledgements.plist */,
+				98A21DE2E8B2A248D4A8C6DE5B49C68C /* Pods-SFBluetooth_Example-dummy.m */,
+				1CF8F754250A1CC2DDCCDC544243ED70 /* Pods-SFBluetooth_Example-frameworks.sh */,
+				A6A9BBD41FF761006EC865158D746AFB /* Pods-SFBluetooth_Example-Info.plist */,
+				58FFD67B8D471503432AC509FD928D4A /* Pods-SFBluetooth_Example-umbrella.h */,
+				175F4D2A0B6300C4BB3B8CA8A3018C5D /* Pods-SFBluetooth_Example.debug.xcconfig */,
+				E7117EF0AB9DDA24A28AEDC68F05A65D /* Pods-SFBluetooth_Example.release.xcconfig */,
 			);
-			name = "Pods-SFBluetooth_Tests";
-			path = "Target Support Files/Pods-SFBluetooth_Tests";
+			name = "Pods-SFBluetooth_Example";
+			path = "Target Support Files/Pods-SFBluetooth_Example";
 			sourceTree = "<group>";
 		};
-		1881B985530C75F40FAFF4F8A7238411 /* Pod */ = {
+		16DF0D866300D7D5CADB2CE6D8741837 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				CD0D6B7AE26AC6E3BABF4DB65DFC5728 /* LICENSE */,
-				F83373D231175A7EF87B3B2ECA027244 /* README.md */,
-				C3B194443EE7172D43CEEAF071C7DC6E /* SFBluetooth.podspec */,
+				0D96AEDDA37155532152615347B6F991 /* Pods-SFBluetooth_Example */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		60C6F0DF92C41F252EB3361307A24EE8 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				FD6A02B5DFECF33F24905565C6040560 /* LICENSE */,
+				B62B2D3D45895FE481417513DA5F64D1 /* README.md */,
+				3E97ECB3E43F9B47E1EB1ECBFAEC4D67 /* SFLogger.podspec */,
 			);
 			name = Pod;
 			sourceTree = "<group>";
 		};
-		1E43321D0E22DC4359FDCBF09ECBDF55 /* SFBluetooth */ = {
+		66EFEF3A918ACE2B229B9ADD17F8D545 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				CCFAE6EE0788F33798617B59A051C141 /* ReplaceMe.swift */,
-				1881B985530C75F40FAFF4F8A7238411 /* Pod */,
-				B3D87A0538E29090DFDCBE9254F7718D /* Support Files */,
+				7D3B9F5BF1C23D094D6B700A19CF1D6A /* SFLogger.modulemap */,
+				13AA08562B82A50425B2A4D214C716CF /* SFLogger-dummy.m */,
+				509877449B06E1D7467C8601F6428285 /* SFLogger-Info.plist */,
+				E0E651AA55C3EBB02C5B431B277AB16B /* SFLogger-prefix.pch */,
+				81B586B3836A0DCA4EB47D3827E8BE25 /* SFLogger-umbrella.h */,
+				507B7B9952A5D953FF5D79ED0942B4C1 /* SFLogger.debug.xcconfig */,
+				0D81631DE4C19EE667CCFB5955631336 /* SFLogger.release.xcconfig */,
 			);
-			name = SFBluetooth;
-			path = ../..;
+			name = "Support Files";
+			path = "../SFBluetooth/Example/Pods/Target Support Files/SFLogger";
 			sourceTree = "<group>";
 		};
-		4BA2479549DD918290454B1CDCD0B92B /* Core */ = {
+		7CFE3FB504FCB676C4E68D84614366F8 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				FEE661E58CA6655B39AA49AA4C021C33 /* FBSnapshotTestCase.h */,
-				277B6BE10C665F515606A22FD60C6DCC /* FBSnapshotTestCase.m */,
-				88B1DEEBF6316A84D7413645212492FF /* FBSnapshotTestCasePlatform.h */,
-				6ABB3EB3CCC5BCA82F40FE8DC87BB778 /* FBSnapshotTestCasePlatform.m */,
-				AE9FF9459FBCDC4AF88FB6B5A4CC1439 /* FBSnapshotTestController.h */,
-				7E1B7EA746BF6557FD565BAE12AF9198 /* FBSnapshotTestController.m */,
-				99A67367E018411D614EC8536A8A1C5B /* UIApplication+StrictKeyWindow.h */,
-				0F538C426803AE34255FC6E35B408CCA /* UIApplication+StrictKeyWindow.m */,
-				656116C8FA5458F45D4707110C9530EC /* UIImage+Compare.h */,
-				235A78CFFA6D8B8D86CACD733531CB13 /* UIImage+Compare.m */,
-				96187BF3038121CC146335E9FF0B0AFF /* UIImage+Diff.h */,
-				4568279DE47DC3AB91598E1317503995 /* UIImage+Diff.m */,
-				284833D18C244D2B42966B6EE425AA59 /* UIImage+Snapshot.h */,
-				D872A3EE224412D4057C234FBC629F9C /* UIImage+Snapshot.m */,
+				95267B17AF6F2F45371EE0609F89AC46 /* SwiftyBeaver.modulemap */,
+				A945B6A1E9DB9BCB42381A4319678895 /* SwiftyBeaver-dummy.m */,
+				1C94A28F870CD5F185BAFA8A66772C54 /* SwiftyBeaver-Info.plist */,
+				4ADA9B0A7613B38098E78DA19931EACB /* SwiftyBeaver-prefix.pch */,
+				EF0DE0B28DAE2F51DD399856CA3D12A9 /* SwiftyBeaver-umbrella.h */,
+				247DC4CD53576B7052C9892934A34F6B /* SwiftyBeaver.debug.xcconfig */,
+				C665164F3FA3674169A749A3B980B0D7 /* SwiftyBeaver.release.xcconfig */,
 			);
-			name = Core;
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyBeaver";
 			sourceTree = "<group>";
 		};
-		50C59F3718D55F8056E4D80C4C718159 /* Products */ = {
+		7EF284B8B6C7302F3ED0213C71119BCB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5C4F31330DFA99D699E4BDC8C3573D73 /* FBSnapshotTestCase */,
+				F890BB49A71F1DC7F78803C796A19528 /* SFExtension */,
+				9A9CE214DADE0C8832FEA5CE31444AE9 /* SwiftyBeaver */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9190FB72A7B9EE0E621D96D52A21EA04 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				312FA998A3D584E9E31283B0AA4612DC /* SFExtension.modulemap */,
+				4CF505B70016359D03080414F54C0602 /* SFExtension-dummy.m */,
+				117E7AB7BB5CF03E04A2E187CAE5AE50 /* SFExtension-Info.plist */,
+				9EC2768936E72379B65DE12DF31AFA97 /* SFExtension-prefix.pch */,
+				5DFBD0BD9FF0C29891F787A7D2C1CB17 /* SFExtension-umbrella.h */,
+				B21AF3C402E77CEF3D5FE5AFFA1D5B7B /* SFExtension.debug.xcconfig */,
+				DE2F0938B1F9A9DFF498CDD4EA60539A /* SFExtension.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SFExtension";
+			sourceTree = "<group>";
+		};
+		9A9CE214DADE0C8832FEA5CE31444AE9 /* SwiftyBeaver */ = {
+			isa = PBXGroup;
+			children = (
+				C55C6D88807C1EC039CC0FB9F15A356A /* Base64.swift */,
+				33642B90B33BFF97DE4018496DE796A1 /* BaseDestination.swift */,
+				20564466CAE519C08F2B4914213AD55A /* ConsoleDestination.swift */,
+				80DCAE86AF404846721DF8573D9B3DDA /* Extensions.swift */,
+				0A2B6D8CE422BCF08F2EF99E80524CF8 /* FileDestination.swift */,
+				F3577FBB00E7A20D18C33CB1444A90C2 /* Filter.swift */,
+				E8F145C5D24F2837C63A80E1EC8C83A2 /* FilterValidator.swift */,
+				E87E9BC900DE181F6A0037A2655AC336 /* GoogleCloudDestination.swift */,
+				E4381699DA4C5B374D7ADC9ECE935160 /* SwiftyBeaver.swift */,
+				7CFE3FB504FCB676C4E68D84614366F8 /* Support Files */,
+			);
+			name = SwiftyBeaver;
+			path = SwiftyBeaver;
+			sourceTree = "<group>";
+		};
+		A636EBA94988E1A08E50DB92F673D2CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
 				FEE3740407ED626B0B0286245857969F /* Pods-SFBluetooth_Example */,
-				F26C9D549F8CA4AFD78F0F2A01D94C7F /* Pods-SFBluetooth_Tests */,
 				76B7B1751C764B0D0BFAEE9B544656AA /* SFBluetooth */,
+				0883ACD70DB48998A293B466B7DD1450 /* SFExtension */,
+				E50820A8EDF537FCA69E0F2671BE1659 /* SFLogger */,
+				7A5F7001277980B8F3EEA75BCD346E53 /* SwiftyBeaver */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		906402ECC4C6C5EB58DD365FD2C64E92 /* SwiftSupport */ = {
+		B7AF49E3FE10307CF7E4FFCA84724C29 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				3F0D66CF296ABBC57EC4D0452397E235 /* SwiftSupport.swift */,
+				0D5A96466039E500BD8F0FF757433313 /* SFBleDiscoverLogSummary.swift */,
+				E87E6AF486D9387FA0194E54FBF1B23F /* SFBleLog.swift */,
+				FA77BAC3E483C3738C64528C35390053 /* SFCentralManagerLogPlugin.swift */,
+				760145BAD425C2EE89070EC951F8FB66 /* SFPeripheralLogPlugin.swift */,
 			);
-			name = SwiftSupport;
-			sourceTree = "<group>";
-		};
-		B321A9160F7D1462EE8DD09147D5C20C /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				1E43321D0E22DC4359FDCBF09ECBDF55 /* SFBluetooth */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		B3D87A0538E29090DFDCBE9254F7718D /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				82F732A8AD9F02914D698529D0E4C531 /* SFBluetooth.modulemap */,
-				BECB031F78FB381EF48145C4CC60D87D /* SFBluetooth-dummy.m */,
-				8E40801D9141912F7B0C06C6C007CEE3 /* SFBluetooth-Info.plist */,
-				B23240B2A1B906822D29823DBB43C027 /* SFBluetooth-prefix.pch */,
-				62E41D0DD0D0E0E87FF2C0A611EC2A58 /* SFBluetooth-umbrella.h */,
-				5A990E74A19CFE08A11CF8CB5935EA40 /* SFBluetooth.debug.xcconfig */,
-				FC937B82DE393D2EE1894244996553FC /* SFBluetooth.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/SFBluetooth";
-			sourceTree = "<group>";
-		};
-		B69B2ECE2D2C9A3924A9231138CE0BBC /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				CBFF6C5FD9C3A84274A9314D3E940B6E /* FBSnapshotTestCase.modulemap */,
-				1ADA6E655DC84D06359BD0ED5E36C783 /* FBSnapshotTestCase-dummy.m */,
-				B7103CA00AED20722C5B69CA5B4F6938 /* FBSnapshotTestCase-Info.plist */,
-				D08CEBB9BDD9EF7A662ECFC0305C169E /* FBSnapshotTestCase-prefix.pch */,
-				8E5923010B02074CAA9AAF6EA02D66AA /* FBSnapshotTestCase-umbrella.h */,
-				9468E867498BBAF36F9AFFE4845F8B09 /* FBSnapshotTestCase.debug.xcconfig */,
-				4C6513B09838318BD763CFD5390D1DE0 /* FBSnapshotTestCase.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/FBSnapshotTestCase";
-			sourceTree = "<group>";
-		};
-		BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FB2668559AE577E6E8078C0C291AD417 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BD2D60DE56CBB8C87BA07E0C1CCD0592 /* FBSnapshotTestCase */ = {
-			isa = PBXGroup;
-			children = (
-				4BA2479549DD918290454B1CDCD0B92B /* Core */,
-				B69B2ECE2D2C9A3924A9231138CE0BBC /* Support Files */,
-				906402ECC4C6C5EB58DD365FD2C64E92 /* SwiftSupport */,
-			);
-			name = FBSnapshotTestCase;
-			path = FBSnapshotTestCase;
-			sourceTree = "<group>";
-		};
-		CB63AA5F16997037A4BD1DB7548AEF71 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				FAD141A557251DEDA643970DC60D691E /* Pods-SFBluetooth_Example */,
-				176538DB5AE64F84B768C823E876B341 /* Pods-SFBluetooth_Tests */,
-			);
-			name = "Targets Support Files";
+			name = Log;
+			path = Log;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				B321A9160F7D1462EE8DD09147D5C20C /* Development Pods */,
-				BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */,
-				E81A37DBDE41E671312C56736544E2FA /* Pods */,
-				50C59F3718D55F8056E4D80C4C718159 /* Products */,
-				CB63AA5F16997037A4BD1DB7548AEF71 /* Targets Support Files */,
+				D4343F551ECCC202D2E869227D979509 /* Development Pods */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				7EF284B8B6C7302F3ED0213C71119BCB /* Pods */,
+				A636EBA94988E1A08E50DB92F673D2CD /* Products */,
+				16DF0D866300D7D5CADB2CE6D8741837 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		E81A37DBDE41E671312C56736544E2FA /* Pods */ = {
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BD2D60DE56CBB8C87BA07E0C1CCD0592 /* FBSnapshotTestCase */,
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FAD141A557251DEDA643970DC60D691E /* Pods-SFBluetooth_Example */ = {
+		D4343F551ECCC202D2E869227D979509 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3D0511ADAAAD676149162E7DA68C769F /* Pods-SFBluetooth_Example.modulemap */,
-				E12C76061E72886EC8A4AA3F6A91A0A9 /* Pods-SFBluetooth_Example-acknowledgements.markdown */,
-				3AD5C5218D20645E619B12F25C4127F6 /* Pods-SFBluetooth_Example-acknowledgements.plist */,
-				43FF6FC5DFC856C6ECBF974FB698AA82 /* Pods-SFBluetooth_Example-dummy.m */,
-				08242C358FE26C4EB53B5D5A44DD06C2 /* Pods-SFBluetooth_Example-frameworks.sh */,
-				C167CE2966560851C38B4E8501A762B1 /* Pods-SFBluetooth_Example-Info.plist */,
-				FA7F1B387050B506AC244CC5C764D36E /* Pods-SFBluetooth_Example-umbrella.h */,
-				EC4217A5827D7F28D5C2447D79A68F8D /* Pods-SFBluetooth_Example.debug.xcconfig */,
-				64B41EFE10090B661617C78BD41E0BF3 /* Pods-SFBluetooth_Example.release.xcconfig */,
+				E423A0B770ACB63EFD83EB48DEE5345F /* SFBluetooth */,
+				F6A65F81A93CC7AFF4D2C6E01850E266 /* SFLogger */,
 			);
-			name = "Pods-SFBluetooth_Example";
-			path = "Target Support Files/Pods-SFBluetooth_Example";
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		FB2668559AE577E6E8078C0C291AD417 /* iOS */ = {
+		D87B01D83FD40AFA0F6765E500961E4A /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				57221B54D014471C3D3E1925EFC917C8 /* Foundation.framework */,
-				3280BB5E7B57C31D41117A74F76E9DF3 /* QuartzCore.framework */,
-				1DA24A38BA9EE106B59E3D4C8DD1CE0E /* UIKit.framework */,
-				E658F388F01C72599CA75537950B6095 /* XCTest.framework */,
+				BCF7842937DAA90FE3E527B9A9F94B1A /* LICENSE */,
+				E822BE80333C275046D0215AC77108BF /* README.md */,
+				24A842F9F3CB0DF65E8BC71662EBD296 /* SFBluetooth.podspec */,
 			);
-			name = iOS;
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		E423A0B770ACB63EFD83EB48DEE5345F /* SFBluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				62A0DF4E60CABF84A52C08D308CD1AB4 /* SFCentralManagerAgent.swift */,
+				A1EDAEE419E9951EB07A0F22F6B359BC /* SFPeripheralAgent.swift */,
+				FA5ABFB9CD7C4CCF937A7B8464C75716 /* Plugin */,
+				D87B01D83FD40AFA0F6765E500961E4A /* Pod */,
+				E8F8D3A9083074D68CC59E7691A396E3 /* Support Files */,
+			);
+			name = SFBluetooth;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		E8F8D3A9083074D68CC59E7691A396E3 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B23FEFA52C6D343F1FB8062289E2B7DD /* SFBluetooth.modulemap */,
+				2F1D629FAEE4C926353163CAA53D1C43 /* SFBluetooth-dummy.m */,
+				BE9F48462F131D0A4F989B225450B1F6 /* SFBluetooth-Info.plist */,
+				84388C6F4D4388DC2C6527BE38332F90 /* SFBluetooth-prefix.pch */,
+				AB8B780D729791F3F6BD09DC6F5A09E3 /* SFBluetooth-umbrella.h */,
+				9ED2D84D5E1EC54D92BC64B50B3DEF73 /* SFBluetooth.debug.xcconfig */,
+				D3839C9210501F9A4E771E60A70E9DD5 /* SFBluetooth.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/SFBluetooth";
+			sourceTree = "<group>";
+		};
+		F6A65F81A93CC7AFF4D2C6E01850E266 /* SFLogger */ = {
+			isa = PBXGroup;
+			children = (
+				9177F7F4A73A30936017511DEA7E60AB /* SFLogger.swift */,
+				60C6F0DF92C41F252EB3361307A24EE8 /* Pod */,
+				66EFEF3A918ACE2B229B9ADD17F8D545 /* Support Files */,
+			);
+			name = SFLogger;
+			path = ../../../SFLogger;
+			sourceTree = "<group>";
+		};
+		F890BB49A71F1DC7F78803C796A19528 /* SFExtension */ = {
+			isa = PBXGroup;
+			children = (
+				DE002DF9D7FB3275FE5DD4B252F74391 /* NSArray+SFExtension.h */,
+				A5D03E29981DB89560AFE0A440D5FA66 /* NSArray+SFExtension.m */,
+				A8C49FA814BB18000C4DDBCE12909399 /* NSDictionary+SFExtension.h */,
+				AF4FFD17BA9227073B6BB7602D5460E5 /* NSDictionary+SFExtension.m */,
+				EA789814C5DF15DADD2F4BA4FE4E2E53 /* NSObject+SFExtension.h */,
+				1A1387A6C9B105B87712CCD29A7B9CA0 /* NSObject+SFExtension.m */,
+				DD9BAF297016D633DB3F824149E0CA4F /* NSString+SFExtension.h */,
+				AE6B71962A4B9A649D9E1C3D36A12971 /* NSString+SFExtension.m */,
+				DF040F927452B6CEA9E54FA3DE7E2CD0 /* NSTimer+SFExtension.h */,
+				42523ED5728DA22E4597FBE41F012D8C /* NSTimer+SFExtension.m */,
+				328C6094652C2E70657223CF6C0A283A /* SFCommon.h */,
+				4D7810FAE83076EB3EBB171422B7F340 /* SFCommon.m */,
+				203F514487C4124313B79028ECF2AFF3 /* SFConstants.h */,
+				9C9249A238FB2C919B00E1DEA36C1770 /* SFConstants.m */,
+				BEAC65A1441D329B0629406A2DADE5A5 /* SFMacro.h */,
+				6BD52A0907E069193B5FFB8C1F95DEC3 /* UIActionSheet+SFExtension.h */,
+				5BCF917A7CC0C8CCDFBE984F53FC9A0B /* UIActionSheet+SFExtension.m */,
+				AB27C5130885DD3FF30953C4B9E3DB5E /* UIAlertView+SFExtension.h */,
+				47E3618A3072A3DC3F369851644D85AB /* UIAlertView+SFExtension.m */,
+				9349DB6201BBB0645C4492E595C79610 /* UIColor+SFExtension.h */,
+				9155ED740418C8C619A727FDAC3F7775 /* UIColor+SFExtension.m */,
+				B8EE873527F58BABEAEB16657DD5F9EC /* UIImageView+SFExtension.h */,
+				3A0A2410E8327DC64F742A36A3576B56 /* UIImageView+SFExtension.m */,
+				82DBEBEBBFE848BF5C4E12DB644841BA /* UIResponder+SFExtension.h */,
+				A96B92BC1BAEF6EF235861AACD68FB64 /* UIResponder+SFExtension.m */,
+				9C64B5662AB6284C9A24586B80DC8642 /* UITextField+SFExtension.h */,
+				21D064465C2B956DDD47D3B6F1939B71 /* UITextField+SFExtension.m */,
+				F657D984DB3BFDBBFCBBCEB1CBC9C255 /* UIView+SFExtension.h */,
+				C0C592BD5688A3B37172E43BD6977D42 /* UIView+SFExtension.m */,
+				ADDDAACB48B335AF4652826B280D5E21 /* UIView+SFFrame.h */,
+				11D227FCCCA64DC5592EE5C46C936C7C /* UIView+SFFrame.m */,
+				C71F545ECB74A1A9294A083B4C8D7AC2 /* UIView+SFGesture.h */,
+				F6C47A6FA07E9321331606AB7190AEA9 /* UIView+SFGesture.m */,
+				C08EC304924B434147895B952DB8642F /* UIWebView+SFExtension.h */,
+				65D1D093513710608CBC41015F6F6008 /* UIWebView+SFExtension.m */,
+				9190FB72A7B9EE0E621D96D52A21EA04 /* Support Files */,
+			);
+			name = SFExtension;
+			path = SFExtension;
+			sourceTree = "<group>";
+		};
+		FA5ABFB9CD7C4CCF937A7B8464C75716 /* Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				F1205963CAF040B632C8A115A636C49F /* SFCentralManagerPlugin.swift */,
+				DD8EA0AA09279260AED0A72650DA74D4 /* SFPeripheralPlugin.swift */,
+				B7AF49E3FE10307CF7E4FFCA84724C29 /* Log */,
+			);
+			name = Plugin;
+			path = SFBluetooth/Classes/Plugin;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4F1BBD7ADD0D35E6E8C335186A52C55C /* Headers */ = {
+		2C3E3C1F298421E3385C0168A2C1A52A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51641ECF7DD52791FDEB0D99849EDDFC /* Pods-SFBluetooth_Example-umbrella.h in Headers */,
+				BD3C987582112C1D6B8F3DAE65875C6D /* NSArray+SFExtension.h in Headers */,
+				A5FA6EF879F3C4AE779F6FE2A0C3287D /* NSDictionary+SFExtension.h in Headers */,
+				34064991AE90926E841B633D0892810F /* NSObject+SFExtension.h in Headers */,
+				FE7881A52F178AAE8AE64E21DED869DA /* NSString+SFExtension.h in Headers */,
+				23B20EB334EC9EF40836CCFEFCA6A9CF /* NSTimer+SFExtension.h in Headers */,
+				325FB56972BEE36A758624C8ECD54F02 /* SFCommon.h in Headers */,
+				7CF7CC2FBC80837B1FDEA565B3E4B06D /* SFConstants.h in Headers */,
+				4199764E268373B72B6EB1FCFFCCF88F /* SFExtension-umbrella.h in Headers */,
+				A6897D6349889A92E40E7B1C2B97A8ED /* SFMacro.h in Headers */,
+				DF39DA252D2B546FE53D8931ED1031C6 /* UIActionSheet+SFExtension.h in Headers */,
+				83EBCB58C1DF8279C75E32E3FABA716D /* UIAlertView+SFExtension.h in Headers */,
+				90C91F103450EB2A1F23CCD99F729E66 /* UIColor+SFExtension.h in Headers */,
+				C941B0932EEC622C9163DEF914F74AEB /* UIImageView+SFExtension.h in Headers */,
+				C9641D62EB780A2BB311E15102D4C694 /* UIResponder+SFExtension.h in Headers */,
+				02FF0F5AD3DBF8D8180F8673423FADA5 /* UITextField+SFExtension.h in Headers */,
+				40B1713C369CDEFA734727095AECCEA6 /* UIView+SFExtension.h in Headers */,
+				468B8ACA3BD097C26632B2F0FF44640B /* UIView+SFFrame.h in Headers */,
+				A09692FEBAFA6B0DF5F827B2D5E984AF /* UIView+SFGesture.h in Headers */,
+				7A80374E98C09E363ED1A847C654A4F1 /* UIWebView+SFExtension.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		631B56DBDA6385F6B13A822CDB1B05AA /* Headers */ = {
+		4F3901E5C71FBAB92C577271548BE11C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BF0478C75FA91A65CB86F4B75314C5B /* Pods-SFBluetooth_Tests-umbrella.h in Headers */,
+				42A526A1A586A2A0378917E3923A2BA2 /* SFBluetooth-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6DF6397B9219FCBA08B338CE813004D4 /* Headers */ = {
+		6C843FDE569DE7DB8D0B68E1988A8562 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B08F07DA1BE64181748C963F23F4AAD /* SFBluetooth-umbrella.h in Headers */,
+				0A8E103352060230906A420610881BD2 /* Pods-SFBluetooth_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4CF7A53AFE8275DDE075747E8245F97 /* Headers */ = {
+		96534EE86A6C9535F489CBD9AB250938 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF8307B7346F4D3BA13C11AECFE6EDD0 /* FBSnapshotTestCase.h in Headers */,
-				1F84FE646CD1D7BAFFB58C243277AFF8 /* FBSnapshotTestCase-umbrella.h in Headers */,
-				640CCE9C3A28AA3CA15510899F9140EE /* FBSnapshotTestCasePlatform.h in Headers */,
-				2B88C28DD20CBFA7B3AEB21A365197FE /* FBSnapshotTestController.h in Headers */,
-				5558B876B579BC1E79BD3D2B19148329 /* UIApplication+StrictKeyWindow.h in Headers */,
-				8AE19756F0126FE92AF625E36F3D70FE /* UIImage+Compare.h in Headers */,
-				67F1963AA7C9EDB78127AD5F566A4949 /* UIImage+Diff.h in Headers */,
-				373413256658309F9053CE22BF62077E /* UIImage+Snapshot.h in Headers */,
+				68B3F20EFB1BD19419B8BDB73A18DEA6 /* SFLogger-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C13C33961B8494AE76BB0D41115740C3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0D3DDC6E7E4955C028619639E8974E8 /* SwiftyBeaver-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		45960635ABAE4024B79486C943B772DE /* SFBluetooth */ = {
+		1740FECD5A74A42ADAE96F3A8246787A /* SwiftyBeaver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C57D5277DA14CFD9B55AB385E0E8D957 /* Build configuration list for PBXNativeTarget "SFBluetooth" */;
+			buildConfigurationList = 760EFA558AAF1BC11E80AFF58AF27C1A /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */;
 			buildPhases = (
-				6DF6397B9219FCBA08B338CE813004D4 /* Headers */,
-				89A6B4E3B96208B7DD31BA746994031E /* Sources */,
-				167C48872D6BAF438ACF1416300E6BE2 /* Frameworks */,
-				65D77CB6803F3F263CCC8CA0326004AE /* Resources */,
+				C13C33961B8494AE76BB0D41115740C3 /* Headers */,
+				F96DD991BB94C72246563C34879CE1A6 /* Sources */,
+				32C8FB47BF273CD4D2A65A94F89E7424 /* Frameworks */,
+				4BB8DB8864B6E185CB47092EFDA2C591 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+			);
+			name = SwiftyBeaver;
+			productName = SwiftyBeaver;
+			productReference = 7A5F7001277980B8F3EEA75BCD346E53 /* SwiftyBeaver */;
+			productType = "com.apple.product-type.framework";
+		};
+		45960635ABAE4024B79486C943B772DE /* SFBluetooth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A28234F24B1DFF8DABCFF0E72B576AF /* Build configuration list for PBXNativeTarget "SFBluetooth" */;
+			buildPhases = (
+				4F3901E5C71FBAB92C577271548BE11C /* Headers */,
+				3716389813622118C86D050A7EA27749 /* Sources */,
+				AFCE2F4AD84417C34AD8369BC894AE38 /* Frameworks */,
+				847DFE4AECB8BE92EEBE576452CB53C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				75E66A871B56EE4CF6EA3CA398025676 /* PBXTargetDependency */,
+				B29B57B5E485D93B1EB2E270E24E7B81 /* PBXTargetDependency */,
 			);
 			name = SFBluetooth;
 			productName = SFBluetooth;
 			productReference = 76B7B1751C764B0D0BFAEE9B544656AA /* SFBluetooth */;
 			productType = "com.apple.product-type.framework";
 		};
-		92F683694DA4125E5AA5AA54C1819FE3 /* Pods-SFBluetooth_Example */ = {
+		5C0BA0F9599234D0D75DC7B2C5636276 /* SFExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4B78FA782D761D0A70AE942B56E98D4A /* Build configuration list for PBXNativeTarget "Pods-SFBluetooth_Example" */;
+			buildConfigurationList = 7DF66411B4E42EFDA9ED9D80F2078452 /* Build configuration list for PBXNativeTarget "SFExtension" */;
 			buildPhases = (
-				4F1BBD7ADD0D35E6E8C335186A52C55C /* Headers */,
-				AFD93506C40350544E472E0C7572CBB7 /* Sources */,
-				4AAAC429AE4FD5542FEC063DFE924CC8 /* Frameworks */,
-				586D2BEB7B06E905A4CE59D2814E4A96 /* Resources */,
+				2C3E3C1F298421E3385C0168A2C1A52A /* Headers */,
+				6DEDBA5E46592BB15407D6C1CCCD60D4 /* Sources */,
+				AEE6C643C81F0DB458CD80D7D6229D65 /* Frameworks */,
+				3814B12D9CB66158F4C6AF1D00817D04 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2BA83D7E7970C2EA14C8BE464589EAEF /* PBXTargetDependency */,
+			);
+			name = SFExtension;
+			productName = SFExtension;
+			productReference = 0883ACD70DB48998A293B466B7DD1450 /* SFExtension */;
+			productType = "com.apple.product-type.framework";
+		};
+		92F683694DA4125E5AA5AA54C1819FE3 /* Pods-SFBluetooth_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED9ECF93E8FC801CB2CF88DCC89AE1C7 /* Build configuration list for PBXNativeTarget "Pods-SFBluetooth_Example" */;
+			buildPhases = (
+				6C843FDE569DE7DB8D0B68E1988A8562 /* Headers */,
+				9F0660DA6CF1C4B73CFC157A7CBAA580 /* Sources */,
+				737D18B459D6A6E12BFD49481D3EB41D /* Frameworks */,
+				ED471850BA29297B719C2EA7AE9494FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABA4CAA5A0B9A9A86D27558458490659 /* PBXTargetDependency */,
+				A5E6C5FE1F001DA26EABF9E28BBD1775 /* PBXTargetDependency */,
+				70E8C1A14678493F5E9DCD4EA9ED69C7 /* PBXTargetDependency */,
+				7EA2ADF174CD2B76CF3271B09B154CB0 /* PBXTargetDependency */,
 			);
 			name = "Pods-SFBluetooth_Example";
 			productName = Pods_SFBluetooth_Example;
 			productReference = FEE3740407ED626B0B0286245857969F /* Pods-SFBluetooth_Example */;
 			productType = "com.apple.product-type.framework";
 		};
-		9898BD3A6AF30901B28FDB0438C39B79 /* Pods-SFBluetooth_Tests */ = {
+		C6CEA71E753675D90FBC51D4748FAF46 /* SFLogger */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DDDD82ECF3F0A706CB2FFF7F809C4B1C /* Build configuration list for PBXNativeTarget "Pods-SFBluetooth_Tests" */;
+			buildConfigurationList = ABF63BB1FD4AFECBEE5B0E2A658ED7F6 /* Build configuration list for PBXNativeTarget "SFLogger" */;
 			buildPhases = (
-				631B56DBDA6385F6B13A822CDB1B05AA /* Headers */,
-				2784F49B72F1F773B2235A7D7FD8DDB2 /* Sources */,
-				2C360C6D6A4E6774A2F62D0A237A3678 /* Frameworks */,
-				79138707EC6E4CB6E3C738C486E07D9F /* Resources */,
+				96534EE86A6C9535F489CBD9AB250938 /* Headers */,
+				EEAE3DD2E895912E5C0B8501CBB24624 /* Sources */,
+				BC6ABF4687B13839BCDA9DFA235D871C /* Frameworks */,
+				DCF576B791222232710C68B59E12A2CE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CCC20712FFF99B9BED5BE8FC17B829C5 /* PBXTargetDependency */,
-				815C45C152DF40B38941B2284149087E /* PBXTargetDependency */,
+				5F83FFA900104969FD6D04793C971A39 /* PBXTargetDependency */,
 			);
-			name = "Pods-SFBluetooth_Tests";
-			productName = Pods_SFBluetooth_Tests;
-			productReference = F26C9D549F8CA4AFD78F0F2A01D94C7F /* Pods-SFBluetooth_Tests */;
-			productType = "com.apple.product-type.framework";
-		};
-		98A98149697C80CEF8D5772791E92E66 /* FBSnapshotTestCase */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 28DAA9880679133EC375B7072B9AEABB /* Build configuration list for PBXNativeTarget "FBSnapshotTestCase" */;
-			buildPhases = (
-				D4CF7A53AFE8275DDE075747E8245F97 /* Headers */,
-				EE210BFC37CDBA0645C09C3819F41723 /* Sources */,
-				E3B880388FF17A336FBF90E30E537508 /* Frameworks */,
-				194C9DCC4899F62F4FB7DDF15C987499 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = FBSnapshotTestCase;
-			productName = FBSnapshotTestCase;
-			productReference = 5C4F31330DFA99D699E4BDC8C3573D73 /* FBSnapshotTestCase */;
+			name = SFLogger;
+			productName = SFLogger;
+			productReference = E50820A8EDF537FCA69E0F2671BE1659 /* SFLogger */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -496,41 +730,49 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 50C59F3718D55F8056E4D80C4C718159 /* Products */;
+			productRefGroup = A636EBA94988E1A08E50DB92F673D2CD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				98A98149697C80CEF8D5772791E92E66 /* FBSnapshotTestCase */,
 				92F683694DA4125E5AA5AA54C1819FE3 /* Pods-SFBluetooth_Example */,
-				9898BD3A6AF30901B28FDB0438C39B79 /* Pods-SFBluetooth_Tests */,
 				45960635ABAE4024B79486C943B772DE /* SFBluetooth */,
+				5C0BA0F9599234D0D75DC7B2C5636276 /* SFExtension */,
+				C6CEA71E753675D90FBC51D4748FAF46 /* SFLogger */,
+				1740FECD5A74A42ADAE96F3A8246787A /* SwiftyBeaver */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		194C9DCC4899F62F4FB7DDF15C987499 /* Resources */ = {
+		3814B12D9CB66158F4C6AF1D00817D04 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		586D2BEB7B06E905A4CE59D2814E4A96 /* Resources */ = {
+		4BB8DB8864B6E185CB47092EFDA2C591 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65D77CB6803F3F263CCC8CA0326004AE /* Resources */ = {
+		847DFE4AECB8BE92EEBE576452CB53C8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		79138707EC6E4CB6E3C738C486E07D9F /* Resources */ = {
+		DCF576B791222232710C68B59E12A2CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED471850BA29297B719C2EA7AE9494FD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -540,206 +782,134 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2784F49B72F1F773B2235A7D7FD8DDB2 /* Sources */ = {
+		3716389813622118C86D050A7EA27749 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E40E3E554E2A5F70F7F2B62009C7B948 /* Pods-SFBluetooth_Tests-dummy.m in Sources */,
+				013B73D3B07BD31CD15EA7F5367B3263 /* SFBleDiscoverLogSummary.swift in Sources */,
+				BE117630A12E2BD2DC2EC45166C2D224 /* SFBleLog.swift in Sources */,
+				42CF6E39C6A1E82666EE977CEE96D212 /* SFBluetooth-dummy.m in Sources */,
+				78B1C7F8600111FFF2826BA352DB9C62 /* SFCentralManagerAgent.swift in Sources */,
+				E5197C40E6F901790432B90AC2E8622A /* SFCentralManagerLogPlugin.swift in Sources */,
+				0A697BE01375D9E9A8769F751FE40B46 /* SFCentralManagerPlugin.swift in Sources */,
+				0595C5D58BCE35E23B888B1B28DA7ECD /* SFPeripheralAgent.swift in Sources */,
+				571108D98117599B37610A3DABFCA6DD /* SFPeripheralLogPlugin.swift in Sources */,
+				3F8F4FDF6EDA758C1ABE6938C721130C /* SFPeripheralPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		89A6B4E3B96208B7DD31BA746994031E /* Sources */ = {
+		6DEDBA5E46592BB15407D6C1CCCD60D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE9EF94783D2631A93C62BBFA551737F /* ReplaceMe.swift in Sources */,
-				CC905147576A788491C414EA3AE6B640 /* SFBluetooth-dummy.m in Sources */,
+				76DD23D075E3DA68E7F05A631BF8824C /* NSArray+SFExtension.m in Sources */,
+				5D1CA5CD84CA5D867955FC61D6F385C7 /* NSDictionary+SFExtension.m in Sources */,
+				3AE55CDED8402A131B4C950127EB304E /* NSObject+SFExtension.m in Sources */,
+				4A7A25EA9E5BA7D664356AA5AE1A83E4 /* NSString+SFExtension.m in Sources */,
+				DE0D2DFC37C03EB9E102C2C5E20F734D /* NSTimer+SFExtension.m in Sources */,
+				80F35AB03C8090922D868B835F84EB01 /* SFCommon.m in Sources */,
+				D2CFF43C8A25DBE9DA95927493CD3324 /* SFConstants.m in Sources */,
+				7566F4167EDF7F23D0E808327FE91F2A /* SFExtension-dummy.m in Sources */,
+				707AE29B803507B5D6CF8AA0FA7D449A /* UIActionSheet+SFExtension.m in Sources */,
+				D39842BC0205E6776795C27150C7B54C /* UIAlertView+SFExtension.m in Sources */,
+				45EEE80B88CD1F536AE164ED450A029E /* UIColor+SFExtension.m in Sources */,
+				EA90C6BE62401169CBF506247EEA98D4 /* UIImageView+SFExtension.m in Sources */,
+				EEFF47828C7EC8A18CB5772013D85229 /* UIResponder+SFExtension.m in Sources */,
+				C21F36121D5C876E1B69A0C73731CBED /* UITextField+SFExtension.m in Sources */,
+				7809C6DC78798F6826455D78D7203804 /* UIView+SFExtension.m in Sources */,
+				A658041640F704C4E97A2C9C11140DFC /* UIView+SFFrame.m in Sources */,
+				BE6D76D229C2EBDF3761F9B57B941969 /* UIView+SFGesture.m in Sources */,
+				A32CE55B55E021CC0A9846C664FA93C0 /* UIWebView+SFExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFD93506C40350544E472E0C7572CBB7 /* Sources */ = {
+		9F0660DA6CF1C4B73CFC157A7CBAA580 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F96421201FB78C9424BAE540F2A5FD59 /* Pods-SFBluetooth_Example-dummy.m in Sources */,
+				C90D07A3FBD870236FBF6CC2AE1CD7BD /* Pods-SFBluetooth_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EE210BFC37CDBA0645C09C3819F41723 /* Sources */ = {
+		EEAE3DD2E895912E5C0B8501CBB24624 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C67CBD15D9B5D0B7769B2F469478332 /* FBSnapshotTestCase.m in Sources */,
-				5BE525FF6FA14B999ED2CCC0AA4FA0CF /* FBSnapshotTestCase-dummy.m in Sources */,
-				30D475DF57C0C682A723231E7BCA0D14 /* FBSnapshotTestCasePlatform.m in Sources */,
-				C390C6005353FB986CB52F474CEF8588 /* FBSnapshotTestController.m in Sources */,
-				2975A09730FD83DC0897129A11EA6585 /* SwiftSupport.swift in Sources */,
-				74339C58AC4E5631FB8C0E662668A796 /* UIApplication+StrictKeyWindow.m in Sources */,
-				B52281F9F4340D4FC8ABB2FEB1FEC08E /* UIImage+Compare.m in Sources */,
-				CA54C09A12400567AFFCB407EEB7E154 /* UIImage+Diff.m in Sources */,
-				2CB61F6FA511CAACB43A50DC3A82E0DD /* UIImage+Snapshot.m in Sources */,
+				1E30644E60F73E9927F1D67C8DDBE92F /* SFLogger.swift in Sources */,
+				C678949E912559B7AEAEC362062F6BA1 /* SFLogger-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F96DD991BB94C72246563C34879CE1A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57ED93F43DC9B06A677D1548173ECB3F /* Base64.swift in Sources */,
+				E597B927036FD5D4508FC341404E3651 /* BaseDestination.swift in Sources */,
+				1E98E0D1016794C1E826EB86F32CD26F /* ConsoleDestination.swift in Sources */,
+				24FC185F6C60E492194C9269EEB1AC36 /* Extensions.swift in Sources */,
+				59B20B26A821365E4F1BD7309BC05F25 /* FileDestination.swift in Sources */,
+				B30A5A073BE536B2B8D7DA87E5F2FA7B /* Filter.swift in Sources */,
+				2BCF9F3EF63A24272A46F0CF84E4A8AD /* FilterValidator.swift in Sources */,
+				F5574C4C7835DBD4AD06E793553E2D5E /* GoogleCloudDestination.swift in Sources */,
+				0C60A6E673C12C22E08322D392BB251D /* SwiftyBeaver.swift in Sources */,
+				E60320AABCC5FF0641EDA7EFF6EBDD19 /* SwiftyBeaver-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2BA83D7E7970C2EA14C8BE464589EAEF /* PBXTargetDependency */ = {
+		5F83FFA900104969FD6D04793C971A39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyBeaver;
+			target = 1740FECD5A74A42ADAE96F3A8246787A /* SwiftyBeaver */;
+			targetProxy = 0A30E450D020B89829C818E449991652 /* PBXContainerItemProxy */;
+		};
+		70E8C1A14678493F5E9DCD4EA9ED69C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SFLogger;
+			target = C6CEA71E753675D90FBC51D4748FAF46 /* SFLogger */;
+			targetProxy = 0803C4F15A96374F19CA367D897465FD /* PBXContainerItemProxy */;
+		};
+		75E66A871B56EE4CF6EA3CA398025676 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SFExtension;
+			target = 5C0BA0F9599234D0D75DC7B2C5636276 /* SFExtension */;
+			targetProxy = C5B003DBEB21E2CE443D3CE6BBF37B63 /* PBXContainerItemProxy */;
+		};
+		7EA2ADF174CD2B76CF3271B09B154CB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyBeaver;
+			target = 1740FECD5A74A42ADAE96F3A8246787A /* SwiftyBeaver */;
+			targetProxy = AAB5AC14EED9ACB90C7F59C18D31DF5D /* PBXContainerItemProxy */;
+		};
+		A5E6C5FE1F001DA26EABF9E28BBD1775 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SFExtension;
+			target = 5C0BA0F9599234D0D75DC7B2C5636276 /* SFExtension */;
+			targetProxy = CAE5D2C80F0FEFF7B85D29BC6A1D246B /* PBXContainerItemProxy */;
+		};
+		ABA4CAA5A0B9A9A86D27558458490659 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SFBluetooth;
 			target = 45960635ABAE4024B79486C943B772DE /* SFBluetooth */;
-			targetProxy = BBA3A6B08320D342AD53B310DB1EC2C8 /* PBXContainerItemProxy */;
+			targetProxy = 2A128752B19B22797C72F1327CB1D438 /* PBXContainerItemProxy */;
 		};
-		815C45C152DF40B38941B2284149087E /* PBXTargetDependency */ = {
+		B29B57B5E485D93B1EB2E270E24E7B81 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-SFBluetooth_Example";
-			target = 92F683694DA4125E5AA5AA54C1819FE3 /* Pods-SFBluetooth_Example */;
-			targetProxy = 501E93AA5D27ACA7EB5CDAC3B3508E5B /* PBXContainerItemProxy */;
-		};
-		CCC20712FFF99B9BED5BE8FC17B829C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FBSnapshotTestCase;
-			target = 98A98149697C80CEF8D5772791E92E66 /* FBSnapshotTestCase */;
-			targetProxy = E348DDBD176639E45D5889A581A7C3BF /* PBXContainerItemProxy */;
+			name = SFLogger;
+			target = C6CEA71E753675D90FBC51D4748FAF46 /* SFLogger */;
+			targetProxy = 2444F051AC4FE8A98FCF124B816E5F74 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0CF977E736A9F0297ED689DCD07C3E1C /* Release */ = {
+		1684D547A665B70B64EF6B1CF2D45B71 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4C6513B09838318BD763CFD5390D1DE0 /* FBSnapshotTestCase.release.xcconfig */;
+			baseConfigurationReference = D3839C9210501F9A4E771E60A70E9DD5 /* SFBluetooth.release.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FBSnapshotTestCase/FBSnapshotTestCase-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FBSnapshotTestCase/FBSnapshotTestCase-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FBSnapshotTestCase/FBSnapshotTestCase.modulemap";
-				PRODUCT_MODULE_NAME = FBSnapshotTestCase;
-				PRODUCT_NAME = FBSnapshotTestCase;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1AE4910F0A53FD26C175188ADA677205 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF23DD2D8246E092E5F41DE471194BCD /* Pods-SFBluetooth_Tests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SFBluetooth_Tests/Pods-SFBluetooth_Tests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SFBluetooth_Tests/Pods-SFBluetooth_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		3F8E98802BD19A40E4CD41E901AB9D1A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6034AEBF2340FDA6611D0BA439C8113 /* Pods-SFBluetooth_Tests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SFBluetooth_Tests/Pods-SFBluetooth_Tests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SFBluetooth_Tests/Pods-SFBluetooth_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		48E64BE356051D864068AB393D3F1CE9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC4217A5827D7F28D5C2447D79A68F8D /* Pods-SFBluetooth_Example.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SFBluetooth_Example/Pods-SFBluetooth_Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SFBluetooth_Example/Pods-SFBluetooth_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		793C74A3DF166A60C147B1E0C25DF008 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC937B82DE393D2EE1894244996553FC /* SFBluetooth.release.xcconfig */;
-			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -752,7 +922,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SFBluetooth/SFBluetooth-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SFBluetooth/SFBluetooth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SFBluetooth/SFBluetooth.modulemap";
 				PRODUCT_MODULE_NAME = SFBluetooth;
@@ -760,133 +930,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7EE7A78859F657F6BEFC651185B43192 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
-		842C60C4F1EBC85F9C8FF97D39D120FF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9468E867498BBAF36F9AFFE4845F8B09 /* FBSnapshotTestCase.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FBSnapshotTestCase/FBSnapshotTestCase-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FBSnapshotTestCase/FBSnapshotTestCase-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FBSnapshotTestCase/FBSnapshotTestCase.modulemap";
-				PRODUCT_MODULE_NAME = FBSnapshotTestCase;
-				PRODUCT_NAME = FBSnapshotTestCase;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		A8BD1B3855969C29C336328ED639B070 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64B41EFE10090B661617C78BD41E0BF3 /* Pods-SFBluetooth_Example.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SFBluetooth_Example/Pods-SFBluetooth_Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SFBluetooth_Example/Pods-SFBluetooth_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -894,10 +938,11 @@
 			};
 			name = Release;
 		};
-		C9A37F49A03D339B9C3B3985F48C2FED /* Debug */ = {
+		1C3E1694690E2B299E7A178845B0FDE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A990E74A19CFE08A11CF8CB5935EA40 /* SFBluetooth.debug.xcconfig */;
+			baseConfigurationReference = 247DC4CD53576B7052C9892934A34F6B /* SwiftyBeaver.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -907,25 +952,57 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SFBluetooth/SFBluetooth-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SFBluetooth/SFBluetooth-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyBeaver/SwiftyBeaver-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyBeaver/SwiftyBeaver-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SFBluetooth/SFBluetooth.modulemap";
-				PRODUCT_MODULE_NAME = SFBluetooth;
-				PRODUCT_NAME = SFBluetooth;
+				MODULEMAP_FILE = "Target Support Files/SwiftyBeaver/SwiftyBeaver.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyBeaver;
+				PRODUCT_NAME = SwiftyBeaver;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		D299434AB35E7FD6F7921C8EF24742FF /* Debug */ = {
+		43EAB647B571390A29011D5EBE23C9AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 507B7B9952A5D953FF5D79ED0942B4C1 /* SFLogger.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SFLogger/SFLogger-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SFLogger/SFLogger-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SFLogger/SFLogger.modulemap";
+				PRODUCT_MODULE_NAME = SFLogger;
+				PRODUCT_NAME = SFLogger;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4BC7450F9457737EE3E637BA155B56F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -978,7 +1055,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -991,50 +1068,351 @@
 			};
 			name = Debug;
 		};
+		6A97EF7575F7020521588DCF3149EFA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE2F0938B1F9A9DFF498CDD4EA60539A /* SFExtension.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SFExtension/SFExtension-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SFExtension/SFExtension-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SFExtension/SFExtension.modulemap";
+				PRODUCT_MODULE_NAME = SFExtension;
+				PRODUCT_NAME = SFExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		848E013D52DFC21FC93391B49AA84387 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 175F4D2A0B6300C4BB3B8CA8A3018C5D /* Pods-SFBluetooth_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SFBluetooth_Example/Pods-SFBluetooth_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SFBluetooth_Example/Pods-SFBluetooth_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		A183F9A7FD5B5E2BB505F8675FCF89CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9ED2D84D5E1EC54D92BC64B50B3DEF73 /* SFBluetooth.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SFBluetooth/SFBluetooth-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SFBluetooth/SFBluetooth-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SFBluetooth/SFBluetooth.modulemap";
+				PRODUCT_MODULE_NAME = SFBluetooth;
+				PRODUCT_NAME = SFBluetooth;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A986F8A55A5413AD0B3A66D6A51D9CB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D81631DE4C19EE667CCFB5955631336 /* SFLogger.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SFLogger/SFLogger-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SFLogger/SFLogger-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SFLogger/SFLogger.modulemap";
+				PRODUCT_MODULE_NAME = SFLogger;
+				PRODUCT_NAME = SFLogger;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C3E95F4AEBE4AECFE3B27BE50CAEAAA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C665164F3FA3674169A749A3B980B0D7 /* SwiftyBeaver.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyBeaver/SwiftyBeaver-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyBeaver/SwiftyBeaver-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyBeaver/SwiftyBeaver.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyBeaver;
+				PRODUCT_NAME = SwiftyBeaver;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		EE62B00A954FD040133183590A367F61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7117EF0AB9DDA24A28AEDC68F05A65D /* Pods-SFBluetooth_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SFBluetooth_Example/Pods-SFBluetooth_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SFBluetooth_Example/Pods-SFBluetooth_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F302D1B792757F57F30390C9809ACBC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B21AF3C402E77CEF3D5FE5AFFA1D5B7B /* SFExtension.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SFExtension/SFExtension-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SFExtension/SFExtension-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SFExtension/SFExtension.modulemap";
+				PRODUCT_MODULE_NAME = SFExtension;
+				PRODUCT_NAME = SFExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		28DAA9880679133EC375B7072B9AEABB /* Build configuration list for PBXNativeTarget "FBSnapshotTestCase" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				842C60C4F1EBC85F9C8FF97D39D120FF /* Debug */,
-				0CF977E736A9F0297ED689DCD07C3E1C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D299434AB35E7FD6F7921C8EF24742FF /* Debug */,
-				7EE7A78859F657F6BEFC651185B43192 /* Release */,
+				4BC7450F9457737EE3E637BA155B56F7 /* Debug */,
+				8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4B78FA782D761D0A70AE942B56E98D4A /* Build configuration list for PBXNativeTarget "Pods-SFBluetooth_Example" */ = {
+		760EFA558AAF1BC11E80AFF58AF27C1A /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				48E64BE356051D864068AB393D3F1CE9 /* Debug */,
-				A8BD1B3855969C29C336328ED639B070 /* Release */,
+				1C3E1694690E2B299E7A178845B0FDE4 /* Debug */,
+				C3E95F4AEBE4AECFE3B27BE50CAEAAA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C57D5277DA14CFD9B55AB385E0E8D957 /* Build configuration list for PBXNativeTarget "SFBluetooth" */ = {
+		7DF66411B4E42EFDA9ED9D80F2078452 /* Build configuration list for PBXNativeTarget "SFExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C9A37F49A03D339B9C3B3985F48C2FED /* Debug */,
-				793C74A3DF166A60C147B1E0C25DF008 /* Release */,
+				F302D1B792757F57F30390C9809ACBC2 /* Debug */,
+				6A97EF7575F7020521588DCF3149EFA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DDDD82ECF3F0A706CB2FFF7F809C4B1C /* Build configuration list for PBXNativeTarget "Pods-SFBluetooth_Tests" */ = {
+		9A28234F24B1DFF8DABCFF0E72B576AF /* Build configuration list for PBXNativeTarget "SFBluetooth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F8E98802BD19A40E4CD41E901AB9D1A /* Debug */,
-				1AE4910F0A53FD26C175188ADA677205 /* Release */,
+				A183F9A7FD5B5E2BB505F8675FCF89CB /* Debug */,
+				1684D547A665B70B64EF6B1CF2D45B71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABF63BB1FD4AFECBEE5B0E2A658ED7F6 /* Build configuration list for PBXNativeTarget "SFLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43EAB647B571390A29011D5EBE23C9AE /* Debug */,
+				A986F8A55A5413AD0B3A66D6A51D9CB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED9ECF93E8FC801CB2CF88DCC89AE1C7 /* Build configuration list for PBXNativeTarget "Pods-SFBluetooth_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848E013D52DFC21FC93391B49AA84387 /* Debug */,
+				EE62B00A954FD040133183590A367F61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

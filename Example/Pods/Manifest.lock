@@ -1,27 +1,33 @@
 PODS:
-  - FBSnapshotTestCase (2.1.4):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
-  - FBSnapshotTestCase/Core (2.1.4)
-  - FBSnapshotTestCase/SwiftSupport (2.1.4):
-    - FBSnapshotTestCase/Core
-  - SFBluetooth (0.1.0)
+  - SFBluetooth (0.1.0):
+    - SFExtension (~> 0.1.0)
+    - SFLogger (~> 0.1.0)
+  - SFExtension (0.1.3)
+  - SFLogger (0.1.0):
+    - SwiftyBeaver
+  - SwiftyBeaver (2.0.0)
 
 DEPENDENCIES:
-  - FBSnapshotTestCase (~> 2.1.4)
-  - SFBluetooth (from `../`)
+  - SFBluetooth (from `../../../Server/SFBluetooth/`)
+  - SFLogger (from `../../../Server/SFLogger/`)
 
 SPEC REPOS:
-  trunk:
-    - FBSnapshotTestCase
+  https://github.com/CocoaPods/Specs.git:
+    - SFExtension
+    - SwiftyBeaver
 
 EXTERNAL SOURCES:
   SFBluetooth:
-    :path: "../"
+    :path: "../../../Server/SFBluetooth/"
+  SFLogger:
+    :path: "../../../Server/SFLogger/"
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  SFBluetooth: c9e59d3cb7de6a2b1bc4ca858cc1e693cf71fe49
+  SFBluetooth: 971c75ed159c7ebe66f93cd6232315edc326f7b5
+  SFExtension: 2e56c0252374930b25874ff367f56d0b7b01610b
+  SFLogger: 32dc52852844a0ac9243948c00d64e02cc5a680a
+  SwiftyBeaver: 014b0c12065026b731bac80305294f27d63e27f6
 
-PODFILE CHECKSUM: e70d3fd280e7c923bed9bbbf68058158a0525971
+PODFILE CHECKSUM: bf85b10cc3c49489ee38342b532c80302f1c2cf6
 
 COCOAPODS: 1.12.1

@@ -52,7 +52,6 @@ public class SFBlePeripheral: NSObject {
     deinit {
         self.peripheral.removeObserver(self, forKeyPath: "state")
     }
-    
 }
 
 
@@ -63,7 +62,7 @@ extension SFBlePeripheral {
             if keyPath == "state", let state = change?[.newKey] as? CBPeripheralState {
                 // plugins
                 plugins.forEach { plugin in
-                    plugin.peripheral(peripheral, didUpdateState: id, state: state)
+                    plugin.didUpdateState(peripheral: peripheral, state: state)
                 }
                 // callback
                 didUpdateState?(peripheral, state)
@@ -85,13 +84,12 @@ extension SFBlePeripheral {
      *
      *  @see        peripheral:didReadRSSI:error:
      */
-    public func readRSSI(id: UUID) {
+    public func readRSSI() {
         // do
-        self.id = id
         peripheral.readRSSI()
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, readRSSI: id)
+            plugin.readRSSI(peripheral: peripheral)
         }
     }
 
@@ -106,13 +104,12 @@ extension SFBlePeripheral {
      *
      *  @see                peripheral:didDiscoverServices:
      */
-    public func discoverServices(id: UUID, serviceUUIDs: [CBUUID]?) {
+    public func discoverServices(serviceUUIDs: [CBUUID]?) {
         // do
-        self.id = id
         peripheral.discoverServices(serviceUUIDs)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, discoverServices: id, serviceUUIDs: serviceUUIDs)
+            plugin.discoverServices(peripheral: peripheral, serviceUUIDs: serviceUUIDs)
         }
     }
 
@@ -128,13 +125,12 @@ extension SFBlePeripheral {
      *
      *  @see                        peripheral:didDiscoverIncludedServicesForService:error:
      */
-    public func discoverIncludedServices(id: UUID, includedServiceUUIDs: [CBUUID]?, for service: CBService) {
+    public func discoverIncludedServices(includedServiceUUIDs: [CBUUID]?, for service: CBService) {
         // do
-        self.id = id
         peripheral.discoverIncludedServices(includedServiceUUIDs, for: service)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, discoverIncludedServices: id, includedServiceUUIDs: includedServiceUUIDs, for: service)
+            plugin.discoverIncludedServices(peripheral: peripheral, includedServiceUUIDs: includedServiceUUIDs, service: service)
         }
     }
 
@@ -150,13 +146,12 @@ extension SFBlePeripheral {
      *
      *  @see                        peripheral:didDiscoverCharacteristicsForService:error:
      */
-    public func discoverCharacteristics(id: UUID, characteristicUUIDs: [CBUUID]?, for service: CBService) {
+    public func discoverCharacteristics(characteristicUUIDs: [CBUUID]?, for service: CBService) {
         // do
-        self.id = id
         peripheral.discoverCharacteristics(characteristicUUIDs, for: service)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, discoverCharacteristics: id, characteristicUUIDs: characteristicUUIDs, for: service)
+            plugin.discoverCharacteristics(peripheral: peripheral, characteristicUUIDs: characteristicUUIDs, service: service)
         }
     }
 
@@ -170,13 +165,12 @@ extension SFBlePeripheral {
      *
      *  @see                    peripheral:didUpdateValueForCharacteristic:error:
      */
-    public func readValue(id: UUID, for characteristic: CBCharacteristic) {
+    public func readValue(for characteristic: CBCharacteristic) {
         // do
-        self.id = id
         peripheral.readRSSI()
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, readValue: id, for: characteristic)
+            plugin.readCharacteristicValue(peripheral: peripheral, characteristic: characteristic)
         }
     }
 
@@ -189,13 +183,12 @@ extension SFBlePeripheral {
      *  @see        writeValue:forCharacteristic:type:
      */
     @available(iOS 9.0, *)
-    public func maximumWriteValueLength(id: UUID, for type: CBCharacteristicWriteType) -> Int {
+    public func maximumWriteValueLength(for type: CBCharacteristicWriteType) -> Int {
         // do
-        self.id = id
         let length = peripheral.maximumWriteValueLength(for: type)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, getMaximumWriteValueLength: id, for: type, return: length)
+            plugin.getMaximumWriteValueLength(peripheral: peripheral, type: type, length: length)
         }
         return length
     }
@@ -219,13 +212,12 @@ extension SFBlePeripheral {
      *    @see                    canSendWriteWithoutResponse
      *    @see                    CBCharacteristicWriteType
      */
-    public func writeValue(id: UUID, data: Data, for characteristic: CBCharacteristic, type: CBCharacteristicWriteType) {
+    public func writeValue(data: Data, for characteristic: CBCharacteristic, type: CBCharacteristicWriteType) {
         // do
-        self.id = id
         peripheral.writeValue(data, for: characteristic, type: type)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, writeValue: id, data: data, for: characteristic, type: type)
+            plugin.writeCharacteristicValue(peripheral: peripheral, data: data, characteristic: characteristic, type: type)
         }
     }
 
@@ -245,13 +237,12 @@ extension SFBlePeripheral {
      *  @see                    peripheral:didUpdateNotificationStateForCharacteristic:error:
      *  @seealso                CBConnectPeripheralOptionNotifyOnNotificationKey
      */
-    public func setNotifyValue(id: UUID, enabled: Bool, for characteristic: CBCharacteristic) {
+    public func setNotifyValue(enabled: Bool, for characteristic: CBCharacteristic) {
         // do
-        self.id = id
         peripheral.setNotifyValue(enabled, for: characteristic)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, setNotifyValue: id, enabled: enabled, for: characteristic)
+            plugin.setCharacteristicNotificationState(peripheral: peripheral, enabled: enabled, characteristic: characteristic)
         }
     }
 
@@ -265,13 +256,12 @@ extension SFBlePeripheral {
      *
      *  @see                    peripheral:didDiscoverDescriptorsForCharacteristic:error:
      */
-    public func discoverDescriptors(id: UUID, for characteristic: CBCharacteristic) {
+    public func discoverDescriptors(for characteristic: CBCharacteristic) {
         // do
-        self.id = id
         peripheral.discoverDescriptors(for: characteristic)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, discoverDescriptors: id, for: characteristic)
+            plugin.discoverDescriptors(peripheral: peripheral, characteristic: characteristic)
         }
     }
 
@@ -285,13 +275,12 @@ extension SFBlePeripheral {
      *
      *  @see                peripheral:didUpdateValueForDescriptor:error:
      */
-    public func readValue(id: UUID, for descriptor: CBDescriptor) {
+    public func readValue(for descriptor: CBDescriptor) {
         // do
-        self.id = id
         peripheral.readValue(for: descriptor)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, readValue: id, for: descriptor)
+            plugin.readDescriptorValue(peripheral: peripheral, descriptor: descriptor)
         }
     }
 
@@ -307,13 +296,12 @@ extension SFBlePeripheral {
      *
      *  @see                peripheral:didWriteValueForCharacteristic:error:
      */
-    public func writeValue(id: UUID, data: Data, for descriptor: CBDescriptor) {
+    public func writeValue(data: Data, for descriptor: CBDescriptor) {
         // do
-        self.id = id
         peripheral.writeValue(data, for: descriptor)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, writeValue: id, data: data, for: descriptor)
+            plugin.writeDescriptorValue(peripheral: peripheral, data: data, descriptor: descriptor)
         }
     }
 
@@ -328,13 +316,12 @@ extension SFBlePeripheral {
      *  @see                peripheral:didWriteValueForCharacteristic:error:
      */
     @available(iOS 11.0, *)
-    public func openL2CAPChannel(id: UUID, PSM: CBL2CAPPSM) {
+    public func openL2CAPChannel(PSM: CBL2CAPPSM) {
         // do
-        self.id = id
         peripheral.openL2CAPChannel(PSM)
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, openL2CAPChannel: id, PSM: PSM)
+            plugin.openL2CAPChannel(peripheral: peripheral, PSM: PSM)
         }
     }
 }
@@ -354,7 +341,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didUpdateName: id, name: peripheral.name)
+            plugin.didUpdateName(peripheral: peripheral, name: peripheral.name)
         }
         // callback
         didUpdateName?(peripheral)
@@ -375,7 +362,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didModifyServices: id, invalidatedServices: invalidatedServices)
+            plugin.didModifyServices(peripheral: peripheral, invalidatedServices: invalidatedServices)
         }
         // callback
         didModifyServices?(peripheral, invalidatedServices)
@@ -396,7 +383,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheralDidUpdateRSSI(_ peripheral: CBPeripheral, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didUpdateRSSI: id, RSSI: peripheral.rssi, error: error)
+            plugin.didUpdateRSSI(peripheral: peripheral, RSSI: peripheral.rssi, error: error)
         }
         // callback
         didUpdateRSSI?(peripheral, error)
@@ -416,7 +403,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didReadRSSI: id, RSSI: RSSI, error: error)
+            plugin.didReadRSSI(peripheral: peripheral, RSSI: RSSI, error: error)
         }
         // callback
         didReadRSSI?(peripheral, RSSI, error)
@@ -437,7 +424,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didDiscoverServices: id, error: error)
+            plugin.didDiscoverServices(peripheral: peripheral, error: error)
         }
         // callback
         didDiscoverServices?(peripheral, error)
@@ -458,7 +445,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didDiscoverIncludedServices: id, for: service, error: error)
+            plugin.didDiscoverIncludedServices(peripheral: peripheral, service: service, error: error)
         }
         // callback
         didDiscoverIncludedServices?(peripheral, service, error)
@@ -479,7 +466,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didDiscoverCharacteristics: id, for: service, error: error)
+            plugin.didDiscoverCharacteristics(peripheral: peripheral, service: service, error: error)
         }
         // callback
         didDiscoverCharacteristics?(peripheral, service, error)
@@ -499,7 +486,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didUpdateValue: id, for: characteristic, error: error)
+            plugin.didUpdateCharacteristicValue(peripheral: peripheral, characteristic: characteristic, error: error)
         }
         // callback
         didUpdateValueForCharacteristic?(peripheral, characteristic, error)
@@ -519,7 +506,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didWriteValue: id, for: characteristic, error: error)
+            plugin.didWriteCharacteristicValue(peripheral: peripheral, characteristic: characteristic, error: error)
         }
         // callback
         didWriteValueForCharacteristic?(peripheral, characteristic, error)
@@ -539,7 +526,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didUpdateNotificationState: id, for: characteristic, error: error)
+            plugin.didUpdateCharacteristicNotificationState(peripheral: peripheral, characteristic: characteristic, error: error)
         }
         // callback
         didUpdateNotificationStateForCharacteristic?(peripheral, characteristic, error)
@@ -560,7 +547,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didDiscoverDescriptors: id, for: characteristic, error: error)
+            plugin.didDiscoverDescriptors(peripheral: peripheral, characteristic: characteristic, error: error)
         }
         // callback
         didDiscoverDescriptorsForCharacteristic?(peripheral, characteristic, error)
@@ -580,7 +567,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didUpdateValue: id, for: descriptor, error: error)
+            plugin.didUpdateDescriptorValue(peripheral: peripheral, descriptor: descriptor, error: error)
         }
         // callback
         didUpdateValueForDescriptor?(peripheral, descriptor, error)
@@ -600,7 +587,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didWriteValue: id, for: descriptor, error: error)
+            plugin.didWriteDescriptorValue(peripheral: peripheral, descriptor: descriptor, error: error)
         }
         // callback
         didWriteValueForDescriptor?(peripheral, descriptor, error)
@@ -620,7 +607,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, isReadyToSendWriteWithoutResponse: id)
+            plugin.isReadyToSendWriteWithoutResponse(peripheral: peripheral)
         }
         // callback
         isReadyToSendWriteWithoutResponse?(peripheral)
@@ -640,7 +627,7 @@ extension SFBlePeripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didOpen channel: CBL2CAPChannel?, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.peripheral(peripheral, didOpen: id, channel: channel, error: error)
+            plugin.didOpenL2CAPChannel(peripheral: peripheral, channel: channel, error: error)
         }
         // callback
         didOpenChannel?(peripheral, channel, error)

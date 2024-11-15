@@ -18,7 +18,6 @@ public class SFBleDiscoverLogSummary {
     public private(set) lazy var timer: DispatchSourceTimer = {
         DispatchSource.makeTimerSource()
     }()
-    public let id: UUID
     public let tag: String
     public let duration: TimeInterval
     public let itemThreshold: Int
@@ -35,12 +34,10 @@ public class SFBleDiscoverLogSummary {
     public var lastTime: Date? {
         items.last?.lastTime
     }
-    public init(id: UUID,
-                tag: String,
+    public init(tag: String,
                 duration: TimeInterval = 60,
                 itemThreshold: Int = 20,
                 logThreshold: Int = 10) {
-        self.id = id
         self.tag = tag
         self.duration = duration
         self.itemThreshold = itemThreshold
@@ -51,15 +48,14 @@ public class SFBleDiscoverLogSummary {
         }
     }
     public func update(log: SFBleDiscoverLog) {
-        let id = log.id
         let identifier = log.peripheral.identifier
         let item = items.first { element in
-            (element.id == id) && element.identifier == identifier
+            element.identifier == identifier
         }
         if let item = item {
             item.update(log: log)
         } else {
-            let item = SFBleDiscoverLogItem(id: id, tag: tag, identifier: identifier, threshold: logThreshold, firstTimeLogEnable: firstTimeLogEnable)
+            let item = SFBleDiscoverLogItem(tag: tag, identifier: identifier, threshold: logThreshold, firstTimeLogEnable: firstTimeLogEnable)
             item.update(log: log)
             items.append(item)
         }
@@ -85,7 +81,7 @@ public class SFBleDiscoverLogSummary {
                 msgs.append("----------\n")
             }
         }
-        Log.bleSummary(id: id, tag: tag, msgs: msgs)
+        Log.bleSummary(tag: tag, msgs: msgs)
         summaryTime = Date()
         items = []
     }
@@ -93,7 +89,6 @@ public class SFBleDiscoverLogSummary {
 
 // MARK: - SFBleDiscoverLogItem
 public class SFBleDiscoverLogItem {
-    public let id: UUID
     public let tag: String
     public let identifier: UUID
     public let threshold: Int
@@ -120,12 +115,10 @@ public class SFBleDiscoverLogItem {
         }
         return sum / Double(logs.count)
     }
-    public init(id: UUID,
-                tag: String,
+    public init(tag: String,
                 identifier: UUID,
                 threshold: Int,
                 firstTimeLogEnable: Bool) {
-        self.id = id
         self.tag = tag
         self.identifier = identifier
         self.threshold = threshold
@@ -134,7 +127,7 @@ public class SFBleDiscoverLogItem {
     public func update(log: SFBleDiscoverLog) {
         logs.append(log)
         if firstTimeLogEnable, logs.count == 1 {
-            Log.bleSummary(id: id, tag: tag, msgs: summaryMsgs)
+            Log.bleSummary(tag: tag, msgs: summaryMsgs)
         }
         if logs.count > threshold {
             clean()
@@ -142,7 +135,7 @@ public class SFBleDiscoverLogItem {
     }
     public func clean() {
         guard logs.count > 0 else { return }
-        Log.bleSummary(id: id, tag: tag, msgs: summaryMsgs)
+        Log.bleSummary(tag: tag, msgs: summaryMsgs)
         logs = []
     }
     
@@ -166,7 +159,6 @@ public class SFBleDiscoverLogItem {
 
 // MARK: - SFBleDiscoverLog
 public struct SFBleDiscoverLog {
-    public let id: UUID
     public let time: Date
     public let peripheral: CBPeripheral
     public let advertisementData: [String : Any]

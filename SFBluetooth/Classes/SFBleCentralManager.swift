@@ -13,16 +13,23 @@ import SFExtension
 import SFLogger
 
 // MARK: - Notify
-public let SF_Notify_CentralManager_Callback_DidUpdateState =                          NSNotification.Name("SF_Notify_CentralManager_Callback_DidUpdateState")
-public let SF_Notify_CentralManager_Callback_DidUpdateIsScanning =                     NSNotification.Name("SF_Notify_CentralManager_Callback_DidUpdateIsScanning")
-public let SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization =              NSNotification.Name("SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization")
-public let SF_Notify_CentralManager_Callback_WillRestoreState =                          NSNotification.Name("SF_Notify_CentralManager_Callback_WillRestoreState")
-public let SF_Notify_CentralManager_Callback_DidDiscoverPeripheral =                     NSNotification.Name("SF_Notify_CentralManager_Callback_DidDiscoverPeripheral")
-public let SF_Notify_CentralManager_Callback_DidConnectPeripheral =                 NSNotification.Name("SF_Notify_CentralManager_Callback_DidConnectPeripheral")
-public let SF_Notify_CentralManager_Callback_DidFailConnectPeripheral =                 NSNotification.Name("SF_Notify_CentralManager_Callback_DidFailConnectPeripheral")
-public let SF_Notify_CentralManager_Callback_DidDisconnectPeripheral =              NSNotification.Name("SF_Notify_CentralManager_Callback_DidDisconnectPeripheral")
-public let SF_Notify_CentralManager_Callback_DidDisconnectPeripheralAutoReconnect = NSNotification.Name("SF_Notify_CentralManager_Callback_DidDisconnectPeripheralAutoReconnect")
-public let SF_Notify_CentralManager_Callback_DidOccurConnectionEvents =                    NSNotification.Name("SF_Notify_CentralManager_Callback_DidOccurConnectionEvents")
+public let SF_Notify_CentralManager_Try_RetrievePeripherals =                           Notification.Name("SF_Notify_CentralManager_Try_RetrievePeripherals")
+public let SF_Notify_CentralManager_Try_RetrieveConnectedPeripherals =                  Notification.Name("SF_Notify_CentralManager_Try_RetrieveConnectedPeripherals")
+public let SF_Notify_CentralManager_Try_ScanForPeripherals =                            Notification.Name("SF_Notify_CentralManager_Try_ScanForPeripherals")
+public let SF_Notify_CentralManager_Try_StopScan =                                      Notification.Name("SF_Notify_CentralManager_Try_StopScan")
+public let SF_Notify_CentralManager_Try_ConnectPeripheral =                             Notification.Name("SF_Notify_CentralManager_Try_ConnectPeripheral")
+public let SF_Notify_CentralManager_Try_DisconnectPeripheral =                          Notification.Name("SF_Notify_CentralManager_Try_DisconnectPeripheral")
+public let SF_Notify_CentralManager_Try_RegisterForConnectionEvents =                   Notification.Name("SF_Notify_CentralManager_Try_RegisterForConnectionEvents")
+public let SF_Notify_CentralManager_Callback_DidUpdateIsScannig =                       Notification.Name("SF_Notify_CentralManager_Callback_DidUpdateIsScannig")
+public let SF_Notify_CentralManager_Callback_DidUpdateState =                           Notification.Name("SF_Notify_CentralManager_Callback_DidUpdateState")
+public let SF_Notify_CentralManager_Callback_WillRestoreState =                         Notification.Name("SF_Notify_CentralManager_Callback_WillRestoreState")
+public let SF_Notify_CentralManager_Callback_DidDiscoverPeripheral =                    Notification.Name("SF_Notify_CentralManager_Callback_DidDiscoverPeripheral")
+public let SF_Notify_CentralManager_Callback_DidConnectPeripheral =                     Notification.Name("SF_Notify_CentralManager_Callback_DidConnectPeripheral")
+public let SF_Notify_CentralManager_Callback_DidFailToConnectPeripheral =               Notification.Name("SF_Notify_CentralManager_Callback_DidFailToConnectPeripheral")
+public let SF_Notify_CentralManager_Callback_DidDisconnectPeripheral =                  Notification.Name("SF_Notify_CentralManager_Callback_DidDisconnectPeripheral")
+public let SF_Notify_CentralManager_Callback_DidDisconnectPeripheralThenTryReconnect =  Notification.Name("SF_Notify_CentralManager_Callback_DidDisconnectPeripheralThenTryReconnect")
+public let SF_Notify_CentralManager_Callback_DidOccurConnectionEvent =                  Notification.Name("SF_Notify_CentralManager_Callback_DidOccurConnectionEvent")
+public let SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization =               Notification.Name("SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization")
 
 
 // MARK: - SFBleCentralManager
@@ -54,13 +61,13 @@ extension SFBleCentralManager {
             if keyPath == "isScanning", let isScanning = change?[.newKey] as? Bool {
                 // plugins
                 plugins.forEach { plugin in
-                    plugin.centralManager(centralManager, didUpdateIsScannig: id, isScanning: isScanning)
+                    plugin.didUpdateIsScannig(central: centralManager, isScanning: isScanning)
                 }
                 // notify
                 var userInfo = [String: Any]()
                 userInfo["centralManager"] = centralManager
                 userInfo["isScanning"] = isScanning
-                NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_DidUpdateIsScanning, object: nil, userInfo: userInfo)
+                NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_DidUpdateIsScannig, object: nil, userInfo: userInfo)
                 return
             }
             return
@@ -72,83 +79,114 @@ extension SFBleCentralManager {
 // MARK: - func
 extension SFBleCentralManager {
     /// 检索外设
-    public func retrievePeripherals(id: UUID, identifiers: [UUID]) -> [CBPeripheral] {
+    public func retrievePeripherals(identifiers: [UUID]) -> [CBPeripheral] {
         // do
-        self.id = id
         let peripherals = centralManager.retrievePeripherals(withIdentifiers: identifiers)
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(centralManager, retrievePeripherals: id, identifiers: identifiers, return: peripherals)
+            plugin.retrievePeripherals(central: centralManager, identifiers: identifiers, peripherals: peripherals)
         }
+        // notify
+        var userInfo = [String: Any]()
+        userInfo["centralManager"] = centralManager
+        userInfo["identifiers"] = identifiers
+        userInfo["peripherals"] = peripherals
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Try_RetrievePeripherals, object: nil, userInfo: userInfo)
         return peripherals
     }
     
     /// 检索已连接的外设
-    public func retrieveConnectedPeripherals(id: UUID, services: [CBUUID]) -> [CBPeripheral] {
+    public func retrieveConnectedPeripherals(services: [CBUUID]) -> [CBPeripheral] {
         // do
-        self.id = id
         let peripherals = centralManager.retrieveConnectedPeripherals(withServices: services)
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(centralManager, retrieveConnectedPeripherals: id, services: services, return: peripherals)
+            plugin.retrieveConnectedPeripherals(central: centralManager, services: services, peripherals: peripherals)
         }
+        // notify
+        var userInfo = [String: Any]()
+        userInfo["centralManager"] = centralManager
+        userInfo["services"] = services
+        userInfo["peripherals"] = peripherals
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Try_RetrieveConnectedPeripherals, object: nil, userInfo: userInfo)
         return peripherals
     }
     
     /// 开始扫描
-    public func scanForPeripherals(id: UUID, services: [CBUUID]?, options: [String: Any]?) {
+    public func scanForPeripherals(services: [CBUUID]?, options: [String: Any]?) {
         // do
-        self.id = id
         centralManager.scanForPeripherals(withServices: services, options: options)
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(centralManager, scanForPeripherals: id, services: services, options: options)
+            plugin.scanForPeripherals(central: centralManager, services: services, options: options)
         }
+        // notify
+        var userInfo = [String: Any]()
+        userInfo["centralManager"] = centralManager
+        userInfo["services"] = services
+        userInfo["options"] = options
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Try_ScanForPeripherals, object: nil, userInfo: userInfo)
     }
     
     /// 停止扫描
     public func stopScan(id: UUID) {
         // do
-        self.id = id
         centralManager.stopScan()
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(centralManager, stopScan: id)
+            plugin.stopScan(central: centralManager)
         }
+        // notify
+        var userInfo = [String: Any]()
+        userInfo["centralManager"] = centralManager
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Try_StopScan, object: nil, userInfo: userInfo)
     }
     
     /// 连接外设
-    public func connect(id: UUID, peripheral: CBPeripheral, options: [String: Any]?) {
+    public func connect(peripheral: CBPeripheral, options: [String: Any]?) {
         // do
-        self.id = id
         centralManager.connect(peripheral, options: options)
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(centralManager, connect: id, peripheral: peripheral, options: options)
+            plugin.connectPeripheral(central: centralManager, peripheral: peripheral, options: options)
         }
+        // notify
+        var userInfo = [String: Any]()
+        userInfo["centralManager"] = centralManager
+        userInfo["peripheral"] = peripheral
+        userInfo["options"] = options
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Try_ConnectPeripheral, object: nil, userInfo: userInfo)
     }
     
     /// 断开外设
-    public func disconnect(id: UUID, peripheral: CBPeripheral) {
+    public func disconnect(peripheral: CBPeripheral) {
         // do
-        self.id = id
         centralManager.cancelPeripheralConnection(peripheral)
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(centralManager, disconnect: id, peripheral: peripheral)
+            plugin.disconnectPeripheral(central: centralManager, peripheral: peripheral)
         }
+        // notify
+        var userInfo = [String: Any]()
+        userInfo["centralManager"] = centralManager
+        userInfo["peripheral"] = peripheral
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Try_DisconnectPeripheral, object: nil, userInfo: userInfo)
     }
     
     /// 注册连接事件
     @available(iOS 13.0, *)
-    public func registerForConnectionEvents(id: UUID, options: [CBConnectionEventMatchingOption : Any]?) {
+    public func registerForConnectionEvents(options: [CBConnectionEventMatchingOption : Any]?) {
         // do
-        self.id = id
         centralManager.registerForConnectionEvents(options: options)
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(centralManager, registerForConnectionEvents: id, options: options)
+            plugin.registerForConnectionEvents(central: centralManager, options: options)
         }
+        // notify
+        var userInfo = [String: Any]()
+        userInfo["centralManager"] = centralManager
+        userInfo["options"] = options
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Try_RegisterForConnectionEvents, object: nil, userInfo: userInfo)
     }
 }
 
@@ -174,7 +212,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(central, didUpdateState: id)
+            plugin.didUpdateState(central: central, state: central.state)
         }
         // notify
         var userInfo = [String: Any]()
@@ -202,7 +240,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(central, willRestoreState: id, dict: dict)
+            plugin.willRestoreState(central: central, dict: dict)
         }
         // notify
         var userInfo = [String: Any]()
@@ -232,7 +270,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(central, didDiscover: id, peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI)
+            plugin.didDiscoverPeripheral(central: central, peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI)
         }
         // notify
         var userInfo = [String: Any]()
@@ -257,7 +295,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(central, didConnect: id, peripheral: peripheral)
+            plugin.didConnectPeripheral(central: central, peripheral: peripheral)
         }
         // notify
         var userInfo = [String: Any]()
@@ -282,7 +320,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(central, didFailToConnect: id, peripheral: peripheral, error: error)
+            plugin.didFailToConnectPeripheral(central: central, peripheral: peripheral, error: error)
         }
         // notify
         var userInfo = [String: Any]()
@@ -291,7 +329,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         if let error = error {
             userInfo["error"] = error
         }
-        NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_DidFailConnectPeripheral, object: nil, userInfo: userInfo)
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_DidFailToConnectPeripheral, object: nil, userInfo: userInfo)
     }
     
     
@@ -311,7 +349,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(central, didDisconnectPeripheral: id, peripheral: peripheral, error: error)
+            plugin.didDisconnectPeripheral(central: central, peripheral: peripheral, error: error)
         }
         // notify
         var userInfo = [String: Any]()
@@ -345,7 +383,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(central, didDisconnectPeripheral: id, peripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
+            plugin.didDisconnectPeripheralThenTryReconnect(central: central, peripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
         }
         // notify
         var userInfo = [String: Any]()
@@ -356,7 +394,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
         if let error = error {
             userInfo["error"] = error
         }
-        NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_DidDisconnectPeripheralAutoReconnect, object: nil, userInfo: userInfo)
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_DidDisconnectPeripheralThenTryReconnect, object: nil, userInfo: userInfo)
     }
     
     
@@ -374,14 +412,14 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, connectionEventDidOccur event: CBConnectionEvent, for peripheral: CBPeripheral) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(central, connectionEventDidOccur: id, event: event, for: peripheral)
+            plugin.didOccurConnectionEvent(central: central, event: event, peripheral: peripheral)
         }
         // notify
         var userInfo = [String: Any]()
         userInfo["centralManager"] = centralManager
         userInfo["event"] = event
         userInfo["peripheral"] = peripheral
-        NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_DidOccurConnectionEvents, object: nil, userInfo: userInfo)
+        NotificationCenter.default.post(name: SF_Notify_CentralManager_Callback_DidOccurConnectionEvent, object: nil, userInfo: userInfo)
     }
     
     
@@ -398,7 +436,7 @@ extension SFBleCentralManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didUpdateANCSAuthorizationFor peripheral: CBPeripheral) {
         // plugins
         plugins.forEach { plugin in
-            plugin.centralManager(central, didUpdateANCSAuthorization: id, for: peripheral)
+            plugin.didUpdateANCSAuthorization(central: central, peripheral: peripheral)
         }
         // notify
         var userInfo = [String: Any]()

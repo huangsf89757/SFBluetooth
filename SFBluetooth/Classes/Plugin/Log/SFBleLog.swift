@@ -15,9 +15,7 @@ import SFLogger
 // MARK: - log
 extension Log {
     
-    public static func bleTry(id: UUID, tag: String, msgs: [String], result: String? = nil) {
-        // id
-        let msg_id = "ID: \(id.uuidString)"
+    public static func bleTry(tag: String, msgs: [String], result: String? = nil) {
         // try
         var msg_try = """
         Try:
@@ -32,7 +30,7 @@ extension Log {
             \(result)
         """
         // msg
-        var msg = msg_id + "\n" + msg_try + "\n" + "\n"
+        var msg = msg_try + "\n" + "\n"
         if result != nil {
             msg += msg_return + "\n"
         }
@@ -40,9 +38,7 @@ extension Log {
         Log.info("\n\(msg)\n")
     }
     
-    public static func bleCallback(id: UUID, tag: String, msgs: [String]) {
-        // id
-        let msg_id = "ID: \(id.uuidString)"
+    public static func bleCallback(tag: String, msgs: [String]) {
         // callback
         var msg_callback = """
         Callback:
@@ -52,13 +48,11 @@ extension Log {
             msg_callback += "\n\(msgs.map { "    \($0)" }.joined(separator: "\n"))"
         }
         // msg
-        let msg = msg_id + "\n" + msg_callback + "\n" + "End"
+        let msg = msg_callback + "\n" + "End"
         Log.info("\n\(msg)\n")
     }
     
-    public static func bleSummary(id: UUID, tag: String, msgs: [String]) {
-        // id
-        let msg_id = "ID: \(id.uuidString)"
+    public static func bleSummary(tag: String, msgs: [String]) {
         // callback
         var msg_callback = """
         Summary:
@@ -68,7 +62,7 @@ extension Log {
             msg_callback += "\n\(msgs.map { "    \($0)" }.joined(separator: "\n"))"
         }
         // msg
-        let msg = msg_id + "\n" + msg_callback + "\n" + "End"
+        let msg = msg_callback + "\n" + "End"
         Log.info("\n\(msg)\n")
     }
 }

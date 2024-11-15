@@ -1,5 +1,5 @@
 //
-//  SFBlePeripheralPlugin.swift
+//  SFPeripheralPlugin.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/10/23.
@@ -9,8 +9,8 @@ import Foundation
 import CoreBluetooth
 
 
-// MARK: - SFBlePeripheralPlugin
-public protocol SFBlePeripheralPlugin {
+// MARK: - SFPeripheralPlugin
+public protocol SFPeripheralPlugin {
     func readRSSI(peripheral: CBPeripheral)
 
     func discoverServices(peripheral: CBPeripheral, serviceUUIDs: [CBUUID]?)
@@ -69,7 +69,7 @@ public protocol SFBlePeripheralPlugin {
 }
 
 
-extension SFBlePeripheralPlugin {
+extension SFPeripheralPlugin {
     func readRSSI(peripheral: CBPeripheral) {}
 
     func discoverServices(peripheral: CBPeripheral, serviceUUIDs: [CBUUID]?) {}

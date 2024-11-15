@@ -1,5 +1,5 @@
 //
-//  SFBleCentralManager.swift
+//  SFCentralManagerAgent.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/8/20.
@@ -32,15 +32,15 @@ public let SF_Notify_CentralManager_Callback_DidOccurConnectionEvent =          
 public let SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization =               Notification.Name("SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization")
 
 
-// MARK: - SFBleCentralManager
-public class SFBleCentralManager: NSObject {
+// MARK: - SFCentralManagerAgent
+public class SFCentralManagerAgent: NSObject {
     // MARK: var
     /// 唯一标识
     public var id = UUID()
     /// 中心设备
     public private(set) var centralManager: CBCentralManager!
     /// 插件
-    public var plugins: [SFBleCentralManagerPlugin] = [SFBleCentralManagerLogPlugin()]
+    public var plugins: [SFCentralManagerPlugin] = [SFCentralManagerLogPlugin()]
    
     // MARK: life cycle
     public init(queue: dispatch_queue_t?, options: [String : Any]?) {
@@ -55,7 +55,7 @@ public class SFBleCentralManager: NSObject {
 }
 
 // MARK: - KVO
-extension SFBleCentralManager {
+extension SFCentralManagerAgent {
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let centralManager = object as? CBCentralManager, centralManager == self.centralManager {
             if keyPath == "isScanning", let isScanning = change?[.newKey] as? Bool {
@@ -77,7 +77,7 @@ extension SFBleCentralManager {
 
 
 // MARK: - func
-extension SFBleCentralManager {
+extension SFCentralManagerAgent {
     /// 检索外设
     public func retrievePeripherals(identifiers: [UUID]) -> [CBPeripheral] {
         // do
@@ -191,7 +191,7 @@ extension SFBleCentralManager {
 }
 
 // MARK: - CBCentralManagerDelegate
-extension SFBleCentralManager: CBCentralManagerDelegate {
+extension SFCentralManagerAgent: CBCentralManagerDelegate {
     
     
     /**

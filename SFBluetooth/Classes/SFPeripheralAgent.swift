@@ -1,5 +1,5 @@
 //
-//  SFBlePeripheral.swift
+//  SFPeripheralAgent.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/9/12.
@@ -14,8 +14,8 @@ import SFLogger
 
 
 
-// MARK: - SFBlePeripheral
-public class SFBlePeripheral: NSObject {
+// MARK: - SFPeripheralAgent
+public class SFPeripheralAgent: NSObject {
     // MARK: callback
     public var didUpdateState: ((_ peripheral: CBPeripheral, _ state: CBPeripheralState) -> ())?
     public var didUpdateName: ((_ peripheral: CBPeripheral) -> ())?
@@ -40,7 +40,7 @@ public class SFBlePeripheral: NSObject {
     /// 外围设备
     public let peripheral: CBPeripheral
     /// 插件
-    public var plugins: [SFBlePeripheralPlugin] = [SFBlePeripheralLogPlugin()]
+    public var plugins: [SFPeripheralPlugin] = [SFPeripheralLogPlugin()]
     
     // MARK: life cycle
     public init(peripheral: CBPeripheral) {
@@ -56,7 +56,7 @@ public class SFBlePeripheral: NSObject {
 
 
 // MARK: - KVO
-extension SFBlePeripheral {
+extension SFPeripheralAgent {
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let peripheral = object as? CBPeripheral, peripheral == self.peripheral {
             if keyPath == "state", let state = change?[.newKey] as? CBPeripheralState {
@@ -75,7 +75,7 @@ extension SFBlePeripheral {
 
 
 // MARK: - func
-extension SFBlePeripheral {
+extension SFPeripheralAgent {
     
     /**
      *  @method readRSSI
@@ -327,7 +327,7 @@ extension SFBlePeripheral {
 }
 
 // MARK: - CBPeripheralDelegate
-extension SFBlePeripheral: CBPeripheralDelegate {
+extension SFPeripheralAgent: CBPeripheralDelegate {
     
     
     /**

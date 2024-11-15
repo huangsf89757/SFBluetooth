@@ -1,5 +1,5 @@
 //
-//  SFBleCentralManagerPlugin.swift
+//  SFCentralManagerPlugin.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/10/23.
@@ -8,8 +8,8 @@
 import Foundation
 import CoreBluetooth
 
-// MARK: - SFBleCentralManagerPlugin
-public protocol SFBleCentralManagerPlugin {
+// MARK: - SFCentralManagerPlugin
+public protocol SFCentralManagerPlugin {
     func retrievePeripherals(central: CBCentralManager, identifiers: [UUID], peripherals: [CBPeripheral])
     
     func retrieveConnectedPeripherals(central: CBCentralManager, services: [CBUUID], peripherals: [CBPeripheral])
@@ -45,7 +45,7 @@ public protocol SFBleCentralManagerPlugin {
     func didUpdateANCSAuthorization(central: CBCentralManager, peripheral: CBPeripheral)
 }
 
-extension SFBleCentralManagerPlugin {
+extension SFCentralManagerPlugin {
     func retrievePeripherals(central: CBCentralManager, identifiers: [UUID], peripherals: [CBPeripheral]) {}
     
     func retrieveConnectedPeripherals(central: CBCentralManager, services: [CBUUID], peripherals: [CBPeripheral]) {}

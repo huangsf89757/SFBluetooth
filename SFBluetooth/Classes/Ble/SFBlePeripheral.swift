@@ -52,6 +52,7 @@ public class SFBlePeripheral: NSObject {
     deinit {
         self.peripheral.removeObserver(self, forKeyPath: "state")
     }
+    
 }
 
 

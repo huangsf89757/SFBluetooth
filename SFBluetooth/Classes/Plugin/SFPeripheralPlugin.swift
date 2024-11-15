@@ -69,7 +69,7 @@ public protocol SFPeripheralPlugin {
 }
 
 
-extension SFPeripheralPlugin {
+public extension SFPeripheralPlugin {
     func readRSSI(peripheral: CBPeripheral) {}
 
     func discoverServices(peripheral: CBPeripheral, serviceUUIDs: [CBUUID]?) {}

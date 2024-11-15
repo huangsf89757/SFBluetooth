@@ -45,7 +45,7 @@ public protocol SFCentralManagerPlugin {
     func didUpdateANCSAuthorization(central: CBCentralManager, peripheral: CBPeripheral)
 }
 
-extension SFCentralManagerPlugin {
+public extension SFCentralManagerPlugin {
     func retrievePeripherals(central: CBCentralManager, identifiers: [UUID], peripherals: [CBPeripheral]) {}
     
     func retrieveConnectedPeripherals(central: CBCentralManager, services: [CBUUID], peripherals: [CBPeripheral]) {}

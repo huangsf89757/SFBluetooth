@@ -35,8 +35,6 @@ public let SF_Notify_CentralManager_Callback_DidUpdateANCSAuthorization =       
 // MARK: - SFCentralManagerAgent
 public class SFCentralManagerAgent: NSObject {
     // MARK: var
-    /// 唯一标识
-    public var id = UUID()
     /// 中心设备
     public private(set) var centralManager: CBCentralManager!
     /// 插件

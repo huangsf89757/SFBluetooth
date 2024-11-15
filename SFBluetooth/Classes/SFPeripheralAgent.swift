@@ -12,35 +12,18 @@ import SFExtension
 // Server
 import SFLogger
 
-
+// MARK: - SFPeripheralAgentDelegate
+public class SFPeripheralAgentDelegate: SFPeripheralPlugin { }
 
 // MARK: - SFPeripheralAgent
 public class SFPeripheralAgent: NSObject {
-    // MARK: callback
-    public var didUpdateState: ((_ peripheral: CBPeripheral, _ state: CBPeripheralState) -> ())?
-    public var didUpdateName: ((_ peripheral: CBPeripheral) -> ())?
-    public var didModifyServices: ((_ peripheral: CBPeripheral, _ invalidatedServices: [CBService]) -> ())?
-    public var didUpdateRSSI: ((_ peripheral: CBPeripheral, _ error: (any Error)?) -> ())?
-    public var isReadyToSendWriteWithoutResponse: ((_ peripheral: CBPeripheral) -> ())?
-    public var didReadRSSI: ((_ peripheral: CBPeripheral, _ RSSI: NSNumber, _ error: (any Error)?) -> ())?
-    public var didDiscoverServices: ((_ peripheral: CBPeripheral, _ error: (any Error)?) -> ())?
-    public var didDiscoverIncludedServices: ((_ peripheral: CBPeripheral, _ service: CBService, _ error: (any Error)?) -> ())?
-    public var didDiscoverCharacteristics: ((_ peripheral: CBPeripheral, _ service: CBService, _ error: (any Error)?) -> ())?
-    public var didUpdateValueForCharacteristic: ((_ peripheral: CBPeripheral, _ characteristic: CBCharacteristic, _ error: (any Error)?) -> ())?
-    public var didWriteValueForCharacteristic: ((_ peripheral: CBPeripheral, _ characteristic: CBCharacteristic, _ error: (any Error)?) -> ())?
-    public var didUpdateNotificationStateForCharacteristic: ((_ peripheral: CBPeripheral, _ characteristic: CBCharacteristic, _ error: (any Error)?) -> ())?
-    public var didDiscoverDescriptorsForCharacteristic: ((_ peripheral: CBPeripheral, _ characteristic: CBCharacteristic, _ error: (any Error)?) -> ())?
-    public var didUpdateValueForDescriptor: ((_ peripheral: CBPeripheral, _ descriptor: CBDescriptor, _ error: (any Error)?) -> ())?
-    public var didWriteValueForDescriptor: ((_ peripheral: CBPeripheral, _ descriptor: CBDescriptor, _ error: (any Error)?) -> ())?
-    public var didOpenChannel: ((_ peripheral: CBPeripheral, _ channel: CBL2CAPChannel?, _ error: (any Error)?) -> ())?
-    
     // MARK: var
-    /// 唯一标识
-    public var id = UUID()
     /// 外围设备
     public let peripheral: CBPeripheral
     /// 插件
     public var plugins: [SFPeripheralPlugin] = [SFPeripheralLogPlugin()]
+    /// 代理
+    public weak var delegate: SFPeripheralAgentDelegate?
     
     // MARK: life cycle
     public init(peripheral: CBPeripheral) {
@@ -64,8 +47,8 @@ extension SFPeripheralAgent {
                 plugins.forEach { plugin in
                     plugin.didUpdateState(peripheral: peripheral, state: state)
                 }
-                // callback
-                didUpdateState?(peripheral, state)
+                // delegate
+                delegate?.didUpdateState(peripheral: peripheral, state: state)
                 return
             }
             return
@@ -91,6 +74,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.readRSSI(peripheral: peripheral)
         }
+        // delegate
+        delegate?.readRSSI(peripheral: peripheral)
     }
 
     
@@ -111,6 +96,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.discoverServices(peripheral: peripheral, serviceUUIDs: serviceUUIDs)
         }
+        // delegate
+        delegate?.discoverServices(peripheral: peripheral, serviceUUIDs: serviceUUIDs)
     }
 
     
@@ -132,6 +119,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.discoverIncludedServices(peripheral: peripheral, includedServiceUUIDs: includedServiceUUIDs, service: service)
         }
+        // delegate
+        delegate?.discoverIncludedServices(peripheral: peripheral, includedServiceUUIDs: includedServiceUUIDs, service: service)
     }
 
     
@@ -153,6 +142,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.discoverCharacteristics(peripheral: peripheral, characteristicUUIDs: characteristicUUIDs, service: service)
         }
+        // delegate
+        delegate?.discoverCharacteristics(peripheral: peripheral, characteristicUUIDs: characteristicUUIDs, service: service)
     }
 
     
@@ -172,6 +163,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.readCharacteristicValue(peripheral: peripheral, characteristic: characteristic)
         }
+        // delegate
+        delegate?.readCharacteristicValue(peripheral: peripheral, characteristic: characteristic)
     }
 
     
@@ -190,6 +183,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.getMaximumWriteValueLength(peripheral: peripheral, type: type, length: length)
         }
+        // delegate
+        delegate?.getMaximumWriteValueLength(peripheral: peripheral, type: type, length: length)
         return length
     }
 
@@ -219,6 +214,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.writeCharacteristicValue(peripheral: peripheral, data: data, characteristic: characteristic, type: type)
         }
+        // delegate
+        delegate?.writeCharacteristicValue(peripheral: peripheral, data: data, characteristic: characteristic, type: type)
     }
 
     
@@ -244,6 +241,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.setCharacteristicNotificationState(peripheral: peripheral, enabled: enabled, characteristic: characteristic)
         }
+        // delegate
+        delegate?.setCharacteristicNotificationState(peripheral: peripheral, enabled: enabled, characteristic: characteristic)
     }
 
     
@@ -263,6 +262,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.discoverDescriptors(peripheral: peripheral, characteristic: characteristic)
         }
+        // delegate
+        delegate?.discoverDescriptors(peripheral: peripheral, characteristic: characteristic)
     }
 
     
@@ -282,6 +283,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.readDescriptorValue(peripheral: peripheral, descriptor: descriptor)
         }
+        // delegate
+        delegate?.readDescriptorValue(peripheral: peripheral, descriptor: descriptor)
     }
 
     
@@ -303,6 +306,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.writeDescriptorValue(peripheral: peripheral, data: data, descriptor: descriptor)
         }
+        // delegate
+        delegate?.writeDescriptorValue(peripheral: peripheral, data: data, descriptor: descriptor)
     }
 
     
@@ -323,6 +328,8 @@ extension SFPeripheralAgent {
         plugins.forEach { plugin in
             plugin.openL2CAPChannel(peripheral: peripheral, PSM: PSM)
         }
+        // delegate
+        delegate?.openL2CAPChannel(peripheral: peripheral, PSM: PSM)
     }
 }
 
@@ -343,8 +350,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didUpdateName(peripheral: peripheral, name: peripheral.name)
         }
-        // callback
-        didUpdateName?(peripheral)
+        // delegate
+        delegate?.didUpdateName(peripheral: peripheral, name: peripheral.name)
     }
 
     
@@ -364,8 +371,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didModifyServices(peripheral: peripheral, invalidatedServices: invalidatedServices)
         }
-        // callback
-        didModifyServices?(peripheral, invalidatedServices)
+        // delegate
+        delegate?.didModifyServices(peripheral: peripheral, invalidatedServices: invalidatedServices)
     }
 
     
@@ -385,8 +392,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didUpdateRSSI(peripheral: peripheral, RSSI: peripheral.rssi, error: error)
         }
-        // callback
-        didUpdateRSSI?(peripheral, error)
+        // delegate
+        delegate?.didUpdateRSSI(peripheral: peripheral, RSSI: peripheral.rssi, error: error)
     }
 
     
@@ -405,8 +412,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didReadRSSI(peripheral: peripheral, RSSI: RSSI, error: error)
         }
-        // callback
-        didReadRSSI?(peripheral, RSSI, error)
+        // delegate
+        delegate?.didReadRSSI(peripheral: peripheral, RSSI: RSSI, error: error)
     }
 
     
@@ -426,8 +433,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didDiscoverServices(peripheral: peripheral, error: error)
         }
-        // callback
-        didDiscoverServices?(peripheral, error)
+        // delegate
+        delegate?.didDiscoverServices(peripheral: peripheral, error: error)
     }
 
     
@@ -447,8 +454,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didDiscoverIncludedServices(peripheral: peripheral, service: service, error: error)
         }
-        // callback
-        didDiscoverIncludedServices?(peripheral, service, error)
+        // delegate
+        delegate?.didDiscoverIncludedServices(peripheral: peripheral, service: service, error: error)
     }
 
     
@@ -468,8 +475,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didDiscoverCharacteristics(peripheral: peripheral, service: service, error: error)
         }
-        // callback
-        didDiscoverCharacteristics?(peripheral, service, error)
+        // delegate
+        delegate?.didDiscoverCharacteristics(peripheral: peripheral, service: service, error: error)
     }
 
     
@@ -488,8 +495,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didUpdateCharacteristicValue(peripheral: peripheral, characteristic: characteristic, error: error)
         }
-        // callback
-        didUpdateValueForCharacteristic?(peripheral, characteristic, error)
+        // delegate
+        delegate?.didUpdateCharacteristicValue(peripheral: peripheral, characteristic: characteristic, error: error)
     }
 
     
@@ -508,8 +515,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didWriteCharacteristicValue(peripheral: peripheral, characteristic: characteristic, error: error)
         }
-        // callback
-        didWriteValueForCharacteristic?(peripheral, characteristic, error)
+        // delegate
+        delegate?.didWriteCharacteristicValue(peripheral: peripheral, characteristic: characteristic, error: error)
     }
 
     
@@ -528,8 +535,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didUpdateCharacteristicNotificationState(peripheral: peripheral, characteristic: characteristic, error: error)
         }
-        // callback
-        didUpdateNotificationStateForCharacteristic?(peripheral, characteristic, error)
+        // delegate
+        delegate?.didUpdateCharacteristicNotificationState(peripheral: peripheral, characteristic: characteristic, error: error)
     }
 
     
@@ -549,8 +556,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didDiscoverDescriptors(peripheral: peripheral, characteristic: characteristic, error: error)
         }
-        // callback
-        didDiscoverDescriptorsForCharacteristic?(peripheral, characteristic, error)
+        // delegate
+        delegate?.didDiscoverDescriptors(peripheral: peripheral, characteristic: characteristic, error: error)
     }
 
     
@@ -569,8 +576,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didUpdateDescriptorValue(peripheral: peripheral, descriptor: descriptor, error: error)
         }
-        // callback
-        didUpdateValueForDescriptor?(peripheral, descriptor, error)
+        // delegate
+        delegate?.didUpdateDescriptorValue(peripheral: peripheral, descriptor: descriptor, error: error)
     }
 
     
@@ -589,8 +596,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didWriteDescriptorValue(peripheral: peripheral, descriptor: descriptor, error: error)
         }
-        // callback
-        didWriteValueForDescriptor?(peripheral, descriptor, error)
+        // delegate
+        delegate?.didWriteDescriptorValue(peripheral: peripheral, descriptor: descriptor, error: error)
     }
 
     
@@ -609,8 +616,8 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.isReadyToSendWriteWithoutResponse(peripheral: peripheral)
         }
-        // callback
-        isReadyToSendWriteWithoutResponse?(peripheral)
+        // delegate
+        delegate?.isReadyToSendWriteWithoutResponse(peripheral: peripheral)
     }
 
     
@@ -629,7 +636,7 @@ extension SFPeripheralAgent: CBPeripheralDelegate {
         plugins.forEach { plugin in
             plugin.didOpenL2CAPChannel(peripheral: peripheral, channel: channel, error: error)
         }
-        // callback
-        didOpenChannel?(peripheral, channel, error)
+        // delegate
+        delegate?.didOpenL2CAPChannel(peripheral: peripheral, channel: channel, error: error)
     }
 }

@@ -44,6 +44,7 @@ TODO: Add long description of the pod here.
   # --- 依赖 --- #
   # Basic
   s.dependency 'SFExtension',       '~> 0.1.0'
+  s.dependency 'SFBase',            '~> 0.1.0'
   # Server
   s.dependency 'SFLogger',          '~> 0.1.0'
 

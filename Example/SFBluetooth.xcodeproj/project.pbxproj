@@ -39,7 +39,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		8F1899C2DEB18DDBDE54F536 /* Pods-SFBluetooth_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFBluetooth_Example.release.xcconfig"; path = "Target Support Files/Pods-SFBluetooth_Example/Pods-SFBluetooth_Example.release.xcconfig"; sourceTree = "<group>"; };
-		B8C1BD9C9CF664569F06A5FB /* SFBluetooth.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SFBluetooth.podspec; path = ../SFBluetooth.podspec; sourceTree = "<group>"; };
+		B8C1BD9C9CF664569F06A5FB /* SFBluetooth.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SFBluetooth.podspec; path = ../SFBluetooth.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CB5E93DC62C5CE5176630408 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D12EBB8FCCB333310EE13EEF /* Pods_SFBluetooth_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SFBluetooth_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF7004F88ECA028DDE8D86DA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };

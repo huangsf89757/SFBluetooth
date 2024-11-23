@@ -44,7 +44,7 @@ end
 #     TARGET     #
 ##################
 
-# === SFCgmsApp === #
+# === SFBluetooth_Example === #
 target 'SFBluetooth_Example' do
   
   pods_private

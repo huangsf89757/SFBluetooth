@@ -138,7 +138,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
             msg_peripherals.append(peripheral.sf.description)
         }
         msg_peripherals.append("]")
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_centralManager, msg_identifiers],
                    result: msg_peripherals)
     }
@@ -157,7 +157,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
             msg_peripherals.append(peripheral.sf.description)
         }
         msg_peripherals.append("]")
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_centralManager, msg_services],
                    result: msg_peripherals)
     }
@@ -178,7 +178,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         if let options = options {
             msg_options = "options=\(options)"
         }
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_centralManager, msg_services, msg_options],
                    result: nil)
     }
@@ -187,7 +187,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         let opt: SFCentralManagerLogOption = .stopScan
         guard opts.contains(opt) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_centralManager, ],
                    result: nil)
     }
@@ -201,7 +201,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         if let options = options {
             msg_options = "options=\(options)"
         }
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_centralManager, msg_peripheral, msg_options],
                    result: nil)
     }
@@ -211,7 +211,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         guard opts.contains(opt) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_centralManager, msg_peripheral],
                    result: nil)
     }
@@ -225,7 +225,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         if let options = options {
             msg_options = "options=\(options)"
         }
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_centralManager, msg_options],
                    result: nil)
     }
@@ -235,7 +235,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         guard opts.contains(opt) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
         let msg_isScanning = "isScanning=\(isScanning)"
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_isScanning])
     }
     
@@ -244,7 +244,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         let opt: SFCentralManagerLogOption = .didUpdateState
         guard opts.contains(opt) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_centralManager, ])
     }
     
@@ -254,7 +254,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         guard opts.contains(opt) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
         let msg_dict = "dict=\(dict)"
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_dict])
     }
     
@@ -266,7 +266,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_advertisementData = "advertisementData=\(advertisementData)"
         let msg_RSSI = "RSSI=\(RSSI)"
-//        Log.bleCallback(tag: opt.tag,
+//        SFLogger.bleCallback(tag: opt.tag,
 //                        msgs: [msg_centralManager, msg_peripheral, msg_advertisementData, msg_RSSI])
         let logSummary = self.logSummary ?? SFBleDiscoverLogSummary(tag: opt.tag)
         logSummary.update(log: SFBleDiscoverLog(time: Date(), peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI))
@@ -278,7 +278,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         guard opts.contains(opt) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_peripheral])
     }
     
@@ -292,7 +292,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_peripheral, msg_error])
     }
     
@@ -306,7 +306,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_peripheral, msg_error])
     }
     
@@ -322,7 +322,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_peripheral, msg_timestamp, msg_isReconnecting, msg_error])
     }
     
@@ -333,7 +333,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         let msg_centralManager = "centralManager=\(central.sf.description)"
         let msg_event = "event=\(event.sf.description)"
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_event, msg_peripheral])
     }
     
@@ -343,7 +343,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         guard opts.contains(opt) else { return }
         let msg_centralManager = "centralManager=\(central.sf.description)"
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_peripheral])
     }
 }

@@ -81,7 +81,7 @@ public class SFBleDiscoverLogSummary {
                 msgs.append("----------\n")
             }
         }
-        Log.bleSummary(tag: tag, msgs: msgs)
+        SFLogger.bleSummary(tag: tag, msgs: msgs)
         summaryTime = Date()
         items = []
     }
@@ -127,7 +127,7 @@ public class SFBleDiscoverLogItem {
     public func update(log: SFBleDiscoverLog) {
         logs.append(log)
         if firstTimeLogEnable, logs.count == 1 {
-            Log.bleSummary(tag: tag, msgs: summaryMsgs)
+            SFLogger.bleSummary(tag: tag, msgs: summaryMsgs)
         }
         if logs.count > threshold {
             clean()
@@ -135,7 +135,7 @@ public class SFBleDiscoverLogItem {
     }
     public func clean() {
         guard logs.count > 0 else { return }
-        Log.bleSummary(tag: tag, msgs: summaryMsgs)
+        SFLogger.bleSummary(tag: tag, msgs: summaryMsgs)
         logs = []
     }
     

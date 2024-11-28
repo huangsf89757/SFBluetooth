@@ -182,7 +182,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         let opt: SFPeripheralLogOption = .readRSSI
         guard opts.contains(opt) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral],
                    result: nil)
     }
@@ -195,7 +195,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let serviceUUIDs = serviceUUIDs {
             msg_serviceUUIDs = "serviceUUIDs=\(serviceUUIDs)"
         }
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_serviceUUIDs],
                    result: nil)
     }
@@ -209,7 +209,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let includedServiceUUIDs = includedServiceUUIDs {
             msg_includedServiceUUIDs = "includedServiceUUIDs=\(includedServiceUUIDs)"
         }
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_service, msg_includedServiceUUIDs],
                    result: nil)
     }
@@ -223,7 +223,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let characteristicUUIDs = characteristicUUIDs {
             msg_characteristicUUIDs = "characteristicUUIDs=\(characteristicUUIDs)"
         }
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_service, msg_characteristicUUIDs],
                    result: nil)
     }
@@ -233,7 +233,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         guard opts.contains(opt) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_characteristic],
                    result: nil)
     }
@@ -245,7 +245,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_type = "type=\(type.sf.description)"
         let msg_length = "length=\(length)"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_type],
                    result: msg_length)
     }
@@ -257,7 +257,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         let msg_characteristic = "characteristic=\(characteristic.sf.description)"
         let msg_type = "type=\(type.sf.description)"
         let msg_data = "data=\(data.sf.toHex())"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_characteristic, msg_type, msg_data],
                    result: nil)
     }
@@ -268,7 +268,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_characteristic = "characteristic=\(characteristic.sf.description)"
         let msg_enabled = "enabled=\(enabled)"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_characteristic, msg_enabled],
                    result: nil)
     }
@@ -278,7 +278,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         guard opts.contains(opt) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_characteristic],
                    result: nil)
     }
@@ -288,7 +288,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         guard opts.contains(opt) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_descriptor = "descriptor=\(descriptor.sf.description)"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_descriptor],
                    result: nil)
     }
@@ -299,7 +299,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_descriptor = "descriptor=\(descriptor.sf.description)"
         let msg_data = "data=\(data.sf.toHex())"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_descriptor, msg_data],
                    result: nil)
     }
@@ -310,7 +310,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         guard opts.contains(opt) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_PSM = "PSM=\(PSM)"
-        Log.bleTry(tag: opt.tag,
+        SFLogger.bleTry(tag: opt.tag,
                    msgs: [msg_peripheral, msg_PSM],
                    result: nil)
     }
@@ -320,7 +320,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         guard opts.contains(opt) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_state = "state=\(state.sf.description)"
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_state])
     }
     
@@ -330,7 +330,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         guard opts.contains(opt) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
         let msg_name = "name=\(name)"
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_name])
     }
     
@@ -344,7 +344,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
             msg_invalidatedServices.append(invalidatedService.sf.description)
         }
         msg_invalidatedServices.append("]")
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_invalidatedServices])
     }
     
@@ -358,7 +358,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_RSSI, msg_error])
     }
     
@@ -372,7 +372,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_RSSI, msg_error])
     }
     
@@ -385,7 +385,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_error])
     }
     
@@ -399,7 +399,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_service, msg_error])
     }
     
@@ -413,7 +413,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_service, msg_error])
     }
     
@@ -427,7 +427,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_characteristic, msg_error])
     }
     
@@ -441,7 +441,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_characteristic, msg_error])
     }
     
@@ -455,7 +455,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_characteristic, msg_error])
     }
     
@@ -469,7 +469,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_characteristic, msg_error])
     }
     
@@ -483,7 +483,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_descriptor, msg_error])
     }
     
@@ -497,7 +497,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_descriptor, msg_error])
     }
     
@@ -506,7 +506,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         let opt: SFPeripheralLogOption = .isReadyToSendWriteWithoutResponse
         guard opts.contains(opt) else { return }
         let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral])
     }
     
@@ -523,7 +523,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
         }
-        Log.bleCallback(tag: opt.tag,
+        SFLogger.bleCallback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_channel, msg_error])
     }
 }

@@ -13,7 +13,7 @@ import SFExtension
 import SFLogger
 
 // MARK: - log
-extension Log {
+extension SFLogger {
     
     public static func bleTry(tag: String, msgs: [String], result: String? = nil) {
         // try
@@ -35,7 +35,7 @@ extension Log {
             msg += msg_return + "\n"
         }
         msg += "End"
-        Log.info("\n\(msg)\n")
+        SFLogger.info("\n\(msg)\n")
     }
     
     public static func bleCallback(tag: String, msgs: [String]) {
@@ -49,7 +49,7 @@ extension Log {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        Log.info("\n\(msg)\n")
+        SFLogger.info("\n\(msg)\n")
     }
     
     public static func bleSummary(tag: String, msgs: [String]) {
@@ -63,6 +63,6 @@ extension Log {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        Log.info("\n\(msg)\n")
+        SFLogger.info("\n\(msg)\n")
     }
 }

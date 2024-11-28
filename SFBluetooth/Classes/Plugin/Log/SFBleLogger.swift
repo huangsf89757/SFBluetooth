@@ -1,5 +1,5 @@
 //
-//  SFBleLog.swift
+//  SFBleLogger.swift
 //  SFBluetooth
 //
 //  Created by hsf on 2024/10/23.
@@ -12,10 +12,9 @@ import SFExtension
 // Server
 import SFLogger
 
-// MARK: - log
-extension SFLogger {
-    
-    public static func bleTry(tag: String, msgs: [String], result: String? = nil) {
+// MARK: - SFBleLogger
+public class SFBleLogger: SFLogger {
+    public static func tryDo(tag: String, msgs: [String], result: String? = nil) {
         // try
         var msg_try = """
         Try:
@@ -35,10 +34,10 @@ extension SFLogger {
             msg += msg_return + "\n"
         }
         msg += "End"
-        SFLogger.info("\n\(msg)\n")
+        info("\n\(msg)\n")
     }
     
-    public static func bleCallback(tag: String, msgs: [String]) {
+    public static func callback(tag: String, msgs: [String]) {
         // callback
         var msg_callback = """
         Callback:
@@ -49,10 +48,10 @@ extension SFLogger {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        SFLogger.info("\n\(msg)\n")
+        info("\n\(msg)\n")
     }
     
-    public static func bleSummary(tag: String, msgs: [String]) {
+    public static func summary(tag: String, msgs: [String]) {
         // callback
         var msg_callback = """
         Summary:
@@ -63,6 +62,6 @@ extension SFLogger {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        SFLogger.info("\n\(msg)\n")
+        info("\n\(msg)\n")
     }
 }

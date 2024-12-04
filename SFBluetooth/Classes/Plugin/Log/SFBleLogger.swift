@@ -13,7 +13,7 @@ import SFExtension
 import SFLogger
 
 // MARK: - SFBleLogger
-public class SFBleLogger: SFLogger {
+public class SFBleLogger {
     public static func tryDo(tag: String, msgs: [String], result: String? = nil) {
         // try
         var msg_try = """
@@ -34,7 +34,7 @@ public class SFBleLogger: SFLogger {
             msg += msg_return + "\n"
         }
         msg += "End"
-        info("\n\(msg)\n")
+        SFLogger.info("\n\(msg)\n")
     }
     
     public static func callback(tag: String, msgs: [String]) {
@@ -48,7 +48,7 @@ public class SFBleLogger: SFLogger {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        info("\n\(msg)\n")
+        SFLogger.info("\n\(msg)\n")
     }
     
     public static func summary(tag: String, msgs: [String]) {
@@ -62,6 +62,6 @@ public class SFBleLogger: SFLogger {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        info("\n\(msg)\n")
+        SFLogger.info("\n\(msg)\n")
     }
 }

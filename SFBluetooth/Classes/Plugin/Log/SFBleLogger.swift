@@ -14,7 +14,8 @@ import SFLogger
 
 // MARK: - SFBleLogger
 public class SFBleLogger {
-    public static func tryDo(tag: String, msgs: [String], result: String? = nil) {
+    public static func tryDo(file: String = #file, function: String = #function, line: Int = #line, context: Any? = nil,
+                             tag: String, msgs: [String], result: String? = nil) {
         // try
         var msg_try = """
         Try:
@@ -34,10 +35,11 @@ public class SFBleLogger {
             msg += msg_return + "\n"
         }
         msg += "End"
-        SFLogger.info("\n\(msg)\n")
+        SFLogger.info(file: file, function: function, line: line, context: context, messages: "\n\(msg)\n")
     }
     
-    public static func callback(tag: String, msgs: [String]) {
+    public static func callback(file: String = #file, function: String = #function, line: Int = #line, context: Any? = nil,
+                                tag: String, msgs: [String]) {
         // callback
         var msg_callback = """
         Callback:
@@ -48,10 +50,11 @@ public class SFBleLogger {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        SFLogger.info("\n\(msg)\n")
+        SFLogger.info(file: file, function: function, line: line, context: context, messages: "\n\(msg)\n")
     }
     
-    public static func summary(tag: String, msgs: [String]) {
+    public static func summary(file: String = #file, function: String = #function, line: Int = #line, context: Any? = nil,
+                               tag: String, msgs: [String]) {
         // callback
         var msg_callback = """
         Summary:
@@ -62,6 +65,6 @@ public class SFBleLogger {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        SFLogger.info("\n\(msg)\n")
+        SFLogger.info(file: file, function: function, line: line, context: context, messages: "\n\(msg)\n")
     }
 }

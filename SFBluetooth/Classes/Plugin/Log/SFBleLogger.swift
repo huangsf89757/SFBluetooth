@@ -35,7 +35,7 @@ public class SFBleLogger {
             msg += msg_return + "\n"
         }
         msg += "End"
-        SFLogger.info(file: file, function: function, line: line, context: context, messages: "\n\(msg)\n")
+        SFLogger.info(file: file, function: function, line: line, context: context, msgs: "\n\(msg)\n")
     }
     
     public static func callback(file: String = #file, function: String = #function, line: Int = #line, context: Any? = nil,
@@ -50,7 +50,7 @@ public class SFBleLogger {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        SFLogger.info(file: file, function: function, line: line, context: context, messages: "\n\(msg)\n")
+        SFLogger.info(file: file, function: function, line: line, context: context, msgs: "\n\(msg)\n")
     }
     
     public static func summary(file: String = #file, function: String = #function, line: Int = #line, context: Any? = nil,
@@ -65,6 +65,6 @@ public class SFBleLogger {
         }
         // msg
         let msg = msg_callback + "\n" + "End"
-        SFLogger.info(file: file, function: function, line: line, context: context, messages: "\n\(msg)\n")
+        SFLogger.info(file: file, function: function, line: line, context: context, msgs: "\n\(msg)\n")
     }
 }

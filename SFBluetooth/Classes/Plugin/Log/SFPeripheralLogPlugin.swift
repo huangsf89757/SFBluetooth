@@ -181,7 +181,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func readRSSI(peripheral: CBPeripheral) {
         let opt: SFPeripheralLogOption = .readRSSI
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_peripheral],
                    result: nil)
@@ -190,7 +190,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func discoverServices(peripheral: CBPeripheral, serviceUUIDs: [CBUUID]?) {
         let opt: SFPeripheralLogOption = .discoverServices
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         var msg_serviceUUIDs = "serviceUUIDs=nil"
         if let serviceUUIDs = serviceUUIDs {
             msg_serviceUUIDs = "serviceUUIDs=\(serviceUUIDs)"
@@ -203,8 +203,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func discoverIncludedServices(peripheral: CBPeripheral, includedServiceUUIDs: [CBUUID]?, service: CBService) {
         let opt: SFPeripheralLogOption = .discoverIncludedServices
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_service = "service=\(service.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_service = "service=\(service.description)"
         var msg_includedServiceUUIDs = "includedServiceUUIDs=nil"
         if let includedServiceUUIDs = includedServiceUUIDs {
             msg_includedServiceUUIDs = "includedServiceUUIDs=\(includedServiceUUIDs)"
@@ -217,8 +217,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func discoverCharacteristics(peripheral: CBPeripheral, characteristicUUIDs: [CBUUID]?, service: CBService) {
         let opt: SFPeripheralLogOption = .discoverCharacteristics
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_service = "service=\(service.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_service = "service=\(service.description)"
         var msg_characteristicUUIDs = "characteristicUUIDs=nil"
         if let characteristicUUIDs = characteristicUUIDs {
             msg_characteristicUUIDs = "characteristicUUIDs=\(characteristicUUIDs)"
@@ -231,8 +231,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func readCharacteristicValue(peripheral: CBPeripheral, characteristic: CBCharacteristic) {
         let opt: SFPeripheralLogOption = .readCharacteristicValue
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_characteristic = "characteristic=\(characteristic.description)"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_peripheral, msg_characteristic],
                    result: nil)
@@ -242,8 +242,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func getMaximumWriteValueLength(peripheral: CBPeripheral, type: CBCharacteristicWriteType, length: Int) {
         let opt: SFPeripheralLogOption = .getMaximumWriteValueLength
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_type = "type=\(type.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_type = "type=\(type.description)"
         let msg_length = "length=\(length)"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_peripheral, msg_type],
@@ -253,9 +253,9 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func writeCharacteristicValue(peripheral: CBPeripheral, data: Data, characteristic: CBCharacteristic, type: CBCharacteristicWriteType) {
         let opt: SFPeripheralLogOption = .writeCharacteristicValue
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_characteristic = "characteristic=\(characteristic.sf.description)"
-        let msg_type = "type=\(type.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_characteristic = "characteristic=\(characteristic.description)"
+        let msg_type = "type=\(type.description)"
         let msg_data = "data=\(data.sf.toHex())"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_peripheral, msg_characteristic, msg_type, msg_data],
@@ -265,8 +265,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func setCharacteristicNotificationState(peripheral: CBPeripheral, enabled: Bool, characteristic: CBCharacteristic) {
         let opt: SFPeripheralLogOption = .setCharacteristicNotificationState
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_characteristic = "characteristic=\(characteristic.description)"
         let msg_enabled = "enabled=\(enabled)"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_peripheral, msg_characteristic, msg_enabled],
@@ -276,8 +276,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func discoverDescriptors(peripheral: CBPeripheral, characteristic: CBCharacteristic) {
         let opt: SFPeripheralLogOption = .discoverDescriptors
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_characteristic = "characteristic=\(characteristic.description)"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_peripheral, msg_characteristic],
                    result: nil)
@@ -286,8 +286,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func readDescriptorValue(peripheral: CBPeripheral, descriptor: CBDescriptor) {
         let opt: SFPeripheralLogOption = .readDescriptorValue
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_descriptor = "descriptor=\(descriptor.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_descriptor = "descriptor=\(descriptor.description)"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_peripheral, msg_descriptor],
                    result: nil)
@@ -296,8 +296,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func writeDescriptorValue(peripheral: CBPeripheral, data: Data, descriptor: CBDescriptor) {
         let opt: SFPeripheralLogOption = .writeDescriptorValue
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_descriptor = "descriptor=\(descriptor.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_descriptor = "descriptor=\(descriptor.description)"
         let msg_data = "data=\(data.sf.toHex())"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_peripheral, msg_descriptor, msg_data],
@@ -308,7 +308,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func openL2CAPChannel(peripheral: CBPeripheral, PSM: CBL2CAPPSM) {
         let opt: SFPeripheralLogOption = .openL2CAPChannel
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         let msg_PSM = "PSM=\(PSM)"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_peripheral, msg_PSM],
@@ -318,8 +318,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didUpdateState(peripheral: CBPeripheral, state: CBPeripheralState) {
         let opt: SFPeripheralLogOption = .didUpdateState
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_state = "state=\(state.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_state = "state=\(state.description)"
         SFBleLogger.callback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_state])
     }
@@ -328,7 +328,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didUpdateName(peripheral: CBPeripheral, name: String?) {
         let opt: SFPeripheralLogOption = .didUpdateName
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         let msg_name = "name=\(name)"
         SFBleLogger.callback(tag: opt.tag,
                         msgs: [msg_peripheral, msg_name])
@@ -338,10 +338,10 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didModifyServices(peripheral: CBPeripheral, invalidatedServices: [CBService]) {
         let opt: SFPeripheralLogOption = .didModifyServices
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         var msg_invalidatedServices = "invalidatedServices=["
         for invalidatedService in invalidatedServices {
-            msg_invalidatedServices.append(invalidatedService.sf.description)
+            msg_invalidatedServices.append(invalidatedService.description)
         }
         msg_invalidatedServices.append("]")
         SFBleLogger.callback(tag: opt.tag,
@@ -352,7 +352,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didUpdateRSSI(peripheral: CBPeripheral, RSSI: NSNumber?, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didUpdateRSSI
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         let msg_RSSI = "RSSI=\(RSSI)"
         var msg_error = "error=nil"
         if let error = error {
@@ -366,7 +366,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didReadRSSI(peripheral: CBPeripheral, RSSI: NSNumber, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didReadRSSI
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         let msg_RSSI = "RSSI=\(RSSI)"
         var msg_error = "error=nil"
         if let error = error {
@@ -380,7 +380,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didDiscoverServices(peripheral: CBPeripheral, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didDiscoverServices
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -393,8 +393,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didDiscoverIncludedServices(peripheral: CBPeripheral, service: CBService, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didDiscoverIncludedServices
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_service = "service=\(service.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_service = "service=\(service.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -407,8 +407,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didDiscoverCharacteristics(peripheral: CBPeripheral, service: CBService, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didDiscoverCharacteristics
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_service = "service=\(service.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_service = "service=\(service.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -421,8 +421,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didUpdateCharacteristicValue(peripheral: CBPeripheral, characteristic: CBCharacteristic, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didUpdateCharacteristicValue
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_characteristic = "characteristic=\(characteristic.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -435,8 +435,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didWriteCharacteristicValue(peripheral: CBPeripheral, characteristic: CBCharacteristic, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didWriteCharacteristicValue
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_characteristic = "characteristic=\(characteristic.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -449,8 +449,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didUpdateCharacteristicNotificationState(peripheral: CBPeripheral, characteristic: CBCharacteristic, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didUpdateCharacteristicNotificationState
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_characteristic = "characteristic=\(characteristic.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -463,8 +463,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didDiscoverDescriptors(peripheral: CBPeripheral, characteristic: CBCharacteristic, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didDiscoverDescriptors
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_characteristic = "characteristic=\(characteristic.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_characteristic = "characteristic=\(characteristic.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -477,8 +477,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didUpdateDescriptorValue(peripheral: CBPeripheral, descriptor: CBDescriptor, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didUpdateDescriptorValue
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_descriptor = "descriptor=\(descriptor.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_descriptor = "descriptor=\(descriptor.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -491,8 +491,8 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didWriteDescriptorValue(peripheral: CBPeripheral, descriptor: CBDescriptor, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didWriteDescriptorValue
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
-        let msg_descriptor = "descriptor=\(descriptor.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
+        let msg_descriptor = "descriptor=\(descriptor.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -505,7 +505,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func isReadyToSendWriteWithoutResponse(peripheral: CBPeripheral) {
         let opt: SFPeripheralLogOption = .isReadyToSendWriteWithoutResponse
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         SFBleLogger.callback(tag: opt.tag,
                         msgs: [msg_peripheral])
     }
@@ -514,7 +514,7 @@ extension SFPeripheralLogPlugin: SFPeripheralPlugin {
     public func didOpenL2CAPChannel(peripheral: CBPeripheral, channel: CBL2CAPChannel?, error: (any Error)?) {
         let opt: SFPeripheralLogOption = .didOpenL2CAPChannel
         guard opts.contains(opt) else { return }
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         var msg_channel = "channel=nil"
         if let channel = channel {
             msg_channel = "channel=\(channel.description)"

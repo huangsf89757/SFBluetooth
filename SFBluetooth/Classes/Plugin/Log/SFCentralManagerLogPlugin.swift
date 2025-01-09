@@ -127,7 +127,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func retrievePeripherals(central: CBCentralManager, identifiers: [UUID], peripherals: [CBPeripheral]) {
         let opt: SFCentralManagerLogOption = .retrievePeripherals
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
         var msg_identifiers = "identifiers=["
         for identifier in identifiers {
             msg_identifiers.append(identifier.uuidString)
@@ -135,7 +135,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         msg_identifiers.append("]")
         var msg_peripherals = "peripherals=["
         for peripheral in peripherals {
-            msg_peripherals.append(peripheral.sf.description)
+            msg_peripherals.append(peripheral.description)
         }
         msg_peripherals.append("]")
         SFBleLogger.tryDo(tag: opt.tag,
@@ -146,7 +146,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func retrieveConnectedPeripherals(central: CBCentralManager, services: [CBUUID], peripherals: [CBPeripheral]) {
         let opt: SFCentralManagerLogOption = .retrieveConnectedPeripherals
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
         var msg_services = "services=["
         for service in services {
             msg_services.append(service.uuidString)
@@ -154,7 +154,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
         msg_services.append("]")
         var msg_peripherals = "peripherals=["
         for peripheral in peripherals {
-            msg_peripherals.append(peripheral.sf.description)
+            msg_peripherals.append(peripheral.description)
         }
         msg_peripherals.append("]")
         SFBleLogger.tryDo(tag: opt.tag,
@@ -165,7 +165,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func scanForPeripherals(central: CBCentralManager, services: [CBUUID]?, options: [String: Any]?) {
         let opt: SFCentralManagerLogOption = .scanForPeripherals
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
         var msg_services = "services=nil"
         if let services = services {
             msg_services = "services=["
@@ -186,7 +186,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func stopScan(central: CBCentralManager) {
         let opt: SFCentralManagerLogOption = .stopScan
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_centralManager, ],
                    result: nil)
@@ -195,8 +195,8 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func connectPeripheral(central: CBCentralManager, peripheral: CBPeripheral, options: [String: Any]?) {
         let opt: SFCentralManagerLogOption = .connectPeripheral
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         var msg_options = "options=nil"
         if let options = options {
             msg_options = "options=\(options)"
@@ -209,8 +209,8 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func disconnectPeripheral(central: CBCentralManager, peripheral: CBPeripheral) {
         let opt: SFCentralManagerLogOption = .disconnectPeripheral
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         SFBleLogger.tryDo(tag: opt.tag,
                    msgs: [msg_centralManager, msg_peripheral],
                    result: nil)
@@ -220,7 +220,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func registerForConnectionEvents(central: CBCentralManager, options: [CBConnectionEventMatchingOption : Any]?) {
         let opt: SFCentralManagerLogOption = .registerForConnectionEvents
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
         var msg_options = "options=nil"
         if let options = options {
             msg_options = "options=\(options)"
@@ -233,7 +233,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func didUpdateIsScannig(central: CBCentralManager, isScanning: Bool) {
         let opt: SFCentralManagerLogOption = .didUpdateIsScannig
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
         let msg_isScanning = "isScanning=\(isScanning)"
         SFBleLogger.callback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_isScanning])
@@ -243,7 +243,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func didUpdateState(central: CBCentralManager, state: CBManagerState) {
         let opt: SFCentralManagerLogOption = .didUpdateState
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
         SFBleLogger.callback(tag: opt.tag,
                         msgs: [msg_centralManager, ])
     }
@@ -252,7 +252,7 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func willRestoreState(central: CBCentralManager, dict: [String : Any]) {
         let opt: SFCentralManagerLogOption = .willRestoreState
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
         let msg_dict = "dict=\(dict)"
         SFBleLogger.callback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_dict])
@@ -262,8 +262,8 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func didDiscoverPeripheral(central: CBCentralManager, peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         let opt: SFCentralManagerLogOption = .didDiscoverPeripheral
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         let msg_advertisementData = "advertisementData=\(advertisementData)"
         let msg_RSSI = "RSSI=\(RSSI)"
 //        SFBleLogger.callback(tag: opt.tag,
@@ -276,8 +276,8 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func didConnectPeripheral(central: CBCentralManager, peripheral: CBPeripheral) {
         let opt: SFCentralManagerLogOption = .didConnectPeripheral
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         SFBleLogger.callback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_peripheral])
     }
@@ -286,8 +286,8 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func didFailToConnectPeripheral(central: CBCentralManager, peripheral: CBPeripheral, error: (any Error)?) {
         let opt: SFCentralManagerLogOption = .didFailToConnectPeripheral
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -300,8 +300,8 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func didDisconnectPeripheral(central: CBCentralManager, peripheral: CBPeripheral, error: (any Error)?) {
         let opt: SFCentralManagerLogOption = .didDisconnectPeripheral
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         var msg_error = "error=nil"
         if let error = error {
             msg_error = "error=\(error.localizedDescription)"
@@ -314,8 +314,8 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func didDisconnectPeripheralThenTryReconnect(central: CBCentralManager, peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         let opt: SFCentralManagerLogOption = .didDisconnectPeripheral
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         let msg_timestamp = "timestamp=\(timestamp)"
         let msg_isReconnecting = "isReconnecting=\(isReconnecting)"
         var msg_error = "error=nil"
@@ -330,9 +330,9 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func didOccurConnectionEvent(central: CBCentralManager, event: CBConnectionEvent, peripheral: CBPeripheral) {
         let opt: SFCentralManagerLogOption = .didOccurConnectionEvent
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
-        let msg_event = "event=\(event.sf.description)"
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
+        let msg_event = "event=\(event.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         SFBleLogger.callback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_event, msg_peripheral])
     }
@@ -341,8 +341,8 @@ extension SFCentralManagerLogPlugin: SFCentralManagerPlugin {
     public func didUpdateANCSAuthorization(central: CBCentralManager, peripheral: CBPeripheral) {
         let opt: SFCentralManagerLogOption = .didUpdateANCSAuthorization
         guard opts.contains(opt) else { return }
-        let msg_centralManager = "centralManager=\(central.sf.description)"
-        let msg_peripheral = "peripheral=\(peripheral.sf.description)"
+        let msg_centralManager = "centralManager=\(central.description)"
+        let msg_peripheral = "peripheral=\(peripheral.description)"
         SFBleLogger.callback(tag: opt.tag,
                         msgs: [msg_centralManager, msg_peripheral])
     }

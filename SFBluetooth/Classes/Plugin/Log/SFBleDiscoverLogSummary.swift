@@ -149,7 +149,7 @@ public class SFBleDiscoverLogItem {
         let msg_last = "last: \(lastTime) \(lastRssi) dBm"
         let msg_avg = "avg: \(avgRssi) dBm"
         let msg_LAST = "[LAST]:"
-        let msg_peripheral = "peripheral=\(lastLog.peripheral.sf.description)"
+        let msg_peripheral = "peripheral=\(lastLog.peripheral.description)"
         let msg_RSSI = "RSSI=\(lastLog.rssi)"
         let msg_advertisementData = "advertisementData=\(lastLog.advertisementData)"
         return [msg_name, msg_identifier, msg_count, msg_first, msg_last, msg_avg, msg_LAST, msg_peripheral, msg_RSSI, msg_advertisementData]
